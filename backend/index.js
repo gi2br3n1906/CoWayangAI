@@ -1,129 +1,83 @@
 const express = require('express');
-const cors = require('cors');
 const http = require('http');
 const { Server } = require('socket.io');
-const axios = require('axios');
-require('dotenv').config();
+const cors = require('cors');
+const axios = require('axios'); // Pastikan ini ada!
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: '*',
-    methods: ['GET', 'POST']
-  }
-});
 
-const PORT = process.env.PORT || 3000;
-
-// Middleware
+// Setup CORS biar frontend dan python bisa masuk
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-// Socket.IO connection handler
-io.on('connection', (socket) => {
-  console.log('Client connected:', socket.id);
-  
-  socket.on('disconnect', () => {
-    console.log('Client disconnected:', socket.id);
-  });
+const io = new Server(server, {
+    cors: {
+        origin: "*", // Boleh diakses dari mana aja
+        methods: ["GET", "POST"]
+    }
 });
 
-// POST /api/analyze
-// Menerima videoUrl dari frontend dan mengirim ke AI API
+// --- ENDPOINT 1: Menerima Perintah dari Frontend ---
 app.post('/api/analyze', async (req, res) => {
-  try {
-    const { videoUrl } = req.body;
+    console.log("\n========================================");
+    console.log("[Node] 1. Menerima Request dari Frontend...");
     
+    const { videoUrl, startMinute } = req.body;
+    
+    // Validasi input
     if (!videoUrl) {
-      return res.status(400).json({ error: 'videoUrl is required' });
+        console.error("[Node] ❌ Error: URL Video kosong!");
+        return res.status(400).json({ status: 'error', message: 'URL Kosong' });
     }
 
-    console.log('Analyzing video:', videoUrl);
+    // Konversi menit ke detik
+    const startTimeInSeconds = (parseInt(startMinute) || 0) * 60;
 
-    // URL AI API (gunakan dummy URL dulu)
-    const aiApiUrl = process.env.AI_API_URL || 'http://localhost:8000/analyze';
-    const webhookUrl = process.env.WEBHOOK_URL || `http://localhost:${PORT}/api/webhook`;
+    console.log(`[Node]    URL: ${videoUrl}`);
+    console.log(`[Node]    Start: ${startMinute} menit (${startTimeInSeconds} detik)`);
+    console.log(`[Node] 2. Sedang menghubungi Python (Port 8000)...`);
 
-    // Kirim request ke AI API
-    const aiResponse = await axios.post(aiApiUrl, {
-      videoUrl: videoUrl,
-      webhookUrl: webhookUrl
-    });
+    try {
+        // TEMBAK KE PYTHON
+        // Pastikan URL ini benar: http://127.0.0.1:8000/start-analysis
+        const pythonResponse = await axios.post('http://127.0.0.1:8000/start-analysis', {
+            videoUrl: videoUrl,
+            startTime: startTimeInSeconds
+        });
 
-    console.log('AI API response:', aiResponse.data);
+        console.log("[Node] ✅ 3. Python Merespon: Sukses!");
+        console.log("[Node]    Status Python:", pythonResponse.data);
+        
+        res.json({ status: 'success', message: 'Perintah dikirim ke AI' });
 
-    res.json({ 
-      success: true, 
-      message: 'Analysis started',
-      data: aiResponse.data 
-    });
+    } catch (error) {
+        console.error("[Node] ❌ 3. GAGAL Menghubungi Python!");
+        console.error("[Node]    Error Message:", error.message);
+        
+        if (error.code === 'ECONNREFUSED') {
+            console.error("[Node]    SEBAB: Server Python (main.py) belum jalan atau beda port!");
+        }
 
-  } catch (error) {
-    console.error('Error in /api/analyze:', error.message);
-    
-    // Jika AI API tidak tersedia, tetap return success
-    if (error.code === 'ECONNREFUSED') {
-      res.json({ 
-        success: true, 
-        message: 'Analysis request received (AI API not available yet)',
-        note: 'Webhook akan menerima hasil ketika AI selesai'
-      });
-    } else {
-      res.status(500).json({ 
-        error: 'Failed to start analysis',
-        details: error.message 
-      });
+        res.status(500).json({ status: 'error', message: 'Gagal connect ke AI' });
     }
-  }
+    console.log("========================================\n");
 });
 
-// POST /api/webhook
-// Menerima hasil analisis dari AI dan broadcast ke frontend
+// --- ENDPOINT 2: Webhook (Menerima Hasil dari Python) ---
 app.post('/api/webhook', (req, res) => {
-  try {
-    const { type, data } = req.body;
-
-    console.log('Webhook received:', { type, data });
-
-    if (!type || !data) {
-      return res.status(400).json({ error: 'type and data are required' });
-    }
-
-    // Broadcast hasil ke semua client yang terhubung via Socket.IO
-    io.emit('ai-result', {
-      type: type,
-      data: data,
-      timestamp: new Date().toISOString()
-    });
-
-    console.log('Broadcasted ai-result to clients');
-
-    res.json({ 
-      success: true, 
-      message: 'Result broadcasted to clients' 
-    });
-
-  } catch (error) {
-    console.error('Error in /api/webhook:', error.message);
-    res.status(500).json({ 
-      error: 'Failed to process webhook',
-      details: error.message 
-    });
-  }
+    const data = req.body;
+    // Log biar kelihatan kalo ada data masuk (opsional, bisa dimatiin biar gak spam)
+    // console.log(`[Node] Webhook masuk: ${data.type}`); 
+    
+    // Broadcast ke Frontend
+    io.emit('ai-result', data);
+    
+    res.json({ status: 'ok' });
 });
 
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ 
-    status: 'OK', 
-    timestamp: new Date().toISOString(),
-    connectedClients: io.engine.clientsCount
-  });
-});
-
-// Start server
+const PORT = 3000;
 server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Socket.IO ready for connections`);
+    console.log(`🚀 Server Backend Node.js jalan di http://localhost:${PORT}`);
 });

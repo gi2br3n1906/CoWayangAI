@@ -1,23 +1,23 @@
 <template>
-  <section class="flex items-center justify-center min-h-[calc(100vh-4rem)] px-4 py-12">
-    <div class="max-w-4xl w-full space-y-8">
+  <section class="flex items-center justify-center min-h-[calc(100vh-4rem)] px-4 py-6 md:py-20">
+    <div class="max-w-4xl w-full space-y-4 md:space-y-8">
       <!-- Title -->
       <div class="text-center space-y-4">
-        <h1 class="text-5xl md:text-6xl font-bold text-white leading-tight">
+        <h1 class="text-3xl md:text-6xl font-bold text-white leading-tight">
           Analisis Video Wayang Kulit 
           <span class="bg-gradient-to-r from-wayang-gold to-wayang-primary bg-clip-text text-transparent">
             Real-time
           </span>
         </h1>
-        <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+        <p class="text-sm md:text-lg text-gray-400 max-w-2xl mx-auto">
           Tempel URL YouTube dan biarkan AI menerjemahkan cerita untukmu.
         </p>
       </div>
 
       <!-- Input Section -->
-      <div class="mt-12">
+      <div class="mt-6 md:mt-12">
         <div class="relative">
-          <div class="flex flex-col sm:flex-row gap-3">
+          <div class="flex flex-col md:flex-row gap-3">
             <!-- Input Field -->
             <div class="flex-1 relative group">
               <input
@@ -31,6 +31,22 @@
                        shadow-lg hover:shadow-wayang-primary/20"
               />
               <!-- Decorative glow effect -->
+              <div class="absolute inset-0 bg-gradient-to-r from-wayang-gold/20 to-wayang-primary/20 rounded-lg opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity duration-200 -z-10"></div>
+            </div>
+
+            <!-- Start Time Input -->
+            <div class="relative group">
+              <input
+                v-model.number="startMinute"
+                type="number"
+                min="0"
+                placeholder="Mulai menit ke... (Opsional)"
+                class="w-full md:w-60 px-6 py-4 bg-wayang-card text-white rounded-lg 
+                       placeholder-gray-500 outline-none
+                       focus:ring-2 focus:ring-wayang-gold focus:ring-opacity-50
+                       transition-all duration-200
+                       shadow-lg hover:shadow-wayang-primary/20"
+              />
               <div class="absolute inset-0 bg-gradient-to-r from-wayang-gold/20 to-wayang-primary/20 rounded-lg opacity-0 group-focus-within:opacity-100 blur-xl transition-opacity duration-200 -z-10"></div>
             </div>
 
@@ -63,6 +79,9 @@
             Mendukung video YouTube dengan subtitle bahasa Jawa
           </p>
         </div>
+
+        <!-- Video Gallery -->
+        <VideoGallery v-if="!hideFeatures" @select="handleGallerySelect" />
       </div>
 
       <!-- Feature Cards -->
@@ -103,6 +122,7 @@
 
 <script setup>
 import { ref } from 'vue'
+import VideoGallery from './VideoGallery.vue'
 
 defineProps({
   loading: {
@@ -118,10 +138,23 @@ defineProps({
 const emit = defineEmits(['analyze'])
 
 const videoUrl = ref('')
+const startMinute = ref('')
 
 const handleAnalyze = () => {
   if (videoUrl.value) {
-    emit('analyze', videoUrl.value)
+    emit('analyze', { 
+      url: videoUrl.value, 
+      startMinute: startMinute.value 
+    })
   }
+}
+
+const handleGallerySelect = (videoId) => {
+  videoUrl.value = `https://www.youtube.com/watch?v=${videoId}`
+  startMinute.value = '' // Reset start time when selecting from gallery
+  emit('analyze', {
+    url: videoUrl.value,
+    startMinute: null
+  })
 }
 </script>

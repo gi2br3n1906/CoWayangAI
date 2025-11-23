@@ -22,7 +22,7 @@
     </div>
 
     <!-- Transcription Content -->
-    <div class="p-4 overflow-y-auto custom-scrollbar flex-1">
+    <div ref="containerRef" class="p-4 overflow-y-auto custom-scrollbar flex-1">
       <TransitionGroup name="fade-slide" tag="div" class="space-y-3">
         <div 
           v-for="subtitle in subtitles" 
@@ -67,12 +67,26 @@
 </template>
 
 <script setup>
-defineProps({
+import { ref, watch, nextTick } from 'vue'
+
+const props = defineProps({
   subtitles: {
     type: Array,
     default: () => []
   }
 })
+
+const containerRef = ref(null)
+
+watch(() => props.subtitles, async () => {
+  await nextTick()
+  if (containerRef.value) {
+    containerRef.value.scrollTo({
+      top: containerRef.value.scrollHeight,
+      behavior: 'smooth'
+    })
+  }
+}, { deep: true })
 </script>
 
 <style scoped>

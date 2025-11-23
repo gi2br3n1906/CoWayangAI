@@ -7,7 +7,7 @@
       <!-- Video container -->
       <div class="relative aspect-video bg-black">
         <iframe
-          :src="`https://www.youtube.com/embed/${videoId}?autoplay=1`"
+          :src="videoSrc"
           class="w-full h-full"
           title="YouTube video player"
           frameborder="0"
@@ -46,14 +46,29 @@
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue'
+
+const props = defineProps({
   videoId: {
     type: String,
     required: true
+  },
+  startMinute: {
+    type: Number,
+    default: 0
   }
 })
 
 defineEmits(['close'])
+
+const videoSrc = computed(() => {
+  let url = `https://www.youtube.com/embed/${props.videoId}?autoplay=1`
+  if (props.startMinute > 0) {
+    const startSeconds = Math.floor(props.startMinute * 60)
+    url += `&start=${startSeconds}`
+  }
+  return url
+})
 </script>
 
 <style scoped>
