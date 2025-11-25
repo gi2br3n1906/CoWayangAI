@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import axios from 'axios'
 import io from 'socket.io-client'
 
@@ -24,10 +24,12 @@ const socket = io('http://localhost:3000')
 const currentVideoId = ref(null)
 const currentStartTime = ref(0)
 const isLoading = ref(false)
+const isASRLoadng = ref(false)
 
 // Data Hasil AI
 const characters = ref([])
 const subtitles = ref([])
+const currentVideoTime = ref(0)
 
 // Mobile Tab State
 const activeMobileTab = ref('characters')
@@ -40,7 +42,7 @@ const getYouTubeVideoId = (url) => {
 }
 
 const handleAnalyze = async (payload) => {
-  const { url, startMinute } = payload;
+  const { url, startTime } = payload;
   const videoId = getYouTubeVideoId(url);
 
   if (!videoId) {
@@ -50,7 +52,7 @@ const handleAnalyze = async (payload) => {
 
   isLoading.value = true;
   currentVideoId.value = videoId;
-  currentStartTime.value = (startMinute || 0) * 60; // Konversi menit ke detik
+  currentStartTime.value = parseTimeToSeconds(startTime || '0'); // Konversi HH:MM:SS ke detik
   
   // Reset Data Lama
   characters.value = [];
@@ -61,11 +63,11 @@ const handleAnalyze = async (payload) => {
   const playerSection = document.getElementById('player-section');
   if (playerSection) playerSection.scrollIntoView({ behavior: 'smooth' });
 
-  // Request ke Backend Node.js
+  // Request ke Backend Node.js untuk Object Detection
   try {
     await axios.post('http://localhost:3000/api/analyze', {
       videoUrl: url,
-      startMinute: startMinute || 0,
+      startTime: startTime || '0',
       socketId: socket.id
     });
   } catch (error) {
@@ -74,11 +76,94 @@ const handleAnalyze = async (payload) => {
   } finally {
     isLoading.value = false;
   }
+
+  // AUTO START ASR juga ketika analisis dimulai
+  console.log("[App] Auto-starting ASR...");
+  try {
+    await axios.post('http://localhost:3000/api/start-asr', {
+      videoUrl: url,
+      startTime: startTime || '0'
+    });
+    console.log("[App] ASR auto-started successfully");
+  } catch (error) {
+    console.error("[App] Failed to auto-start ASR:", error);
+  }
+};
+
+const handleStartASR = async (payload) => {
+  const { url, startTime } = payload;
+  const videoId = getYouTubeVideoId(url);
+
+  if (!videoId) {
+    alert("URL YouTube tidak valid!");
+    return;
+  }
+
+  isASRLoadng.value = true;
+  currentVideoId.value = videoId;
+  currentStartTime.value = parseTimeToSeconds(startTime || '0');
+  
+  // Reset Data Lama hanya untuk video baru
+  characters.value = [];
+  subtitles.value = [];
+
+  // Auto Scroll ke Player
+  await nextTick();
+  const playerSection = document.getElementById('player-section');
+  if (playerSection) playerSection.scrollIntoView({ behavior: 'smooth' });
+
+  // Request ke Backend Node.js untuk ASR
+  try {
+    await axios.post('http://localhost:3000/api/start-asr', {
+      videoUrl: url,
+      startTime: startTime || '0'
+    });
+  } catch (error) {
+    console.error("Gagal memulai ASR:", error);
+    alert("ASR error. Cek terminal Node.js!");
+  } finally {
+    isASRLoadng.value = false;
+  }
+}
+
+const parseTimeToSeconds = (timeStr) => {
+  if (!timeStr || timeStr === '0') return 0;
+  const parts = timeStr.split(':');
+  if (parts.length === 3) {
+    return parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]);
+  } else if (parts.length === 2) {
+    return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+  } else {
+    return parseInt(parts[0]) || 0;
+  }
+}
+
+const handleVideoSeek = async (seekTime) => {
+  console.log(`[App] Video seek detected to: ${seekTime}s`);
+  
+  // Convert seconds to HH:MM:SS format
+  const hours = Math.floor(seekTime / 3600);
+  const minutes = Math.floor((seekTime % 3600) / 60);
+  const seconds = Math.floor(seekTime % 60);
+  const timeStr = hours > 0 ? 
+    `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}` :
+    `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  
+  try {
+    await axios.post('http://localhost:3000/api/update-asr-time', {
+      startTime: timeStr
+    });
+    console.log(`[App] ASR updated to start from: ${timeStr}`);
+  } catch (error) {
+    console.error("[App] Failed to update ASR time:", error);
+  }
 }
 
 // --- SOCKET LISTENER ---
 onMounted(() => {
   socket.on('ai-result', (payload) => {
+    console.log('[Frontend] AI Result diterima:', payload);
+
     // Logika Active Scene (Ganti Total Karakter)
     if (payload.type === 'active_scene') {
       const enrichedData = payload.data.map(char => ({
@@ -96,9 +181,26 @@ onMounted(() => {
 
     // Logika Subtitle
     if (payload.type === 'subtitle') {
-      subtitles.value.push(payload.data);
+      console.log('[Frontend] Subtitle baru:', payload.data);
+      subtitles.value.push({
+        ...payload.data,
+        id: Date.now(), // Tambah ID unik
+        isNew: true
+      });
+
+      // Hapus flag isNew setelah 3 detik
+      setTimeout(() => {
+        const sub = subtitles.value.find(s => s.id === payload.data.id);
+        if (sub) sub.isNew = false;
+      }, 3000);
     }
   });
+});
+
+// Cleanup ketika component unmount
+onUnmounted(() => {
+  // Stop ASR ketika user keluar dari halaman
+  axios.post('http://localhost:3000/api/stop-asr').catch(err => console.log('Cleanup ASR:', err));
 });
 </script>
 
@@ -111,7 +213,7 @@ onMounted(() => {
       
       <div v-if="!currentVideoId" class="flex flex-col items-center animate-fade-in space-y-8">
         
-        <HeroSection @analyze="handleAnalyze" :loading="isLoading" />
+        <HeroSection @analyze="handleAnalyze" @start-asr="handleStartASR" :loading="isLoading" :asrLoading="isASRLoadng" />
         
         <VideoGallery @select-video="(url) => handleAnalyze({ url, startMinute: 0 })" />
       
@@ -140,6 +242,8 @@ onMounted(() => {
               :video-id="currentVideoId" 
               :start-time="currentStartTime" 
               @close="currentVideoId = null"
+              @timeUpdate="currentVideoTime = $event"
+              @seek="handleVideoSeek"
             />
             
             <div class="flex lg:hidden mt-4 bg-slate-800 rounded-xl p-1 border border-white/10">
@@ -153,7 +257,7 @@ onMounted(() => {
           </div>
 
           <div class="lg:col-span-3 h-full overflow-hidden" :class="{'hidden lg:block': activeMobileTab !== 'subtitles'}">
-            <LiveTranscription :subtitles="subtitles" />
+            <LiveTranscription :subtitles="subtitles" :currentTime="currentVideoTime" />
           </div>
 
         </div>

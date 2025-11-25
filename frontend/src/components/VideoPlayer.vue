@@ -2,14 +2,7 @@
   <div id="video-player-section" class="w-full h-full flex flex-col">
     
     <div class="aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative group">
-      <iframe 
-        class="w-full h-full"
-        :src="videoSrc" 
-        title="YouTube video player" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen
-      ></iframe>
+      <div id="youtube-player" class="w-full h-full"></div>
     </div>
 
     <div class="mt-4 bg-slate-800/80 backdrop-blur border border-white/10 rounded-xl p-4 flex items-center justify-between shadow-lg animate-fade-in">
@@ -41,7 +34,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 
 // Menerima props dari App.vue
 const props = defineProps({
@@ -50,13 +43,108 @@ const props = defineProps({
 });
 
 // Mendefinisikan event 'close' agar bisa didengar App.vue
-defineEmits(['close']);
+const emit = defineEmits(['close', 'timeUpdate', 'seek']);
 
-// Logic URL YouTube agar bisa skip
-const videoSrc = computed(() => {
-  // Parameter 'start' di YouTube harus dalam DETIK
-  // Kita gunakan &start= karena parameter pertama sudah autoplay=1
-  return `https://www.youtube.com/embed/${props.videoId}?autoplay=1&start=${props.startTime}`;
+let player = null;
+let lastTime = 0;
+let timeUpdateInterval = null;
+
+// Load YouTube IFrame API
+const loadYouTubeAPI = () => {
+  return new Promise((resolve) => {
+    if (window.YT && window.YT.Player) {
+      resolve();
+      return;
+    }
+
+    // If script is already loading or loaded, wait for YT
+    if (window.YT) {
+      const checkYT = () => {
+        if (window.YT && window.YT.Player) {
+          resolve();
+        } else {
+          setTimeout(checkYT, 100);
+        }
+      };
+      checkYT();
+      return;
+    }
+
+    // Load the script
+    const script = document.createElement('script');
+    script.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(script);
+
+    // Wait for YT to be ready
+    const checkYT = () => {
+      if (window.YT && window.YT.Player) {
+        resolve();
+      } else {
+        setTimeout(checkYT, 100);
+      }
+    };
+    checkYT();
+  });
+};
+
+onMounted(async () => {
+  await loadYouTubeAPI();
+  
+  player = new window.YT.Player('youtube-player', {
+    height: '100%',
+    width: '100%',
+    videoId: props.videoId,
+    playerVars: {
+      autoplay: 1,
+      start: props.startTime,
+      modestbranding: 1,
+      rel: 0
+    },
+    events: {
+      onReady: onPlayerReady,
+      onStateChange: onPlayerStateChange
+    }
+  });
+});
+
+const onPlayerReady = (event) => {
+  // Player is ready
+  lastTime = props.startTime;
+};
+
+const onPlayerStateChange = (event) => {
+  if (event.data === window.YT.PlayerState.PLAYING) {
+    // Start updating current time
+    if (!timeUpdateInterval) {
+      timeUpdateInterval = setInterval(() => {
+        if (player && player.getCurrentTime) {
+          const currentTime = player.getCurrentTime();
+          
+          // Detect seek (perubahan waktu > 5 detik)
+          if (Math.abs(currentTime - lastTime) > 5) {
+            console.log(`[VideoPlayer] Seek detected: ${lastTime}s -> ${currentTime}s`);
+            emit('seek', currentTime);
+          }
+          
+          emit('timeUpdate', currentTime);
+          lastTime = currentTime;
+        }
+      }, 1000); // Update every second
+    }
+  } else if (event.data === window.YT.PlayerState.PAUSED || event.data === window.YT.PlayerState.ENDED) {
+    // Stop updating when paused or ended
+    if (timeUpdateInterval) {
+      clearInterval(timeUpdateInterval);
+      timeUpdateInterval = null;
+    }
+  }
+};
+
+// Watch for videoId changes
+watch(() => props.videoId, (newId) => {
+  if (player && newId) {
+    player.loadVideoById(newId, props.startTime);
+  }
 });
 </script>
 
