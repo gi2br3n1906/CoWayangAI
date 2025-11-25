@@ -38,10 +38,9 @@
             </svg>
           </div>
           <input
-            v-model.number="startMinute"
-            type="number"
-            min="0"
-            placeholder="Mulai menit..."
+            v-model="startTime"
+            type="text"
+            placeholder="HH:MM:SS (opsional)"
             class="w-full pl-12 pr-4 py-4 bg-slate-900/80 text-white rounded-xl border border-transparent focus:border-wayang-gold/50 focus:ring-2 focus:ring-wayang-gold/20 outline-none transition-all placeholder-gray-500"
             @keyup.enter="handleAnalyze"
           />
@@ -50,7 +49,7 @@
         <button
           @click="handleAnalyze"
           :disabled="!videoUrl || loading"
-          class="px-8 py-4 bg-gradient-to-r from-wayang-primary to-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
+          class="px-6 py-4 bg-gradient-to-r from-wayang-primary to-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
         >
           <svg v-if="loading" class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -60,6 +59,21 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <span>{{ loading ? 'Memproses...' : 'Analisis' }}</span>
+        </button>
+
+        <button
+          @click="handleStartASR"
+          :disabled="!videoUrl || asrLoading"
+          class="px-6 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold rounded-xl shadow-lg shadow-green-500/30 hover:shadow-green-500/50 hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
+        >
+          <svg v-if="asrLoading" class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <svg v-else class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+          </svg>
+          <span>{{ asrLoading ? 'Memulai ASR...' : 'Start ASR' }}</span>
         </button>
       </div>
     </div>
@@ -81,19 +95,32 @@ defineProps({
   loading: {
     type: Boolean,
     default: false
+  },
+  asrLoading: {
+    type: Boolean,
+    default: false
   }
 })
 
-const emit = defineEmits(['analyze'])
+const emit = defineEmits(['analyze', 'start-asr'])
 
 const videoUrl = ref('')
-const startMinute = ref('')
+const startTime = ref('')
 
 const handleAnalyze = () => {
   if (videoUrl.value) {
     emit('analyze', { 
       url: videoUrl.value, 
-      startMinute: startMinute.value 
+      startTime: startTime.value 
+    })
+  }
+}
+
+const handleStartASR = () => {
+  if (videoUrl.value) {
+    emit('start-asr', { 
+      url: videoUrl.value, 
+      startTime: startTime.value 
     })
   }
 }

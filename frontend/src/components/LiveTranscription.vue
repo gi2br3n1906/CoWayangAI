@@ -25,10 +25,14 @@
     <div ref="containerRef" class="p-4 overflow-y-auto custom-scrollbar flex-1">
       <TransitionGroup name="fade-slide" tag="div" class="space-y-3">
         <div 
-          v-for="subtitle in subtitles" 
+          v-for="subtitle in currentSubtitles" 
           :key="subtitle.id"
+          :data-id="subtitle.id"
           class="bg-wayang-dark/50 rounded-lg p-3 border border-white/5 transition-all duration-200"
-          :class="{ 'border-wayang-gold/50 bg-wayang-gold/5': subtitle.isNew }"
+          :class="{ 
+            'border-wayang-gold/50 bg-wayang-gold/5': subtitle.isNew,
+            'border-wayang-primary/50 bg-wayang-primary/10': subtitle.isCurrent 
+          }"
         >
           <div class="flex items-center gap-2 mb-2">
             <span class="text-xs text-gray-400 font-mono">{{ subtitle.timestamp }}</span>
@@ -38,10 +42,16 @@
             >
               NEW
             </span>
+            <span 
+              v-if="subtitle.isCurrent" 
+              class="text-xs bg-wayang-primary text-white px-2 py-0.5 rounded-full font-semibold"
+            >
+              NOW
+            </span>
           </div>
           <p 
             class="text-sm leading-relaxed"
-            :class="subtitle.isNew ? 'text-white font-medium' : 'text-gray-300'"
+            :class="subtitle.isNew || subtitle.isCurrent ? 'text-white font-medium' : 'text-gray-300'"
           >
             {{ subtitle.text }}
           </p>
@@ -67,16 +77,39 @@
 </template>
 
 <script setup>
-import { ref, watch, nextTick } from 'vue'
+import { ref, watch, nextTick, computed } from 'vue'
 
 const props = defineProps({
   subtitles: {
     type: Array,
     default: () => []
+  },
+  currentTime: {
+    type: Number,
+    default: 0
   }
 })
 
 const containerRef = ref(null)
+
+// Computed untuk subtitle yang sedang aktif
+const currentSubtitles = computed(() => {
+  return props.subtitles.map(sub => ({
+    ...sub,
+    isCurrent: props.currentTime >= sub.start_time && props.currentTime <= sub.end_time
+  }))
+})
+
+// Scroll ke subtitle yang sedang aktif
+watch(() => props.currentTime, () => {
+  const current = currentSubtitles.value.find(sub => sub.isCurrent)
+  if (current && containerRef.value) {
+    const element = containerRef.value.querySelector(`[data-id="${current.id}"]`)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }
+}, { immediate: true })
 
 watch(() => props.subtitles, async () => {
   await nextTick()

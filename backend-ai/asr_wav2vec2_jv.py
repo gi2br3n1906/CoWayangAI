@@ -66,10 +66,13 @@ def get_stream_url(yt_url):
 
 class PCMStreamer:
     """Spawn ffmpeg to output raw PCM s16le 16k mono to stdout and yield frames"""
-    def __init__(self, stream_url, sample_rate=16000):
+    def __init__(self, stream_url, sample_rate=16000, start_time=0):
         self.stream_url = stream_url
         self.sample_rate = sample_rate
+        self.start_time = start_time  # Start time in seconds
         self.proc = None
+        self.frames_consumed = 0
+        self.has_seeked = False
 
     def start(self):
         cmd = [
@@ -81,8 +84,41 @@ class PCMStreamer:
 
     def read_chunk(self, n_bytes):
         if not self.proc: return None
+        
+        # If we haven't seeked yet and have a start_time, consume audio until we reach the target
+        if not self.has_seeked and self.start_time > 0:
+            target_frames = int(self.start_time * self.sample_rate)
+            bytes_per_frame = 2  # s16le = 2 bytes per sample
+            frames_to_skip = target_frames - self.frames_consumed
+            
+            if frames_to_skip > 0:
+                skip_bytes = min(frames_to_skip * bytes_per_frame, 1024 * 1024)  # Max 1MB at a time
+                try:
+                    skipped = self.proc.stdout.read(skip_bytes)
+                    if skipped:
+                        frames_skipped = len(skipped) // bytes_per_frame
+                        self.frames_consumed += frames_skipped
+                        print(f"⏩ Seeking: {self.frames_consumed}/{target_frames} frames ({self.frames_consumed/self.sample_rate:.1f}s)")
+                    else:
+                        # End of stream reached before target
+                        self.has_seeked = True
+                        return None
+                except:
+                    self.has_seeked = True
+                    return None
+                
+                # Check if we've reached the target
+                if self.frames_consumed >= target_frames:
+                    self.has_seeked = True
+                    print(f"✅ Seek complete: Started at {self.start_time}s")
+                else:
+                    # Continue seeking
+                    return self.read_chunk(n_bytes)
+        
+        # Normal reading after seeking
         data = self.proc.stdout.read(n_bytes)
-        if not data or len(data) < n_bytes: return None
+        if not data or len(data) < n_bytes:
+            return None
         return data
 
     def stop(self):
@@ -142,7 +178,7 @@ def run_transcription_loop(youtube_url, start_time=0, model_id=None):
         print('Failed to get stream url from yt-dlp. Exiting.')
         return
 
-    streamer = PCMStreamer(stream_url, sample_rate=sample_rate)
+    streamer = PCMStreamer(stream_url, sample_rate=sample_rate, start_time=start_time)
     streamer.start()
 
     chunk_buffer = deque(maxlen=window_frames)
@@ -199,7 +235,7 @@ def run_transcription_loop(youtube_url, start_time=0, model_id=None):
                     chunk_frame_count += 1
                     continue
 
-                window_end = audio_pos_seconds
+                window_end = audio_pos_seconds + start_time
                 window_start = window_end - window_sec
                 
                 uploaded_file = None
@@ -289,16 +325,32 @@ def run_transcription_loop(youtube_url, start_time=0, model_id=None):
         except: pass
 
 
+def parse_time(time_str):
+    """Parse time string in format HH:MM:SS or MM:SS or just seconds"""
+    if isinstance(time_str, int):
+        return time_str
+    if isinstance(time_str, str):
+        parts = time_str.split(':')
+        if len(parts) == 3:  # HH:MM:SS
+            return int(parts[0]) * 3600 + int(parts[1]) * 60 + int(parts[2])
+        elif len(parts) == 2:  # MM:SS
+            return int(parts[0]) * 60 + int(parts[1])
+        else:  # Just seconds
+            return int(parts[0])
+    return 0
+
 def main():
     parser = argparse.ArgumentParser(description='ASR prototype: Gemini Javanese streaming on CPU')
     parser.add_argument('video_url', help='YouTube URL to analyze')
-    parser.add_argument('--start', type=int, default=0, help='Start time in seconds')
+    parser.add_argument('--start', type=str, default='0', help='Start time (seconds or HH:MM:SS format, e.g., 1:02:21)')
     
     # The --model argument is no longer used by Gemini, but kept for compatibility to avoid errors
     parser.add_argument('--model', default=None, help='(Not used with Gemini backend)')
 
     args = parser.parse_args()
-    run_transcription_loop(args.video_url, start_time=args.start)
+    start_seconds = parse_time(args.start)
+    print(f"🎬 Starting transcription from: {args.start} ({start_seconds} seconds)")
+    run_transcription_loop(args.video_url, start_time=start_seconds)
 
 
 if __name__ == '__main__':

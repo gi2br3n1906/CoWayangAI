@@ -19,6 +19,92 @@ const io = new Server(server, {
     }
 });
 
+// --- AUTO START PYTHON BACKEND ---
+let pythonProcess = null;
+
+const startPythonBackend = () => {
+    console.log("[Node] 🚀 Starting Python Backend AI...");
+    const { spawn } = require('child_process');
+    pythonProcess = spawn('python', ['g:\\KERJAAN\\cowayang\\CoWayangAI\\backend-ai\\main.py'], {
+        stdio: 'inherit',
+        cwd: 'g:\\KERJAAN\\cowayang\\CoWayangAI\\backend-ai'
+    });
+
+    pythonProcess.on('exit', (code) => {
+        console.log(`[Node] Python Backend exited with code: ${code}`);
+        // Auto restart jika keluar
+        setTimeout(startPythonBackend, 5000);
+    });
+
+    pythonProcess.on('error', (error) => {
+        console.error(`[Node] Error starting Python Backend: ${error}`);
+    });
+};
+
+// --- AUTO START ASR SERVER ---
+let asrServerProcess = null;
+
+const startASRServer = () => {
+    console.log("[Node] 🎙️ Starting ASR Server...");
+    const { spawn } = require('child_process');
+    asrServerProcess = spawn('python', ['g:\\KERJAAN\\cowayang\\CoWayangAI\\backend-ai\\asr_server.py'], {
+        stdio: 'inherit',
+        cwd: 'g:\\KERJAAN\\cowayang\\CoWayangAI\\backend-ai'
+    });
+
+    asrServerProcess.on('exit', (code) => {
+        console.log(`[Node] ASR Server exited with code: ${code}`);
+        // Auto restart jika keluar
+        setTimeout(startASRServer, 5000);
+    });
+
+    asrServerProcess.on('error', (error) => {
+        console.error(`[Node] Error starting ASR Server: ${error}`);
+    });
+};
+
+// Start Python backend saat server start
+startPythonBackend();
+startASRServer();
+
+// --- ASR PROCESS MANAGEMENT ---
+let currentVideoUrl = null;
+let currentStartTime = '0';
+
+const stopASR = async () => {
+    if (currentVideoUrl) {
+        console.log("[Node] 🛑 Stopping ASR for current video...");
+        try {
+            await axios.post('http://127.0.0.1:8001/stop-asr', {
+                videoUrl: currentVideoUrl,
+                startTime: parseInt(currentStartTime)
+            });
+        } catch (error) {
+            console.error("[Node] Error stopping ASR:", error.message);
+        }
+        currentVideoUrl = null;
+        currentStartTime = '0';
+    }
+};
+
+const startASR = async (videoUrl, startTime) => {
+    // Always stop existing ASR first
+    await stopASR();
+    
+    console.log(`[Node] 🎙️ Starting ASR for: ${videoUrl} at ${startTime}`);
+    try {
+        const response = await axios.post('http://127.0.0.1:8001/start-asr', {
+            videoUrl: videoUrl,
+            startTime: parseInt(startTime)
+        });
+        console.log("[Node] ASR Server Response:", response.data);
+        currentVideoUrl = videoUrl;
+        currentStartTime = startTime;
+    } catch (error) {
+        console.error("[Node] Error starting ASR:", error.message);
+    }
+};
+
 // --- ENDPOINT 1: Menerima Perintah dari Frontend ---
 app.post('/api/analyze', async (req, res) => {
     console.log("\n========================================");
@@ -50,7 +136,11 @@ app.post('/api/analyze', async (req, res) => {
         console.log("[Node] ✅ 3. Python Merespon: Sukses!");
         console.log("[Node]    Status Python:", pythonResponse.data);
         
-        res.json({ status: 'success', message: 'Perintah dikirim ke AI' });
+        // AUTO START ASR
+        console.log("[Node] 4. Starting ASR automatically...");
+        await startASR(videoUrl, startTimeInSeconds.toString());
+        
+        res.json({ status: 'success', message: 'Perintah dikirim ke AI dan ASR dimulai' });
 
     } catch (error) {
         console.error("[Node] ❌ 3. GAGAL Menghubungi Python!");
@@ -65,19 +155,69 @@ app.post('/api/analyze', async (req, res) => {
     console.log("========================================\n");
 });
 
-app.get('/', (req, res) => {
-    res.status(200).json({
-        status: 'OK',
-        message: 'Co-Wayang AI API Gateway Operational',
-        service: 'Node.js/Socket.IO'
-    });
+// --- ENDPOINT 2: Start ASR Transcription ---
+app.post('/api/start-asr', async (req, res) => {
+    console.log("\n========================================");
+    console.log("[Node] 1. Menerima Request ASR dari Frontend...");
+    
+    const { videoUrl, startTime } = req.body;
+    
+    // Validasi input
+    if (!videoUrl) {
+        console.error("[Node] ❌ Error: URL Video kosong!");
+        return res.status(400).json({ status: 'error', message: 'URL Kosong' });
+    }
+
+    try {
+        startASR(videoUrl, startTime || '0');
+        res.json({ status: 'success', message: 'ASR transcription started' });
+    } catch (error) {
+        console.error("[Node] ❌ Error starting ASR:", error);
+        res.status(500).json({ status: 'error', message: 'Gagal menjalankan ASR' });
+    }
+    console.log("========================================\n");
+});
+
+// --- ENDPOINT 3: Update ASR Start Time ---
+app.post('/api/update-asr-time', async (req, res) => {
+    console.log("\n========================================");
+    console.log("[Node] 1. Update ASR Start Time...");
+    
+    const { startTime } = req.body;
+    
+    if (!currentVideoUrl) {
+        return res.status(400).json({ status: 'error', message: 'Tidak ada video aktif' });
+    }
+
+    try {
+        startASR(currentVideoUrl, startTime || '0');
+        res.json({ status: 'success', message: 'ASR time updated' });
+    } catch (error) {
+        console.error("[Node] ❌ Error updating ASR time:", error);
+        res.status(500).json({ status: 'error', message: 'Gagal update ASR time' });
+    }
+    console.log("========================================\n");
+});
+
+// --- ENDPOINT 4: Stop ASR ---
+app.post('/api/stop-asr', async (req, res) => {
+    console.log("\n========================================");
+    console.log("[Node] Stopping ASR process...");
+    
+    try {
+        stopASR();
+        res.json({ status: 'success', message: 'ASR stopped' });
+    } catch (error) {
+        console.error("[Node] ❌ Error stopping ASR:", error);
+        res.status(500).json({ status: 'error', message: 'Gagal stop ASR' });
+    }
+    console.log("========================================\n");
 });
 
 // --- ENDPOINT 2: Webhook (Menerima Hasil dari Python) ---
 app.post('/api/webhook', (req, res) => {
     const data = req.body;
-    // Log biar kelihatan kalo ada data masuk (opsional, bisa dimatiin biar gak spam)
-    // console.log(`[Node] Webhook masuk: ${data.type}`); 
+    console.log(`[Node] Webhook masuk: ${data.type}`, data);
     
     // Broadcast ke Frontend
     io.emit('ai-result', data);
