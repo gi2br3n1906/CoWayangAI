@@ -1,70 +1,87 @@
 <template>
-  <div class="bg-wayang-card rounded-2xl shadow-2xl border border-white/10 overflow-hidden h-full flex flex-col">
-    <!-- Header -->
-    <div class="bg-gradient-to-r from-wayang-primary/20 to-wayang-gold/20 p-4 border-b border-white/10 flex-shrink-0">
+  <div class="bg-wayang-card rounded-2xl h-full border border-white/10 flex flex-col overflow-hidden shadow-xl">
+    
+    <div class="bg-gradient-to-r from-slate-800 to-slate-900 p-4 border-b border-white/5 flex-shrink-0 flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 bg-wayang-gold/20 rounded-lg flex items-center justify-center">
-          <svg class="w-6 h-6 text-wayang-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        <div class="w-8 h-8 bg-wayang-primary/20 rounded-lg flex items-center justify-center text-wayang-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
           </svg>
         </div>
-        <div class="flex-1">
-          <h3 class="text-lg font-semibold text-white">Characters</h3>
-          <p class="text-xs text-gray-400">{{ characters.length }} detected</p>
+        <div>
+          <h3 class="font-bold text-white text-sm uppercase tracking-wider">Tokoh di Layar</h3>
+          <p class="text-xs text-gray-400">{{ characters.length }} terdeteksi</p>
         </div>
+      </div>
+      <div v-if="characters.length > 0" class="flex items-center gap-1.5">
+        <span class="relative flex h-2.5 w-2.5">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+        </span>
+        <span class="text-[10px] font-bold text-green-400">LIVE</span>
       </div>
     </div>
 
-    <!-- Characters List -->
-    <div class="p-4 overflow-y-auto custom-scrollbar flex-1">
+    <div class="flex-1 overflow-y-auto custom-scrollbar p-4 relative">
+      
+      <div v-if="characters.length === 0" class="absolute inset-0 flex flex-col items-center justify-center text-gray-600 space-y-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+        </svg>
+        <p class="text-sm">Menunggu Wayang...</p>
+      </div>
+
       <TransitionGroup name="list" tag="div" class="space-y-3">
         <div 
-          v-for="character in characters" 
-          :key="character.id"
-          class="bg-wayang-dark/50 rounded-lg p-3 border border-white/5 hover:border-wayang-gold/30 transition-all duration-200 group cursor-pointer"
+          v-for="(char, index) in characters" 
+          :key="char.name + index" 
+          class="bg-slate-800/50 p-3 rounded-xl border border-white/5 flex gap-3 items-center hover:bg-slate-800 transition-colors group"
         >
-          <div class="flex items-start justify-between mb-2">
-            <div class="flex-1">
-              <h4 class="text-white font-semibold text-sm group-hover:text-wayang-gold transition-colors">
-                {{ character.name }}
-              </h4>
-              <p class="text-xs text-gray-400 mt-1 flex items-center gap-1">
-                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {{ character.time }}
-              </p>
+          <div class="w-24 aspect-video flex-shrink-0 rounded-lg overflow-hidden border border-white/10 bg-black relative">
+             
+            <img 
+              v-if="char.image"
+              :src="`data:image/jpeg;base64,${char.image}`" 
+              alt="Wayang Frame"
+              class="w-full h-full object-contain opacity-80"
+            />
+            <div v-else class="w-full h-full flex items-center justify-center bg-slate-700">
+               <span class="text-xs text-gray-500">?</span>
             </div>
-            <div class="text-right">
-              <span class="text-xs font-medium text-wayang-primary bg-wayang-primary/10 px-2 py-1 rounded">
-                {{ character.confidence }}
-              </span>
-            </div>
-          </div>
 
-          <!-- Confidence Bar -->
-          <div class="w-full bg-wayang-dark rounded-full h-1.5 overflow-hidden">
             <div 
-              class="h-full bg-gradient-to-r from-wayang-primary to-wayang-gold transition-all duration-500"
-              :style="{ width: character.confidence }"
-            ></div>
+              v-if="char.box"
+              class="absolute border-2 border-red-500 shadow-[0_0_5px_rgba(239,68,68,0.8)] transition-all duration-300"
+              :style="{
+                left: char.box.left + '%',
+                top: char.box.top + '%',
+                width: char.box.width + '%',
+                height: char.box.height + '%'
+              }"
+            >
+              <div class="absolute top-1/2 left-1/2 w-1 h-1 bg-red-500 rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
+            </div>
+            
           </div>
-
-          <!-- Description -->
-          <div v-if="character.description" class="mt-2 text-xs text-gray-500 line-clamp-2">
-            {{ character.description }}
+          <div class="flex-1 min-w-0">
+            <div class="flex justify-between items-start mb-1">
+              <h3 class="font-bold text-white text-base truncate group-hover:text-wayang-gold transition-colors">{{ char.name }}</h3>
+            </div>
+            
+            <div class="flex items-center gap-2 mt-2">
+                <div class="flex-1 bg-gray-700 h-1.5 rounded-full overflow-hidden">
+                  <div 
+                    class="h-full bg-gradient-to-r from-indigo-500 to-purple-500"
+                    :style="{ width: char.confidence + '%' }"
+                  ></div>
+                </div>
+                <span class="text-[10px] text-wayang-primary font-bold">{{ char.confidence }}%</span>
+            </div>
           </div>
         </div>
       </TransitionGroup>
 
-      <!-- Empty State -->
-      <div v-if="characters.length === 0" class="text-center py-8">
-        <svg class="w-12 h-12 mx-auto text-gray-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-        </svg>
-        <p class="text-gray-400 text-sm">Waiting...</p>
-        <p class="text-xs text-gray-500 mt-1">Characters will appear here</p>
-      </div>
     </div>
   </div>
 </template>
@@ -79,49 +96,14 @@ defineProps({
 </script>
 
 <style scoped>
-/* Custom scrollbar */
-.custom-scrollbar::-webkit-scrollbar {
-  width: 4px;
-}
+/* Custom Scrollbar & Transitions sama seperti sebelumnya */
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
+.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #475569; }
 
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.5);
-  border-radius: 10px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(99, 102, 241, 0.5);
-  border-radius: 10px;
-}
-
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(99, 102, 241, 0.8);
-}
-
-/* List animation */
-.list-enter-active {
-  transition: all 0.4s ease;
-}
-
-.list-enter-from {
-  opacity: 0;
-  transform: translateX(-20px);
-}
-
-.list-leave-active {
-  transition: all 0.3s ease;
-}
-
-.list-leave-to {
-  opacity: 0;
-  transform: translateX(20px);
-}
-
-/* Line clamp utility */
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
+.list-enter-active, .list-leave-active { transition: all 0.4s ease; }
+.list-enter-from { opacity: 0; transform: translateX(-20px); }
+.list-leave-to { opacity: 0; transform: translateX(20px); }
+.list-leave-active { position: absolute; width: 100%; }
 </style>
