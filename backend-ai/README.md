@@ -20,34 +20,71 @@ Backend ini bertanggung jawab untuk:
 - **Roboflow**: AI Object Detection model
 - **Uvicorn**: ASGI server
 
-## 📦 Instalasi
+## 📦 Instalasi (setelah clone)
 
-### 1. Clone Repository
+Jika kamu telah meng-clone repo ini, ikuti langkah-langkah berikut untuk menginstal dependensi dan menyiapkan environment pengembangan.
+
+1) Masuk ke folder proyek
 ```bash
 git clone <repository-url>
 cd backend-ai
 ```
 
-### 2. Buat Virtual Environment
+2) Buat dan aktifkan virtual environment (Python 3.8+)
+
+- Linux / macOS:
 ```bash
-# Linux/Mac
 python3 -m venv venv
 source venv/bin/activate
+```
 
-# Windows
+- Windows (Command Prompt):
+```powershell
 python -m venv venv
 venv\Scripts\activate
 ```
 
-### 3. Install Dependencies
+- Windows (PowerShell):
+```powershell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+```
+
+Catatan: Jika PowerShell menolak menjalankan skrip, jalankan PowerShell sebagai Administrator dan jalankan:
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+3) Perbarui `pip` lalu instal dependensi dari `requirements.txt`
 ```bash
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-Jika `requirements.txt` belum ada, install manual:
+Jika `requirements.txt` belum ada (mis. kamu bekerja dari branch yang belum menyertakannya), install dependensi utama secara manual:
 ```bash
 pip install fastapi uvicorn opencv-python yt-dlp roboflow requests python-dotenv
 ```
+
+4) (Opsional) Membuat `requirements.txt` dari environment yang sudah terpasang
+```bash
+pip freeze > requirements.txt
+```
+
+5) Konfigurasi environment variables
+Buat file `.env` di root `backend-ai` dan tambahkan variabel yang diperlukan:
+```env
+ROBOFLOW_API_KEY=your_api_key_here
+NODEJS_WEBHOOK_URL=http://localhost:3000/api/webhook
+```
+
+6) Verifikasi instalasi
+```bash
+# pastikan virtualenv aktif
+python -c "import fastapi, uvicorn; print('deps OK')"
+```
+
+Jika ada modul yang hilang, ulangi instalasi paket yang diperlukan atau lihat bagian Troubleshooting di bawah.
 
 ### 4. Konfigurasi Environment Variables
 
