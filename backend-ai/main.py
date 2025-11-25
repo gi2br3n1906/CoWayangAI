@@ -20,6 +20,16 @@ NODEJS_WEBHOOK_URL = "http://localhost:3000/api/webhook"
 
 # --- Init App & Global Vars ---
 app = FastAPI()
+
+@app.get("/")
+def health_check():
+    model_status = global_model is not None
+    return {
+        "status": "AI Engine Running",
+        "model_loaded": model_status,
+        "version": "1.0.0"
+    }
+
 current_thread = None
 stop_event = threading.Event() 
 

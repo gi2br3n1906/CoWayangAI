@@ -65,6 +65,14 @@ app.post('/api/analyze', async (req, res) => {
     console.log("========================================\n");
 });
 
+app.get('/', (req, res) => {
+    res.status(200).json({
+        status: 'OK',
+        message: 'Co-Wayang AI API Gateway Operational',
+        service: 'Node.js/Socket.IO'
+    });
+});
+
 // --- ENDPOINT 2: Webhook (Menerima Hasil dari Python) ---
 app.post('/api/webhook', (req, res) => {
     const data = req.body;

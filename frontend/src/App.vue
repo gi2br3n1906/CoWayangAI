@@ -20,7 +20,7 @@ const handleLogin = (userData) => console.log('User logged in:', userData)
 
 // --- STATE: WAYANG AI ---
 // Pastikan backend Node.js jalan di port 3000
-const socket = io('http://localhost:3000') 
+const socket = io("/", { path: "/socket.io" });
 const currentVideoId = ref(null)
 const currentStartTime = ref(0)
 const isLoading = ref(false)
