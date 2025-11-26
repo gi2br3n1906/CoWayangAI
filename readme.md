@@ -359,6 +359,7 @@ This project is licensed under the ISC License.
 
 **Gibran**
 - GitHub: [@gi2br3n1906](https://github.com/gi2br3n1906)
+- GitHub: [@dartyourt](https://github.com/dartyourt)
 
 ---
 
