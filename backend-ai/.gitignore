@@ -22,6 +22,12 @@ dist/
 
 # Logs
 *.log
+$tempLog
+
+# Temporary files from processing
+temp*.jpg
+temp*.mp4
+temp_audio_chunks/*.wav
 
 # macOS
 .DS_Store

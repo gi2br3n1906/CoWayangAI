@@ -61,12 +61,12 @@ def get_stream_url(yt_url):
     
     cookies_path = os.path.join(os.path.dirname(__file__), 'cookies.txt')
     
-    # Format options - HLS formats work better with cookies
+    # Format options - prioritize more stable formats
     format_options = [
-        '91',  # 144p HLS with audio
+        '93',  # 360p HLS with audio (more stable)
         '92',  # 240p HLS with audio  
-        '93',  # 360p HLS with audio
-        'bestaudio/best',
+        '91',  # 144p HLS with audio
+        'bestaudio[ext=m4a]/bestaudio/best',
     ]
     
     # Retry mechanism
@@ -111,25 +111,67 @@ def get_stream_url(yt_url):
 
 
 class PCMStreamer:
-    """Spawn ffmpeg to output raw PCM s16le 16k mono to stdout and yield frames"""
-    def __init__(self, stream_url, sample_rate=16000, start_time=0):
-        self.stream_url = stream_url
+    """Stream audio from YouTube using yt-dlp piped to ffmpeg"""
+    def __init__(self, youtube_url, sample_rate=16000, start_time=0):
+        self.youtube_url = youtube_url
         self.sample_rate = sample_rate
         self.start_time = start_time  # Start time in seconds
-        self.proc = None
+        self.yt_proc = None
+        self.ff_proc = None
         self.frames_consumed = 0
         self.has_seeked = False
 
     def start(self):
-        cmd = [
-            'ffmpeg', '-i', self.stream_url,
-            '-vn', '-f', 's16le', '-acodec', 'pcm_s16le',
-            '-ar', str(self.sample_rate), '-ac', '1', '-nostdin', '-loglevel', 'error', '-'
+        cookies_path = os.path.join(os.path.dirname(__file__), 'cookies.txt')
+        
+        # Use yt-dlp to stream directly to ffmpeg via pipe
+        # This is more reliable than using the extracted URL
+        yt_cmd = [
+            'yt-dlp',
+            '--cookies', cookies_path,
+            '-f', '93/92/91/bestaudio/best',  # Format preference
+            '-o', '-',  # Output to stdout
+            '--quiet',
+            '--no-warnings',
+            self.youtube_url
         ]
-        self.proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        
+        ff_cmd = [
+            'ffmpeg',
+            '-i', 'pipe:0',                   # Read from stdin
+            '-vn',                            # No video
+            '-f', 's16le',                    # Output format
+            '-acodec', 'pcm_s16le',          # Audio codec
+            '-ar', str(self.sample_rate),     # Sample rate
+            '-ac', '1',                       # Mono
+            '-loglevel', 'error',
+            '-'
+        ]
+        
+        print(f"[PCMStreamer] Starting yt-dlp -> ffmpeg pipeline...")
+        
+        # Start yt-dlp process
+        self.yt_proc = subprocess.Popen(
+            yt_cmd, 
+            stdout=subprocess.PIPE, 
+            stderr=subprocess.PIPE
+        )
+        
+        # Start ffmpeg process, reading from yt-dlp's stdout
+        self.ff_proc = subprocess.Popen(
+            ff_cmd,
+            stdin=self.yt_proc.stdout,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE
+        )
+        
+        # Allow yt-dlp to receive SIGPIPE if ffmpeg exits
+        self.yt_proc.stdout.close()
+        
+        print(f"[PCMStreamer] Pipeline started successfully")
 
     def read_chunk(self, n_bytes):
-        if not self.proc: return None
+        if not self.ff_proc: return None
         
         # If we haven't seeked yet and have a start_time, consume audio until we reach the target
         if not self.has_seeked and self.start_time > 0:
@@ -140,16 +182,18 @@ class PCMStreamer:
             if frames_to_skip > 0:
                 skip_bytes = min(frames_to_skip * bytes_per_frame, 1024 * 1024)  # Max 1MB at a time
                 try:
-                    skipped = self.proc.stdout.read(skip_bytes)
+                    skipped = self.ff_proc.stdout.read(skip_bytes)
                     if skipped:
                         frames_skipped = len(skipped) // bytes_per_frame
                         self.frames_consumed += frames_skipped
-                        print(f"⏩ Seeking: {self.frames_consumed}/{target_frames} frames ({self.frames_consumed/self.sample_rate:.1f}s)")
+                        if self.frames_consumed % (self.sample_rate * 10) < frames_skipped:  # Log every 10 seconds
+                            print(f"⏩ Seeking: {self.frames_consumed/self.sample_rate:.1f}s / {self.start_time}s")
                     else:
                         # End of stream reached before target
                         self.has_seeked = True
                         return None
-                except:
+                except Exception as e:
+                    print(f"[PCMStreamer] Seek error: {e}")
                     self.has_seeked = True
                     return None
                 
@@ -162,14 +206,35 @@ class PCMStreamer:
                     return self.read_chunk(n_bytes)
         
         # Normal reading after seeking
-        data = self.proc.stdout.read(n_bytes)
-        if not data or len(data) < n_bytes:
+        try:
+            data = self.ff_proc.stdout.read(n_bytes)
+            if data and len(data) >= n_bytes:
+                return data
+            elif data and len(data) > 0:
+                # Partial read - pad with silence
+                return data + b'\x00' * (n_bytes - len(data))
+            else:
+                # Check processes status
+                yt_status = self.yt_proc.poll() if self.yt_proc else None
+                ff_status = self.ff_proc.poll() if self.ff_proc else None
+                
+                if yt_status is not None or ff_status is not None:
+                    print(f"[PCMStreamer] Processes ended - yt-dlp: {yt_status}, ffmpeg: {ff_status}")
+                    if self.ff_proc.stderr:
+                        err = self.ff_proc.stderr.read()
+                        if err:
+                            print(f"[PCMStreamer] FFmpeg stderr: {err.decode('utf-8', errors='ignore')[:200]}")
+                return None
+        except Exception as e:
+            print(f"[PCMStreamer] Read error: {e}")
             return None
-        return data
 
     def stop(self):
-        if self.proc:
-            try: self.proc.kill()
+        if self.ff_proc:
+            try: self.ff_proc.kill()
+            except: pass
+        if self.yt_proc:
+            try: self.yt_proc.kill()
             except: pass
 
 
@@ -219,12 +284,9 @@ def run_transcription_loop(youtube_url, start_time=0, model_id=None):
     window_frames = int(math.ceil(window_sec * 1000 / frame_duration))
     stride_frames = int(math.ceil(stride_sec * 1000 / frame_duration))
 
-    stream_url = get_stream_url(youtube_url)
-    if not stream_url:
-        print('Failed to get stream url from yt-dlp. Exiting.')
-        return
-
-    streamer = PCMStreamer(stream_url, sample_rate=sample_rate, start_time=start_time)
+    # Langsung gunakan YouTube URL dengan PCMStreamer (yt-dlp pipe approach)
+    print(f"🎙️ [ASR] Memulai streaming audio dari: {youtube_url}")
+    streamer = PCMStreamer(youtube_url, sample_rate=sample_rate, start_time=start_time)
     streamer.start()
 
     chunk_buffer = deque(maxlen=window_frames)

@@ -71,69 +71,57 @@ CoWayangAI_V2/
 ### Prerequisites
 
 - Node.js 20.x atau 22.x
-- npm atau yarn
-- Firebase account (untuk authentication)
+- Python 3.8+
 - Git
+- Firebase account (untuk authentication)
 
-### Installation
+### Quick Installation
+
+CoWayangAI sekarang dilengkapi dengan skrip instalasi otomatis yang akan menghandle semua setup untuk Anda!
 
 #### 1. Clone Repository
 
 ```bash
 git clone https://github.com/gi2br3n1906/CoWayangAI.git
-cd CoWayangAI_V2
+cd CoWayangAI
 ```
 
-#### 2. Setup Backend
+#### 2. Run Installation Script
 
 ```bash
-cd backend
-npm install
+bash install.sh
 ```
 
-Buat file `.env` dan isi dengan:
+Skrip instalasi akan:
+- ✅ Memeriksa dan menginstall dependencies sistem (Node.js, Python, PM2, yt-dlp)
+- ✅ Meminta konfigurasi (Firebase credentials, API keys, dll)
+- ✅ Membuat file `.env` untuk semua services
+- ✅ Menginstall dependencies untuk backend, frontend, dan AI backend
+- ✅ Setup Python virtual environment
+- ✅ Menjalankan semua backend services dengan PM2
+- ✅ Melakukan health check
 
-```env
-PORT=3000
-AI_API_URL=http://localhost:8000/analyze
-WEBHOOK_URL=http://localhost:3000/api/webhook
-```
-
-Jalankan server:
+#### 3. Start Frontend Development Server
 
 ```bash
-npm run dev
-```
-
-Backend akan berjalan di `http://localhost:3000`
-
-#### 3. Setup Frontend
-
-```bash
-cd ../frontend
-npm install
-```
-
-Buat file `.env` dan isi dengan kredensial Firebase Anda:
-
-```env
-VITE_FIREBASE_API_KEY=your-api-key
-VITE_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
-VITE_FIREBASE_PROJECT_ID=your-project-id
-VITE_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
-VITE_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
-VITE_FIREBASE_APP_ID=your-app-id
-```
-
-> 📝 Lihat [FIREBASE_SETUP.md](FIREBASE_SETUP.md) untuk panduan lengkap setup Firebase
-
-Jalankan development server:
-
-```bash
+cd frontend
 npm run dev
 ```
 
 Frontend akan berjalan di `http://localhost:5173`
+
+#### 4. (Optional) Refresh YouTube Cookies
+
+Jika Anda mengalami masalah saat mengakses video YouTube, refresh cookies:
+
+```bash
+bash backend-ai/refresh-cookies.sh
+```
+
+### Manual Installation
+
+Jika Anda lebih suka instalasi manual, lihat [FIREBASE_SETUP.md](FIREBASE_SETUP.md) untuk panduan lengkap.
+
 
 ---
 
@@ -205,6 +193,106 @@ Health check endpoint.
     timestamp: '2025-11-17T...'
   }
   ```
+
+---
+
+## 🛠️ Managing Services
+
+### PM2 Commands
+
+Setelah instalasi, semua backend services dikelola dengan PM2:
+
+```bash
+# View status semua services
+pm2 status
+
+# View logs
+pm2 logs                      # Semua logs
+pm2 logs nodejs-api           # Node.js backend logs
+pm2 logs cowayang-ai-backend  # AI backend logs
+pm2 logs cowayang-ai-asr      # ASR server logs
+
+# Restart services
+pm2 restart all               # Restart semua
+pm2 restart nodejs-api        # Restart specific service
+
+# Stop services
+pm2 stop all                  # Stop semua
+pm2 stop nodejs-api           # Stop specific service
+
+# Clean restart (recommended)
+bash restart-all.sh           # Restart dengan cleanup temp files
+```
+
+### Troubleshooting
+
+#### YouTube Video Download Gagal
+
+Jika Anda mendapat error saat download video YouTube:
+
+1. **Refresh YouTube cookies:**
+   ```bash
+   bash backend-ai/refresh-cookies.sh
+   ```
+
+2. **Pastikan yt-dlp up-to-date:**
+   ```bash
+   pip3 install --upgrade yt-dlp
+   ```
+
+#### Service Tidak Start
+
+1. **Cek logs untuk error:**
+   ```bash
+   pm2 logs
+   ```
+
+2. **Restart services:**
+   ```bash
+   bash restart-all.sh
+   ```
+
+3. **Cek apakah port sudah digunakan:**
+   ```bash
+   # Cek port 3000 (Node.js backend)
+   lsof -i :3000
+   
+   # Cek port 8000 (AI backend)
+   lsof -i :8000
+   
+   # Cek port 8001 (ASR server)
+   lsof -i :8001
+   ```
+
+#### Frontend Tidak Bisa Connect ke Backend
+
+1. **Pastikan semua backend services running:**
+   ```bash
+   pm2 status
+   ```
+
+2. **Cek health endpoints:**
+   ```bash
+   curl http://localhost:3000/api/health
+   curl http://localhost:8000/
+   curl http://localhost:8001/
+   ```
+
+3. **Periksa CORS settings di backend**
+
+#### Model AI Tidak Load
+
+Jika AI backend tidak bisa load model Roboflow:
+
+1. **Cek koneksi internet** (model di-download saat startup)
+2. **Cek API key di `.env`:**
+   ```bash
+   cat backend-ai/.env | grep ROBOFLOW_API_KEY
+   ```
+3. **Restart AI backend:**
+   ```bash
+   pm2 restart cowayang-ai-backend
+   ```
 
 ---
 

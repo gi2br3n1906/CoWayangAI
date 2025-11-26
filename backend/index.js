@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -136,6 +137,10 @@ app.post('/api/analyze', async (req, res) => {
         console.log("[Node] ✅ 3. Python Merespon: Sukses!");
         console.log("[Node]    Status Python:", pythonResponse.data);
         
+        // Track current video for seek functionality
+        currentVideoUrl = videoUrl;
+        currentStartTime = startTimeInSeconds.toString();
+        
         // AUTO START ASR
         console.log("[Node] 4. Starting ASR automatically...");
         await startASR(videoUrl, startTimeInSeconds.toString());
@@ -214,6 +219,58 @@ app.post('/api/stop-asr', async (req, res) => {
     console.log("========================================\n");
 });
 
+// --- ENDPOINT 5: Seek AI Analysis ---
+app.post('/api/seek-analysis', async (req, res) => {
+    console.log("\n========================================");
+    console.log("[Node] 📍 Seek AI Analysis Request...");
+    
+    const { startTime } = req.body;
+    
+    if (!currentVideoUrl) {
+        return res.status(400).json({ status: 'error', message: 'Tidak ada video aktif' });
+    }
+
+    console.log(`[Node]    Seeking to: ${startTime} seconds`);
+    console.log(`[Node]    Video: ${currentVideoUrl}`);
+
+    try {
+        // Stop current analysis first
+        console.log("[Node] 🛑 Stopping current AI analysis...");
+        try {
+            await axios.post('http://127.0.0.1:8000/stop-analysis', {}, { timeout: 3000 });
+        } catch (stopErr) {
+            console.log("[Node] Note: Stop request completed or timed out");
+        }
+
+        // Small delay to ensure thread is stopped
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        // Restart from new position
+        console.log("[Node] 🚀 Starting AI analysis from seek position...");
+        const pythonResponse = await axios.post('http://127.0.0.1:8000/start-analysis', {
+            videoUrl: currentVideoUrl,
+            startTime: parseInt(startTime) || 0
+        });
+
+        console.log("[Node] ✅ AI Analysis restarted from seek position:", pythonResponse.data);
+        
+        // Also update ASR
+        const hours = Math.floor(startTime / 3600);
+        const minutes = Math.floor((startTime % 3600) / 60);
+        const seconds = Math.floor(startTime % 60);
+        const timeStr = hours > 0 ? 
+            `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}` :
+            `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        await startASR(currentVideoUrl, timeStr);
+        
+        res.json({ status: 'success', message: 'AI seek successful', startTime: startTime });
+    } catch (error) {
+        console.error("[Node] ❌ Error seeking AI:", error.message);
+        res.status(500).json({ status: 'error', message: 'Gagal seek AI' });
+    }
+    console.log("========================================\n");
+});
+
 // --- ENDPOINT 2: Webhook (Menerima Hasil dari Python) ---
 app.post('/api/webhook', (req, res) => {
     const data = req.body;
@@ -223,6 +280,63 @@ app.post('/api/webhook', (req, res) => {
     io.emit('ai-result', data);
     
     res.json({ status: 'ok' });
+});
+
+// --- ENDPOINT 6: Search YouTube Videos ---
+app.get('/api/search-youtube', async (req, res) => {
+    console.log("\n========================================");
+    console.log("[Node] 🔎 YouTube Search Request...");
+    
+    const { q } = req.query;
+    
+    if (!q) {
+        console.error("[Node] ❌ Error: Query pencarian kosong!");
+        return res.status(400).json({ status: 'error', message: 'Query pencarian kosong' });
+    }
+
+    console.log(`[Node]    Query: ${q}`);
+
+    try {
+        const apiKey = process.env.YOUTUBE_API_KEY;
+        
+        if (!apiKey || apiKey === 'your_youtube_api_key_here') {
+            console.error("[Node] ❌ Error: YOUTUBE_API_KEY tidak dikonfigurasi!");
+            return res.status(500).json({ status: 'error', message: 'YouTube API Key belum dikonfigurasi' });
+        }
+
+        const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+            params: {
+                part: 'snippet',
+                type: 'video',
+                maxResults: 6,
+                key: apiKey,
+                q: q
+            }
+        });
+
+        // Format hasil untuk frontend
+        const videos = response.data.items.map(item => ({
+            videoId: item.id.videoId,
+            title: item.snippet.title,
+            thumbnail: item.snippet.thumbnails.medium.url,
+            channelTitle: item.snippet.channelTitle,
+            publishedAt: item.snippet.publishedAt
+        }));
+
+        console.log(`[Node] ✅ Ditemukan ${videos.length} video`);
+        res.json({ status: 'success', videos: videos });
+
+    } catch (error) {
+        console.error("[Node] ❌ Error searching YouTube:", error.message);
+        
+        if (error.response) {
+            console.error("[Node]    Status:", error.response.status);
+            console.error("[Node]    Data:", error.response.data);
+        }
+        
+        res.status(500).json({ status: 'error', message: 'Gagal mencari video YouTube' });
+    }
+    console.log("========================================\n");
 });
 
 const PORT = 3000;
