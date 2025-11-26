@@ -74,7 +74,7 @@ const subtitles = ref([])
 
 onMounted(() => {
   // Connect to Backend Socket.IO
-  socket.value = io('http://localhost:3000')
+  socket.value = io('/', { path: '/socket.io' })
 
   socket.value.on('connect', () => {
     console.log('Connected to backend:', socket.value.id)
@@ -141,7 +141,7 @@ const handleAnalyze = async ({ url, startMinute }) => {
     }
 
     // Call Backend API
-    await axios.post('http://localhost:3000/api/analyze', {
+    await axios.post('/api/analyze', {
       videoUrl: url,
       socketId: socketId.value, // Kirim socketId agar backend tau siapa yg request
       startMinute: startMinute || 0

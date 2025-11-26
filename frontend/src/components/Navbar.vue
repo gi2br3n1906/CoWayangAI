@@ -18,15 +18,22 @@
             >
               About
             </a>
-            <a 
-              href="#documentation" 
-              class="text-gray-400 hover:text-white transition-colors duration-200 px-3 py-2 text-sm font-medium"
+            <button 
+              @click="$emit('openShortcuts')"
+              class="text-gray-400 hover:text-white transition-colors duration-200 px-3 py-2 text-sm font-medium flex items-center gap-1"
+              title="Keyboard Shortcuts"
             >
-              Documentation
-            </a>
+              <kbd class="px-1.5 py-0.5 bg-wayang-card text-xs rounded">?</kbd>
+            </button>
             
             <!-- Login/User Menu -->
-            <div v-if="!isAuthenticated">
+            <div v-if="!isAuthenticated" class="flex items-center gap-3">
+              <button
+                @click="openRegisterModal"
+                class="px-6 py-2 text-wayang-gold font-medium rounded-lg border border-wayang-gold/50 hover:bg-wayang-gold/10 transition-all duration-200"
+              >
+                Daftar
+              </button>
               <button
                 @click="openLoginModal"
                 class="px-6 py-2 bg-wayang-primary text-white font-medium rounded-lg hover:bg-wayang-primary/90 hover:shadow-lg hover:shadow-wayang-primary/30 transition-all duration-200"
@@ -35,21 +42,68 @@
               </button>
             </div>
             <div v-else class="flex items-center gap-4">
-              <div class="flex items-center gap-2">
-                <div v-if="user?.photoURL" class="w-8 h-8 rounded-full overflow-hidden">
-                  <img :src="user.photoURL" :alt="user.displayName || user.email" class="w-full h-full object-cover" />
+              <!-- User Dropdown -->
+              <div class="relative" ref="userDropdownRef">
+                <button 
+                  @click="toggleUserDropdown"
+                  class="flex items-center gap-2 hover:bg-wayang-card/50 rounded-lg px-2 py-1 transition-colors"
+                >
+                  <div v-if="user?.photoURL" class="w-8 h-8 rounded-full overflow-hidden">
+                    <img :src="user.photoURL" :alt="user.displayName || user.email" class="w-full h-full object-cover" />
+                  </div>
+                  <div v-else class="w-8 h-8 rounded-full bg-wayang-primary flex items-center justify-center">
+                    <span class="text-sm font-semibold">{{ (user?.displayName || user?.email)?.[0]?.toUpperCase() }}</span>
+                  </div>
+                  <span class="text-sm text-gray-300">{{ user?.displayName || user?.email }}</span>
+                  <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                
+                <!-- Dropdown Menu -->
+                <div 
+                  v-if="isUserDropdownOpen"
+                  class="absolute right-0 mt-2 w-48 bg-wayang-card rounded-lg shadow-xl border border-wayang-card/50 py-2 z-50"
+                >
+                  <button
+                    @click="openProfileModal"
+                    class="w-full px-4 py-2 text-left text-sm text-gray-300 hover:bg-wayang-dark/50 hover:text-white transition-colors flex items-center gap-2"
+                  >
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    Profil Saya
+                  </button>
+                  <button
+                    @click="openProfileModal"
+                    class="w-full px-4 py-2 text-left text-sm text-gray-300 hover:bg-wayang-dark/50 hover:text-white transition-colors flex items-center gap-2"
+                  >
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Riwayat
+                  </button>
+                  <button
+                    @click="openProfileModal"
+                    class="w-full px-4 py-2 text-left text-sm text-gray-300 hover:bg-wayang-dark/50 hover:text-white transition-colors flex items-center gap-2"
+                  >
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                    Favorit
+                  </button>
+                  <hr class="my-2 border-wayang-card/50" />
+                  <button
+                    @click="handleLogout"
+                    class="w-full px-4 py-2 text-left text-sm text-red-400 hover:bg-wayang-dark/50 hover:text-red-300 transition-colors flex items-center gap-2"
+                  >
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    Logout
+                  </button>
                 </div>
-                <div v-else class="w-8 h-8 rounded-full bg-wayang-primary flex items-center justify-center">
-                  <span class="text-sm font-semibold">{{ (user?.displayName || user?.email)?.[0]?.toUpperCase() }}</span>
-                </div>
-                <span class="text-sm text-gray-300">{{ user?.displayName || user?.email }}</span>
               </div>
-              <button
-                @click="handleLogout"
-                class="px-4 py-2 bg-wayang-card text-gray-300 font-medium rounded-lg hover:bg-wayang-card/70 hover:text-white transition-all duration-200"
-              >
-                Logout
-              </button>
             </div>
           </div>
         </div>
@@ -103,16 +157,15 @@
           >
             About
           </a>
-          <a 
-            href="#documentation" 
-            @click="closeMenu"
-            class="text-gray-400 hover:text-white text-lg font-medium transition-colors duration-200 border-b border-wayang-card/50 pb-2"
-          >
-            Documentation
-          </a>
           
           <!-- Mobile Login/User -->
-          <div v-if="!isAuthenticated" class="pt-4">
+          <div v-if="!isAuthenticated" class="pt-4 space-y-3">
+            <button
+              @click="openRegisterModal"
+              class="w-full px-6 py-3 text-wayang-gold font-medium rounded-lg border border-wayang-gold/50 hover:bg-wayang-gold/10 transition-all duration-200"
+            >
+              Daftar
+            </button>
             <button
               @click="openLoginModal"
               class="w-full px-6 py-3 bg-wayang-primary text-white font-medium rounded-lg hover:bg-wayang-primary/90 transition-all duration-200 shadow-lg shadow-wayang-primary/20"
@@ -121,7 +174,10 @@
             </button>
           </div>
           <div v-else class="pt-4 space-y-4">
-            <div class="flex items-center gap-3 p-3 bg-wayang-card/50 rounded-lg">
+            <div 
+              @click="openProfileModal"
+              class="flex items-center gap-3 p-3 bg-wayang-card/50 rounded-lg cursor-pointer hover:bg-wayang-card/70 transition-colors"
+            >
               <div v-if="user?.photoURL" class="w-10 h-10 rounded-full overflow-hidden border border-wayang-gold/50">
                 <img :src="user?.photoURL" :alt="user?.displayName || user?.email" class="w-full h-full object-cover" />
               </div>
@@ -134,8 +190,17 @@
               </div>
             </div>
             <button
+              @click="openProfileModal"
+              class="w-full px-6 py-3 bg-wayang-card text-gray-300 font-medium rounded-lg hover:bg-wayang-card/70 hover:text-white transition-all duration-200 border border-wayang-card flex items-center justify-center gap-2"
+            >
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+              Profil Saya
+            </button>
+            <button
               @click="handleLogout"
-              class="w-full px-6 py-3 bg-wayang-card text-gray-300 font-medium rounded-lg hover:bg-wayang-card/70 hover:text-white transition-all duration-200 border border-wayang-card"
+              class="w-full px-6 py-3 text-red-400 font-medium rounded-lg hover:bg-red-500/10 transition-all duration-200 border border-red-500/30"
             >
               Logout
             </button>
@@ -147,16 +212,18 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 
 const isMenuOpen = ref(false)
+const isUserDropdownOpen = ref(false)
+const userDropdownRef = ref(null)
 const authStore = useAuthStore()
 
 const isAuthenticated = computed(() => authStore.isAuthenticated)
 const user = computed(() => authStore.user)
 
-const emit = defineEmits(['openLogin'])
+const emit = defineEmits(['openLogin', 'openRegister', 'openProfile', 'openShortcuts'])
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
@@ -166,13 +233,44 @@ const closeMenu = () => {
   isMenuOpen.value = false
 }
 
+const toggleUserDropdown = () => {
+  isUserDropdownOpen.value = !isUserDropdownOpen.value
+}
+
 const openLoginModal = () => {
   emit('openLogin')
   closeMenu()
 }
 
+const openRegisterModal = () => {
+  emit('openRegister')
+  closeMenu()
+}
+
+const openProfileModal = () => {
+  isUserDropdownOpen.value = false
+  emit('openProfile')
+  closeMenu()
+}
+
 const handleLogout = async () => {
+  isUserDropdownOpen.value = false
   await authStore.logout()
   closeMenu()
 }
+
+// Close dropdown when clicking outside
+const handleClickOutside = (event) => {
+  if (userDropdownRef.value && !userDropdownRef.value.contains(event.target)) {
+    isUserDropdownOpen.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
 </script>

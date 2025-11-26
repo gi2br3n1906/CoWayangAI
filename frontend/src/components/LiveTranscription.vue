@@ -16,7 +16,12 @@
               <span class="relative inline-flex rounded-full h-2 w-2 bg-wayang-gold"></span>
             </span>
           </h3>
-          <p class="text-xs text-gray-400">Live subtitle feed</p>
+          <div class="flex items-center gap-2">
+            <p class="text-xs text-gray-400">Live subtitle feed</p>
+            <span v-if="queueCount > 0" class="text-xs bg-wayang-primary/30 text-wayang-primary px-2 py-0.5 rounded-full">
+              {{ queueCount }} pending
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -25,13 +30,13 @@
     <div ref="containerRef" class="p-4 overflow-y-auto custom-scrollbar flex-1">
       <TransitionGroup name="fade-slide" tag="div" class="space-y-3">
         <div 
-          v-for="subtitle in currentSubtitles" 
+          v-for="subtitle in sortedSubtitles" 
           :key="subtitle.id"
           :data-id="subtitle.id"
           class="bg-wayang-dark/50 rounded-lg p-3 border border-white/5 transition-all duration-200"
           :class="{ 
             'border-wayang-gold/50 bg-wayang-gold/5': subtitle.isNew,
-            'border-wayang-primary/50 bg-wayang-primary/10': subtitle.isCurrent 
+            'border-wayang-primary/50 bg-wayang-primary/10 ring-1 ring-wayang-primary/30': subtitle.isCurrent 
           }"
         >
           <div class="flex items-center gap-2 mb-2">
@@ -44,7 +49,7 @@
             </span>
             <span 
               v-if="subtitle.isCurrent" 
-              class="text-xs bg-wayang-primary text-white px-2 py-0.5 rounded-full font-semibold"
+              class="text-xs bg-wayang-primary text-white px-2 py-0.5 rounded-full font-semibold animate-pulse"
             >
               NOW
             </span>
@@ -57,7 +62,7 @@
           </p>
           <p 
             v-if="subtitle.translation" 
-            class="text-xs text-gray-500 mt-2 italic border-t border-white/5 pt-2"
+            class="text-sm text-gray-300 mt-2 italic border-t border-white/5 pt-2"
           >
             {{ subtitle.translation }}
           </p>
@@ -87,22 +92,23 @@ const props = defineProps({
   currentTime: {
     type: Number,
     default: 0
+  },
+  queueCount: {
+    type: Number,
+    default: 0
   }
 })
 
 const containerRef = ref(null)
 
-// Computed untuk subtitle yang sedang aktif
-const currentSubtitles = computed(() => {
-  return props.subtitles.map(sub => ({
-    ...sub,
-    isCurrent: props.currentTime >= sub.start_time && props.currentTime <= sub.end_time
-  }))
+// Computed: Sort subtitles by start_time
+const sortedSubtitles = computed(() => {
+  return [...props.subtitles].sort((a, b) => a.start_time - b.start_time)
 })
 
 // Scroll ke subtitle yang sedang aktif
 watch(() => props.currentTime, () => {
-  const current = currentSubtitles.value.find(sub => sub.isCurrent)
+  const current = sortedSubtitles.value.find(sub => sub.isCurrent)
   if (current && containerRef.value) {
     const element = containerRef.value.querySelector(`[data-id="${current.id}"]`)
     if (element) {
@@ -111,15 +117,24 @@ watch(() => props.currentTime, () => {
   }
 }, { immediate: true })
 
-watch(() => props.subtitles, async () => {
-  await nextTick()
-  if (containerRef.value) {
-    containerRef.value.scrollTo({
-      top: containerRef.value.scrollHeight,
-      behavior: 'smooth'
-    })
+// Scroll ke bawah saat ada subtitle baru
+watch(() => props.subtitles.length, async (newLen, oldLen) => {
+  if (newLen > oldLen) {
+    await nextTick()
+    if (containerRef.value) {
+      // Hanya auto-scroll jika user tidak sedang scroll manual
+      const container = containerRef.value
+      const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 100
+      
+      if (isNearBottom) {
+        container.scrollTo({
+          top: container.scrollHeight,
+          behavior: 'smooth'
+        })
+      }
+    }
   }
-}, { deep: true })
+})
 </script>
 
 <style scoped>

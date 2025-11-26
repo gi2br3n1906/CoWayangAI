@@ -1,22 +1,66 @@
 <script setup>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import axios from 'axios'
 import io from 'socket.io-client'
+import { useAuthStore } from '@/stores/auth'
 
 // --- COMPONENTS ---
 import Navbar from './components/Navbar.vue'
 import LoginModal from './components/LoginModal.vue'
+import RegisterModal from './components/RegisterModal.vue'
+import ForgotPasswordModal from './components/ForgotPasswordModal.vue'
+import UserProfileModal from './components/UserProfileModal.vue'
 import HeroSection from './components/HeroSection.vue'
 import VideoGallery from './components/VideoGallery.vue'
 import VideoPlayer from './components/VideoPlayer.vue'
 import CharacterList from './components/CharacterList.vue'
 import LiveTranscription from './components/LiveTranscription.vue'
+import KeyboardShortcutsModal from './components/KeyboardShortcutsModal.vue'
+import TutorialModal from './components/TutorialModal.vue'
+import AboutSection from './components/AboutSection.vue'
+import AppFooter from './components/AppFooter.vue'
 
 // --- STATE: LOGIN & UI ---
 const isLoginModalOpen = ref(false)
+const isRegisterModalOpen = ref(false)
+const isForgotPasswordModalOpen = ref(false)
+const isProfileModalOpen = ref(false)
+const isShortcutsModalOpen = ref(false)
+const isTutorialOpen = ref(false)
+
 const openLoginModal = () => isLoginModalOpen.value = true
 const closeLoginModal = () => isLoginModalOpen.value = false
+const openRegisterModal = () => isRegisterModalOpen.value = true
+const closeRegisterModal = () => isRegisterModalOpen.value = false
+const openForgotPasswordModal = () => isForgotPasswordModalOpen.value = true
+const closeForgotPasswordModal = () => isForgotPasswordModalOpen.value = false
+const openProfileModal = () => isProfileModalOpen.value = true
+const closeProfileModal = () => isProfileModalOpen.value = false
+const openShortcutsModal = () => isShortcutsModalOpen.value = true
+const closeShortcutsModal = () => isShortcutsModalOpen.value = false
+const openTutorial = () => isTutorialOpen.value = true
+const closeTutorial = () => isTutorialOpen.value = false
+
 const handleLogin = (userData) => console.log('User logged in:', userData)
+const handleRegister = (userData) => console.log('User registered:', userData)
+
+// Switch between modals
+const switchToRegister = () => {
+  closeLoginModal()
+  openRegisterModal()
+}
+const switchToLogin = () => {
+  closeRegisterModal()
+  closeForgotPasswordModal()
+  openLoginModal()
+}
+const switchToForgotPassword = () => {
+  closeLoginModal()
+  openForgotPasswordModal()
+}
+
+// Auth Store
+const authStore = useAuthStore()
 
 // --- STATE: WAYANG AI ---
 // Pastikan backend Node.js jalan di port 3000
@@ -26,13 +70,62 @@ const currentStartTime = ref(0)
 const isLoading = ref(false)
 const isASRLoadng = ref(false)
 
+// Video Player Control
+const videoPlayerRef = ref(null)
+const shouldAutoPlay = ref(false)
+
 // Data Hasil AI
 const characters = ref([])
-const subtitles = ref([])
 const currentVideoTime = ref(0)
+
+// SUBTITLE QUEUE SYSTEM - Untuk sinkronisasi yang lebih baik
+const subtitlesQueue = ref([])      // Antrian subtitle dari backend
+const displayedSubtitles = ref([])  // Subtitle yang sudah ditampilkan (sesuai waktu video)
+
+// Computed: Gabungan subtitle untuk display dengan status sinkron
+const syncedSubtitles = computed(() => {
+  return displayedSubtitles.value.map(sub => ({
+    ...sub,
+    isCurrent: currentVideoTime.value >= sub.start_time && currentVideoTime.value <= sub.end_time
+  }))
+})
 
 // Mobile Tab State
 const activeMobileTab = ref('characters')
+
+// Debounce timer for seek
+let seekDebounceTimer = null
+let syncInterval = null
+
+// --- FUNGSI SINKRONISASI KUNCI ---
+const syncVideoAndData = () => {
+  const currentTime = currentVideoTime.value
+  
+  // Iterasi queue dan pindahkan subtitle yang sudah lewat waktunya
+  const toDisplay = []
+  const remaining = []
+  
+  for (const subtitle of subtitlesQueue.value) {
+    // Jika waktu video sudah melewati timestamp subtitle, tampilkan
+    if (subtitle.start_time <= currentTime + 1) { // +1 detik buffer
+      toDisplay.push(subtitle)
+    } else {
+      remaining.push(subtitle)
+    }
+  }
+  
+  // Pindahkan dari queue ke displayed
+  if (toDisplay.length > 0) {
+    displayedSubtitles.value.push(...toDisplay)
+    subtitlesQueue.value = remaining
+    console.log(`[Sync] Moved ${toDisplay.length} subtitles to display. Queue: ${remaining.length}`)
+  }
+}
+
+// Watch currentVideoTime untuk sinkronisasi
+watch(currentVideoTime, () => {
+  syncVideoAndData()
+})
 
 // --- LOGIKA ANALISIS ---
 const getYouTubeVideoId = (url) => {
@@ -51,42 +144,60 @@ const handleAnalyze = async (payload) => {
   }
 
   isLoading.value = true;
+  shouldAutoPlay.value = false; // Jangan autoplay dulu
   currentVideoId.value = videoId;
-  currentStartTime.value = parseTimeToSeconds(startTime || '0'); // Konversi HH:MM:SS ke detik
+  currentStartTime.value = parseTimeToSeconds(startTime || '0');
   
   // Reset Data Lama
   characters.value = [];
-  subtitles.value = [];
+  subtitlesQueue.value = [];
+  displayedSubtitles.value = [];
+  currentVideoTime.value = currentStartTime.value;
+
+  // Save to watch history if user is logged in
+  if (authStore.isAuthenticated) {
+    authStore.addToWatchHistory({
+      videoId: videoId,
+      videoUrl: url,
+      title: `Video ${videoId}`, // Will be updated with actual title if available
+      thumbnail: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`
+    })
+  }
 
   // Auto Scroll ke Player
   await nextTick();
   const playerSection = document.getElementById('player-section');
   if (playerSection) playerSection.scrollIntoView({ behavior: 'smooth' });
 
-  // Request ke Backend Node.js untuk Object Detection
+  // Request ke Backend Node.js untuk Object Detection & ASR
   try {
-    await axios.post('http://localhost:3000/api/analyze', {
+    await axios.post('/api/analyze', {
       videoUrl: url,
       startTime: startTime || '0',
       socketId: socket.id
     });
+    
+    console.log("[App] Backend request success, waiting before play...");
+    
+    // Tunggu 2.5 detik agar backend siap memproses
+    await new Promise(resolve => setTimeout(resolve, 2500));
+    
+    // Sekarang putar video
+    console.log("[App] Starting video playback...");
+    shouldAutoPlay.value = true;
+    
+    // Fallback: Jika autoPlay prop tidak trigger, panggil manual
+    setTimeout(() => {
+      if (videoPlayerRef.value && videoPlayerRef.value.playVideo) {
+        videoPlayerRef.value.playVideo();
+      }
+    }, 500);
+
   } catch (error) {
     console.error("Gagal menghubungi backend:", error);
     alert("Backend error. Cek terminal Node.js!");
   } finally {
     isLoading.value = false;
-  }
-
-  // AUTO START ASR juga ketika analisis dimulai
-  console.log("[App] Auto-starting ASR...");
-  try {
-    await axios.post('http://localhost:3000/api/start-asr', {
-      videoUrl: url,
-      startTime: startTime || '0'
-    });
-    console.log("[App] ASR auto-started successfully");
-  } catch (error) {
-    console.error("[App] Failed to auto-start ASR:", error);
   }
 };
 
@@ -100,12 +211,15 @@ const handleStartASR = async (payload) => {
   }
 
   isASRLoadng.value = true;
+  shouldAutoPlay.value = false;
   currentVideoId.value = videoId;
   currentStartTime.value = parseTimeToSeconds(startTime || '0');
   
-  // Reset Data Lama hanya untuk video baru
+  // Reset Data Lama
   characters.value = [];
-  subtitles.value = [];
+  subtitlesQueue.value = [];
+  displayedSubtitles.value = [];
+  currentVideoTime.value = currentStartTime.value;
 
   // Auto Scroll ke Player
   await nextTick();
@@ -114,10 +228,24 @@ const handleStartASR = async (payload) => {
 
   // Request ke Backend Node.js untuk ASR
   try {
-    await axios.post('http://localhost:3000/api/start-asr', {
+    await axios.post('/api/start-asr', {
       videoUrl: url,
       startTime: startTime || '0'
     });
+    
+    console.log("[App] ASR request success, waiting before play...");
+    
+    // Tunggu 2 detik agar ASR siap
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // Putar video
+    shouldAutoPlay.value = true;
+    setTimeout(() => {
+      if (videoPlayerRef.value && videoPlayerRef.value.playVideo) {
+        videoPlayerRef.value.playVideo();
+      }
+    }, 500);
+    
   } catch (error) {
     console.error("Gagal memulai ASR:", error);
     alert("ASR error. Cek terminal Node.js!");
@@ -141,26 +269,58 @@ const parseTimeToSeconds = (timeStr) => {
 const handleVideoSeek = async (seekTime) => {
   console.log(`[App] Video seek detected to: ${seekTime}s`);
   
-  // Convert seconds to HH:MM:SS format
-  const hours = Math.floor(seekTime / 3600);
-  const minutes = Math.floor((seekTime % 3600) / 60);
-  const seconds = Math.floor(seekTime % 60);
-  const timeStr = hours > 0 ? 
-    `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}` :
-    `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  // Reset subtitle queues on seek
+  // Pindahkan semua displayed yang waktunya > seekTime kembali ke queue
+  const toQueue = displayedSubtitles.value.filter(sub => sub.start_time > seekTime)
+  const toKeep = displayedSubtitles.value.filter(sub => sub.start_time <= seekTime)
   
-  try {
-    await axios.post('http://localhost:3000/api/update-asr-time', {
-      startTime: timeStr
-    });
-    console.log(`[App] ASR updated to start from: ${timeStr}`);
-  } catch (error) {
-    console.error("[App] Failed to update ASR time:", error);
+  displayedSubtitles.value = toKeep
+  subtitlesQueue.value = [...toQueue, ...subtitlesQueue.value].sort((a, b) => a.start_time - b.start_time)
+  
+  // Debounce: tunggu 1.5 detik setelah user selesai seek
+  if (seekDebounceTimer) {
+    clearTimeout(seekDebounceTimer);
   }
+  
+  seekDebounceTimer = setTimeout(async () => {
+    console.log(`[App] Executing seek to: ${seekTime}s`);
+    
+    try {
+      await axios.post('/api/seek-analysis', {
+        startTime: Math.floor(seekTime)
+      });
+      console.log(`[App] AI Analysis restarted from: ${seekTime}s`);
+    } catch (error) {
+      console.error("[App] Failed to seek AI analysis:", error);
+    }
+  }, 1500);
+}
+
+const handlePlayerReady = () => {
+  console.log("[App] Video player ready");
+}
+
+const handleCloseVideo = () => {
+  currentVideoId.value = null;
+  shouldAutoPlay.value = false;
+  subtitlesQueue.value = [];
+  displayedSubtitles.value = [];
 }
 
 // --- SOCKET LISTENER ---
 onMounted(() => {
+  // Check if first-time user (show tutorial)
+  const tutorialCompleted = localStorage.getItem('cowayang_tutorial_completed')
+  if (!tutorialCompleted) {
+    // Show tutorial after a short delay
+    setTimeout(() => {
+      isTutorialOpen.value = true
+    }, 1000)
+  }
+
+  // Keyboard shortcuts listener
+  window.addEventListener('keydown', handleKeyboardShortcuts)
+
   socket.on('ai-result', (payload) => {
     console.log('[Frontend] AI Result diterima:', payload);
 
@@ -179,35 +339,192 @@ onMounted(() => {
       if (!exists) characters.value.unshift(payload.data);
     }
 
-    // Logika Subtitle
+    // Logika Subtitle - Masukkan ke Queue
     if (payload.type === 'subtitle') {
-      console.log('[Frontend] Subtitle baru:', payload.data);
-      subtitles.value.push({
+      console.log('[Frontend] Subtitle masuk ke queue:', payload.data);
+      
+      const newSubtitle = {
         ...payload.data,
-        id: Date.now(), // Tambah ID unik
-        isNew: true
-      });
+        id: Date.now() + Math.random(), // ID unik
+        isNew: true,
+        // Pastikan start_time ada (konversi dari timestamp jika perlu)
+        start_time: payload.data.start_time || parseTimestampToSeconds(payload.data.timestamp),
+        end_time: payload.data.end_time || (payload.data.start_time || parseTimestampToSeconds(payload.data.timestamp)) + 4
+      };
+      
+      // Masukkan ke queue, sorted by start_time
+      subtitlesQueue.value.push(newSubtitle);
+      subtitlesQueue.value.sort((a, b) => a.start_time - b.start_time);
+      
+      console.log(`[Frontend] Queue size: ${subtitlesQueue.value.length}, Displayed: ${displayedSubtitles.value.length}`);
 
       // Hapus flag isNew setelah 3 detik
       setTimeout(() => {
-        const sub = subtitles.value.find(s => s.id === payload.data.id);
+        const sub = displayedSubtitles.value.find(s => s.id === newSubtitle.id);
         if (sub) sub.isNew = false;
       }, 3000);
     }
   });
+  
+  // Start sync interval (backup untuk sinkronisasi)
+  syncInterval = setInterval(syncVideoAndData, 500);
 });
+
+// Helper: Parse timestamp string ke seconds
+const parseTimestampToSeconds = (timestamp) => {
+  if (!timestamp) return 0;
+  const parts = timestamp.split(':');
+  if (parts.length === 2) {
+    return parseInt(parts[0]) * 60 + parseInt(parts[1]);
+  } else if (parts.length === 3) {
+    return parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2]);
+  }
+  return parseInt(timestamp) || 0;
+}
+
+// --- KEYBOARD SHORTCUTS ---
+const handleKeyboardShortcuts = (e) => {
+  // Ignore if user is typing in an input
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) {
+    return
+  }
+
+  // Ignore if any modal is open (except shortcuts modal itself with ?)
+  const isModalOpen = isLoginModalOpen.value || isRegisterModalOpen.value || 
+                      isForgotPasswordModalOpen.value || isProfileModalOpen.value ||
+                      isTutorialOpen.value
+
+  switch(e.key) {
+    // Show shortcuts modal
+    case '?':
+      e.preventDefault()
+      isShortcutsModalOpen.value = !isShortcutsModalOpen.value
+      break
+    
+    // Close any open modal
+    case 'Escape':
+      if (isShortcutsModalOpen.value) {
+        closeShortcutsModal()
+      } else if (isTutorialOpen.value) {
+        closeTutorial()
+      } else if (isProfileModalOpen.value) {
+        closeProfileModal()
+      } else if (isLoginModalOpen.value) {
+        closeLoginModal()
+      } else if (isRegisterModalOpen.value) {
+        closeRegisterModal()
+      } else if (isForgotPasswordModalOpen.value) {
+        closeForgotPasswordModal()
+      }
+      break
+    
+    // Focus search (when no video playing)
+    case '/':
+      if (!currentVideoId.value && !isModalOpen) {
+        e.preventDefault()
+        const searchInput = document.querySelector('input[type="text"]')
+        if (searchInput) searchInput.focus()
+      }
+      break
+    
+    // Go home
+    case 'h':
+    case 'H':
+      if (currentVideoId.value && !isModalOpen) {
+        e.preventDefault()
+        handleCloseVideo()
+      }
+      break
+
+    // Video controls (only when video is playing)
+    case ' ': // Space - Play/Pause
+      if (currentVideoId.value && !isModalOpen) {
+        e.preventDefault()
+        if (videoPlayerRef.value) {
+          videoPlayerRef.value.togglePlayPause?.()
+        }
+      }
+      break
+    
+    case 'ArrowLeft': // Seek backward 10s
+      if (currentVideoId.value && !isModalOpen) {
+        e.preventDefault()
+        if (videoPlayerRef.value) {
+          videoPlayerRef.value.seekRelative?.(-10)
+        }
+      }
+      break
+    
+    case 'ArrowRight': // Seek forward 10s
+      if (currentVideoId.value && !isModalOpen) {
+        e.preventDefault()
+        if (videoPlayerRef.value) {
+          videoPlayerRef.value.seekRelative?.(10)
+        }
+      }
+      break
+    
+    case 'ArrowUp': // Volume up
+      if (currentVideoId.value && !isModalOpen) {
+        e.preventDefault()
+        if (videoPlayerRef.value) {
+          videoPlayerRef.value.changeVolume?.(10)
+        }
+      }
+      break
+    
+    case 'ArrowDown': // Volume down
+      if (currentVideoId.value && !isModalOpen) {
+        e.preventDefault()
+        if (videoPlayerRef.value) {
+          videoPlayerRef.value.changeVolume?.(-10)
+        }
+      }
+      break
+    
+    case 'm':
+    case 'M': // Mute toggle
+      if (currentVideoId.value && !isModalOpen) {
+        e.preventDefault()
+        if (videoPlayerRef.value) {
+          videoPlayerRef.value.toggleMute?.()
+        }
+      }
+      break
+    
+    case 'f':
+    case 'F': // Fullscreen
+      if (currentVideoId.value && !isModalOpen) {
+        e.preventDefault()
+        if (videoPlayerRef.value) {
+          videoPlayerRef.value.toggleFullscreen?.()
+        }
+      }
+      break
+  }
+}
 
 // Cleanup ketika component unmount
 onUnmounted(() => {
   // Stop ASR ketika user keluar dari halaman
-  axios.post('http://localhost:3000/api/stop-asr').catch(err => console.log('Cleanup ASR:', err));
+  axios.post('/api/stop-asr').catch(err => console.log('Cleanup ASR:', err));
+  
+  // Remove keyboard listener
+  window.removeEventListener('keydown', handleKeyboardShortcuts)
+  
+  if (syncInterval) {
+    clearInterval(syncInterval);
+  }
+  if (seekDebounceTimer) {
+    clearTimeout(seekDebounceTimer);
+  }
 });
 </script>
 
 <template>
   <div class="min-h-screen bg-wayang-dark text-slate-200 font-sans selection:bg-wayang-primary selection:text-white">
     
-    <Navbar @open-login="openLoginModal" />
+    <Navbar @open-login="openLoginModal" @open-register="openRegisterModal" @open-profile="openProfileModal" @open-shortcuts="openShortcutsModal" />
 
     <main class="container mx-auto px-4 pb-20 pt-24">
       
@@ -222,7 +539,7 @@ onUnmounted(() => {
       <div v-else id="player-section" class="animate-fade-in">
         
         <button 
-          @click="currentVideoId = null"
+          @click="handleCloseVideo"
           class="mb-6 text-sm text-gray-400 hover:text-white flex items-center gap-2 transition-colors"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -239,11 +556,14 @@ onUnmounted(() => {
 
           <div class="lg:col-span-6 flex flex-col h-full">
             <VideoPlayer 
+              ref="videoPlayerRef"
               :video-id="currentVideoId" 
-              :start-time="currentStartTime" 
-              @close="currentVideoId = null"
+              :start-time="currentStartTime"
+              :auto-play="shouldAutoPlay"
+              @close="handleCloseVideo"
               @timeUpdate="currentVideoTime = $event"
               @seek="handleVideoSeek"
+              @playerReady="handlePlayerReady"
             />
             
             <div class="flex lg:hidden mt-4 bg-slate-800 rounded-xl p-1 border border-white/10">
@@ -257,15 +577,55 @@ onUnmounted(() => {
           </div>
 
           <div class="lg:col-span-3 h-full overflow-hidden" :class="{'hidden lg:block': activeMobileTab !== 'subtitles'}">
-            <LiveTranscription :subtitles="subtitles" :currentTime="currentVideoTime" />
+            <LiveTranscription :subtitles="syncedSubtitles" :currentTime="currentVideoTime" :queueCount="subtitlesQueue.length" />
           </div>
 
         </div>
       </div>
 
+      <!-- About Section (shown when no video) -->
+      <AboutSection v-if="!currentVideoId" />
+
     </main>
 
-    <LoginModal :is-open="isLoginModalOpen" @close="closeLoginModal" @login="handleLogin" />
+    <!-- Footer -->
+    <AppFooter 
+      @showShortcuts="openShortcutsModal"
+      @showTutorial="openTutorial"
+    />
+
+    <LoginModal 
+      :is-open="isLoginModalOpen" 
+      @close="closeLoginModal" 
+      @login="handleLogin" 
+      @switch-to-register="switchToRegister"
+      @forgot-password="switchToForgotPassword"
+    />
+    <RegisterModal 
+      :is-open="isRegisterModalOpen" 
+      @close="closeRegisterModal" 
+      @register="handleRegister" 
+      @switch-to-login="switchToLogin"
+    />
+    <ForgotPasswordModal
+      :is-open="isForgotPasswordModalOpen"
+      @close="closeForgotPasswordModal"
+      @switch-to-login="switchToLogin"
+    />
+    <UserProfileModal
+      :is-open="isProfileModalOpen"
+      @close="closeProfileModal"
+      @play-video="(url) => handleAnalyze({ url, startTime: '0' })"
+    />
+    <KeyboardShortcutsModal
+      :is-open="isShortcutsModalOpen"
+      @close="closeShortcutsModal"
+    />
+    <TutorialModal
+      :is-open="isTutorialOpen"
+      @close="closeTutorial"
+      @complete="closeTutorial"
+    />
   </div>
 </template>
 

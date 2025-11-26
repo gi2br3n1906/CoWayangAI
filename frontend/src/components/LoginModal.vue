@@ -96,9 +96,13 @@
               />
               <span class="ml-2">Remember me</span>
             </label>
-            <a href="#" class="text-wayang-gold hover:text-wayang-gold/80 transition-colors">
+            <button 
+              type="button"
+              @click="$emit('forgot-password')"
+              class="text-wayang-gold hover:text-wayang-gold/80 transition-colors"
+            >
               Lupa password?
-            </a>
+            </button>
           </div>
 
           <!-- Login Button -->
@@ -164,9 +168,12 @@
         <!-- Register Link -->
         <div class="mt-6 text-center text-sm text-gray-400">
           Belum punya akun?
-          <a href="#" class="text-wayang-gold hover:text-wayang-gold/80 transition-colors font-medium">
+          <button 
+            @click="$emit('switch-to-register')"
+            class="text-wayang-gold hover:text-wayang-gold/80 transition-colors font-medium"
+          >
             Daftar sekarang
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -184,7 +191,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['close', 'login'])
+const emit = defineEmits(['close', 'login', 'switch-to-register', 'forgot-password'])
 
 const authStore = useAuthStore()
 const showPassword = ref(false)
