@@ -53,15 +53,61 @@ except Exception:
 
 
 def get_stream_url(yt_url):
+    """Get YouTube audio stream URL with cookies and retry logic"""
     import yt_dlp
-    ydl_opts = {'format': 'bestaudio/best', 'quiet': True}
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        try:
-            info = ydl.extract_info(yt_url, download=False)
-            return info['url']
-        except Exception as e:
-            print(f"Error yt-dlp: {e}")
-            return None
+    import time
+    
+    print(f"📥 [ASR] Mengambil audio stream: {yt_url}")
+    
+    cookies_path = os.path.join(os.path.dirname(__file__), 'cookies.txt')
+    
+    # Format options - HLS formats work better with cookies
+    format_options = [
+        '91',  # 144p HLS with audio
+        '92',  # 240p HLS with audio  
+        '93',  # 360p HLS with audio
+        'bestaudio/best',
+    ]
+    
+    # Retry mechanism
+    max_retries = 3
+    for retry in range(max_retries):
+        if retry > 0:
+            print(f"   🔄 [ASR] Retry attempt {retry + 1}/{max_retries}...")
+            time.sleep(2 ** retry)
+        
+        for fmt in format_options:
+            ydl_opts = {
+                'format': fmt,
+                'quiet': True,
+                'noplaylist': True,
+                'no_warnings': True,
+                'cookiefile': cookies_path,
+                'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'http_headers': {
+                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                    'Accept-Language': 'en-us,en;q=0.5',
+                },
+            }
+            
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                try:
+                    print(f"   [ASR] Mencoba format: {fmt}")
+                    info = ydl.extract_info(yt_url, download=False)
+                    stream_url = info.get('url')
+                    if stream_url:
+                        print(f"   ✅ [ASR] Berhasil dengan format: {fmt}")
+                        return stream_url
+                except Exception as e:
+                    error_msg = str(e)
+                    if 'Sign in to confirm' in error_msg or 'bot' in error_msg.lower():
+                        print(f"   ⚠️ [ASR] Bot detection - akan retry...")
+                        break
+                    print(f"   ⚠️ [ASR] Format '{fmt}' gagal: {error_msg[:50]}...")
+                    continue
+    
+    print(f"❌ [ASR] Semua format gagal setelah {max_retries} percobaan")
+    return None
 
 
 class PCMStreamer:

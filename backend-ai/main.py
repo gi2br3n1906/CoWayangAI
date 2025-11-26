@@ -55,24 +55,51 @@ class VideoRequest(BaseModel):
     videoUrl: str
     startTime: int = 0
 
-# --- Fungsi ambil URL Stream (Mode Stabil 360p) ---
-def get_stream_url(yt_url):
-    print(f"📥 Mengambil Stream untuk: {yt_url}")
+# --- Fungsi download video chunk untuk analisis ---
+def download_video_chunk(yt_url, duration=60, start_time=0):
+    """
+    Download video chunk menggunakan yt-dlp ke file temp.
+    Ini lebih reliable untuk YouTube HLS karena yt-dlp handle cookies.
+    """
+    temp_file = f"/tmp/wayang_chunk_{int(time.time())}.mp4"
+    
+    # Download section menggunakan yt-dlp
     ydl_opts = {
-        'format': '18/best[ext=mp4]', 
+        'format': '93/92/94/best[height<=480]',  # Prioritas 360p m3u8
         'quiet': True,
         'noplaylist': True,
-        'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        'no_warnings': True,
+        'cookiefile': os.path.join(os.path.dirname(__file__), 'cookies.txt'),
+        'outtmpl': temp_file,
+        'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36',
+        'extractor_args': {
+            'youtube': {
+                'player_client': ['web_safari', 'tv'],
+            }
+        },
+        # Download hanya section tertentu
+        'download_ranges': lambda info, ydl: [{'start_time': start_time, 'end_time': start_time + duration}],
+        'force_keyframes_at_cuts': True,
     }
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        try:
-            info = ydl.extract_info(yt_url, download=False)
-            return info['url']
-        except Exception as e:
-            print(f"❌ Error yt-dlp: {e}")
+    
+    print(f"   📥 Downloading chunk ({start_time}s - {start_time + duration}s)...")
+    
+    try:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([yt_url])
+        
+        # Cek apakah file ada
+        if os.path.exists(temp_file):
+            print(f"   ✅ Download berhasil: {temp_file}")
+            return temp_file
+        else:
+            print(f"   ❌ File tidak ditemukan setelah download")
             return None
+    except Exception as e:
+        print(f"   ❌ Download error: {e}")
+        return None
 
-# --- Logic Analisis Utama ---
+# --- Logic Analisis Utama (Mode Chunk Download) ---
 def analysis_logic(video_url: str, start_time: int = 0):
     # Cek apakah model sudah siap
     if global_model is None:
@@ -81,58 +108,67 @@ def analysis_logic(video_url: str, start_time: int = 0):
 
     print(f"🚀 Thread Analisis Dimulai. Skip ke: {start_time} detik")
     
-    # 1. Get Stream (Ini butuh 2-3 detik wajar karena request ke YouTube)
-    stream_url = get_stream_url(video_url)
-    if not stream_url:
-        print("❌ Stream URL kosong/gagal.")
-        return
-
-    cap = cv2.VideoCapture(stream_url)
-
-    # 2. Seeking (Lompat)
-    if start_time > 0:
-        print(f"⏩ Melompat ke detik {start_time}...")
-        cap.set(cv2.CAP_PROP_POS_MSEC, start_time * 1000)
-        ret, _ = cap.read() # Pancing buffer
-
-    # 3. Setup Sync & Loop
-    video_fps = cap.get(cv2.CAP_PROP_FPS)
-    if video_fps == 0 or video_fps > 60: video_fps = 30
-    target_frame_time = 1.0 / video_fps
+    chunk_duration = 60  # Download 60 detik per chunk
+    current_start = start_time
+    max_chunks = 100  # Max ~100 menit analisis
     
-    last_analysis_time = 0
-    analysis_interval = 1.5 
-    last_detected_char = None
-    last_sent_time = 0
-
-    while True:
-        loop_start_time = time.time()
-
+    for chunk_num in range(max_chunks):
         if stop_event.is_set():
             print("🛑 Analisis dihentikan User.")
             break
-
-        ret, frame = cap.read()
         
-        # Auto Reconnect
-        if not ret:
-            print("⚠️ Stream terputus/buffering...")
-            time.sleep(1)
-            if not cap.isOpened(): break
+        # 1. Download chunk
+        print(f"\n📦 Chunk {chunk_num + 1}: {current_start}s - {current_start + chunk_duration}s")
+        temp_file = download_video_chunk(video_url, chunk_duration, current_start)
+        
+        if not temp_file:
+            print("❌ Gagal download chunk. Mencoba lanjut ke chunk berikutnya...")
+            current_start += chunk_duration
             continue
+        
+        # 2. Buka file dengan OpenCV
+        cap = cv2.VideoCapture(temp_file)
+        if not cap.isOpened():
+            print(f"❌ Gagal buka video file: {temp_file}")
+            os.remove(temp_file)
+            current_start += chunk_duration
+            continue
+        
+        # 3. Setup loop - OPTIMIZED: Skip frames, hanya baca yang perlu
+        video_fps = cap.get(cv2.CAP_PROP_FPS)
+        if video_fps == 0 or video_fps > 60: video_fps = 30
+        
+        total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        analysis_interval = 1.5  # Analisis setiap 1.5 detik
+        frames_per_analysis = int(video_fps * analysis_interval)  # ~45 frames per analisis
+        
+        # Hitung jumlah analisis yang akan dilakukan
+        num_analyses = int(total_frames / frames_per_analysis) + 1
+        print(f"   🎬 {total_frames} frames, analisis {num_analyses}x (setiap {analysis_interval}s)")
 
-        current_time = time.time()
-
-        if current_time - last_analysis_time > analysis_interval:
-            last_analysis_time = current_time
+        for analysis_num in range(num_analyses):
+            if stop_event.is_set():
+                break
+            
+            # Langsung seek ke frame yang dibutuhkan
+            target_frame = analysis_num * frames_per_analysis
+            if target_frame >= total_frames:
+                break
+                
+            cap.set(cv2.CAP_PROP_POS_FRAMES, target_frame)
+            ret, frame = cap.read()
+            
+            if not ret:
+                break
+            
+            current_time = target_frame / video_fps
             
             cv2.imwrite("temp.jpg", frame)
             try:
-                # --- PREDIKSI AI (Langsung pakai global_model, gak perlu connect lagi) ---
                 prediction = global_model.predict("temp.jpg", confidence=40, overlap=30).json()
                 detected_characters = []
                 
-                img_height, img_width, _ = frame.shape
+                img_height, img_width = frame.shape[:2]
 
                 if prediction['predictions']:
                     # Encode Gambar
@@ -144,7 +180,6 @@ def analysis_logic(video_url: str, start_time: int = 0):
                     jpg_as_text = base64.b64encode(buffer).decode('utf-8')
 
                     for pred in prediction['predictions']:
-                        # Hitung Persen Box
                         x_center = pred['x']
                         y_center = pred['y']
                         box_width = pred['width']
@@ -165,12 +200,13 @@ def analysis_logic(video_url: str, start_time: int = 0):
                         }
                         detected_characters.append(char_data)
 
-                    print(f"🔥 DETEKSI: {[c['name'] for c in detected_characters]}")
+                    timestamp_abs = current_start + current_time
+                    print(f"🔥 [{timestamp_abs:.1f}s] DETEKSI: {[c['name'] for c in detected_characters]}")
 
                     try:
                         requests.post(NODEJS_WEBHOOK_URL, json={
                             "type": "active_scene",
-                            "timestamp": "Live",
+                            "timestamp": f"{timestamp_abs:.1f}s",
                             "image": jpg_as_text,
                             "data": detected_characters
                         }, timeout=0.5)
@@ -179,31 +215,38 @@ def analysis_logic(video_url: str, start_time: int = 0):
                     try:
                         requests.post(NODEJS_WEBHOOK_URL, json={
                             "type": "active_scene",
-                            "timestamp": "Live",
+                            "timestamp": f"{current_start + current_time:.1f}s",
                             "image": None,
                             "data": [] 
                         }, timeout=0.5)
                     except: pass
 
             except Exception as e:
-                print(f"Error AI: {e}")
+                print(f"Error AI: {e}")        # Cleanup chunk
+        cap.release()
+        if os.path.exists(temp_file): 
+            os.remove(temp_file)
+        
+        # Update untuk chunk berikutnya
+        current_start += chunk_duration
+        
+        # Cek apakah video sudah habis (total_frames < expected)
+        if total_frames < (chunk_duration * video_fps * 0.8):
+            print("📼 Video selesai (chunk terakhir lebih pendek)")
+            break
 
-        # Pacing FPS
-        processing_time = time.time() - loop_start_time
-        time_to_wait = target_frame_time - processing_time
-        if time_to_wait > 0:
-            time.sleep(time_to_wait)
-
-    cap.release()
     if os.path.exists("temp.jpg"): os.remove("temp.jpg")
-    print("🏁 Selesai.")
+    print("🏁 Analisis Selesai.")
 
 @app.post("/start-analysis")
 def start_analysis(req: VideoRequest):
     global current_thread
+    
+    # Stop thread lama jika masih jalan
     if current_thread and current_thread.is_alive():
+        print("🛑 Stopping existing analysis...")
         stop_event.set()
-        current_thread.join()
+        current_thread.join(timeout=5)  # Max wait 5 detik
     
     stop_event.clear()
     current_thread = threading.Thread(
@@ -211,7 +254,19 @@ def start_analysis(req: VideoRequest):
         args=(req.videoUrl, req.startTime)
     )
     current_thread.start()
-    return {"status": "started", "video": req.videoUrl}
+    return {"status": "started", "video": req.videoUrl, "startTime": req.startTime}
+
+@app.post("/stop-analysis")
+def stop_analysis():
+    global current_thread
+    
+    if current_thread and current_thread.is_alive():
+        print("🛑 Stopping analysis by request...")
+        stop_event.set()
+        current_thread.join(timeout=5)
+        return {"status": "stopped"}
+    
+    return {"status": "no_active_analysis"}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
