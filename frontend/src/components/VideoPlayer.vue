@@ -15,9 +15,9 @@
       </div>
     </div>
 
-    <div class="mt-4 bg-slate-800/80 backdrop-blur border border-white/10 rounded-xl p-4 flex items-center justify-between shadow-lg animate-fade-in">
+    <div class="mt-4 bg-white/10 backdrop-blur border border-white/15 rounded-xl p-4 flex items-center justify-between shadow-lg animate-fade-in">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-500">
+        <div class="w-10 h-10 rounded-full bg-wayang-gold/15 flex items-center justify-center text-wayang-gold">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -25,7 +25,7 @@
         </div>
         <div>
           <h3 class="text-white font-semibold text-sm">Video Sedang Dianalisis</h3>
-          <p class="text-xs text-gray-400">AI mendeteksi tokoh & subtitle secara real-time</p>
+          <p class="text-xs text-white/70">AI mendeteksi tokoh & subtitle secara real-time</p>
         </div>
       </div>
 

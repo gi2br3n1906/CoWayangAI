@@ -18,6 +18,12 @@
             >
               About
             </a>
+            <RouterLink
+              to="/almanac"
+              class="text-gray-300 hover:text-white transition-colors duration-200 px-3 py-2 text-sm font-medium border border-transparent hover:border-wayang-gold/40 rounded-lg"
+            >
+              Almanak Wayang
+            </RouterLink>
             <button 
               @click="$emit('openShortcuts')"
               class="text-gray-400 hover:text-white transition-colors duration-200 px-3 py-2 text-sm font-medium flex items-center gap-1"
@@ -157,6 +163,13 @@
           >
             About
           </a>
+          <RouterLink 
+            to="/almanac"
+            @click="closeMenu"
+            class="text-gray-300 hover:text-white text-lg font-medium transition-colors duration-200 border-b border-wayang-card/50 pb-2"
+          >
+            Almanak Wayang
+          </RouterLink>
           
           <!-- Mobile Login/User -->
           <div v-if="!isAuthenticated" class="pt-4 space-y-3">

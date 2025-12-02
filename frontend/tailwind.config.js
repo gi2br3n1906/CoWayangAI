@@ -1,4 +1,10 @@
 /** @type {import('tailwindcss').Config} */
+const palette = {
+  burgundy: '#781D42',
+  terracotta: '#A3423C',
+  sand: '#F0D290',
+}
+
 export default {
   content: [
     "./index.html",
@@ -8,10 +14,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        'wayang-dark': '#0f172a',
-        'wayang-card': '#1e293b',
-        'wayang-primary': '#6366f1',
-        'wayang-gold': '#f59e0b',
+        'wayang-dark': palette.burgundy,
+        'wayang-card': palette.terracotta,
+        'wayang-primary': palette.terracotta,
+        'wayang-gold': palette.sand,
       },
       fontFamily: {
         sans: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],

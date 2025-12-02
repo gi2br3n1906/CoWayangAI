@@ -1,10 +1,10 @@
 <template>
-  <div class="bg-wayang-card rounded-2xl shadow-2xl border border-white/10 overflow-hidden h-full flex flex-col">
+  <div class="bg-white/10 rounded-2xl shadow-2xl border border-white/15 overflow-hidden h-full flex flex-col backdrop-blur">
     <!-- Header -->
-    <div class="bg-gradient-to-r from-wayang-gold/20 to-wayang-primary/20 p-4 border-b border-white/10 flex-shrink-0">
+    <div class="bg-gradient-to-r from-[#781D42]/80 to-[#A3423C]/80 p-4 border-b border-white/10 flex-shrink-0">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 bg-wayang-primary/20 rounded-lg flex items-center justify-center">
-          <svg class="w-6 h-6 text-wayang-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="w-10 h-10 bg-white/15 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-[#F0D290]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
           </svg>
         </div>
@@ -17,8 +17,8 @@
             </span>
           </h3>
           <div class="flex items-center gap-2">
-            <p class="text-xs text-gray-400">Live subtitle feed</p>
-            <span v-if="queueCount > 0" class="text-xs bg-wayang-primary/30 text-wayang-primary px-2 py-0.5 rounded-full">
+            <p class="text-xs text-white/70">Live subtitle feed</p>
+            <span v-if="queueCount > 0" class="text-xs bg-white/15 text-[#F0D290] px-2 py-0.5 rounded-full">
               {{ queueCount }} pending
             </span>
           </div>
@@ -33,14 +33,14 @@
           v-for="subtitle in sortedSubtitles" 
           :key="subtitle.id"
           :data-id="subtitle.id"
-          class="bg-wayang-dark/50 rounded-lg p-3 border border-white/5 transition-all duration-200"
+          class="bg-white/5 rounded-lg p-3 border border-white/10 transition-all duration-200"
           :class="{ 
             'border-wayang-gold/50 bg-wayang-gold/5': subtitle.isNew,
-            'border-wayang-primary/50 bg-wayang-primary/10 ring-1 ring-wayang-primary/30': subtitle.isCurrent 
+            'border-wayang-primary/50 bg-wayang-primary/15 ring-1 ring-white/25': subtitle.isCurrent 
           }"
         >
           <div class="flex items-center gap-2 mb-2">
-            <span class="text-xs text-gray-400 font-mono">{{ subtitle.timestamp }}</span>
+            <span class="text-xs text-white/70 font-mono">{{ subtitle.timestamp }}</span>
             <span 
               v-if="subtitle.isNew" 
               class="text-xs bg-wayang-gold text-wayang-dark px-2 py-0.5 rounded-full font-semibold"
@@ -56,13 +56,13 @@
           </div>
           <p 
             class="text-sm leading-relaxed"
-            :class="subtitle.isNew || subtitle.isCurrent ? 'text-white font-medium' : 'text-gray-300'"
+            :class="subtitle.isNew || subtitle.isCurrent ? 'text-white font-medium' : 'text-white/85'"
           >
             {{ subtitle.text }}
           </p>
           <p 
             v-if="subtitle.translation" 
-            class="text-sm text-gray-300 mt-2 italic border-t border-white/5 pt-2"
+            class="text-sm text-white/75 mt-2 italic border-t border-white/5 pt-2"
           >
             {{ subtitle.translation }}
           </p>
@@ -70,12 +70,12 @@
       </TransitionGroup>
 
       <!-- Empty State -->
-      <div v-if="subtitles.length === 0" class="text-center py-8">
-        <svg class="w-12 h-12 mx-auto text-gray-600 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div v-if="subtitles.length === 0" class="text-center py-8 text-white/70">
+        <svg class="w-12 h-12 mx-auto text-white/40 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
         </svg>
-        <p class="text-gray-400 text-sm">Waiting...</p>
-        <p class="text-xs text-gray-500 mt-1">Subtitles will appear here</p>
+        <p class="text-sm">Waiting...</p>
+        <p class="text-xs mt-1">Subtitles will appear here</p>
       </div>
     </div>
   </div>
@@ -144,17 +144,17 @@ watch(() => props.subtitles.length, async (newLen, oldLen) => {
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.5);
+  background: rgba(240, 210, 144, 0.15);
   border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(99, 102, 241, 0.5);
+  background: rgba(163, 66, 60, 0.5);
   border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(99, 102, 241, 0.8);
+  background: rgba(240, 210, 144, 0.8);
 }
 
 /* Fade slide animation */

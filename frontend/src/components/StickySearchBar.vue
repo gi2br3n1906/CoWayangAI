@@ -15,10 +15,10 @@
         <button
           @click="inputMode = 'search'"
           :class="[
-            'px-5 py-2.5 rounded-lg font-medium transition-all',
+            'px-5 py-2.5 rounded-lg font-medium transition-all border',
             inputMode === 'search' 
-              ? 'bg-wayang-primary text-white' 
-              : 'bg-slate-800/50 text-gray-400 hover:text-white'
+              ? 'bg-wayang-primary text-white border-white/30 shadow-[0_8px_20px_rgba(120,29,66,0.35)]' 
+              : 'bg-white/5 text-[#F0D290]/80 border-white/15 hover:text-white'
           ]"
         >
           🔍 Cari Video
@@ -26,17 +26,17 @@
         <button
           @click="inputMode = 'url'"
           :class="[
-            'px-5 py-2.5 rounded-lg font-medium transition-all',
+            'px-5 py-2.5 rounded-lg font-medium transition-all border',
             inputMode === 'url' 
-              ? 'bg-wayang-primary text-white' 
-              : 'bg-slate-800/50 text-gray-400 hover:text-white'
+              ? 'bg-wayang-primary text-white border-white/30 shadow-[0_8px_20px_rgba(120,29,66,0.35)]' 
+              : 'bg-white/5 text-[#F0D290]/80 border-white/15 hover:text-white'
           ]"
         >
           🔗 Tempel URL
         </button>
       </div>
 
-      <div class="w-full max-w-4xl mx-auto bg-slate-800/50 p-2 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-sm">
+      <div class="w-full max-w-4xl mx-auto bg-white/5 p-2 rounded-2xl border border-white/10 shadow-xl backdrop-blur">
         <div class="flex flex-col md:flex-row gap-3">
           
           <!-- Search Mode Input -->
@@ -50,7 +50,7 @@
               v-model="searchQuery"
               type="text"
               placeholder="Cari video wayang... (tekan Enter)"
-              class="w-full pl-12 pr-4 py-4 bg-slate-900/80 text-white rounded-xl border border-transparent focus:border-wayang-primary/50 focus:ring-2 focus:ring-wayang-primary/20 outline-none transition-all placeholder-gray-500 text-base"
+              class="w-full pl-12 pr-4 py-4 bg-white/10 text-white rounded-xl border border-white/20 focus:border-wayang-gold/60 focus:ring-2 focus:ring-wayang-gold/30 outline-none transition-all placeholder-[#F0D290]/70 text-base"
               @keyup.enter="handleSearch"
             />
           </div>
@@ -66,7 +66,7 @@
               v-model="videoUrl"
               type="text"
               placeholder="Tempel link YouTube di sini..."
-              class="w-full pl-12 pr-4 py-4 bg-slate-900/80 text-white rounded-xl border border-transparent focus:border-wayang-primary/50 focus:ring-2 focus:ring-wayang-primary/20 outline-none transition-all placeholder-gray-500 text-base"
+              class="w-full pl-12 pr-4 py-4 bg-white/10 text-white rounded-xl border border-white/20 focus:border-wayang-gold/60 focus:ring-2 focus:ring-wayang-gold/30 outline-none transition-all placeholder-[#F0D290]/70 text-base"
               @keyup.enter="handleAnalyze"
             />
           </div>
@@ -82,7 +82,7 @@
               v-model="startTime"
               type="text"
               placeholder="HH:MM:SS"
-              class="w-full pl-12 pr-4 py-4 bg-slate-900/80 text-white rounded-xl border border-transparent focus:border-wayang-gold/50 focus:ring-2 focus:ring-wayang-gold/20 outline-none transition-all placeholder-gray-500 text-base"
+              class="w-full pl-12 pr-4 py-4 bg-white/10 text-white rounded-xl border border-white/20 focus:border-wayang-gold/60 focus:ring-2 focus:ring-wayang-gold/30 outline-none transition-all placeholder-[#F0D290]/70 text-base"
               @keyup.enter="handleAnalyze"
             />
           </div>
@@ -92,7 +92,7 @@
             v-if="inputMode === 'search'"
             @click="handleSearch"
             :disabled="!searchQuery || searchLoading"
-            class="px-6 py-4 bg-gradient-to-r from-wayang-primary to-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
+            class="px-6 py-4 bg-wayang-primary text-white font-bold rounded-xl shadow-[0_12px_30px_rgba(120,29,66,0.35)] hover:shadow-[0_15px_35px_rgba(163,66,60,0.4)] hover:scale-[1.01] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
           >
             <svg v-if="searchLoading" class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -109,7 +109,7 @@
             v-if="inputMode === 'url'"
             @click="handleAnalyze"
             :disabled="!videoUrl || loading"
-            class="px-6 py-4 bg-gradient-to-r from-wayang-primary to-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
+            class="px-6 py-4 bg-wayang-primary text-white font-bold rounded-xl shadow-[0_12px_30px_rgba(120,29,66,0.35)] hover:shadow-[0_15px_35px_rgba(163,66,60,0.4)] hover:scale-[1.01] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
           >
             <svg v-if="loading" class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

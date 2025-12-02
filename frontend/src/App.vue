@@ -2,7 +2,10 @@
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import axios from 'axios'
 import io from 'socket.io-client'
+import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import { unlockCharacter } from '@/services/firebase'
+import AlmanacView from '@/views/AlmanacView.vue'
 
 // --- COMPONENTS ---
 import Navbar from './components/Navbar.vue'
@@ -70,6 +73,8 @@ const currentVideoId = ref(null)
 const currentStartTime = ref(0)
 const isLoading = ref(false)
 const isASRLoadng = ref(false)
+const route = useRoute()
+const isAlmanacRoute = computed(() => route.name === 'almanac')
 
 // Search Results from StickySearchBar
 const searchResults = ref([])
@@ -85,6 +90,12 @@ const shouldAutoPlay = ref(false)
 // Data Hasil AI
 const characters = ref([])
 const currentVideoTime = ref(0)
+
+const isAchievementVisible = ref(false)
+const achievementMessage = ref('')
+let achievementTimer = null
+let audioContext = null
+const unlockedCache = new Set()
 
 // SUBTITLE QUEUE SYSTEM - Untuk sinkronisasi yang lebih baik
 const subtitlesQueue = ref([])      // Antrian subtitle dari backend
@@ -133,6 +144,12 @@ const syncVideoAndData = () => {
 // Watch currentVideoTime untuk sinkronisasi
 watch(currentVideoTime, () => {
   syncVideoAndData()
+})
+
+watch(() => authStore.isAuthenticated, (isAuthenticated) => {
+  if (!isAuthenticated) {
+    unlockedCache.clear()
+  }
 })
 
 // --- LOGIKA ANALISIS ---
@@ -274,6 +291,74 @@ const parseTimeToSeconds = (timeStr) => {
   }
 }
 
+const normalizeCharacterId = (characterPayload) => {
+  if (!characterPayload) return null
+  const fallbackFromName = characterPayload.name
+    ? characterPayload.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+    : null
+  return characterPayload.id || characterPayload.slug || fallbackFromName || null
+}
+
+const playAchievementSound = async () => {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext
+    if (!AudioCtx) return
+    if (!audioContext) {
+      audioContext = new AudioCtx()
+    }
+    if (audioContext.state === 'suspended') {
+      await audioContext.resume()
+    }
+
+    const osc = audioContext.createOscillator()
+    const gain = audioContext.createGain()
+    osc.type = 'triangle'
+    osc.frequency.setValueAtTime(880, audioContext.currentTime)
+    osc.connect(gain)
+    gain.connect(audioContext.destination)
+    gain.gain.setValueAtTime(0.0001, audioContext.currentTime)
+    gain.gain.exponentialRampToValueAtTime(0.2, audioContext.currentTime + 0.02)
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.35)
+    osc.start()
+    osc.stop(audioContext.currentTime + 0.35)
+  } catch (error) {
+    console.warn('Achievement sound error:', error)
+  }
+}
+
+const triggerAchievementToast = (characterName) => {
+  achievementMessage.value = `Karakter Baru Ditemukan: ${characterName || 'Tokoh Misterius'}!`
+  isAchievementVisible.value = true
+  if (achievementTimer) {
+    clearTimeout(achievementTimer)
+  }
+  achievementTimer = setTimeout(() => {
+    isAchievementVisible.value = false
+  }, 4000)
+  playAchievementSound()
+}
+
+const handleCharacterUnlock = async (characterPayload) => {
+  if (!authStore.isAuthenticated) return
+  const characterId = normalizeCharacterId(characterPayload)
+  if (!characterId) return
+  if (unlockedCache.has(characterId)) return
+
+  try {
+    const result = await unlockCharacter({
+      userId: authStore.user.uid,
+      characterId,
+      videoId: currentVideoId.value
+    })
+    unlockedCache.add(characterId)
+    if (result?.isNew) {
+      triggerAchievementToast(characterPayload?.name)
+    }
+  } catch (error) {
+    console.error('[App] Gagal unlock karakter:', error)
+  }
+}
+
 const handleVideoSeek = async (seekTime) => {
   console.log(`[App] Video seek detected to: ${seekTime}s`);
   
@@ -365,6 +450,7 @@ onMounted(() => {
     else if (payload.type === 'character') {
       const exists = characters.value.find(c => c.name === payload.data.name);
       if (!exists) characters.value.unshift(payload.data);
+      handleCharacterUnlock(payload.data)
     }
 
     // Logika Subtitle - Masukkan ke Queue
@@ -546,15 +632,21 @@ onUnmounted(() => {
   if (seekDebounceTimer) {
     clearTimeout(seekDebounceTimer);
   }
+  if (achievementTimer) {
+    clearTimeout(achievementTimer)
+  }
+  if (audioContext?.state !== 'closed') {
+    audioContext?.close?.().catch(() => {})
+  }
 });
 </script>
 
 <template>
-  <div class="min-h-screen bg-wayang-dark text-slate-200 font-sans selection:bg-wayang-primary selection:text-white">
+  <div class="min-h-screen text-[#FCEFE4] font-sans selection:bg-wayang-gold selection:text-wayang-dark">
     
     <Navbar @open-login="openLoginModal" @open-register="openRegisterModal" @open-profile="openProfileModal" @open-shortcuts="openShortcutsModal" />
 
-    <main class="container mx-auto px-4 pb-20 pt-24">
+    <main v-if="!isAlmanacRoute" class="container mx-auto px-4 pb-20 pt-24">
       
       <div v-if="!currentVideoId" class="flex flex-col items-center animate-fade-in space-y-6">
         
@@ -582,7 +674,7 @@ onUnmounted(() => {
               v-for="video in searchResults" 
               :key="video.videoId"
               @click="handleSelectSearchVideo(video)"
-              class="bg-slate-800/50 rounded-xl overflow-hidden border border-white/10 hover:border-wayang-primary/50 cursor-pointer transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-wayang-primary/20"
+              class="bg-white/10 rounded-xl overflow-hidden border border-white/15 hover:border-wayang-gold/60 cursor-pointer transition-transform hover:scale-[1.02] backdrop-blur-sm"
             >
               <div class="relative aspect-video">
                 <img 
@@ -645,7 +737,7 @@ onUnmounted(() => {
               @playerReady="handlePlayerReady"
             />
             
-            <div class="flex lg:hidden mt-4 bg-slate-800 rounded-xl p-1 border border-white/10">
+            <div class="flex lg:hidden mt-4 bg-white/5 rounded-xl p-1 border border-white/10 backdrop-blur">
               <button @click="activeMobileTab = 'characters'" class="flex-1 py-2 rounded-lg text-sm font-bold transition-all" :class="activeMobileTab === 'characters' ? 'bg-wayang-primary text-white' : 'text-gray-400'">
                 🎭 Tokoh
               </button>
@@ -667,11 +759,28 @@ onUnmounted(() => {
 
     </main>
 
+    <AlmanacView v-else />
+
     <!-- Footer -->
     <AppFooter 
       @showShortcuts="openShortcutsModal"
       @showTutorial="openTutorial"
     />
+
+    <transition name="fade">
+      <div
+        v-if="isAchievementVisible"
+        class="fixed top-24 right-6 bg-white/10 border border-wayang-gold/60 text-white rounded-2xl px-5 py-4 shadow-[0_15px_35px_rgba(0,0,0,0.45)] backdrop-blur flex items-center gap-3"
+      >
+        <div class="w-10 h-10 rounded-full bg-wayang-gold/20 flex items-center justify-center text-wayang-gold text-xl">
+          ✨
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-[0.35em] text-white/60">Achievement</p>
+          <p class="font-semibold">{{ achievementMessage }}</p>
+        </div>
+      </div>
+    </transition>
 
     <LoginModal 
       :is-open="isLoginModalOpen" 

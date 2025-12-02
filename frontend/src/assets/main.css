@@ -6,7 +6,9 @@
 
 @layer base {
   body {
-    @apply bg-wayang-dark text-gray-100 font-sans;
+    background: linear-gradient(165deg, rgba(120,29,66,0.95) 0%, rgba(67,11,29,0.97) 45%, rgba(163,66,60,0.9) 90%);
+    color: #FCEFE4;
+    font-family: 'Poppins', 'Inter', system-ui, sans-serif;
   }
   
   html {
