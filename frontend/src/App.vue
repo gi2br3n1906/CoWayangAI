@@ -6,6 +6,7 @@ import { useAuthStore } from '@/stores/auth'
 
 // --- COMPONENTS ---
 import Navbar from './components/Navbar.vue'
+import StickySearchBar from './components/StickySearchBar.vue'
 import LoginModal from './components/LoginModal.vue'
 import RegisterModal from './components/RegisterModal.vue'
 import ForgotPasswordModal from './components/ForgotPasswordModal.vue'
@@ -69,6 +70,13 @@ const currentVideoId = ref(null)
 const currentStartTime = ref(0)
 const isLoading = ref(false)
 const isASRLoadng = ref(false)
+
+// Search Results from StickySearchBar
+const searchResults = ref([])
+const searchError = ref('')
+const stickySearchBarRef = ref(null)
+const isSearchBarSticky = ref(false)
+const searchBarHeight = ref(0)
 
 // Video Player Control
 const videoPlayerRef = ref(null)
@@ -307,6 +315,26 @@ const handleCloseVideo = () => {
   displayedSubtitles.value = [];
 }
 
+// Handle search results from StickySearchBar
+const handleSearchResults = (result) => {
+  searchResults.value = result.videos
+  searchError.value = result.error
+}
+
+// Handle sticky state change
+const handleStickyChange = (data) => {
+  isSearchBarSticky.value = data.isSticky
+  searchBarHeight.value = data.height
+}
+
+// Handle video selection from search results
+const handleSelectSearchVideo = (video) => {
+  if (stickySearchBarRef.value) {
+    stickySearchBarRef.value.setVideoUrl(`https://www.youtube.com/watch?v=${video.videoId}`)
+  }
+  searchResults.value = []
+}
+
 // --- SOCKET LISTENER ---
 onMounted(() => {
   // Check if first-time user (show tutorial)
@@ -528,9 +556,60 @@ onUnmounted(() => {
 
     <main class="container mx-auto px-4 pb-20 pt-24">
       
-      <div v-if="!currentVideoId" class="flex flex-col items-center animate-fade-in space-y-8">
+      <div v-if="!currentVideoId" class="flex flex-col items-center animate-fade-in space-y-6">
         
-        <HeroSection @analyze="handleAnalyze" @start-asr="handleStartASR" :loading="isLoading" :asrLoading="isASRLoadng" />
+        <HeroSection />
+
+        <!-- Sticky Search Bar (in content flow, becomes sticky on scroll) -->
+        <StickySearchBar 
+          ref="stickySearchBarRef"
+          :loading="isLoading"
+          @analyze="handleAnalyze"
+          @search-results="handleSearchResults"
+          @sticky-change="handleStickyChange"
+        />
+
+        <!-- Spacer when sticky to prevent content jump -->
+        <div v-if="isSearchBarSticky" :style="{ height: searchBarHeight + 'px' }"></div>
+
+        <!-- Search Results Grid -->
+        <div v-if="searchResults.length > 0" class="w-full max-w-4xl">
+          <h3 class="text-left text-lg font-semibold text-white mb-4">
+            Hasil Pencarian ({{ searchResults.length }} video)
+          </h3>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div 
+              v-for="video in searchResults" 
+              :key="video.videoId"
+              @click="handleSelectSearchVideo(video)"
+              class="bg-slate-800/50 rounded-xl overflow-hidden border border-white/10 hover:border-wayang-primary/50 cursor-pointer transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-wayang-primary/20"
+            >
+              <div class="relative aspect-video">
+                <img 
+                  :src="video.thumbnail" 
+                  :alt="video.title"
+                  class="w-full h-full object-cover"
+                />
+                <div class="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="p-3">
+                <h4 class="text-sm font-medium text-white line-clamp-2 leading-tight">
+                  {{ video.title }}
+                </h4>
+                <p class="text-xs text-gray-500 mt-1">{{ video.channelTitle }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Error -->
+        <div v-if="searchError" class="w-full max-w-4xl p-4 bg-red-500/20 border border-red-500/50 rounded-xl text-red-400 text-sm">
+          {{ searchError }}
+        </div>
         
         <VideoGallery @select-video="(url) => handleAnalyze({ url, startMinute: 0 })" />
       
