@@ -468,6 +468,14 @@ const initPlayer = async () => {
   await loadYouTubeAPI();
   await checkFavorite();
   
+  // Connect socket for player state sync (not just live mode)
+  if (!socket.value) {
+    socket.value = io('/', { path: '/socket.io' });
+    socket.value.on('connect', () => {
+      console.log('[VideoPlayer] Socket connected for player sync');
+    });
+  }
+  
   if (!document.getElementById('youtube-player')) return;
 
   player = new window.YT.Player('youtube-player', {
@@ -511,9 +519,24 @@ const onPlayerReady = (event) => {
   }
 };
 
+// Helper to send player state to backend for ASR sync
+const sendPlayerState = (state, time = null) => {
+  if (socket.value && socket.value.connected) {
+    socket.value.emit('player-state', { 
+      state, 
+      time: time !== null ? time : (player ? player.getCurrentTime() : 0)
+    });
+    console.log(`[VideoPlayer] Sent player state: ${state}`);
+  }
+};
+
 const onPlayerStateChange = (event) => {
   if (event.data === window.YT.PlayerState.PLAYING) {
     isWaitingForBackend.value = false;
+    
+    // Notify backend ASR to resume
+    const currentTime = player ? player.getCurrentTime() : 0;
+    sendPlayerState('playing', currentTime);
     
     if (!timeUpdateInterval) {
       timeUpdateInterval = setInterval(() => {
@@ -523,6 +546,11 @@ const onPlayerStateChange = (event) => {
           if (Math.abs(currentTime - lastTime) > 3) {
             console.log(`[VideoPlayer] Seek detected: ${lastTime}s -> ${currentTime}s`);
             emit('seek', currentTime);
+            
+            // Send seek event to backend for ASR sync
+            if (socket.value && socket.value.connected) {
+              socket.value.emit('player-seek', { time: currentTime });
+            }
           }
           
           emit('timeUpdate', currentTime);
@@ -530,7 +558,14 @@ const onPlayerStateChange = (event) => {
         }
       }, 500);
     }
-  } else if (event.data === window.YT.PlayerState.PAUSED || event.data === window.YT.PlayerState.ENDED) {
+  } else if (event.data === window.YT.PlayerState.PAUSED) {
+    sendPlayerState('paused');
+    if (timeUpdateInterval) {
+      clearInterval(timeUpdateInterval);
+      timeUpdateInterval = null;
+    }
+  } else if (event.data === window.YT.PlayerState.ENDED) {
+    sendPlayerState('ended');
     if (timeUpdateInterval) {
       clearInterval(timeUpdateInterval);
       timeUpdateInterval = null;

@@ -1,0 +1,383 @@
+2025-12-04 14:33:52 +00:00: [dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+2025-12-04 14:33:53 +00:00: [Config] ASR Server: http://127.0.0.1:8001
+2025-12-04 14:33:53 +00:00: [Config] Python AI: http://127.0.0.1:8000
+2025-12-04 14:33:53 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-04 14:33:53 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-04 14:33:53 +00:00: 🚀 Server Backend Node.js jalan di http://0.0.0.0:3000
+2025-12-04 14:34:01 +00:00: [Socket] Client connected: 3SaKU2Cj0T3TUWARAAAB
+2025-12-04 14:34:01 +00:00: [Socket] Client connected: c-tzYlRA6PvLuxjvAAAD
+2025-12-04 14:34:03 +00:00: [Socket] Client connected: UyHIPYx68J3Cm8JIAAAF
+2025-12-04 14:34:04 +00:00: [Socket] Client connected: 9Frt1gGbZFPjJP7MAAAH
+2025-12-04 14:35:39 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:00',
+    start_time: 0.020000000000002238,
+    end_time: 4.020000000000002,
+    text: 'berarti bapak kuwi pancen lair batin nggone mbantu.',
+    translation: 'Berarti ayah itu memang sepenuh hati dalam membantu.'
+  }
+}
+2025-12-04 14:35:48 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:02',
+    start_time: 2.0199999999999596,
+    end_time: 6.01999999999996,
+    text: 'lahir batin nggone mbantu karo anakmu bagong',
+    translation: 'Lahir batin dalam membantu anakmu Bagong'
+  }
+}
+2025-12-04 14:36:14 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:08',
+    start_time: 8.019999999999833,
+    end_time: 12.019999999999833,
+    text: 'lha gareng piye iki?',
+    translation: 'Nah Gareng bagaimana ini?'
+  }
+}
+2025-12-04 14:36:23 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:10',
+    start_time: 10.01999999999979,
+    end_time: 14.01999999999979,
+    text: 'gareng piye iki? mangga kersane bapak pripun?',
+    translation: 'Gareng bagaimana ini? Silakan, keinginan Bapak bagaimana?'
+  }
+}
+2025-12-04 14:36:31 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:12',
+    start_time: 12.019999999999747,
+    end_time: 16.019999999999747,
+    text: 'lah monggo kersane bapak pripun? hem, nggih truk, nggih.',
+    translation: 'Nah, silakan kehendak Bapak bagaimana? Hem, iya Truk, iya.'
+  }
+}
+2025-12-04 14:36:41 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:14',
+    start_time: 14.019999999999705,
+    end_time: 18.019999999999705,
+    text: 'ho petruk piye? lah ya ora ngerti.',
+    translation: 'Ho Petruk bagaimana? Ya tidak tahu.'
+  }
+}
+2025-12-04 14:36:49 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:16',
+    start_time: 16.019999999999662,
+    end_time: 20.019999999999662,
+    text: 'weh, kowe ora ngerti. pun rasah taring-taring.',
+    translation: 'Wah, kamu tidak mengerti. Tidak usah berdebat.'
+  }
+}
+2025-12-04 14:37:07 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:20',
+    start_time: 20.019999999999577,
+    end_time: 24.019999999999577,
+    text: 'cekat-cekat menyang. iki ana apa?',
+    translation: 'Cepat-cepat pergi ke sana. Ini ada apa?'
+  }
+}
+2025-12-04 14:37:15 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:22',
+    start_time: 22.019999999999534,
+    end_time: 26.019999999999534,
+    text: 'nggih wonten transport kula aturi unjuk rumiyin, menapa menika dipun tampi ing nala kula menika...',
+    translation: 'Iya ada transport, silakan silakan dulu minum, apakah ini diterima di hati saya ini...'
+  }
+}
+2025-12-04 14:37:23 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:24',
+    start_time: 24.01999999999949,
+    end_time: 28.01999999999949,
+    text: 'transport. lawong.',
+    translation: 'transport. Padahal.'
+  }
+}
+2025-12-04 14:37:40 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:30',
+    start_time: 30.01999999999972,
+    end_time: 34.01999999999972,
+    text: 'iki tekan ngendi gong, tekan kayangan kok selawu ewu. pripun, pak?',
+    translation: 'ini sampai mana Gong, sampai kahyangan kok dua puluh lima ribu. Bagaimana, Pak?'
+  }
+}
+2025-12-04 14:37:50 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:32',
+    start_time: 32.02000000000003,
+    end_time: 36.02000000000003,
+    text: '00:00 lalah-lalah 00:01 piye to ngger? 00:02 piye ta, pak? 00:03 nek upama',
+    translation: '00:00 kenapa-kenapa 00:01 bagaimana nak? 00:02 bagaimana, Pak? 00:03 kalau misalnya'
+  }
+}
+2025-12-04 14:37:58 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:34',
+    start_time: 34.020000000000344,
+    end_time: 38.020000000000344,
+    text: 'nek upama aku ora usah munggah ning kayangan piye?',
+    translation: 'Kalau seumpama aku tidak usah naik ke kahyangan bagaimana?'
+  }
+}
+2025-12-04 14:38:08 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:36',
+    start_time: 36.02000000000066,
+    end_time: 40.02000000000066,
+    text: 'aku ora sah munggah ning kahyangan piye? lha terus?',
+    translation: 'Aku tidak usah naik ke kahyangan bagaimana? Lalu?'
+  }
+}
+2025-12-04 14:38:16 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:38',
+    start_time: 38.02000000000097,
+    end_time: 42.02000000000097,
+    text: '00:00 aduh, 00:01 lah terus 00:02 aduh 00:03 adiku guru tak undang',
+    translation: '00:00 Aduh, 00:01 Lalu terus 00:02 Aduh 00:03 Adikku guru saya panggil'
+  }
+}
+2025-12-04 14:38:25 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:40',
+    start_time: 40.02000000000128,
+    end_time: 44.02000000000128,
+    text: 'adhiku guru tak undange mrene. we lah iki',
+    translation: 'adikku guru, aku panggil ke sini. We lah ini'
+  }
+}
+2025-12-04 14:38:36 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:42',
+    start_time: 42.020000000001595,
+    end_time: 46.020000000001595,
+    text: 'ing mrene. weh, lah iki, iki. ngetoke ketoke...',
+    translation: 'ke sini. Wah, ini dia, ini. Menunjukkannya sepertinya...'
+  }
+}
+2025-12-04 14:38:44 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:44',
+    start_time: 44.02000000000191,
+    end_time: 48.02000000000191,
+    text: 'geh gek.. gek.. gek.. wingi netoke ketrampilan keketene bapak. coba...',
+    translation: 'Ya, ayo.. ayo.. ayo.. kemarin menunjukkan keterampilan kesetiaan bapak. Coba...'
+  }
+}
+2025-12-04 14:38:52 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:46',
+    start_time: 46.02000000000222,
+    end_time: 50.02000000000222,
+    text: 'ampilan kesektene bapak. coba. guru kok',
+    translation: 'kesaktian Bapak. Coba. Guru kok'
+  }
+}
+2025-12-04 14:39:05 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:48',
+    start_time: 48.02000000000253,
+    end_time: 52.02000000000253,
+    text: 'guru kon mrene ning ojo sak murid e lo, nak ngono.',
+    translation: 'Guru disuruh kesini tapi jangan semua muridnya ya, kalau begitu.'
+  }
+}
+2025-12-04 14:39:21 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:50',
+    start_time: 50.020000000002845,
+    end_time: 54.020000000002845,
+    text: 'rene ning aja sak muride lo nak ngebak-baki guru',
+    translation: 'Sini tapi jangan seenaknya sendiri kalau memenuhi mengisi Guru'
+  }
+}
+2025-12-04 14:39:28 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:52',
+    start_time: 52.02000000000316,
+    end_time: 56.02000000000316,
+    text: 'gurune tok wae',
+    translation: 'gurunya saja'
+  }
+}
+2025-12-04 14:39:36 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:54',
+    start_time: 54.02000000000347,
+    end_time: 58.02000000000347,
+    text: 'ketok wae. ee iyo, yo. gurune tok..',
+    translation: 'kelihatan saja. Ee iya, ya. Gurunya saja..'
+  }
+}
+2025-12-04 14:39:51 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:56',
+    start_time: 56.02000000000378,
+    end_time: 60.02000000000378,
+    text: 'iyo, iyo. gurune tok. hemm. engko ndak ngobah-obahi aku ngono.',
+    translation: 'Iya, iya. Gurunya saja. Hemm. Nanti jangan mengubah-ubah aku begitu.'
+  }
+}
+2025-12-04 14:40:14 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:58',
+    start_time: 58.020000000004096,
+    end_time: 62.020000000004096,
+    text: 'engko ndak ngebabahe aku malah kewuhan nyuguh aku.',
+    translation: 'Nanti jangan sampai merepotkan saya, saya malah akan kesulitan untuk menjamu.'
+  }
+}
+2025-12-04 14:40:19 +00:00: [Socket] Client connected: mHPc9OmcrsBMZC0rAAAJ
+2025-12-04 14:40:21 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:00',
+    start_time: 60.0200000000044,
+    end_time: 64.0200000000044,
+    text: 'lah, kewanene nyuguh aku. oh iya. heh, tak mangani.',
+    translation: 'Nah, binatangnya menyuguhi aku. Oh iya. Heh, aku akan memakannya.'
+  }
+}
+2025-12-04 14:40:29 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:02',
+    start_time: 62.020000000004,
+    end_time: 66.020000000004,
+    text: 'ho, tak matek aji ya bagong, matek aji.',
+    translation: 'Ho, akan ku keluarkan ajiku ya Bagong, mengeluarkan aji.'
+  }
+}
+2025-12-04 14:40:29 +00:00: 
+========================================
+2025-12-04 14:40:29 +00:00: [Node] 1. Menerima Request dari Frontend...
+2025-12-04 14:40:29 +00:00: [Node]    URL: https://www.youtube.com/watch?v=aOtB-yw9GSE
+2025-12-04 14:40:29 +00:00: [Node]    Start: undefined menit (0 detik)
+2025-12-04 14:40:29 +00:00: [Node] 2. Mencoba menghubungi Python AI (Port 8000)...
+2025-12-04 14:40:29 +00:00: [Node] ⚠️ Python AI tidak tersedia, lanjut dengan ASR saja...
+2025-12-04 14:40:29 +00:00: [Node] 4. Starting ASR...
+2025-12-04 14:40:29 +00:00: [Node] 🛑 Stopping ASR for current video...
+2025-12-04 14:40:29 +00:00: [Node] 🎙️ Starting ASR for: https://www.youtube.com/watch?v=aOtB-yw9GSE at 0
+2025-12-04 14:40:29 +00:00: [Node] ASR Server Response: {
+  status: 'started',
+  video: 'https://www.youtube.com/watch?v=aOtB-yw9GSE',
+  startTime: 0,
+  api_keys_available: 1
+}
+2025-12-04 14:40:29 +00:00: ========================================
+
+2025-12-04 14:40:51 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:06',
+    start_time: 66.02000000000321,
+    end_time: 70.02000000000321,
+    text: 'aji pamêlik, bêthara guru mêntekan ana ing kene.',
+    translation: 'Aji pamêlik, Batara Guru muncul di sini.'
+  }
+}
+2025-12-04 14:42:03 +00:00: [Socket] Client disconnected: mHPc9OmcrsBMZC0rAAAJ
+2025-12-04 14:46:13 +00:00: [Socket] Client connected: of61fE-M7SyweSxsAAAL
+2025-12-04 14:46:27 +00:00: [Socket] 🛑 Frontend request stop live stream
+2025-12-04 14:46:27 +00:00: [Socket] Client disconnected: c-tzYlRA6PvLuxjvAAAD
+2025-12-04 14:46:35 +00:00: 
+========================================
+2025-12-04 14:46:35 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-04 14:46:35 +00:00: [Node]    Query: https://www.youtube.com/watch?v=6nVXtRo9uM8&t=4215s
+2025-12-04 14:46:38 +00:00: [Socket] 🎬 Frontend request live stream: { videoUrl: 'https://www.youtube.com/watch?v=6nVXtRo9uM8&t=4215s' }
+2025-12-04 14:46:38 +00:00: [Socket] 📤 Broadcasting start-processing to 3 other clients
+2025-12-04 14:46:38 +00:00: 
+========================================
+2025-12-04 14:46:38 +00:00: [Node] 1. Menerima Request ASR dari Frontend...
+2025-12-04 14:46:38 +00:00: [Node] 🛑 Stopping ASR for current video...
+2025-12-04 14:46:38 +00:00: ========================================
+
+2025-12-04 14:46:38 +00:00: [Node] 🎙️ Starting ASR for: https://www.youtube.com/watch?v=6nVXtRo9uM8&t=4215s at 0
+2025-12-04 14:46:38 +00:00: [Node] ASR Server Response: {
+  status: 'started',
+  video: 'https://www.youtube.com/watch?v=6nVXtRo9uM8&t=4215s',
+  startTime: 0,
+  api_keys_available: 1
+}
+2025-12-04 14:46:38 +00:00: [Socket] Client connected: -HReVpeeKxE5PBF9AAAN
+2025-12-04 14:46:43 +00:00: [Socket] Client disconnected: -HReVpeeKxE5PBF9AAAN
+2025-12-04 14:46:43 +00:00: [Socket] 🛑 Frontend request stop live stream
+2025-12-04 14:46:43 +00:00: [Socket] ✅ Python started streaming: {
+  videoUrl: 'https://www.youtube.com/watch?v=6nVXtRo9uM8&t=4215s',
+  duration: 25560
+}
+2025-12-04 14:46:45 +00:00: 
+========================================
+2025-12-04 14:46:45 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-04 14:46:45 +00:00: [Node]    Query: bagong lucu
+2025-12-04 14:46:47 +00:00: 
+========================================
+2025-12-04 14:46:47 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-04 14:46:47 +00:00: [Node]    Query: bagong lucu
+2025-12-04 14:49:17 +00:00: [Socket] Client disconnected: 9Frt1gGbZFPjJP7MAAAH
+2025-12-04 14:49:18 +00:00: [Socket] Client connected: c_PvfPld4w_IjFEqAAAP
+2025-12-04 14:49:21 +00:00: 
+========================================
+2025-12-04 14:49:21 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-04 14:49:21 +00:00: [Node]    Query: bagong lucu
+2025-12-04 14:51:21 +00:00: [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+2025-12-04 14:51:21 +00:00: [Config] ASR Server: http://127.0.0.1:8001
+2025-12-04 14:51:21 +00:00: [Config] Python AI: http://127.0.0.1:8000
+2025-12-04 14:51:21 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-04 14:51:21 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-04 14:51:21 +00:00: 🚀 Server Backend Node.js jalan di http://0.0.0.0:3000
+2025-12-04 14:51:22 +00:00: [Socket] Client connected: rofzyb1TCfARLxmyAAAB
+2025-12-04 14:51:22 +00:00: [Socket] Client connected: vEA7AL8sU9HWEbSnAAAE
+2025-12-04 14:51:22 +00:00: [Socket] Client connected: 2z-Hi3uQ9jFqe217AAAF
+2025-12-04 14:51:33 +00:00: [Socket] Client connected: x6_MbBKNaqH8cDh_AAAH
+2025-12-04 14:51:35 +00:00: 
+========================================
+2025-12-04 14:51:35 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-04 14:51:35 +00:00: [Node]    Query: bagong lucu
+2025-12-04 14:51:37 +00:00: [Socket] Client disconnected: vEA7AL8sU9HWEbSnAAAE
+2025-12-04 14:51:40 +00:00: [Socket] Client connected: wi-DTwikX2gzt-UrAAAJ
+2025-12-04 14:51:45 +00:00: 
+========================================
+2025-12-04 14:51:45 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-04 14:51:45 +00:00: [Node]    Query: bagong lucu
+2025-12-04 14:52:50 +00:00: [dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+2025-12-04 14:52:50 +00:00: [Config] ASR Server: http://127.0.0.1:8001
+2025-12-04 14:52:50 +00:00: [Config] Python AI: http://127.0.0.1:8000
+2025-12-04 14:52:50 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-04 14:52:50 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-04 14:52:50 +00:00: 🚀 Server Backend Node.js jalan di http://0.0.0.0:3000
+2025-12-04 14:52:51 +00:00: [Socket] Client connected: JjD-t2fVoR3B2myZAAAB
+2025-12-04 14:53:03 +00:00: [Socket] Client connected: 4Hw-snAKAOoHlp36AAAD
+2025-12-04 14:53:16 +00:00: [Socket] Client connected: Wn169bm1VGodBewNAAAF
+2025-12-04 14:53:17 +00:00: [Socket] Client connected: 7A-oOgz13-kS4_evAAAH

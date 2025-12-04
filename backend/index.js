@@ -62,10 +62,55 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('player-time', data);
     });
 
-    // Frontend sends seek event to Python
-    socket.on('player-seek', (data) => {
+    // Frontend sends seek event to Python AND ASR
+    socket.on('player-seek', async (data) => {
         console.log(`[Socket] ⏩ Player seek to:`, data);
         socket.broadcast.emit('player-seek', data);
+        
+        // Also seek ASR if running
+        if (currentVideoUrl) {
+            console.log(`[Socket] 🎙️ Syncing ASR to seek position: ${data.time}s`);
+            try {
+                await axios.post(`${ASR_SERVER_URL}/seek-asr`, {
+                    videoUrl: currentVideoUrl,
+                    seekTime: Math.floor(data.time)
+                }, { timeout: 3000 });
+            } catch (error) {
+                console.log(`[Socket] ⚠️ ASR seek failed: ${error.message}`);
+            }
+        }
+    });
+
+    // Frontend sends player state (play/pause/stop)
+    socket.on('player-state', async (data) => {
+        console.log(`[Socket] 🎮 Player state:`, data);
+        
+        if (data.state === 'paused' || data.state === 'stopped' || data.state === 'ended') {
+            // Pause ASR when video paused/stopped
+            if (currentVideoUrl) {
+                console.log(`[Socket] ⏸️ Pausing ASR due to player ${data.state}`);
+                try {
+                    await axios.post(`${ASR_SERVER_URL}/pause-asr`, {
+                        videoUrl: currentVideoUrl
+                    }, { timeout: 3000 });
+                } catch (error) {
+                    console.log(`[Socket] ⚠️ ASR pause failed: ${error.message}`);
+                }
+            }
+        } else if (data.state === 'playing') {
+            // Resume ASR when video playing
+            if (currentVideoUrl) {
+                console.log(`[Socket] ▶️ Resuming ASR for playback`);
+                try {
+                    await axios.post(`${ASR_SERVER_URL}/resume-asr`, {
+                        videoUrl: currentVideoUrl,
+                        currentTime: Math.floor(data.time || 0)
+                    }, { timeout: 3000 });
+                } catch (error) {
+                    console.log(`[Socket] ⚠️ ASR resume failed: ${error.message}`);
+                }
+            }
+        }
     });
 
     // Python notifies that stream has started
@@ -425,6 +470,63 @@ server.listen(PORT, '0.0.0.0', () => {
 // --- Health Check Endpoint ---
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+// --- ENDPOINT 7: Get YouTube Video Info ---
+app.get('/api/youtube-info', async (req, res) => {
+    const { videoId } = req.query;
+    
+    if (!videoId) {
+        return res.status(400).json({ status: 'error', message: 'videoId diperlukan' });
+    }
+
+    try {
+        const apiKey = process.env.YOUTUBE_API_KEY;
+        
+        if (!apiKey || apiKey === 'your_youtube_api_key_here') {
+            return res.status(500).json({ status: 'error', message: 'YouTube API Key belum dikonfigurasi' });
+        }
+
+        const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
+            params: {
+                part: 'snippet,contentDetails',
+                id: videoId,
+                key: apiKey
+            }
+        });
+
+        if (response.data.items && response.data.items.length > 0) {
+            const video = response.data.items[0];
+            const duration = video.contentDetails.duration; // Format ISO 8601 (PT1H2M3S)
+            
+            // Parse ISO 8601 duration to readable format
+            const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+            const hours = parseInt(match[1] || 0);
+            const minutes = parseInt(match[2] || 0);
+            const seconds = parseInt(match[3] || 0);
+            
+            let durationStr = '';
+            if (hours > 0) {
+                durationStr = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            } else {
+                durationStr = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            res.json({
+                status: 'success',
+                title: video.snippet.title,
+                duration: durationStr,
+                thumbnail: video.snippet.thumbnails.medium.url,
+                channelTitle: video.snippet.channelTitle
+            });
+        } else {
+            res.status(404).json({ status: 'error', message: 'Video tidak ditemukan' });
+        }
+
+    } catch (error) {
+        console.error("[Node] Error fetching YouTube info:", error.message);
+        res.status(500).json({ status: 'error', message: 'Gagal mengambil info video' });
+    }
 });
 
 // --- ASR Status Endpoint (proxy to ASR server) ---

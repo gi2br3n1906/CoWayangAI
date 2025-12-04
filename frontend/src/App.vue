@@ -228,7 +228,7 @@ const handleAnalyze = async (payload) => {
   }
 };
 
-const handleLiveStream = (payload) => {
+const handleLiveStream = async (payload) => {
   const videoUrl = payload.videoUrl;
   console.log("[App] Starting Live Stream with URL:", videoUrl);
   
@@ -245,6 +245,18 @@ const handleLiveStream = (payload) => {
   // Send URL to local Python via Socket
   socket.emit('start-live-stream', { videoUrl: videoUrl });
   console.log("[App] Sent start-live-stream event to server");
+  
+  // Start ASR untuk Live Stream juga
+  try {
+    console.log("[App] Starting ASR for Live Stream...");
+    await axios.post('/api/start-asr', {
+      videoUrl: videoUrl,
+      startTime: '0'
+    });
+    console.log("[App] ASR started for Live Stream");
+  } catch (error) {
+    console.error("[App] Failed to start ASR:", error);
+  }
   
   shouldAutoPlay.value = true;
   
@@ -717,7 +729,6 @@ onUnmounted(() => {
         <StickySearchBar 
           ref="stickySearchBarRef"
           :loading="isLoading"
-          @analyze="handleAnalyze"
           @live-stream="handleLiveStream"
           @search-results="handleSearchResults"
           @sticky-change="handleStickyChange"
