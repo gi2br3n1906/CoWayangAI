@@ -26,6 +26,25 @@ import numpy as np
 import soundfile as sf
 from dotenv import load_dotenv
 
+# --- Global Metrics untuk Monitoring ---
+stream_request_count = 0
+stream_success_count = 0
+last_block_detected = None
+
+def log_stream_attempt(success, error_msg=None):
+    global stream_request_count, stream_success_count, last_block_detected
+    stream_request_count += 1
+    if success:
+        stream_success_count += 1
+    else:
+        if 'Sign in to confirm' in str(error_msg) or 'blocked' in str(error_msg).lower():
+            last_block_detected = time.time()
+    
+    success_rate = (stream_success_count / stream_request_count * 100) if stream_request_count > 0 else 0
+    print(f"📊 Stream Metrics: {stream_success_count}/{stream_request_count} sukses ({success_rate:.1f}%)")
+    if last_block_detected:
+        print(f"🚨 Last block detected: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(last_block_detected))}")
+
 # --- Gemini API Setup ---
 import google.generativeai as genai
 
@@ -53,125 +72,110 @@ except Exception:
 
 
 def get_stream_url(yt_url):
-    """Get YouTube audio stream URL with cookies and retry logic"""
     import yt_dlp
+    import random
     import time
     
-    print(f"📥 [ASR] Mengambil audio stream: {yt_url}")
+    print(f"📥 Mengambil Stream Audio untuk: {yt_url}")
     
-    cookies_path = os.path.join(os.path.dirname(__file__), 'cookies.txt')
+    # Random delay 1-3 detik untuk menghindari deteksi bot
+    time.sleep(random.uniform(1, 3))
     
-    # Format options - prioritize more stable formats
-    format_options = [
-        '93',  # 360p HLS with audio (more stable)
-        '92',  # 240p HLS with audio  
-        '91',  # 144p HLS with audio
-        'bestaudio[ext=m4a]/bestaudio/best',
+    # Rotate user-agents untuk meniru browser berbeda
+    user_agents = [
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
     ]
     
-    # Retry mechanism
-    max_retries = 3
-    for retry in range(max_retries):
-        if retry > 0:
-            print(f"   🔄 [ASR] Retry attempt {retry + 1}/{max_retries}...")
-            time.sleep(2 ** retry)
-        
-        for fmt in format_options:
-            ydl_opts = {
-                'format': fmt,
-                'quiet': True,
-                'noplaylist': True,
-                'no_warnings': True,
-                'cookiefile': cookies_path,
-                'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                'http_headers': {
-                    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-                    'Accept-Language': 'en-us,en;q=0.5',
-                },
-            }
-            
-            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                try:
-                    print(f"   [ASR] Mencoba format: {fmt}")
-                    info = ydl.extract_info(yt_url, download=False)
-                    stream_url = info.get('url')
-                    if stream_url:
-                        print(f"   ✅ [ASR] Berhasil dengan format: {fmt}")
-                        return stream_url
-                except Exception as e:
-                    error_msg = str(e)
-                    if 'Sign in to confirm' in error_msg or 'bot' in error_msg.lower():
-                        print(f"   ⚠️ [ASR] Bot detection - akan retry...")
-                        break
-                    print(f"   ⚠️ [ASR] Format '{fmt}' gagal: {error_msg[:50]}...")
-                    continue
+    ydl_opts = {
+        'format': 'bestaudio/best',
+        'quiet': True,
+        'user_agent': random.choice(user_agents),
+        'http_headers': {
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Referer': 'https://www.youtube.com/',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'DNT': '1',
+            'Connection': 'keep-alive',
+            'Upgrade-Insecure-Requests': '1',
+        }
+    }
     
-    print(f"❌ [ASR] Semua format gagal setelah {max_retries} percobaan")
+    # Load cookies if available
+    cookiefile = os.environ.get('YT_COOKIES_PATH')
+    if cookiefile and os.path.exists(cookiefile):
+        ydl_opts['cookiefile'] = cookiefile
+        print("🍪 Menggunakan cookies untuk autentikasi YouTube")
+    
+    # Retry logic dengan exponential backoff
+    for attempt in range(3):
+        try:
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                info = ydl.extract_info(yt_url, download=False)
+                if not info:
+                    print("❌ yt-dlp tidak mengembalikan info apapun (None)")
+                    continue
+                
+                # Handle playlists
+                if info.get('entries'):
+                    if not info['entries'] or not info['entries'][0]:
+                        print("❌ yt-dlp mengembalikan entries kosong")
+                        continue
+                    entry = info['entries'][0]
+                else:
+                    entry = info
+                
+                if not entry or 'url' not in entry:
+                    print("❌ Entry tidak valid atau tidak ada URL")
+                    continue
+                
+                print("✅ Berhasil mendapatkan stream URL")
+                log_stream_attempt(True)
+                return entry['url']
+                
+        except Exception as e:
+            msg = str(e)
+            print(f"❌ Attempt {attempt+1} gagal: {msg}")
+            
+            # Check for specific errors
+            if 'Sign in to confirm' in msg or 'use --cookies' in msg:
+                print('👉 YouTube meminta autentikasi. Pastikan cookies valid atau export ulang.')
+            elif 'This video is unavailable' in msg:
+                print('👉 Video tidak tersedia (dihapus atau private).')
+            
+            # Exponential backoff
+            if attempt < 2:
+                delay = 2 ** attempt
+                print(f"⏳ Retry dalam {delay} detik...")
+                time.sleep(delay)
+    
+    print("❌ Semua attempt gagal. Tidak bisa mendapatkan stream URL.")
+    log_stream_attempt(False, "All attempts failed")
     return None
 
 
 class PCMStreamer:
-    """Stream audio from YouTube using yt-dlp piped to ffmpeg"""
-    def __init__(self, youtube_url, sample_rate=16000, start_time=0):
-        self.youtube_url = youtube_url
+    """Spawn ffmpeg to output raw PCM s16le 16k mono to stdout and yield frames"""
+    def __init__(self, stream_url, sample_rate=16000, start_time=0):
+        self.stream_url = stream_url
         self.sample_rate = sample_rate
         self.start_time = start_time  # Start time in seconds
-        self.yt_proc = None
-        self.ff_proc = None
+        self.proc = None
         self.frames_consumed = 0
         self.has_seeked = False
 
     def start(self):
-        cookies_path = os.path.join(os.path.dirname(__file__), 'cookies.txt')
-        
-        # Use yt-dlp to stream directly to ffmpeg via pipe
-        # This is more reliable than using the extracted URL
-        yt_cmd = [
-            'yt-dlp',
-            '--cookies', cookies_path,
-            '-f', '93/92/91/bestaudio/best',  # Format preference
-            '-o', '-',  # Output to stdout
-            '--quiet',
-            '--no-warnings',
-            self.youtube_url
+        cmd = [
+            'ffmpeg', '-i', self.stream_url,
+            '-vn', '-f', 's16le', '-acodec', 'pcm_s16le',
+            '-ar', str(self.sample_rate), '-ac', '1', '-nostdin', '-loglevel', 'error', '-'
         ]
-        
-        ff_cmd = [
-            'ffmpeg',
-            '-i', 'pipe:0',                   # Read from stdin
-            '-vn',                            # No video
-            '-f', 's16le',                    # Output format
-            '-acodec', 'pcm_s16le',          # Audio codec
-            '-ar', str(self.sample_rate),     # Sample rate
-            '-ac', '1',                       # Mono
-            '-loglevel', 'error',
-            '-'
-        ]
-        
-        print(f"[PCMStreamer] Starting yt-dlp -> ffmpeg pipeline...")
-        
-        # Start yt-dlp process
-        self.yt_proc = subprocess.Popen(
-            yt_cmd, 
-            stdout=subprocess.PIPE, 
-            stderr=subprocess.PIPE
-        )
-        
-        # Start ffmpeg process, reading from yt-dlp's stdout
-        self.ff_proc = subprocess.Popen(
-            ff_cmd,
-            stdin=self.yt_proc.stdout,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
-        )
-        
-        # Allow yt-dlp to receive SIGPIPE if ffmpeg exits
-        self.yt_proc.stdout.close()
-        
-        print(f"[PCMStreamer] Pipeline started successfully")
+        self.proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     def read_chunk(self, n_bytes):
-        if not self.ff_proc: return None
+        if not self.proc: return None
         
         # If we haven't seeked yet and have a start_time, consume audio until we reach the target
         if not self.has_seeked and self.start_time > 0:
@@ -182,18 +186,16 @@ class PCMStreamer:
             if frames_to_skip > 0:
                 skip_bytes = min(frames_to_skip * bytes_per_frame, 1024 * 1024)  # Max 1MB at a time
                 try:
-                    skipped = self.ff_proc.stdout.read(skip_bytes)
+                    skipped = self.proc.stdout.read(skip_bytes)
                     if skipped:
                         frames_skipped = len(skipped) // bytes_per_frame
                         self.frames_consumed += frames_skipped
-                        if self.frames_consumed % (self.sample_rate * 10) < frames_skipped:  # Log every 10 seconds
-                            print(f"⏩ Seeking: {self.frames_consumed/self.sample_rate:.1f}s / {self.start_time}s")
+                        print(f"⏩ Seeking: {self.frames_consumed}/{target_frames} frames ({self.frames_consumed/self.sample_rate:.1f}s)")
                     else:
                         # End of stream reached before target
                         self.has_seeked = True
                         return None
-                except Exception as e:
-                    print(f"[PCMStreamer] Seek error: {e}")
+                except:
                     self.has_seeked = True
                     return None
                 
@@ -206,35 +208,14 @@ class PCMStreamer:
                     return self.read_chunk(n_bytes)
         
         # Normal reading after seeking
-        try:
-            data = self.ff_proc.stdout.read(n_bytes)
-            if data and len(data) >= n_bytes:
-                return data
-            elif data and len(data) > 0:
-                # Partial read - pad with silence
-                return data + b'\x00' * (n_bytes - len(data))
-            else:
-                # Check processes status
-                yt_status = self.yt_proc.poll() if self.yt_proc else None
-                ff_status = self.ff_proc.poll() if self.ff_proc else None
-                
-                if yt_status is not None or ff_status is not None:
-                    print(f"[PCMStreamer] Processes ended - yt-dlp: {yt_status}, ffmpeg: {ff_status}")
-                    if self.ff_proc.stderr:
-                        err = self.ff_proc.stderr.read()
-                        if err:
-                            print(f"[PCMStreamer] FFmpeg stderr: {err.decode('utf-8', errors='ignore')[:200]}")
-                return None
-        except Exception as e:
-            print(f"[PCMStreamer] Read error: {e}")
+        data = self.proc.stdout.read(n_bytes)
+        if not data or len(data) < n_bytes:
             return None
+        return data
 
     def stop(self):
-        if self.ff_proc:
-            try: self.ff_proc.kill()
-            except: pass
-        if self.yt_proc:
-            try: self.yt_proc.kill()
+        if self.proc:
+            try: self.proc.kill()
             except: pass
 
 
@@ -284,9 +265,12 @@ def run_transcription_loop(youtube_url, start_time=0, model_id=None):
     window_frames = int(math.ceil(window_sec * 1000 / frame_duration))
     stride_frames = int(math.ceil(stride_sec * 1000 / frame_duration))
 
-    # Langsung gunakan YouTube URL dengan PCMStreamer (yt-dlp pipe approach)
-    print(f"🎙️ [ASR] Memulai streaming audio dari: {youtube_url}")
-    streamer = PCMStreamer(youtube_url, sample_rate=sample_rate, start_time=start_time)
+    stream_url = get_stream_url(youtube_url)
+    if not stream_url:
+        print('Failed to get stream url from yt-dlp. Exiting.')
+        return
+
+    streamer = PCMStreamer(stream_url, sample_rate=sample_rate, start_time=start_time)
     streamer.start()
 
     chunk_buffer = deque(maxlen=window_frames)

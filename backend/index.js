@@ -17,7 +17,59 @@ const io = new Server(server, {
     cors: {
         origin: "*", // Boleh diakses dari mana aja
         methods: ["GET", "POST"]
-    }
+    },
+    maxHttpBufferSize: 1e8 // 100 MB buffer size for large frames
+});
+
+io.on('connection', (socket) => {
+    console.log(`[Socket] Client connected: ${socket.id}`);
+
+    // Relay AI bounding boxes from Python to Frontend
+    socket.on('ai-boxes', (data) => {
+        // Broadcast to all clients (Frontend)
+        socket.broadcast.volatile.emit('ai-boxes', data);
+    });
+
+    // Frontend request to start live stream with YouTube URL
+    socket.on('start-live-stream', (data) => {
+        console.log(`[Socket] 🎬 Frontend request live stream:`, data);
+        console.log(`[Socket] 📤 Broadcasting start-processing to ${io.engine.clientsCount - 1} other clients`);
+        // Broadcast to Python client to start processing
+        io.emit('start-processing', data); // Use io.emit to send to ALL including sender
+    });
+
+    // Frontend request to stop live stream
+    socket.on('stop-live-stream', () => {
+        console.log(`[Socket] 🛑 Frontend request stop live stream`);
+        socket.broadcast.emit('stop-processing');
+    });
+
+    // Frontend sends current playback time to Python for sync
+    socket.on('player-time', (data) => {
+        socket.broadcast.emit('player-time', data);
+    });
+
+    // Frontend sends seek event to Python
+    socket.on('player-seek', (data) => {
+        console.log(`[Socket] ⏩ Player seek to:`, data);
+        socket.broadcast.emit('player-seek', data);
+    });
+
+    // Python notifies that stream has started
+    socket.on('stream-started', (data) => {
+        console.log(`[Socket] ✅ Python started streaming:`, data);
+        socket.broadcast.emit('stream-started', data);
+    });
+
+    // Python notifies error
+    socket.on('stream-error', (data) => {
+        console.log(`[Socket] ❌ Python stream error:`, data);
+        socket.broadcast.emit('stream-error', data);
+    });
+
+    socket.on('disconnect', () => {
+        console.log(`[Socket] Client disconnected: ${socket.id}`);
+    });
 });
 
 // --- AUTO START PYTHON BACKEND ---

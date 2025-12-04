@@ -34,6 +34,21 @@
         >
           🔗 Tempel URL
         </button>
+        <button
+          @click="inputMode = 'live'"
+          :class="[
+            'px-5 py-2.5 rounded-lg font-medium transition-all border flex items-center gap-2',
+            inputMode === 'live' 
+              ? 'bg-red-600 text-white border-white/30 shadow-[0_8px_20px_rgba(220,38,38,0.35)]' 
+              : 'bg-white/5 text-[#F0D290]/80 border-white/15 hover:text-white'
+          ]"
+        >
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+          </span>
+          Live Stream
+        </button>
       </div>
 
       <div class="w-full max-w-4xl mx-auto bg-white/5 p-2 rounded-2xl border border-white/10 shadow-xl backdrop-blur">
@@ -56,7 +71,7 @@
           </div>
 
           <!-- URL Mode Input -->
-          <div v-else class="flex-1 relative group">
+          <div v-else-if="inputMode === 'url'" class="flex-1 relative group">
             <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <svg class="h-5 w-5 text-gray-500 group-focus-within:text-wayang-primary transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
@@ -68,6 +83,22 @@
               placeholder="Tempel link YouTube di sini..."
               class="w-full pl-12 pr-4 py-4 bg-white/10 text-white rounded-xl border border-white/20 focus:border-wayang-gold/60 focus:ring-2 focus:ring-wayang-gold/30 outline-none transition-all placeholder-[#F0D290]/70 text-base"
               @keyup.enter="handleAnalyze"
+            />
+          </div>
+
+          <!-- Live Mode Input - User inputs YouTube URL for local AI processing -->
+          <div v-else-if="inputMode === 'live'" class="flex-1 relative group">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <svg class="h-5 w-5 text-red-500 group-focus-within:text-red-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+              </svg>
+            </div>
+            <input
+              v-model="liveUrl"
+              type="text"
+              placeholder="Tempel link YouTube untuk diproses AI lokal..."
+              class="w-full pl-12 pr-4 py-4 bg-white/10 text-white rounded-xl border border-red-500/30 focus:border-red-500/60 focus:ring-2 focus:ring-red-500/30 outline-none transition-all placeholder-[#F0D290]/70 text-base"
+              @keyup.enter="handleLiveStream"
             />
           </div>
 
@@ -121,6 +152,21 @@
             </svg>
             <span class="hidden sm:inline">{{ loading ? 'Memproses...' : 'Analisis' }}</span>
           </button>
+
+          <!-- Live Button -->
+          <button
+            v-if="inputMode === 'live'"
+            @click="handleLiveStream"
+            :disabled="!liveUrl || liveLoading"
+            class="px-6 py-4 bg-red-600 text-white font-bold rounded-xl shadow-[0_12px_30px_rgba(220,38,38,0.35)] hover:shadow-[0_15px_35px_rgba(220,38,38,0.4)] hover:scale-[1.01] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
+          >
+            <span v-if="liveLoading" class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+            <svg v-else class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="hidden sm:inline">{{ liveLoading ? 'Menunggu AI...' : 'Mulai Live' }}</span>
+          </button>
         </div>
       </div>
     </div>
@@ -138,7 +184,7 @@ defineProps({
   }
 })
 
-const emit = defineEmits(['analyze', 'search-results', 'sticky-change'])
+const emit = defineEmits(['analyze', 'search-results', 'sticky-change', 'live-stream'])
 
 // Sticky state
 const searchBarRef = ref(null)
@@ -152,6 +198,10 @@ const inputMode = ref('search')
 // URL mode
 const videoUrl = ref('')
 const startTime = ref('')
+
+// Live mode
+const liveUrl = ref('')
+const liveLoading = ref(false)
 
 // Search mode
 const searchQuery = ref('')
@@ -220,6 +270,19 @@ const handleAnalyze = () => {
   }
 }
 
+const handleLiveStream = () => {
+  if (!liveUrl.value) return
+  
+  // Emit YouTube URL for live processing
+  emit('live-stream', { videoUrl: liveUrl.value })
+  liveLoading.value = true
+}
+
+// Method to reset loading state (called from parent)
+const resetLiveLoading = () => {
+  liveLoading.value = false
+}
+
 // Expose method to set URL from parent (when selecting from search results)
 const setVideoUrl = (url) => {
   videoUrl.value = url
@@ -227,7 +290,7 @@ const setVideoUrl = (url) => {
   searchQuery.value = ''
 }
 
-defineExpose({ setVideoUrl })
+defineExpose({ setVideoUrl, resetLiveLoading })
 </script>
 
 <style scoped>

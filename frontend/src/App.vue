@@ -70,6 +70,8 @@ const authStore = useAuthStore()
 // Pastikan backend Node.js jalan di port 3000
 const socket = io("/", { path: "/socket.io" });
 const currentVideoId = ref(null)
+const liveStreamUrl = ref(null)
+const liveVideoUrl = ref(null)  // YouTube URL for live mode
 const currentStartTime = ref(0)
 const isLoading = ref(false)
 const isASRLoadng = ref(false)
@@ -224,6 +226,33 @@ const handleAnalyze = async (payload) => {
   } finally {
     isLoading.value = false;
   }
+};
+
+const handleLiveStream = (payload) => {
+  const videoUrl = payload.videoUrl;
+  console.log("[App] Starting Live Stream with URL:", videoUrl);
+  
+  // Reset state
+  currentVideoId.value = 'live-stream'; // Dummy ID to trigger view switch
+  liveStreamUrl.value = 'socket-relay'; // Flag for socket mode
+  liveVideoUrl.value = videoUrl; // Pass YouTube URL to player
+  currentStartTime.value = 0;
+  
+  characters.value = [];
+  subtitlesQueue.value = [];
+  displayedSubtitles.value = [];
+  
+  // Send URL to local Python via Socket
+  socket.emit('start-live-stream', { videoUrl: videoUrl });
+  console.log("[App] Sent start-live-stream event to server");
+  
+  shouldAutoPlay.value = true;
+  
+  // Auto Scroll ke Player
+  nextTick(() => {
+    const playerSection = document.getElementById('player-section');
+    if (playerSection) playerSection.scrollIntoView({ behavior: 'smooth' });
+  });
 };
 
 const handleStartASR = async (payload) => {
@@ -394,10 +423,22 @@ const handlePlayerReady = () => {
 }
 
 const handleCloseVideo = () => {
+  // If live streaming, send stop signal
+  if (liveStreamUrl.value === 'socket-relay') {
+    socket.emit('stop-live-stream');
+    console.log("[App] Sent stop-live-stream event");
+  }
+  
   currentVideoId.value = null;
+  liveStreamUrl.value = null;
   shouldAutoPlay.value = false;
   subtitlesQueue.value = [];
   displayedSubtitles.value = [];
+  
+  // Reset search bar loading state
+  if (stickySearchBarRef.value && stickySearchBarRef.value.resetLiveLoading) {
+    stickySearchBarRef.value.resetLiveLoading();
+  }
 }
 
 // Handle search results from StickySearchBar
@@ -478,6 +519,26 @@ onMounted(() => {
         if (sub) sub.isNew = false;
       }, 3000);
     }
+  });
+
+  // Listen for stream started event from Python
+  socket.on('stream-started', (data) => {
+    console.log('[Frontend] Stream started:', data);
+    // Reset loading state
+    if (stickySearchBarRef.value && stickySearchBarRef.value.resetLiveLoading) {
+      stickySearchBarRef.value.resetLiveLoading();
+    }
+  });
+
+  // Listen for stream error
+  socket.on('stream-error', (data) => {
+    console.error('[Frontend] Stream error:', data);
+    alert('Gagal memulai stream: ' + (data.message || 'Unknown error'));
+    // Reset state
+    if (stickySearchBarRef.value && stickySearchBarRef.value.resetLiveLoading) {
+      stickySearchBarRef.value.resetLiveLoading();
+    }
+    handleCloseVideo();
   });
   
   // Start sync interval (backup untuk sinkronisasi)
@@ -657,6 +718,7 @@ onUnmounted(() => {
           ref="stickySearchBarRef"
           :loading="isLoading"
           @analyze="handleAnalyze"
+          @live-stream="handleLiveStream"
           @search-results="handleSearchResults"
           @sticky-change="handleStickyChange"
         />
@@ -729,6 +791,8 @@ onUnmounted(() => {
             <VideoPlayer 
               ref="videoPlayerRef"
               :video-id="currentVideoId" 
+              :stream-url="liveStreamUrl"
+              :live-video-url="liveVideoUrl"
               :start-time="currentStartTime"
               :auto-play="shouldAutoPlay"
               @close="handleCloseVideo"
