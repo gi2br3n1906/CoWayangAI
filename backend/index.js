@@ -8,6 +8,19 @@ const axios = require('axios'); // Pastikan ini ada!
 const app = express();
 const server = http.createServer(app);
 
+// =============================================================================
+// KONFIGURASI SERVER EKSTERNAL
+// =============================================================================
+// Jika ASR server jalan di komputer lain, set di .env:
+//   ASR_SERVER_URL=http://192.168.1.100:8001
+//   PYTHON_AI_URL=http://192.168.1.100:8000
+// Jika jalan di komputer yang sama (localhost), biarkan default
+const ASR_SERVER_URL = process.env.ASR_SERVER_URL || 'http://127.0.0.1:8001';
+const PYTHON_AI_URL = process.env.PYTHON_AI_URL || 'http://127.0.0.1:8000';
+
+console.log(`[Config] ASR Server: ${ASR_SERVER_URL}`);
+console.log(`[Config] Python AI: ${PYTHON_AI_URL}`);
+
 // Setup CORS biar frontend dan python bisa masuk
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
@@ -73,9 +86,14 @@ io.on('connection', (socket) => {
 });
 
 // --- AUTO START PYTHON BACKEND ---
+// Set AUTO_START_PYTHON=false di .env jika Python jalan di komputer lain
 let pythonProcess = null;
 
 const startPythonBackend = () => {
+    if (process.env.AUTO_START_PYTHON === 'false') {
+        console.log("[Node] ⏭️ Skipping Python Backend (running externally)");
+        return;
+    }
     console.log("[Node] 🚀 Starting Python Backend AI...");
     const { spawn } = require('child_process');
     pythonProcess = spawn('python', ['g:\\KERJAAN\\cowayang\\CoWayangAI\\backend-ai\\main.py'], {
@@ -95,9 +113,14 @@ const startPythonBackend = () => {
 };
 
 // --- AUTO START ASR SERVER ---
+// Set AUTO_START_ASR=false di .env jika ASR jalan di komputer lain
 let asrServerProcess = null;
 
 const startASRServer = () => {
+    if (process.env.AUTO_START_ASR === 'false') {
+        console.log("[Node] ⏭️ Skipping ASR Server (running externally)");
+        return;
+    }
     console.log("[Node] 🎙️ Starting ASR Server...");
     const { spawn } = require('child_process');
     asrServerProcess = spawn('python', ['g:\\KERJAAN\\cowayang\\CoWayangAI\\backend-ai\\asr_server.py'], {
@@ -128,7 +151,7 @@ const stopASR = async () => {
     if (currentVideoUrl) {
         console.log("[Node] 🛑 Stopping ASR for current video...");
         try {
-            await axios.post('http://127.0.0.1:8001/stop-asr', {
+            await axios.post(`${ASR_SERVER_URL}/stop-asr`, {
                 videoUrl: currentVideoUrl,
                 startTime: parseInt(currentStartTime)
             });
@@ -146,7 +169,7 @@ const startASR = async (videoUrl, startTime) => {
     
     console.log(`[Node] 🎙️ Starting ASR for: ${videoUrl} at ${startTime}`);
     try {
-        const response = await axios.post('http://127.0.0.1:8001/start-asr', {
+        const response = await axios.post(`${ASR_SERVER_URL}/start-asr`, {
             videoUrl: videoUrl,
             startTime: parseInt(startTime)
         });
@@ -176,38 +199,41 @@ app.post('/api/analyze', async (req, res) => {
 
     console.log(`[Node]    URL: ${videoUrl}`);
     console.log(`[Node]    Start: ${startMinute} menit (${startTimeInSeconds} detik)`);
-    console.log(`[Node] 2. Sedang menghubungi Python (Port 8000)...`);
+    
+    // Track current video for seek functionality
+    currentVideoUrl = videoUrl;
+    currentStartTime = startTimeInSeconds.toString();
 
+    // Try Python AI (optional - won't block ASR if fails)
+    let pythonSuccess = false;
     try {
-        // TEMBAK KE PYTHON
-        // Pastikan URL ini benar: http://127.0.0.1:8000/start-analysis
-        const pythonResponse = await axios.post('http://127.0.0.1:8000/start-analysis', {
+        console.log(`[Node] 2. Mencoba menghubungi Python AI (Port 8000)...`);
+        const pythonResponse = await axios.post(`${PYTHON_AI_URL}/start-analysis`, {
             videoUrl: videoUrl,
             startTime: startTimeInSeconds
-        });
+        }, { timeout: 5000 }); // 5 second timeout
 
         console.log("[Node] ✅ 3. Python Merespon: Sukses!");
         console.log("[Node]    Status Python:", pythonResponse.data);
-        
-        // Track current video for seek functionality
-        currentVideoUrl = videoUrl;
-        currentStartTime = startTimeInSeconds.toString();
-        
-        // AUTO START ASR
-        console.log("[Node] 4. Starting ASR automatically...");
+        pythonSuccess = true;
+    } catch (error) {
+        console.log("[Node] ⚠️ Python AI tidak tersedia, lanjut dengan ASR saja...");
+    }
+
+    // AUTO START ASR (always try, regardless of Python status)
+    try {
+        console.log("[Node] 4. Starting ASR...");
         await startASR(videoUrl, startTimeInSeconds.toString());
         
-        res.json({ status: 'success', message: 'Perintah dikirim ke AI dan ASR dimulai' });
+        const message = pythonSuccess 
+            ? 'AI dan ASR dimulai' 
+            : 'ASR dimulai (AI tidak tersedia)';
+        res.json({ status: 'success', message: message });
 
     } catch (error) {
-        console.error("[Node] ❌ 3. GAGAL Menghubungi Python!");
+        console.error("[Node] ❌ GAGAL Start ASR!");
         console.error("[Node]    Error Message:", error.message);
-        
-        if (error.code === 'ECONNREFUSED') {
-            console.error("[Node]    SEBAB: Server Python (main.py) belum jalan atau beda port!");
-        }
-
-        res.status(500).json({ status: 'error', message: 'Gagal connect ke AI' });
+        res.status(500).json({ status: 'error', message: 'Gagal start ASR' });
     }
     console.log("========================================\n");
 });
@@ -289,7 +315,7 @@ app.post('/api/seek-analysis', async (req, res) => {
         // Stop current analysis first
         console.log("[Node] 🛑 Stopping current AI analysis...");
         try {
-            await axios.post('http://127.0.0.1:8000/stop-analysis', {}, { timeout: 3000 });
+            await axios.post(`${PYTHON_AI_URL}/stop-analysis`, {}, { timeout: 3000 });
         } catch (stopErr) {
             console.log("[Node] Note: Stop request completed or timed out");
         }
@@ -299,7 +325,7 @@ app.post('/api/seek-analysis', async (req, res) => {
 
         // Restart from new position
         console.log("[Node] 🚀 Starting AI analysis from seek position...");
-        const pythonResponse = await axios.post('http://127.0.0.1:8000/start-analysis', {
+        const pythonResponse = await axios.post(`${PYTHON_AI_URL}/start-analysis`, {
             videoUrl: currentVideoUrl,
             startTime: parseInt(startTime) || 0
         });
@@ -392,6 +418,21 @@ app.get('/api/search-youtube', async (req, res) => {
 });
 
 const PORT = 3000;
-server.listen(PORT, () => {
-    console.log(`🚀 Server Backend Node.js jalan di http://localhost:${PORT}`);
+server.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Server Backend Node.js jalan di http://0.0.0.0:${PORT}`);
+});
+
+// --- Health Check Endpoint ---
+app.get('/health', (req, res) => {
+    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+// --- ASR Status Endpoint (proxy to ASR server) ---
+app.get('/api/asr-status', async (req, res) => {
+    try {
+        const response = await axios.get(`${ASR_SERVER_URL}/pool-status`, { timeout: 5000 });
+        res.json(response.data);
+    } catch (error) {
+        res.status(500).json({ status: 'error', message: 'ASR server not reachable' });
+    }
 });
