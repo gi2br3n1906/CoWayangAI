@@ -5,6 +5,36 @@
       
       <!-- Live Stream Mode (YouTube + AI Overlay) -->
       <div v-if="isLiveMode" class="w-full h-full relative">
+        <!-- Session Error Overlay -->
+        <div v-if="sessionError" class="absolute inset-0 bg-black/90 flex flex-col items-center justify-center z-30">
+          <div class="text-center p-8 max-w-md">
+            <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <h3 class="text-white font-bold text-lg mb-2">Server Penuh</h3>
+            <p class="text-gray-400 text-sm mb-4">{{ sessionError }}</p>
+            <div v-if="workerStatus" class="bg-slate-800 rounded-lg p-3 mb-4">
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-400">Status Worker:</span>
+                <span class="text-white font-medium">{{ workerStatus.busy }}/{{ workerStatus.total }} terpakai</span>
+              </div>
+            </div>
+            <button 
+              @click="requestSession()"
+              :disabled="isRequestingSession"
+              class="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <span v-if="isRequestingSession" class="flex items-center gap-2">
+                <div class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Mencoba...
+              </span>
+              <span v-else>Coba Lagi</span>
+            </button>
+          </div>
+        </div>
+        
         <!-- YouTube Player for Video + Audio -->
         <div id="youtube-player-live" class="w-full h-full"></div>
         
@@ -19,15 +49,23 @@
           <span class="w-2 h-2 bg-white rounded-full"></span>
           LIVE AI
         </div>
+        
+        <!-- Worker Info Badge -->
+        <div v-if="workerId && !sessionError" class="absolute top-4 left-4 bg-slate-800/90 text-white px-3 py-1 rounded-lg text-xs font-medium flex items-center gap-2 shadow-lg z-20 border border-white/10">
+          <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+          {{ workerId }}
+        </div>
 
         <!-- AI Status -->
-        <div v-if="!aiConnected" class="absolute bottom-4 left-4 bg-yellow-600/90 text-white px-3 py-1 rounded-lg text-xs font-medium flex items-center gap-2 shadow-lg z-20">
-          <div class="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-          Menunggu AI terhubung...
-        </div>
-        <div v-else class="absolute bottom-4 left-4 bg-green-600/90 text-white px-3 py-1 rounded-lg text-xs font-medium flex items-center gap-2 shadow-lg z-20">
-          <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-          AI Aktif · {{ detectedCount }} objek
+        <div v-if="!sessionError">
+          <div v-if="!aiConnected" class="absolute bottom-4 left-4 bg-yellow-600/90 text-white px-3 py-1 rounded-lg text-xs font-medium flex items-center gap-2 shadow-lg z-20">
+            <div class="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+            Menunggu AI terhubung...
+          </div>
+          <div v-else class="absolute bottom-4 left-4 bg-green-600/90 text-white px-3 py-1 rounded-lg text-xs font-medium flex items-center gap-2 shadow-lg z-20">
+            <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+            AI Aktif · {{ detectedCount }} objek
+          </div>
         </div>
       </div>
 
@@ -78,7 +116,7 @@
         </button>
 
         <button 
-          @click="emit('close')"
+          @click="handleClose"
           class="p-2 rounded-lg hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
           title="Tutup Video"
         >
@@ -131,6 +169,15 @@ const socket = ref(null);
 const aiConnected = ref(false);
 const detectedCount = ref(0);
 const currentBoxes = ref([]);
+
+// Session Management
+const sessionId = ref(null);
+const workerId = ref(null);
+const sessionError = ref(null);
+const isRequestingSession = ref(false);
+
+// Worker Status
+const workerStatus = ref(null);
 
 // Colors for bounding boxes (same as Python)
 const COLORS = [
@@ -357,6 +404,53 @@ const loadYouTubeAPI = () => {
   });
 };
 
+// Request session from server
+const requestSession = (existingSessionId = null) => {
+  if (!socket.value || !socket.value.connected) return;
+  if (isRequestingSession.value) return;
+  
+  // Prevent double request if already have session
+  if (sessionId.value) {
+    console.log('[VideoPlayer] Already have session:', sessionId.value);
+    return;
+  }
+  
+  isRequestingSession.value = true;
+  sessionError.value = null;
+  
+  console.log('[VideoPlayer] Requesting session for:', props.liveVideoUrl);
+  
+  socket.value.emit('start-live-stream', {
+    videoUrl: props.liveVideoUrl,
+    existingSessionId: existingSessionId
+  });
+};
+
+// End current session
+const endSession = (reason = 'user_action') => {
+  if (!socket.value || !sessionId.value) return;
+  
+  console.log('[VideoPlayer] Ending session:', sessionId.value, 'reason:', reason);
+  
+  socket.value.emit('end-session', {
+    sessionId: sessionId.value,
+    reason: reason
+  });
+  
+  localStorage.removeItem('cowayang_session_id');
+  sessionId.value = null;
+  workerId.value = null;
+  aiConnected.value = false;
+};
+
+// Handle close button - end session first
+const handleClose = () => {
+  if (isLiveMode.value && sessionId.value) {
+    endSession('user_close');
+  }
+  emit('close');
+};
+
 // Extract video ID from YouTube URL
 const extractVideoId = (url) => {
   const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -380,17 +474,81 @@ const initLivePlayer = async () => {
   
   socket.value.on('connect', () => {
     console.log('[VideoPlayer] Socket connected for AI overlay');
+    
+    // Only request session if we don't already have one
+    if (sessionId.value) {
+      console.log('[VideoPlayer] Already have active session:', sessionId.value);
+      return;
+    }
+    
+    // Try to reconnect to existing session from localStorage
+    const savedSessionId = localStorage.getItem('cowayang_session_id');
+    if (savedSessionId) {
+      console.log('[VideoPlayer] Attempting to reconnect to session:', savedSessionId);
+    }
+    
+    // Debounce: wait a bit before requesting to avoid race conditions
+    setTimeout(() => {
+      if (!sessionId.value && !isRequestingSession.value) {
+        requestSession(savedSessionId);
+      }
+    }, 500);
+  });
+  
+  socket.value.on('session-created', (data) => {
+    console.log('[VideoPlayer] Session created:', data);
+    sessionId.value = data.sessionId;
+    workerId.value = data.workerId;
+    isRequestingSession.value = false;
+    sessionError.value = null;
+    
+    // Save session for reconnect
+    localStorage.setItem('cowayang_session_id', data.sessionId);
+    
+    if (data.reconnected) {
+      console.log('[VideoPlayer] Reconnected to existing session');
+      aiConnected.value = true;
+    }
+  });
+  
+  socket.value.on('session-error', (data) => {
+    console.error('[VideoPlayer] Session error:', data);
+    sessionError.value = data.message;
+    isRequestingSession.value = false;
+    workerStatus.value = data.status;
+  });
+  
+  socket.value.on('session-ended', (data) => {
+    console.log('[VideoPlayer] Session ended:', data);
+    sessionId.value = null;
+    workerId.value = null;
+    localStorage.removeItem('cowayang_session_id');
+  });
+  
+  socket.value.on('worker-status-update', (data) => {
+    console.log('[VideoPlayer] Worker status update:', data);
+    workerStatus.value = data;
   });
   
   socket.value.on('ai-boxes', (data) => {
+    // Only process if for our session (or no session filter for backward compat)
+    if (data.sessionId && data.sessionId !== sessionId.value) return;
+    
     aiConnected.value = true;
     currentBoxes.value = data.boxes || [];
     detectedCount.value = currentBoxes.value.length;
     drawBoundingBoxes(currentBoxes.value);
   });
   
-  socket.value.on('stream-started', () => {
+  socket.value.on('stream-started', (data) => {
+    if (data.sessionId && data.sessionId !== sessionId.value) return;
     aiConnected.value = true;
+  });
+  
+  socket.value.on('stream-error', (data) => {
+    if (data.sessionId && data.sessionId !== sessionId.value) return;
+    console.error('[VideoPlayer] Stream error:', data.message);
+    sessionError.value = data.message;
   });
   
   // Get video ID from URL
@@ -439,10 +597,21 @@ const onLivePlayerStateChange = (event) => {
             console.log(`[VideoPlayer] Live seek detected: ${lastTime}s -> ${currentTime}s`);
             emit('seek', currentTime);
             
-            // Send seek event to Python via socket
+            // Send seek event to Python via socket with session
             if (socket.value) {
-              socket.value.emit('player-seek', { time: currentTime });
+              socket.value.emit('player-seek', { 
+                sessionId: sessionId.value,
+                time: currentTime 
+              });
             }
+          }
+          
+          // Send player time to Python for sync
+          if (socket.value && sessionId.value) {
+            socket.value.emit('player-time', { 
+              sessionId: sessionId.value,
+              time: currentTime 
+            });
           }
           
           emit('timeUpdate', currentTime);
@@ -450,10 +619,43 @@ const onLivePlayerStateChange = (event) => {
         }
       }, 500);
     }
-  } else if (event.data === window.YT.PlayerState.PAUSED || event.data === window.YT.PlayerState.ENDED) {
+    
+    // Notify backend of playing state
+    if (socket.value && sessionId.value) {
+      socket.value.emit('player-state', {
+        sessionId: sessionId.value,
+        state: 'playing',
+        time: livePlayer ? livePlayer.getCurrentTime() : 0
+      });
+    }
+  } else if (event.data === window.YT.PlayerState.PAUSED) {
     if (timeUpdateInterval) {
       clearInterval(timeUpdateInterval);
       timeUpdateInterval = null;
+    }
+    
+    if (socket.value && sessionId.value) {
+      socket.value.emit('player-state', {
+        sessionId: sessionId.value,
+        state: 'paused',
+        time: livePlayer ? livePlayer.getCurrentTime() : 0
+      });
+    }
+  } else if (event.data === window.YT.PlayerState.ENDED) {
+    if (timeUpdateInterval) {
+      clearInterval(timeUpdateInterval);
+      timeUpdateInterval = null;
+    }
+    
+    // Video ended - end session
+    if (socket.value && sessionId.value) {
+      socket.value.emit('player-state', {
+        sessionId: sessionId.value,
+        state: 'ended'
+      });
+      
+      // End the session
+      endSession('video_ended');
     }
   }
 };
@@ -497,9 +699,24 @@ const initPlayer = async () => {
 
 onMounted(async () => {
   await initPlayer();
+  
+  // Handle tab close - end session
+  window.addEventListener('beforeunload', handleBeforeUnload);
 });
 
+const handleBeforeUnload = () => {
+  if (isLiveMode.value && sessionId.value) {
+    // Try to end session before tab closes
+    endSession('tab_close');
+  }
+};
+
 onUnmounted(() => {
+  // End session if live mode
+  if (isLiveMode.value && sessionId.value) {
+    endSession('component_unmount');
+  }
+  
   if (timeUpdateInterval) {
     clearInterval(timeUpdateInterval);
     timeUpdateInterval = null;
@@ -508,6 +725,7 @@ onUnmounted(() => {
     socket.value.disconnect();
   }
   window.removeEventListener('resize', setupCanvas);
+  window.removeEventListener('beforeunload', handleBeforeUnload);
 });
 
 const onPlayerReady = (event) => {

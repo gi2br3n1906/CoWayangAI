@@ -3,7 +3,8 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
-const axios = require('axios'); // Pastikan ini ada!
+const axios = require('axios');
+const { sessionManager } = require('./sessionManager');
 
 const app = express();
 const server = http.createServer(app);
@@ -37,35 +38,173 @@ const io = new Server(server, {
 io.on('connection', (socket) => {
     console.log(`[Socket] Client connected: ${socket.id}`);
 
-    // Relay AI bounding boxes from Python to Frontend
-    socket.on('ai-boxes', (data) => {
-        // Broadcast to all clients (Frontend)
-        socket.broadcast.volatile.emit('ai-boxes', data);
+    // ==========================================================================
+    // PYTHON WORKER REGISTRATION
+    // ==========================================================================
+    
+    // Python worker registers itself with worker ID
+    socket.on('register-worker', (data) => {
+        const { workerId } = data;
+        console.log(`[Socket] 🐍 Python worker registering: ${workerId}`);
+        
+        if (sessionManager.registerPythonWorker(workerId, socket.id)) {
+            socket.workerId = workerId; // Store for disconnect handling
+            socket.isPythonWorker = true;
+            socket.emit('worker-registered', { success: true, workerId });
+            
+            // Broadcast updated status
+            io.emit('worker-status-update', sessionManager.getStatus());
+        } else {
+            socket.emit('worker-registered', { success: false, error: 'Invalid worker ID' });
+        }
     });
 
-    // Frontend request to start live stream with YouTube URL
+    // ==========================================================================
+    // SESSION-BASED LIVE STREAM (NEW)
+    // ==========================================================================
+    
+    // Frontend request to start live stream with session management
     socket.on('start-live-stream', (data) => {
+        const { videoUrl, existingSessionId } = data;
         console.log(`[Socket] 🎬 Frontend request live stream:`, data);
-        console.log(`[Socket] 📤 Broadcasting start-processing to ${io.engine.clientsCount - 1} other clients`);
-        // Broadcast to Python client to start processing
-        io.emit('start-processing', data); // Use io.emit to send to ALL including sender
+        
+        // Request session from manager
+        const result = sessionManager.requestSession(socket.id, videoUrl, existingSessionId);
+        
+        if (!result.success) {
+            // Server full - notify frontend
+            socket.emit('session-error', {
+                type: 'server_full',
+                message: result.message,
+                status: result.status
+            });
+            return;
+        }
+        
+        const { sessionId, workerId, reconnected } = result;
+        
+        // Store session info on socket
+        socket.sessionId = sessionId;
+        
+        // Notify frontend of session created
+        socket.emit('session-created', {
+            sessionId,
+            workerId,
+            reconnected: reconnected || false,
+            message: result.message
+        });
+        
+        // If reconnected, no need to send to Python (it's already processing)
+        if (reconnected) {
+            console.log(`[Socket] ♻️ Reconnected to existing session, skipping Python start`);
+            return;
+        }
+        
+        // Find the Python worker socket and send start command
+        const workerInfo = sessionManager.getWorkerBySession(sessionId);
+        if (workerInfo && workerInfo.pythonSocketId) {
+            io.to(workerInfo.pythonSocketId).emit('start-processing', {
+                sessionId,
+                workerId,
+                videoUrl
+            });
+            console.log(`[Socket] 📤 Sent start-processing to ${workerId}`);
+        } else {
+            // No Python worker connected for this worker ID - broadcast to all Python workers
+            console.log(`[Socket] ⚠️ No specific Python socket for ${workerId}, broadcasting to all`);
+            socket.broadcast.emit('start-processing', {
+                sessionId,
+                workerId,
+                videoUrl
+            });
+        }
+    });
+    
+    // Frontend request to end session
+    socket.on('end-session', (data) => {
+        const { sessionId, reason } = data;
+        console.log(`[Socket] 🛑 Frontend ending session: ${sessionId} (${reason || 'user_action'})`);
+        
+        const session = sessionManager.getSession(sessionId);
+        if (session) {
+            // Notify Python worker to stop
+            const workerInfo = sessionManager.getWorkerBySession(sessionId);
+            if (workerInfo && workerInfo.pythonSocketId) {
+                io.to(workerInfo.pythonSocketId).emit('stop-processing', { sessionId });
+            } else {
+                socket.broadcast.emit('stop-processing', { sessionId });
+            }
+            
+            // End the session
+            sessionManager.endSession(sessionId, reason || 'user_action');
+            
+            // Broadcast updated status
+            io.emit('worker-status-update', sessionManager.getStatus());
+        }
+        
+        socket.emit('session-ended', { sessionId });
     });
 
-    // Frontend request to stop live stream
+    // Relay AI bounding boxes from Python to specific Frontend session
+    socket.on('ai-boxes', (data) => {
+        const { sessionId } = data;
+        
+        if (sessionId) {
+            // Route to specific session
+            const session = sessionManager.getSession(sessionId);
+            if (session && session.socketId) {
+                io.to(session.socketId).volatile.emit('ai-boxes', data);
+                sessionManager.updateActivity(sessionId);
+            }
+        } else {
+            // Legacy: broadcast to all (for backward compatibility)
+            socket.broadcast.volatile.emit('ai-boxes', data);
+        }
+    });
+
+    // Legacy: Frontend request to stop live stream (backward compatible)
     socket.on('stop-live-stream', () => {
-        console.log(`[Socket] 🛑 Frontend request stop live stream`);
+        console.log(`[Socket] 🛑 Frontend request stop live stream (legacy)`);
+        
+        // Check if socket has a session
+        const sessionInfo = sessionManager.getSessionBySocket(socket.id);
+        if (sessionInfo) {
+            sessionManager.endSession(sessionInfo.sessionId, 'user_action');
+            io.emit('worker-status-update', sessionManager.getStatus());
+        }
+        
         socket.broadcast.emit('stop-processing');
     });
 
     // Frontend sends current playback time to Python for sync
     socket.on('player-time', (data) => {
-        socket.broadcast.emit('player-time', data);
+        const { sessionId } = data;
+        
+        if (sessionId) {
+            const workerInfo = sessionManager.getWorkerBySession(sessionId);
+            if (workerInfo && workerInfo.pythonSocketId) {
+                io.to(workerInfo.pythonSocketId).emit('player-time', data);
+            }
+        } else {
+            socket.broadcast.emit('player-time', data);
+        }
     });
 
     // Frontend sends seek event to Python AND ASR
     socket.on('player-seek', async (data) => {
         console.log(`[Socket] ⏩ Player seek to:`, data);
-        socket.broadcast.emit('player-seek', data);
+        
+        const { sessionId } = data;
+        
+        // Route to specific worker if session exists
+        if (sessionId) {
+            const workerInfo = sessionManager.getWorkerBySession(sessionId);
+            if (workerInfo && workerInfo.pythonSocketId) {
+                io.to(workerInfo.pythonSocketId).emit('player-seek', data);
+            }
+        } else {
+            socket.broadcast.emit('player-seek', data);
+        }
         
         // Also seek ASR if running
         if (currentVideoUrl) {
@@ -85,10 +224,20 @@ io.on('connection', (socket) => {
     socket.on('player-state', async (data) => {
         console.log(`[Socket] 🎮 Player state:`, data);
         
-        if (data.state === 'paused' || data.state === 'stopped' || data.state === 'ended') {
+        const { sessionId, state } = data;
+        
+        // Route to specific worker if session exists
+        if (sessionId) {
+            const workerInfo = sessionManager.getWorkerBySession(sessionId);
+            if (workerInfo && workerInfo.pythonSocketId) {
+                io.to(workerInfo.pythonSocketId).emit('player-state', data);
+            }
+        }
+        
+        if (state === 'paused' || state === 'stopped' || state === 'ended') {
             // Pause ASR when video paused/stopped
             if (currentVideoUrl) {
-                console.log(`[Socket] ⏸️ Pausing ASR due to player ${data.state}`);
+                console.log(`[Socket] ⏸️ Pausing ASR due to player ${state}`);
                 try {
                     await axios.post(`${ASR_SERVER_URL}/pause-asr`, {
                         videoUrl: currentVideoUrl
@@ -97,7 +246,14 @@ io.on('connection', (socket) => {
                     console.log(`[Socket] ⚠️ ASR pause failed: ${error.message}`);
                 }
             }
-        } else if (data.state === 'playing') {
+            
+            // If video ended, end the session
+            if (state === 'ended' && sessionId) {
+                console.log(`[Socket] 📺 Video ended, ending session ${sessionId}`);
+                sessionManager.endSession(sessionId, 'video_ended');
+                io.emit('worker-status-update', sessionManager.getStatus());
+            }
+        } else if (state === 'playing') {
             // Resume ASR when video playing
             if (currentVideoUrl) {
                 console.log(`[Socket] ▶️ Resuming ASR for playback`);
@@ -113,20 +269,55 @@ io.on('connection', (socket) => {
         }
     });
 
-    // Python notifies that stream has started
+    // Python notifies that stream has started (with session)
     socket.on('stream-started', (data) => {
         console.log(`[Socket] ✅ Python started streaming:`, data);
-        socket.broadcast.emit('stream-started', data);
+        
+        const { sessionId } = data;
+        if (sessionId) {
+            const session = sessionManager.getSession(sessionId);
+            if (session && session.socketId) {
+                io.to(session.socketId).emit('stream-started', data);
+            }
+        } else {
+            socket.broadcast.emit('stream-started', data);
+        }
     });
 
-    // Python notifies error
+    // Python notifies error (with session)
     socket.on('stream-error', (data) => {
         console.log(`[Socket] ❌ Python stream error:`, data);
-        socket.broadcast.emit('stream-error', data);
+        
+        const { sessionId } = data;
+        if (sessionId) {
+            const session = sessionManager.getSession(sessionId);
+            if (session && session.socketId) {
+                io.to(session.socketId).emit('stream-error', data);
+            }
+            // End the session on error
+            sessionManager.endSession(sessionId, 'error');
+            io.emit('worker-status-update', sessionManager.getStatus());
+        } else {
+            socket.broadcast.emit('stream-error', data);
+        }
     });
 
+    // Handle disconnect - for both frontend and Python workers
     socket.on('disconnect', () => {
         console.log(`[Socket] Client disconnected: ${socket.id}`);
+        
+        // Check if it's a Python worker
+        if (socket.isPythonWorker && socket.workerId) {
+            sessionManager.unregisterPythonWorker(socket.id);
+            io.emit('worker-status-update', sessionManager.getStatus());
+            return;
+        }
+        
+        // Check if it's a frontend with active session
+        const disconnectedSessionId = sessionManager.handleDisconnect(socket.id);
+        if (disconnectedSessionId) {
+            console.log(`[Socket] 📴 Frontend disconnected, session ${disconnectedSessionId} pending reconnect`);
+        }
     });
 });
 
@@ -465,6 +656,19 @@ app.get('/api/search-youtube', async (req, res) => {
 const PORT = 3000;
 server.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Server Backend Node.js jalan di http://0.0.0.0:${PORT}`);
+    console.log(`📊 Worker Pool: ${sessionManager.getStatus().total} workers available`);
+});
+
+// --- ENDPOINT 8: Worker Status ---
+app.get('/api/worker-status', (req, res) => {
+    const status = sessionManager.getStatus();
+    res.json({
+        success: true,
+        ...status,
+        message: status.available > 0 
+            ? `${status.available}/${status.total} slot tersedia`
+            : `Server penuh (${status.busy}/${status.total} slot terpakai)`
+    });
 });
 
 // --- Health Check Endpoint ---
