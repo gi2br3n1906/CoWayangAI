@@ -22,6 +22,13 @@ const PYTHON_AI_URL = process.env.PYTHON_AI_URL || 'http://127.0.0.1:8000';
 console.log(`[Config] ASR Server: ${ASR_SERVER_URL}`);
 console.log(`[Config] Python AI: ${PYTHON_AI_URL}`);
 
+// Debounce tracking untuk ASR seek/resume
+const asrDebounce = {
+    lastSeekTime: 0,
+    seekCooldown: 2000,  // 2 detik cooldown setelah seek
+    isSeekInProgress: false
+};
+
 // Setup CORS biar frontend dan python bisa masuk
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
@@ -67,6 +74,10 @@ io.on('connection', (socket) => {
     socket.on('start-live-stream', (data) => {
         const { videoUrl, existingSessionId } = data;
         console.log(`[Socket] 🎬 Frontend request live stream:`, data);
+        console.log(`[Socket]    Socket ID: ${socket.id}`);
+        
+        // Track video URL for ASR seek functionality
+        currentVideoUrl = videoUrl;
         
         // Request session from manager
         const result = sessionManager.requestSession(socket.id, videoUrl, existingSessionId);
@@ -85,6 +96,10 @@ io.on('connection', (socket) => {
         
         // Store session info on socket
         socket.sessionId = sessionId;
+        
+        // IMPORTANT: Update socketId in session if this is a reconnect or existing session
+        // This ensures ai-boxes are routed to the correct socket
+        sessionManager.updateSocketId(sessionId, socket.id);
         
         // Notify frontend of session created
         socket.emit('session-created', {
@@ -121,7 +136,7 @@ io.on('connection', (socket) => {
     });
     
     // Frontend request to end session
-    socket.on('end-session', (data) => {
+    socket.on('end-session', async (data) => {
         const { sessionId, reason } = data;
         console.log(`[Socket] 🛑 Frontend ending session: ${sessionId} (${reason || 'user_action'})`);
         
@@ -140,6 +155,19 @@ io.on('connection', (socket) => {
             
             // Broadcast updated status
             io.emit('worker-status-update', sessionManager.getStatus());
+        }
+        
+        // ALSO stop ASR when session ends
+        if (currentVideoUrl) {
+            console.log(`[Socket] 🎙️ Stopping ASR due to session end`);
+            try {
+                await axios.post(`${ASR_SERVER_URL}/pause-asr`, {
+                    videoUrl: currentVideoUrl
+                }, { timeout: 3000 });
+                currentVideoUrl = null;
+            } catch (error) {
+                console.log(`[Socket] ⚠️ ASR stop failed: ${error.message}`);
+            }
         }
         
         socket.emit('session-ended', { sessionId });
@@ -163,7 +191,7 @@ io.on('connection', (socket) => {
     });
 
     // Legacy: Frontend request to stop live stream (backward compatible)
-    socket.on('stop-live-stream', () => {
+    socket.on('stop-live-stream', async () => {
         console.log(`[Socket] 🛑 Frontend request stop live stream (legacy)`);
         
         // Check if socket has a session
@@ -174,6 +202,19 @@ io.on('connection', (socket) => {
         }
         
         socket.broadcast.emit('stop-processing');
+        
+        // ALSO stop ASR
+        if (currentVideoUrl) {
+            console.log(`[Socket] 🎙️ Stopping ASR (legacy stop)`);
+            try {
+                await axios.post(`${ASR_SERVER_URL}/pause-asr`, {
+                    videoUrl: currentVideoUrl
+                }, { timeout: 3000 });
+                currentVideoUrl = null;
+            } catch (error) {
+                console.log(`[Socket] ⚠️ ASR stop failed: ${error.message}`);
+            }
+        }
     });
 
     // Frontend sends current playback time to Python for sync
@@ -195,6 +236,10 @@ io.on('connection', (socket) => {
         console.log(`[Socket] ⏩ Player seek to:`, data);
         
         const { sessionId } = data;
+        
+        // Mark seek in progress untuk debounce
+        asrDebounce.isSeekInProgress = true;
+        asrDebounce.lastSeekTime = Date.now();
         
         // Route to specific worker if session exists
         if (sessionId) {
@@ -218,6 +263,11 @@ io.on('connection', (socket) => {
                 console.log(`[Socket] ⚠️ ASR seek failed: ${error.message}`);
             }
         }
+        
+        // Reset seek flag after cooldown
+        setTimeout(() => {
+            asrDebounce.isSeekInProgress = false;
+        }, asrDebounce.seekCooldown);
     });
 
     // Frontend sends player state (play/pause/stop)
@@ -255,6 +305,19 @@ io.on('connection', (socket) => {
             }
         } else if (state === 'playing') {
             // Resume ASR when video playing
+            // SKIP jika baru saja seek (debounce) - seek-asr sudah handle resume
+            if (asrDebounce.isSeekInProgress) {
+                console.log(`[Socket] ⏭️ Skipping ASR resume - seek in progress (debounce)`);
+                return;
+            }
+            
+            // Juga skip jika baru saja ada seek (dalam cooldown period)
+            const timeSinceSeek = Date.now() - asrDebounce.lastSeekTime;
+            if (timeSinceSeek < asrDebounce.seekCooldown) {
+                console.log(`[Socket] ⏭️ Skipping ASR resume - within seek cooldown (${timeSinceSeek}ms ago)`);
+                return;
+            }
+            
             if (currentVideoUrl) {
                 console.log(`[Socket] ▶️ Resuming ASR for playback`);
                 try {
@@ -303,7 +366,7 @@ io.on('connection', (socket) => {
     });
 
     // Handle disconnect - for both frontend and Python workers
-    socket.on('disconnect', () => {
+    socket.on('disconnect', async () => {
         console.log(`[Socket] Client disconnected: ${socket.id}`);
         
         // Check if it's a Python worker
@@ -315,8 +378,41 @@ io.on('connection', (socket) => {
         
         // Check if it's a frontend with active session
         const disconnectedSessionId = sessionManager.handleDisconnect(socket.id);
-        if (disconnectedSessionId) {
+        
+        // Always try to stop ASR when any non-worker client disconnects
+        // This ensures ASR stops even if sessionManager doesn't track this client
+        console.log(`[Socket] 🔍 Checking ASR status after disconnect...`);
+        
+        // Count remaining frontend clients (non-workers)
+        const allSockets = await io.fetchSockets();
+        const frontendClients = allSockets.filter(s => !s.isPythonWorker);
+        console.log(`[Socket] 📊 Remaining frontend clients: ${frontendClients.length}`);
+        
+        // If no frontend clients left, stop all ASR
+        if (frontendClients.length === 0) {
+            console.log(`[Socket] 🛑 No frontend clients left, stopping all ASR...`);
+            try {
+                await axios.post(`${ASR_SERVER_URL}/stop-all`, {}, { timeout: 5000 });
+                currentVideoUrl = null;
+                currentStartTime = '0';
+                console.log(`[Socket] ✅ All ASR stopped successfully`);
+            } catch (error) {
+                console.log(`[Socket] ⚠️ ASR stop-all failed: ${error.message}`);
+            }
+        } else if (disconnectedSessionId && currentVideoUrl) {
+            // If specific session disconnected and has video, stop that specific ASR
             console.log(`[Socket] 📴 Frontend disconnected, session ${disconnectedSessionId} pending reconnect`);
+            console.log(`[Socket] 🛑 Stopping ASR for current video...`);
+            try {
+                await axios.post(`${ASR_SERVER_URL}/stop-asr`, {
+                    videoUrl: currentVideoUrl
+                }, { timeout: 3000 });
+                currentVideoUrl = null;
+                currentStartTime = '0';
+                console.log(`[Socket] ✅ ASR stopped successfully`);
+            } catch (error) {
+                console.log(`[Socket] ⚠️ ASR stop failed: ${error.message}`);
+            }
         }
     });
 });

@@ -3,11 +3,11 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <!-- Logo -->
-        <div class="flex-shrink-0">
-          <h1 class="text-2xl font-bold bg-gradient-to-r from-wayang-gold to-white bg-clip-text text-transparent">
+        <RouterLink to="/" class="flex-shrink-0">
+          <h1 class="text-2xl font-bold bg-gradient-to-r from-wayang-gold to-white bg-clip-text text-transparent hover:opacity-80 transition-opacity cursor-pointer">
             Co-Wayang AI
           </h1>
-        </div>
+        </RouterLink>
 
         <!-- Navigation Menu -->
         <div class="hidden md:block">

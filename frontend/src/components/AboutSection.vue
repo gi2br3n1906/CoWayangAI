@@ -28,11 +28,11 @@
       </div>
 
       <!-- Tech Stack (Compact) -->
-      <div class="flex flex-wrap justify-center gap-3 mb-10">
+      <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10 px-4">
         <span 
           v-for="tech in techStack" 
           :key="tech"
-          class="px-3 py-1 bg-wayang-dark text-xs text-gray-400 rounded-full border border-wayang-card/50"
+          class="px-4 py-1.5 bg-wayang-dark text-xs sm:text-sm text-gray-300 rounded-full border border-wayang-card hover:border-wayang-primary/50 hover:text-wayang-gold transition-colors whitespace-nowrap"
         >
           {{ tech }}
         </span>

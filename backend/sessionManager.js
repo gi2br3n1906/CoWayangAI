@@ -281,6 +281,22 @@ class SessionManager {
     }
     
     /**
+     * Update socket ID for a session (when socket reconnects)
+     * @param {string} sessionId - Session ID
+     * @param {string} newSocketId - New socket ID
+     */
+    updateSocketId(sessionId, newSocketId) {
+        const session = this.sessions.get(sessionId);
+        if (session) {
+            const oldSocketId = session.socketId;
+            session.socketId = newSocketId;
+            console.log(`[SessionManager] 🔄 Updated socketId for ${sessionId}: ${oldSocketId} -> ${newSocketId}`);
+            return true;
+        }
+        return false;
+    }
+    
+    /**
      * Get session by socket ID
      * @param {string} socketId - Socket ID
      * @returns {object|null} Session info or null

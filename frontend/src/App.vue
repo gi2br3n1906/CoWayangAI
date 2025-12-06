@@ -17,7 +17,7 @@ import UserProfileModal from './components/UserProfileModal.vue'
 import HeroSection from './components/HeroSection.vue'
 import VideoGallery from './components/VideoGallery.vue'
 import VideoPlayer from './components/VideoPlayer.vue'
-import CharacterList from './components/CharacterList.vue'
+import DetectionPanel from './components/DetectionPanel.vue'
 import LiveTranscription from './components/LiveTranscription.vue'
 import KeyboardShortcutsModal from './components/KeyboardShortcutsModal.vue'
 import TutorialModal from './components/TutorialModal.vue'
@@ -92,6 +92,13 @@ const shouldAutoPlay = ref(false)
 // Data Hasil AI
 const characters = ref([])
 const currentVideoTime = ref(0)
+const aiConnected = ref(false)
+
+// AI Control Settings
+const showBoundingBox = ref(true)
+const showLabels = ref(true)
+const confidenceThreshold = ref(50)
+const videoInfo = ref(null)
 
 const isAchievementVisible = ref(false)
 const achievementMessage = ref('')
@@ -242,9 +249,10 @@ const handleLiveStream = async (payload) => {
   subtitlesQueue.value = [];
   displayedSubtitles.value = [];
   
-  // Send URL to local Python via Socket
-  socket.emit('start-live-stream', { videoUrl: videoUrl });
-  console.log("[App] Sent start-live-stream event to server");
+  // NOTE: Don't emit start-live-stream here!
+  // VideoPlayer.vue will handle session request when it mounts
+  // This prevents double session creation
+  console.log("[App] Live Stream mode set, VideoPlayer will request session");
   
   // Start ASR untuk Live Stream juga
   try {
@@ -434,15 +442,29 @@ const handlePlayerReady = () => {
   console.log("[App] Video player ready");
 }
 
-const handleCloseVideo = () => {
+const handleBoxesUpdate = (boxes) => {
+  characters.value = boxes;
+  console.log("[App] Boxes updated:", boxes.length, "objects detected");
+}
+
+const handleCloseVideo = async () => {
   // If live streaming, send stop signal
   if (liveStreamUrl.value === 'socket-relay') {
     socket.emit('stop-live-stream');
     console.log("[App] Sent stop-live-stream event");
   }
   
+  // Also explicitly stop ASR via API
+  try {
+    await axios.post('/api/stop-asr');
+    console.log("[App] ASR stopped via API");
+  } catch (error) {
+    console.log("[App] Failed to stop ASR:", error.message);
+  }
+  
   currentVideoId.value = null;
   liveStreamUrl.value = null;
+  liveVideoUrl.value = null;
   shouldAutoPlay.value = false;
   subtitlesQueue.value = [];
   displayedSubtitles.value = [];
@@ -471,6 +493,15 @@ const handleSelectSearchVideo = (video) => {
     stickySearchBarRef.value.setVideoUrl(`https://www.youtube.com/watch?v=${video.videoId}`)
   }
   searchResults.value = []
+}
+
+// Handle video selection from gallery - just set URL to input, don't auto-play
+const handleGalleryVideoSelect = (url) => {
+  if (stickySearchBarRef.value) {
+    stickySearchBarRef.value.setVideoUrl(url)
+  }
+  // Scroll to top so user can see the input
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 // --- SOCKET LISTENER ---
@@ -776,7 +807,7 @@ onUnmounted(() => {
           {{ searchError }}
         </div>
         
-        <VideoGallery @select-video="(url) => handleAnalyze({ url, startMinute: 0 })" />
+        <VideoGallery @select-video="handleGalleryVideoSelect" />
       
       </div>
 
@@ -792,10 +823,21 @@ onUnmounted(() => {
           Kembali ke Pencarian
         </button>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[85vh]">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[75vh] max-h-[700px]">
           
-          <div class="lg:col-span-3 h-full overflow-hidden" :class="{'hidden lg:block': activeMobileTab !== 'characters'}">
-            <CharacterList :characters="characters" />
+          <div class="lg:col-span-3 h-full overflow-hidden max-h-[700px]" :class="{'hidden lg:block': activeMobileTab !== 'characters'}">
+            <DetectionPanel 
+              :characters="characters"
+              :ai-connected="aiConnected"
+              :video-info="videoInfo"
+              :current-time="currentVideoTime"
+              :show-bounding-box="showBoundingBox"
+              :show-labels="showLabels"
+              :confidence-threshold="confidenceThreshold"
+              @toggle-bbox="showBoundingBox = $event"
+              @toggle-labels="showLabels = $event"
+              @update-confidence="confidenceThreshold = $event"
+            />
           </div>
 
           <div class="lg:col-span-6 flex flex-col h-full">
@@ -806,15 +848,21 @@ onUnmounted(() => {
               :live-video-url="liveVideoUrl"
               :start-time="currentStartTime"
               :auto-play="shouldAutoPlay"
+              :characters="characters"
+              :show-bounding-box="showBoundingBox"
+              :show-labels="showLabels"
+              :confidence-threshold="confidenceThreshold"
               @close="handleCloseVideo"
               @timeUpdate="currentVideoTime = $event"
               @seek="handleVideoSeek"
               @playerReady="handlePlayerReady"
+              @ai-connected="aiConnected = $event"
+              @boxes-update="handleBoxesUpdate"
             />
             
             <div class="flex lg:hidden mt-4 bg-white/5 rounded-xl p-1 border border-white/10 backdrop-blur">
               <button @click="activeMobileTab = 'characters'" class="flex-1 py-2 rounded-lg text-sm font-bold transition-all" :class="activeMobileTab === 'characters' ? 'bg-wayang-primary text-white' : 'text-gray-400'">
-                🎭 Tokoh
+                🤖 Panel AI
               </button>
               <button @click="activeMobileTab = 'subtitles'" class="flex-1 py-2 rounded-lg text-sm font-bold transition-all" :class="activeMobileTab === 'subtitles' ? 'bg-wayang-primary text-white' : 'text-gray-400'">
                 📜 Subtitle
@@ -822,7 +870,7 @@ onUnmounted(() => {
             </div>
           </div>
 
-          <div class="lg:col-span-3 h-full overflow-hidden" :class="{'hidden lg:block': activeMobileTab !== 'subtitles'}">
+          <div class="lg:col-span-3 h-full overflow-hidden max-h-[700px]" :class="{'hidden lg:block': activeMobileTab !== 'subtitles'}">
             <LiveTranscription :subtitles="syncedSubtitles" :currentTime="currentVideoTime" :queueCount="subtitlesQueue.length" />
           </div>
 

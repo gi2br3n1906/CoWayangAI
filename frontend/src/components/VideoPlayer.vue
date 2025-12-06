@@ -70,7 +70,21 @@
       </div>
 
       <!-- Normal YouTube Mode -->
-      <div v-else id="youtube-player" class="w-full h-full"></div>
+      <div v-else class="w-full h-full relative">
+        <div id="youtube-player" class="w-full h-full"></div>
+        
+        <!-- AI Bounding Box Overlay for Normal Mode -->
+        <canvas 
+          ref="normalOverlayCanvas" 
+          class="absolute inset-0 w-full h-full pointer-events-none z-10"
+        ></canvas>
+        
+        <!-- AI Status for Normal Mode -->
+        <div v-if="props.characters && props.characters.length > 0" class="absolute bottom-4 left-4 bg-green-600/90 text-white px-3 py-1 rounded-lg text-xs font-medium flex items-center gap-2 shadow-lg z-20">
+          <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+          AI Aktif · {{ props.characters.length }} objek
+        </div>
+      </div>
       
       <!-- Loading Overlay saat menunggu backend (Only for YouTube) -->
       <div 
@@ -146,13 +160,17 @@ const props = defineProps({
   streamUrl: { type: String, default: '' }, // Used as flag for Live Mode
   liveVideoUrl: { type: String, default: '' }, // YouTube URL for live mode
   startTime: { type: Number, default: 0 },
-  autoPlay: { type: Boolean, default: false } // Kontrol autoplay dari parent
+  autoPlay: { type: Boolean, default: false }, // Kontrol autoplay dari parent
+  characters: { type: Array, default: () => [] }, // Characters with bounding boxes for normal mode
+  showBoundingBox: { type: Boolean, default: true }, // Toggle bounding box visibility
+  showLabels: { type: Boolean, default: true }, // Toggle label visibility
+  confidenceThreshold: { type: Number, default: 50 } // Min confidence to show
 });
 
 const isLiveMode = computed(() => props.streamUrl === 'socket-relay');
 
 // Mendefinisikan event 'close' agar bisa didengar App.vue
-const emit = defineEmits(['close', 'timeUpdate', 'seek', 'playerReady']);
+const emit = defineEmits(['close', 'timeUpdate', 'seek', 'playerReady', 'ai-connected', 'boxes-update']);
 
 let player = null;
 let livePlayer = null;
@@ -160,15 +178,49 @@ let lastTime = 0;
 let timeUpdateInterval = null;
 const isWaitingForBackend = ref(true);
 
-// Canvas overlay for bounding boxes
+// Canvas overlay for bounding boxes (Live Mode)
 const overlayCanvas = ref(null);
 let canvasCtx = null;
+
+// Canvas overlay for normal mode
+const normalOverlayCanvas = ref(null);
+let normalCanvasCtx = null;
 
 // Socket for AI Detection
 const socket = ref(null);
 const aiConnected = ref(false);
 const detectedCount = ref(0);
 const currentBoxes = ref([]);
+
+// Emit aiConnected state to parent
+watch(aiConnected, (newVal) => {
+  emit('ai-connected', newVal);
+});
+
+// Redraw bounding boxes when control props change
+watch(() => props.showBoundingBox, () => {
+  if (isLiveMode.value) {
+    drawBoundingBoxes(currentBoxes.value);
+  } else {
+    drawNormalBoundingBoxes(props.characters);
+  }
+});
+
+watch(() => props.showLabels, () => {
+  if (isLiveMode.value) {
+    drawBoundingBoxes(currentBoxes.value);
+  } else {
+    drawNormalBoundingBoxes(props.characters);
+  }
+});
+
+watch(() => props.confidenceThreshold, () => {
+  if (isLiveMode.value) {
+    drawBoundingBoxes(currentBoxes.value);
+  } else {
+    drawNormalBoundingBoxes(props.characters);
+  }
+});
 
 // Session Management
 const sessionId = ref(null);
@@ -224,9 +276,17 @@ const drawBoundingBoxes = (boxes) => {
   // Clear canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   
+  // Skip if bounding box disabled
+  if (!props.showBoundingBox) return;
+  
   if (!boxes || boxes.length === 0) return;
   
-  boxes.forEach((box, index) => {
+  // Filter by confidence threshold
+  const filteredBoxes = boxes.filter(box => 
+    (box.confidence || 100) >= props.confidenceThreshold
+  );
+  
+  filteredBoxes.forEach((box, index) => {
     const color = COLORS[index % COLORS.length];
     
     // Convert percentage to pixels
@@ -240,17 +300,19 @@ const drawBoundingBoxes = (boxes) => {
     ctx.lineWidth = 3;
     ctx.strokeRect(x, y, w, h);
     
-    // Draw label background
-    const label = box.confidence ? `${box.name} ${box.confidence}%` : box.name;
-    ctx.font = 'bold 14px Arial';
-    const textWidth = ctx.measureText(label).width;
-    
-    ctx.fillStyle = color;
-    ctx.fillRect(x, y - 24, textWidth + 10, 24);
-    
-    // Draw label text
-    ctx.fillStyle = '#000';
-    ctx.fillText(label, x + 5, y - 7);
+    // Draw label if enabled
+    if (props.showLabels) {
+      const label = box.confidence ? `${box.name} ${box.confidence}%` : box.name;
+      ctx.font = 'bold 14px Arial';
+      const textWidth = ctx.measureText(label).width;
+      
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y - 24, textWidth + 10, 24);
+      
+      // Draw label text
+      ctx.fillStyle = '#000';
+      ctx.fillText(label, x + 5, y - 7);
+    }
   });
 };
 
@@ -266,6 +328,71 @@ const setupCanvas = () => {
   canvas.height = container.offsetHeight;
   
   canvasCtx = canvas.getContext('2d');
+};
+
+// Setup normal mode canvas dimensions
+const setupNormalCanvas = () => {
+  if (!normalOverlayCanvas.value) return;
+  
+  const canvas = normalOverlayCanvas.value;
+  const container = canvas.parentElement;
+  
+  // Match canvas size to container
+  canvas.width = container.offsetWidth;
+  canvas.height = container.offsetHeight;
+  
+  normalCanvasCtx = canvas.getContext('2d');
+};
+
+// Draw bounding boxes on normal mode canvas
+const drawNormalBoundingBoxes = (characters) => {
+  if (!normalOverlayCanvas.value || !normalCanvasCtx) return;
+  
+  const canvas = normalOverlayCanvas.value;
+  const ctx = normalCanvasCtx;
+  
+  // Clear canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Skip if bounding box disabled
+  if (!props.showBoundingBox) return;
+  
+  if (!characters || characters.length === 0) return;
+  
+  // Filter by confidence threshold
+  const filteredChars = characters.filter(char => 
+    char.box && (char.confidence || 100) >= props.confidenceThreshold
+  );
+  
+  filteredChars.forEach((char, index) => {
+    const box = char.box;
+    const color = COLORS[index % COLORS.length];
+    
+    // Convert percentage to pixels
+    const x = (box.left / 100) * canvas.width;
+    const y = (box.top / 100) * canvas.height;
+    const w = (box.width / 100) * canvas.width;
+    const h = (box.height / 100) * canvas.height;
+    
+    // Draw box
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 3;
+    ctx.strokeRect(x, y, w, h);
+    
+    // Draw label if enabled
+    if (props.showLabels) {
+      const label = char.confidence ? `${char.name} ${char.confidence}%` : char.name;
+      ctx.font = 'bold 14px Arial';
+      const textWidth = ctx.measureText(label).width;
+      
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y - 24, textWidth + 10, 24);
+      
+      // Draw label text
+      ctx.fillStyle = '#000';
+      ctx.fillText(label, x + 5, y - 7);
+    }
+  });
 };
 
 // Expose player methods ke parent
@@ -538,6 +665,9 @@ const initLivePlayer = async () => {
     currentBoxes.value = data.boxes || [];
     detectedCount.value = currentBoxes.value.length;
     drawBoundingBoxes(currentBoxes.value);
+    
+    // Emit boxes to parent for statistics panel
+    emit('boxes-update', currentBoxes.value);
   });
   
   socket.value.on('stream-started', (data) => {
@@ -700,9 +830,42 @@ const initPlayer = async () => {
 onMounted(async () => {
   await initPlayer();
   
+  // Setup normal mode canvas if not live mode
+  if (!isLiveMode.value) {
+    await nextTick();
+    setupNormalCanvas();
+    
+    // Handle resize (including mobile orientation change)
+    const handleNormalResize = () => {
+      setupNormalCanvas();
+      drawNormalBoundingBoxes(props.characters);
+    };
+    window.addEventListener('resize', handleNormalResize);
+    window.addEventListener('orientationchange', handleNormalResize);
+    
+    // Handle fullscreen change to redraw canvas
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+  }
+  
   // Handle tab close - end session
   window.addEventListener('beforeunload', handleBeforeUnload);
 });
+
+// Handle fullscreen change - resize canvas and redraw
+const handleFullscreenChange = async () => {
+  await nextTick();
+  // Wait a bit for fullscreen transition
+  setTimeout(() => {
+    if (isLiveMode.value) {
+      setupCanvas();
+      drawBoundingBoxes(currentBoxes.value);
+    } else {
+      setupNormalCanvas();
+      drawNormalBoundingBoxes(props.characters);
+    }
+  }, 100);
+};
 
 const handleBeforeUnload = () => {
   if (isLiveMode.value && sessionId.value) {
@@ -725,8 +888,22 @@ onUnmounted(() => {
     socket.value.disconnect();
   }
   window.removeEventListener('resize', setupCanvas);
+  window.removeEventListener('resize', setupNormalCanvas);
   window.removeEventListener('beforeunload', handleBeforeUnload);
+  document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
 });
+
+// Watch for characters prop changes (normal mode) and draw bounding boxes
+watch(() => props.characters, async (newCharacters) => {
+  if (isLiveMode.value) return;
+  
+  await nextTick();
+  if (!normalCanvasCtx) {
+    setupNormalCanvas();
+  }
+  drawNormalBoundingBoxes(newCharacters);
+}, { deep: true, immediate: true });
 
 const onPlayerReady = (event) => {
   lastTime = props.startTime;
