@@ -142,85 +142,99 @@
     </div>
 
     <!-- Mobile Menu Overlay & Sidebar -->
-    <div class="md:hidden">
-      <!-- Backdrop Overlay -->
-      <div 
-        v-if="isMenuOpen" 
-        @click="closeMenu"
-        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300"
-      ></div>
+    <Teleport to="body">
+      <Transition name="fade">
+        <div 
+          v-if="isMenuOpen" 
+          @click="closeMenu"
+          class="md:hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-[100]"
+        ></div>
+      </Transition>
 
-      <!-- Sliding Sidebar -->
-      <div 
-        class="fixed top-0 right-0 h-full w-64 bg-[#0f172a] border-l border-gray-800 z-50 transform transition-transform duration-300 ease-in-out shadow-2xl pt-20"
-        :class="isMenuOpen ? 'translate-x-0' : 'translate-x-full'"
-      >
-        <div class="flex flex-col px-6 space-y-6 h-full">
-          <a 
-            href="#about" 
-            @click="closeMenu"
-            class="text-gray-400 hover:text-white text-lg font-medium transition-colors duration-200 border-b border-wayang-card/50 pb-2"
-          >
-            About
-          </a>
-          <RouterLink 
-            to="/almanac"
-            @click="closeMenu"
-            class="text-gray-300 hover:text-white text-lg font-medium transition-colors duration-200 border-b border-wayang-card/50 pb-2"
-          >
-            Almanak Wayang
-          </RouterLink>
-          
-          <!-- Mobile Login/User -->
-          <div v-if="!isAuthenticated" class="pt-4 space-y-3">
-            <button
-              @click="openRegisterModal"
-              class="w-full px-6 py-3 text-wayang-gold font-medium rounded-lg border border-wayang-gold/50 hover:bg-wayang-gold/10 transition-all duration-200"
+      <Transition name="slide">
+        <div 
+          v-if="isMenuOpen"
+          class="md:hidden fixed top-0 right-0 h-full w-64 bg-wayang-dark border-l border-gray-700 z-[101] shadow-2xl"
+        >
+          <!-- Close button inside sidebar -->
+          <div class="flex justify-end p-4">
+            <button 
+              @click="closeMenu"
+              class="text-gray-400 hover:text-white p-2"
             >
-              Daftar
-            </button>
-            <button
-              @click="openLoginModal"
-              class="w-full px-6 py-3 bg-wayang-primary text-white font-medium rounded-lg hover:bg-wayang-primary/90 transition-all duration-200 shadow-lg shadow-wayang-primary/20"
-            >
-              Login
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
           </div>
-          <div v-else class="pt-4 space-y-4">
-            <div 
-              @click="openProfileModal"
-              class="flex items-center gap-3 p-3 bg-wayang-card/50 rounded-lg cursor-pointer hover:bg-wayang-card/70 transition-colors"
+
+          <div class="flex flex-col px-6 space-y-6">
+            <a 
+              href="#about" 
+              @click="closeMenu"
+              class="text-gray-400 hover:text-white text-lg font-medium transition-colors duration-200 border-b border-wayang-card/50 pb-2"
             >
-              <div v-if="user?.photoURL" class="w-10 h-10 rounded-full overflow-hidden border border-wayang-gold/50">
-                <img :src="user?.photoURL" :alt="user?.displayName || user?.email" class="w-full h-full object-cover" />
-              </div>
-              <div v-else class="w-10 h-10 rounded-full bg-wayang-primary flex items-center justify-center border border-wayang-gold/50">
-                <span class="text-lg font-semibold text-white">{{ (user?.displayName || user?.email)?.[0]?.toUpperCase() }}</span>
-              </div>
-              <div class="flex flex-col overflow-hidden">
-                <span class="text-sm font-medium text-white truncate">{{ user?.displayName }}</span>
-                <span class="text-xs text-gray-400 truncate">{{ user?.email }}</span>
-              </div>
+              About
+            </a>
+            <RouterLink 
+              to="/almanac"
+              @click="closeMenu"
+              class="text-gray-300 hover:text-white text-lg font-medium transition-colors duration-200 border-b border-wayang-card/50 pb-2"
+            >
+              Almanak Wayang
+            </RouterLink>
+            
+            <!-- Mobile Login/User -->
+            <div v-if="!isAuthenticated" class="pt-4 space-y-3">
+              <button
+                @click="openRegisterModal"
+                class="w-full px-6 py-3 text-wayang-gold font-medium rounded-lg border border-wayang-gold/50 hover:bg-wayang-gold/10 transition-all duration-200"
+              >
+                Daftar
+              </button>
+              <button
+                @click="openLoginModal"
+                class="w-full px-6 py-3 bg-wayang-primary text-white font-medium rounded-lg hover:bg-wayang-primary/90 transition-all duration-200 shadow-lg shadow-wayang-primary/20"
+              >
+                Login
+              </button>
             </div>
-            <button
-              @click="openProfileModal"
-              class="w-full px-6 py-3 bg-wayang-card text-gray-300 font-medium rounded-lg hover:bg-wayang-card/70 hover:text-white transition-all duration-200 border border-wayang-card flex items-center justify-center gap-2"
-            >
-              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-              Profil Saya
-            </button>
-            <button
-              @click="handleLogout"
-              class="w-full px-6 py-3 text-red-400 font-medium rounded-lg hover:bg-red-500/10 transition-all duration-200 border border-red-500/30"
-            >
-              Logout
-            </button>
+            <div v-else class="pt-4 space-y-4">
+              <div 
+                @click="openProfileModal"
+                class="flex items-center gap-3 p-3 bg-wayang-card/50 rounded-lg cursor-pointer hover:bg-wayang-card/70 transition-colors"
+              >
+                <div v-if="user?.photoURL" class="w-10 h-10 rounded-full overflow-hidden border border-wayang-gold/50">
+                  <img :src="user?.photoURL" :alt="user?.displayName || user?.email" class="w-full h-full object-cover" />
+                </div>
+                <div v-else class="w-10 h-10 rounded-full bg-wayang-primary flex items-center justify-center border border-wayang-gold/50">
+                  <span class="text-lg font-semibold text-white">{{ (user?.displayName || user?.email)?.[0]?.toUpperCase() }}</span>
+                </div>
+                <div class="flex flex-col overflow-hidden">
+                  <span class="text-sm font-medium text-white truncate">{{ user?.displayName }}</span>
+                  <span class="text-xs text-gray-400 truncate">{{ user?.email }}</span>
+                </div>
+              </div>
+              <button
+                @click="openProfileModal"
+                class="w-full px-6 py-3 bg-wayang-card text-gray-300 font-medium rounded-lg hover:bg-wayang-card/70 hover:text-white transition-all duration-200 border border-wayang-card flex items-center justify-center gap-2"
+              >
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                Profil Saya
+              </button>
+              <button
+                @click="handleLogout"
+                class="w-full px-6 py-3 text-red-400 font-medium rounded-lg hover:bg-red-500/10 transition-all duration-200 border border-red-500/30"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </Transition>
+    </Teleport>
   </nav>
 </template>
 
@@ -287,3 +301,27 @@ onUnmounted(() => {
   document.removeEventListener('click', handleClickOutside)
 })
 </script>
+
+<style scoped>
+/* Fade transition for backdrop */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Slide transition for sidebar */
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.3s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateX(100%);
+}
+</style>

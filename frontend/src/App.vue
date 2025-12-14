@@ -98,6 +98,7 @@ const aiConnected = ref(false)
 const showBoundingBox = ref(true)
 const showLabels = ref(true)
 const confidenceThreshold = ref(50)
+const targetLanguage = ref('id') // 'id' for Indonesia, 'en' for English
 const videoInfo = ref(null)
 
 const isAchievementVisible = ref(false)
@@ -445,6 +446,20 @@ const handlePlayerReady = () => {
 const handleBoxesUpdate = (boxes) => {
   characters.value = boxes;
   console.log("[App] Boxes updated:", boxes.length, "objects detected");
+}
+
+const handleChangeLanguage = async (lang) => {
+  targetLanguage.value = lang;
+  console.log("[App] Changing target language to:", lang);
+  
+  try {
+    const response = await axios.post('/api/change-language', {
+      targetLanguage: lang
+    });
+    console.log("[App] Language change response:", response.data);
+  } catch (error) {
+    console.error("[App] Failed to change language:", error.message);
+  }
 }
 
 const handleCloseVideo = async () => {
@@ -834,9 +849,11 @@ onUnmounted(() => {
               :show-bounding-box="showBoundingBox"
               :show-labels="showLabels"
               :confidence-threshold="confidenceThreshold"
+              :target-language="targetLanguage"
               @toggle-bbox="showBoundingBox = $event"
               @toggle-labels="showLabels = $event"
               @update-confidence="confidenceThreshold = $event"
+              @change-language="handleChangeLanguage"
             />
           </div>
 

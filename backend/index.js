@@ -71,13 +71,15 @@ io.on('connection', (socket) => {
     // ==========================================================================
     
     // Frontend request to start live stream with session management
-    socket.on('start-live-stream', (data) => {
-        const { videoUrl, existingSessionId } = data;
+    socket.on('start-live-stream', async (data) => {
+        const { videoUrl, existingSessionId, currentTime } = data;
         console.log(`[Socket] 🎬 Frontend request live stream:`, data);
         console.log(`[Socket]    Socket ID: ${socket.id}`);
+        console.log(`[Socket]    Current player time: ${currentTime || 0}s`);
         
-        // Track video URL for ASR seek functionality
+        // Track video URL and start time for ASR seek functionality
         currentVideoUrl = videoUrl;
+        currentStartTime = currentTime || 0;  // Use frontend's current time
         
         // Request session from manager
         const result = sessionManager.requestSession(socket.id, videoUrl, existingSessionId);
@@ -121,17 +123,33 @@ io.on('connection', (socket) => {
             io.to(workerInfo.pythonSocketId).emit('start-processing', {
                 sessionId,
                 workerId,
-                videoUrl
+                videoUrl,
+                startTime: currentTime || 0  // Pass current player time to Python
             });
-            console.log(`[Socket] 📤 Sent start-processing to ${workerId}`);
+            console.log(`[Socket] 📤 Sent start-processing to ${workerId} at time ${currentTime || 0}s`);
         } else {
             // No Python worker connected for this worker ID - broadcast to all Python workers
             console.log(`[Socket] ⚠️ No specific Python socket for ${workerId}, broadcasting to all`);
             socket.broadcast.emit('start-processing', {
                 sessionId,
                 workerId,
-                videoUrl
+                videoUrl,
+                startTime: currentTime || 0
             });
+        }
+        
+        // AUTO-START ASR with current player time (sync with frontend)
+        const startTimeForASR = currentTime || 0;
+        console.log(`[Socket] 🎙️ Auto-starting ASR at ${startTimeForASR}s`);
+        try {
+            await axios.post(`${ASR_SERVER_URL}/start-asr`, {
+                videoUrl: videoUrl,
+                startTime: parseInt(startTimeForASR),
+                targetLanguage: currentTargetLanguage || 'id'
+            }, { timeout: 5000 });
+            console.log(`[Socket] ✅ ASR started at ${startTimeForASR}s`);
+        } catch (error) {
+            console.log(`[Socket] ⚠️ ASR auto-start failed: ${error.message}`);
         }
     });
     
@@ -478,6 +496,7 @@ startASRServer();
 // --- ASR PROCESS MANAGEMENT ---
 let currentVideoUrl = null;
 let currentStartTime = '0';
+let currentTargetLanguage = 'id'; // 'id' for Indonesia, 'en' for English
 
 const stopASR = async () => {
     if (currentVideoUrl) {
@@ -495,19 +514,21 @@ const stopASR = async () => {
     }
 };
 
-const startASR = async (videoUrl, startTime) => {
+const startASR = async (videoUrl, startTime, targetLanguage = 'id') => {
     // Always stop existing ASR first
     await stopASR();
     
-    console.log(`[Node] 🎙️ Starting ASR for: ${videoUrl} at ${startTime}`);
+    console.log(`[Node] 🎙️ Starting ASR for: ${videoUrl} at ${startTime} (lang: ${targetLanguage})`);
     try {
         const response = await axios.post(`${ASR_SERVER_URL}/start-asr`, {
             videoUrl: videoUrl,
-            startTime: parseInt(startTime)
+            startTime: parseInt(startTime),
+            targetLanguage: targetLanguage
         });
         console.log("[Node] ASR Server Response:", response.data);
         currentVideoUrl = videoUrl;
         currentStartTime = startTime;
+        currentTargetLanguage = targetLanguage;
     } catch (error) {
         console.error("[Node] Error starting ASR:", error.message);
     }
@@ -518,7 +539,7 @@ app.post('/api/analyze', async (req, res) => {
     console.log("\n========================================");
     console.log("[Node] 1. Menerima Request dari Frontend...");
     
-    const { videoUrl, startMinute } = req.body;
+    const { videoUrl, startMinute, targetLanguage } = req.body;
     
     // Validasi input
     if (!videoUrl) {
@@ -528,13 +549,16 @@ app.post('/api/analyze', async (req, res) => {
 
     // Konversi menit ke detik
     const startTimeInSeconds = (parseInt(startMinute) || 0) * 60;
+    const lang = targetLanguage || 'id';
 
     console.log(`[Node]    URL: ${videoUrl}`);
     console.log(`[Node]    Start: ${startMinute} menit (${startTimeInSeconds} detik)`);
+    console.log(`[Node]    Target Language: ${lang}`);
     
     // Track current video for seek functionality
     currentVideoUrl = videoUrl;
     currentStartTime = startTimeInSeconds.toString();
+    currentTargetLanguage = lang;
 
     // Try Python AI (optional - won't block ASR if fails)
     let pythonSuccess = false;
@@ -555,7 +579,7 @@ app.post('/api/analyze', async (req, res) => {
     // AUTO START ASR (always try, regardless of Python status)
     try {
         console.log("[Node] 4. Starting ASR...");
-        await startASR(videoUrl, startTimeInSeconds.toString());
+        await startASR(videoUrl, startTimeInSeconds.toString(), currentTargetLanguage);
         
         const message = pythonSuccess 
             ? 'AI dan ASR dimulai' 
@@ -575,7 +599,7 @@ app.post('/api/start-asr', async (req, res) => {
     console.log("\n========================================");
     console.log("[Node] 1. Menerima Request ASR dari Frontend...");
     
-    const { videoUrl, startTime } = req.body;
+    const { videoUrl, startTime, targetLanguage } = req.body;
     
     // Validasi input
     if (!videoUrl) {
@@ -583,9 +607,11 @@ app.post('/api/start-asr', async (req, res) => {
         return res.status(400).json({ status: 'error', message: 'URL Kosong' });
     }
 
+    const lang = targetLanguage || currentTargetLanguage || 'id';
+
     try {
-        startASR(videoUrl, startTime || '0');
-        res.json({ status: 'success', message: 'ASR transcription started' });
+        startASR(videoUrl, startTime || '0', lang);
+        res.json({ status: 'success', message: 'ASR transcription started', targetLanguage: lang });
     } catch (error) {
         console.error("[Node] ❌ Error starting ASR:", error);
         res.status(500).json({ status: 'error', message: 'Gagal menjalankan ASR' });
@@ -598,18 +624,52 @@ app.post('/api/update-asr-time', async (req, res) => {
     console.log("\n========================================");
     console.log("[Node] 1. Update ASR Start Time...");
     
-    const { startTime } = req.body;
+    const { startTime, targetLanguage } = req.body;
     
     if (!currentVideoUrl) {
         return res.status(400).json({ status: 'error', message: 'Tidak ada video aktif' });
     }
 
+    // Update language if provided
+    if (targetLanguage) {
+        currentTargetLanguage = targetLanguage;
+    }
+
     try {
-        startASR(currentVideoUrl, startTime || '0');
-        res.json({ status: 'success', message: 'ASR time updated' });
+        startASR(currentVideoUrl, startTime || '0', currentTargetLanguage);
+        res.json({ status: 'success', message: 'ASR time updated', targetLanguage: currentTargetLanguage });
     } catch (error) {
         console.error("[Node] ❌ Error updating ASR time:", error);
         res.status(500).json({ status: 'error', message: 'Gagal update ASR time' });
+    }
+    console.log("========================================\n");
+});
+
+// --- ENDPOINT 3.5: Change ASR Target Language ---
+app.post('/api/change-language', async (req, res) => {
+    console.log("\n========================================");
+    console.log("[Node] Changing ASR Target Language...");
+    
+    const { targetLanguage } = req.body;
+    
+    if (!targetLanguage || !['id', 'en'].includes(targetLanguage)) {
+        return res.status(400).json({ status: 'error', message: 'Invalid language. Use "id" or "en"' });
+    }
+    
+    currentTargetLanguage = targetLanguage;
+    console.log(`[Node] 🌐 Target language changed to: ${targetLanguage}`);
+    
+    // If ASR is running, restart with new language
+    if (currentVideoUrl) {
+        try {
+            await startASR(currentVideoUrl, currentStartTime, currentTargetLanguage);
+            res.json({ status: 'success', message: `Language changed to ${targetLanguage}, ASR restarted`, targetLanguage });
+        } catch (error) {
+            console.error("[Node] ❌ Error restarting ASR:", error);
+            res.status(500).json({ status: 'error', message: 'Language changed but failed to restart ASR' });
+        }
+    } else {
+        res.json({ status: 'success', message: `Language changed to ${targetLanguage}`, targetLanguage });
     }
     console.log("========================================\n");
 });
@@ -671,7 +731,7 @@ app.post('/api/seek-analysis', async (req, res) => {
         const timeStr = hours > 0 ? 
             `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}` :
             `${minutes}:${seconds.toString().padStart(2, '0')}`;
-        await startASR(currentVideoUrl, timeStr);
+        await startASR(currentVideoUrl, timeStr, currentTargetLanguage);
         
         res.json({ status: 'success', message: 'AI seek successful', startTime: startTime });
     } catch (error) {

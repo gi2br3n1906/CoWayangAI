@@ -1,0 +1,59 @@
+2025-12-08 03:28:18 +00:00: [Node] Error starting Python Backend: Error: spawn python ENOENT
+2025-12-08 03:28:18 +00:00: [Node] Error starting ASR Server: Error: spawn python ENOENT
+2025-12-08 03:41:10 +00:00: [Node] Error starting Python Backend: Error: spawn python ENOENT
+2025-12-08 03:41:10 +00:00: [Node] Error starting ASR Server: Error: spawn python ENOENT
+2025-12-08 03:42:35 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-08 13:37:09 +00:00: [Node] ❌ Error: YOUTUBE_API_KEY tidak dikonfigurasi!
+2025-12-08 13:39:29 +00:00: [Node] ❌ Error: YOUTUBE_API_KEY tidak dikonfigurasi!
+2025-12-08 13:39:54 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-08 13:40:49 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-08 13:40:59 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-08 13:42:38 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-08 13:43:43 +00:00: [Node] Error stopping ASR: Request failed with status code 404
+2025-12-08 13:43:51 +00:00: [Node] ❌ Error: YOUTUBE_API_KEY tidak dikonfigurasi!
+2025-12-08 13:44:13 +00:00: [Node] Error starting Python Backend: Error: spawn python ENOENT
+2025-12-08 13:44:13 +00:00: [Node] Error starting ASR Server: Error: spawn python ENOENT
+2025-12-09 11:40:36 +00:00: [Node] ❌ Error: YOUTUBE_API_KEY tidak dikonfigurasi!
+2025-12-09 11:40:51 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-09 11:40:59 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-09 11:41:01 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-09 11:41:03 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-09 11:41:21 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-09 11:41:42 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-09 11:42:18 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-09 11:42:22 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-09 11:42:34 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-09 11:42:37 +00:00: [Node] Error stopping ASR: Request failed with status code 404
+2025-12-09 11:42:37 +00:00: [Node] Error stopping ASR: Request failed with status code 404
+2025-12-09 11:42:46 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-09 11:42:58 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-09 11:43:06 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-09 11:43:39 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-09 11:43:43 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-10 06:54:17 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-10 14:05:49 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-11 06:41:33 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-11 06:41:55 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-11 06:41:59 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-11 06:47:54 +00:00: [Node] Error starting Python Backend: Error: spawn python ENOENT
+2025-12-11 06:47:54 +00:00: [Node] Error starting ASR Server: Error: spawn python ENOENT
+2025-12-11 06:48:47 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-11 06:52:13 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-11 06:52:15 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-11 06:52:21 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-11 06:52:24 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-11 06:52:30 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-11 10:54:54 +00:00: [Node] ❌ Error: YOUTUBE_API_KEY tidak dikonfigurasi!
+2025-12-12 09:50:44 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-12 09:50:52 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-12 09:50:55 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-12 09:51:05 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-12 09:51:08 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-12 09:51:10 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-12 09:52:18 +00:00: [Node] Error stopping ASR: Request failed with status code 404
+2025-12-12 09:52:18 +00:00: [Node] Error stopping ASR: Request failed with status code 404
+2025-12-12 09:53:06 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-12 09:53:29 +00:00: [Node] Error stopping ASR: Request failed with status code 500
+2025-12-12 09:53:29 +00:00: [Node] Error starting ASR: socket hang up
+2025-12-12 11:41:07 +00:00: [Node] Error starting Python Backend: Error: spawn python ENOENT
+2025-12-12 11:41:07 +00:00: [Node] Error starting ASR Server: Error: spawn python ENOENT

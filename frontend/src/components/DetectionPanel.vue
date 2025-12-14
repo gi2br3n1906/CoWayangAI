@@ -141,6 +141,29 @@
               class="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer slider"
             />
           </div>
+          
+          <!-- Language Selector -->
+          <div class="space-y-1 pt-2 border-t border-white/10">
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-white/70">Bahasa Terjemahan</span>
+            </div>
+            <div class="flex gap-2">
+              <button 
+                @click="$emit('change-language', 'id')"
+                class="flex-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center justify-center gap-1"
+                :class="targetLanguage === 'id' ? 'bg-[#F0D290] text-wayang-dark' : 'bg-white/10 text-white/70 hover:bg-white/20'"
+              >
+                🇮🇩 Indonesia
+              </button>
+              <button 
+                @click="$emit('change-language', 'en')"
+                class="flex-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center justify-center gap-1"
+                :class="targetLanguage === 'en' ? 'bg-[#F0D290] text-wayang-dark' : 'bg-white/10 text-white/70 hover:bg-white/20'"
+              >
+                🇬🇧 English
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -179,10 +202,14 @@ const props = defineProps({
   confidenceThreshold: {
     type: Number,
     default: 50
+  },
+  targetLanguage: {
+    type: String,
+    default: 'id'
   }
 });
 
-defineEmits(['toggle-bbox', 'toggle-labels', 'update-confidence']);
+defineEmits(['toggle-bbox', 'toggle-labels', 'update-confidence', 'change-language']);
 
 // Warna untuk setiap karakter
 const characterColors = {

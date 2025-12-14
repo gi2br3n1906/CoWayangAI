@@ -76,10 +76,10 @@ const techStack = [
   'Vue.js',
   'Firebase',
   'Python',
-  'PyTorch',
-  'Wav2Vec2',
-  'YOLOv8',
+  'Gemini API',
+  'YOLOv12',
   'Socket.IO',
-  'YouTube API'
+  'YouTube API',
+  'Node.js'
 ]
 </script>

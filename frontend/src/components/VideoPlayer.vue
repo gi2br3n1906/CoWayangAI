@@ -545,11 +545,15 @@ const requestSession = (existingSessionId = null) => {
   isRequestingSession.value = true;
   sessionError.value = null;
   
-  console.log('[VideoPlayer] Requesting session for:', props.liveVideoUrl);
+  // Get current player time for sync
+  const currentPlayerTime = getCurrentTime() || 0;
+  
+  console.log('[VideoPlayer] Requesting session for:', props.liveVideoUrl, 'at time:', currentPlayerTime);
   
   socket.value.emit('start-live-stream', {
     videoUrl: props.liveVideoUrl,
-    existingSessionId: existingSessionId
+    existingSessionId: existingSessionId,
+    currentTime: Math.floor(currentPlayerTime)  // Send current player position
   });
 };
 

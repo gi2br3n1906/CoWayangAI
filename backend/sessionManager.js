@@ -2,13 +2,13 @@
  * Session Manager for Multi-User Worker Pool
  * 
  * Features:
- * - Worker pool management (5 workers max)
+ * - Worker pool management (20 workers max)
  * - Session tracking with reconnect support (5 min window)
  * - Round-robin worker assignment
  * - Auto-cleanup on disconnect
  */
 
-const MAX_WORKERS = 5;
+const MAX_WORKERS = 20;
 const RECONNECT_WINDOW_MS = 5 * 60 * 1000; // 5 minutes
 
 class SessionManager {
