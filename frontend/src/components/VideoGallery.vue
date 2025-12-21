@@ -52,14 +52,14 @@
           </h3>
           
           <div class="flex items-center justify-between mt-auto pt-2 border-t border-white/5">
-            <p class="text-gray-500 text-xs flex items-center gap-1.5">
-              <div class="w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center">
+            <span class="text-gray-500 text-xs flex items-center gap-1.5">
+              <span class="w-5 h-5 rounded-full bg-slate-700 flex items-center justify-center">
                 <svg class="w-3 h-3 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
-              </div>
+              </span>
               {{ video.dalang }}
-            </p>
+            </span>
           </div>
         </div>
       </div>
