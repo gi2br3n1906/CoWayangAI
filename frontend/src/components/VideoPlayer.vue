@@ -3,6 +3,55 @@
     
     <div class="aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10 relative group">
       
+      <!-- Maintenance Overlay (Priority Tertinggi) -->
+      <div 
+        v-if="props.isMaintenance" 
+        class="absolute inset-0 z-[60] bg-black/85 backdrop-blur-md flex flex-col items-center justify-center p-6"
+      >
+        <div class="text-center max-w-md">
+          <!-- Server Sleep Icon -->
+          <div class="relative w-24 h-24 mx-auto mb-6">
+            <div class="absolute inset-0 bg-indigo-500/20 rounded-full animate-pulse"></div>
+            <div class="absolute inset-2 bg-slate-800 rounded-full flex items-center justify-center border-2 border-indigo-500/50">
+              <svg class="w-12 h-12 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+              </svg>
+            </div>
+            <!-- Zzz Animation -->
+            <div class="absolute -top-1 -right-1 text-xl animate-bounce delay-100">💤</div>
+          </div>
+          
+          <h3 class="text-2xl md:text-3xl font-bold text-white mb-3">
+            AI Sedang Istirahat 😴
+          </h3>
+          
+          <p class="text-gray-400 text-sm md:text-base mb-6 leading-relaxed">
+            Kami sedang melakukan <span class="text-indigo-400 font-medium">migrasi server</span> untuk performa yang lebih baik. 
+            Analisis video real-time & transkripsi dinonaktifkan sementara.
+          </p>
+          
+          <!-- Estimated Time (Optional) -->
+          <div class="bg-white/5 border border-white/10 rounded-lg px-4 py-2 mb-6 inline-flex items-center gap-2">
+            <svg class="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-gray-300 text-sm">Estimasi: <span class="text-white font-medium">1-2 bulan</span></span>
+          </div>
+          
+          <!-- CTA Button -->
+          <router-link 
+            to="/almanac" 
+            class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-indigo-500/30 hover:-translate-y-0.5"
+          >
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            Jelajahi Almanak Wayang
+          </router-link>
+        </div>
+      </div>
+
+
       <!-- Live Stream Mode (YouTube + AI Overlay) -->
       <div v-if="isLiveMode" class="w-full h-full relative">
         <!-- Session Error Overlay -->
@@ -164,7 +213,8 @@ const props = defineProps({
   characters: { type: Array, default: () => [] }, // Characters with bounding boxes for normal mode
   showBoundingBox: { type: Boolean, default: true }, // Toggle bounding box visibility
   showLabels: { type: Boolean, default: true }, // Toggle label visibility
-  confidenceThreshold: { type: Number, default: 50 } // Min confidence to show
+  confidenceThreshold: { type: Number, default: 50 }, // Min confidence to show
+  isMaintenance: { type: Boolean, default: false } // AI Maintenance mode
 });
 
 const isLiveMode = computed(() => props.streamUrl === 'socket-relay');

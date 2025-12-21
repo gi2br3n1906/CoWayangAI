@@ -7,6 +7,11 @@ import { useAuthStore } from '@/stores/auth'
 import { unlockCharacter } from '@/services/firebase'
 import AlmanacView from '@/views/AlmanacView.vue'
 
+// --- AI MAINTENANCE MODE ---
+// Toggle ini untuk mengaktifkan mode pemeliharaan AI
+// Bisa di-set via environment variable atau hardcode di sini
+const isAIMaintenance = ref(import.meta.env.VITE_AI_MAINTENANCE === 'true' || true) // Set ke false untuk mematikan
+
 // --- COMPONENTS ---
 import Navbar from './components/Navbar.vue'
 import StickySearchBar from './components/StickySearchBar.vue'
@@ -763,9 +768,28 @@ onUnmounted(() => {
 <template>
   <div class="min-h-screen text-[#FCEFE4] font-sans selection:bg-wayang-gold selection:text-wayang-dark">
     
+    <!-- AI Maintenance Banner -->
+    <div 
+      v-if="isAIMaintenance" 
+      class="fixed top-0 left-0 right-0 z-[100] bg-gradient-to-r from-amber-500/95 via-amber-400/95 to-amber-500/95 backdrop-blur-sm border-b border-amber-600/50 shadow-lg"
+    >
+      <div class="container mx-auto px-4 py-3 flex items-center justify-center gap-3">
+        <div class="flex-shrink-0 w-6 h-6 bg-amber-700/30 rounded-full flex items-center justify-center">
+          <svg class="w-4 h-4 text-amber-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        </div>
+        <p class="text-amber-900 text-sm font-medium text-center">
+          <span class="font-bold">Sistem AI & Transkripsi</span> sedang dalam pemeliharaan server. 
+          <span class="hidden sm:inline">Fitur <router-link to="/almanac" class="underline font-bold hover:text-amber-700">Almanak Wayang</router-link> tetap dapat diakses.</span>
+          <span class="sm:hidden"><router-link to="/almanac" class="underline font-bold">Almanak</router-link> tetap aktif.</span>
+        </p>
+      </div>
+    </div>
+    
     <Navbar @open-login="openLoginModal" @open-register="openRegisterModal" @open-profile="openProfileModal" @open-shortcuts="openShortcutsModal" />
 
-    <main v-if="!isAlmanacRoute" class="container mx-auto px-4 pb-20 pt-24">
+    <main v-if="!isAlmanacRoute" class="container mx-auto px-4 pb-20" :class="isAIMaintenance ? 'pt-36' : 'pt-24'">
       
       <div v-if="!currentVideoId" class="flex flex-col items-center animate-fade-in space-y-6">
         
@@ -869,6 +893,7 @@ onUnmounted(() => {
               :show-bounding-box="showBoundingBox"
               :show-labels="showLabels"
               :confidence-threshold="confidenceThreshold"
+              :is-maintenance="isAIMaintenance"
               @close="handleCloseVideo"
               @timeUpdate="currentVideoTime = $event"
               @seek="handleVideoSeek"
