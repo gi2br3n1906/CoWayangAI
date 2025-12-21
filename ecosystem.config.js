@@ -2,8 +2,8 @@ module.exports = {
     apps: [
         {
             name: 'nodejs-api',
-            script: './backend/index.js',
-            cwd: '/var/www/CoWayangAI',
+            script: './index.js',
+            cwd: '/var/www/CoWayangAI/backend',
             instances: 1,
             autorestart: true,
             watch: false,
@@ -11,8 +11,8 @@ module.exports = {
             env: {
                 NODE_ENV: 'production'
             },
-            error_file: './logs/nodejs-api-error.log',
-            out_file: './logs/nodejs-api-out.log',
+            error_file: '/var/www/CoWayangAI/logs/nodejs-api-error.log',
+            out_file: '/var/www/CoWayangAI/logs/nodejs-api-out.log',
             log_date_format: 'YYYY-MM-DD HH:mm:ss Z'
         },
         {

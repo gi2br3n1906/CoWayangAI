@@ -2873,3 +2873,1220 @@
 2025-12-04 14:44:04 +00:00: 
 2025-12-04 14:44:04 +00:00: 🛑 Shutting down, stopping all sessions...
 2025-12-04 14:44:04 +00:00: ✅ All sessions stopped
+2025-12-18 06:32:47 +00:00: ⚠️ WebRTC VAD not available, trying Silero...
+2025-12-18 06:32:50 +00:00: Using cache found in /root/.cache/torch/hub/snakers4_silero-vad_master
+2025-12-18 06:32:50 +00:00: ⚠️ Silero VAD failed: type object 'RecursiveScriptModule' has no attribute '_construct'. Using energy-based VAD.
+2025-12-18 06:32:50 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:368: DeprecationWarning: 
+2025-12-18 06:32:50 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-18 06:32:50 +00:00: 
+2025-12-18 06:32:50 +00:00:         Read more about it in the
+2025-12-18 06:32:50 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-18 06:32:50 +00:00:         
+2025-12-18 06:32:50 +00:00:   @app.on_event("startup")
+2025-12-18 06:32:50 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:382: DeprecationWarning: 
+2025-12-18 06:32:50 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-18 06:32:50 +00:00: 
+2025-12-18 06:32:50 +00:00:         Read more about it in the
+2025-12-18 06:32:50 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-18 06:32:50 +00:00:         
+2025-12-18 06:32:50 +00:00:   @app.on_event("shutdown")
+2025-12-18 06:32:50 +00:00: INFO:     Started server process [541631]
+2025-12-18 06:32:50 +00:00: INFO:     Waiting for application startup.
+2025-12-18 06:32:50 +00:00: ✅ API Pool: Loaded 3 API key(s)
+2025-12-18 06:32:50 +00:00: ✅ API Pool: Loaded 4 model(s): ['gemini-2.0-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash-lite', 'gemini-3.0-flash']
+2025-12-18 06:32:50 +00:00: 
+2025-12-18 06:32:50 +00:00: ============================================================
+2025-12-18 06:32:50 +00:00: 🎬 CoWayangAI ASR Service Starting...
+2025-12-18 06:32:50 +00:00: ============================================================
+2025-12-18 06:32:50 +00:00:    API Keys loaded: 3
+2025-12-18 06:32:50 +00:00:    Cooldown time: 60s
+2025-12-18 06:32:50 +00:00: ============================================================
+2025-12-18 06:32:50 +00:00: 
+2025-12-18 06:32:50 +00:00: INFO:     Application startup complete.
+2025-12-18 06:32:50 +00:00: INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2025-12-18 06:41:09 +00:00: INFO:     127.0.0.1:51750 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-18 06:41:20 +00:00: 🌐 Target language: Indonesia
+2025-12-18 06:41:20 +00:00: 
+2025-12-18 06:41:20 +00:00: ============================================================
+2025-12-18 06:41:20 +00:00: 🎬 ASR SESSION STARTED
+2025-12-18 06:41:20 +00:00: ============================================================
+2025-12-18 06:41:20 +00:00: 📹 Video: https://www.youtube.com/watch?v=eV6jQPwK3qE
+2025-12-18 06:41:20 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-18 06:41:20 +00:00: 🤖 Model: gemini-3.0-flash
+2025-12-18 06:41:20 +00:00: 🔑 API Pool: 3 keys available
+2025-12-18 06:41:20 +00:00: ============================================================
+2025-12-18 06:41:20 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-18 06:41:20 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-18 06:41:20 +00:00: INFO:     127.0.0.1:47116 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-18 06:41:20 +00:00: ✅ Pipeline started from 0s
+2025-12-18 06:41:20 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-18 06:41:20 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-18 06:41:21 +00:00: INFO:     127.0.0.1:47116 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-18 06:41:24 +00:00: 
+2025-12-18 06:41:24 +00:00: ▶️ ASR Resume request at 0s for https://www.youtube.com/watch?v=eV6jQPwK3qE
+2025-12-18 06:41:29 +00:00: 📼 Stream ended
+2025-12-18 06:41:29 +00:00: 
+2025-12-18 06:41:29 +00:00: 🏁 ASR session ended🌐 Target language: Indonesia
+2025-12-18 06:41:29 +00:00: 
+2025-12-18 06:41:29 +00:00:    Total chunks: 0
+2025-12-18 06:41:29 +00:00:    Successful: 0
+2025-12-18 06:41:29 +00:00:    API Pool status: 0 total requests
+2025-12-18 06:41:29 +00:00: 
+2025-12-18 06:41:29 +00:00: ============================================================
+2025-12-18 06:41:29 +00:00: 🎬 ASR SESSION STARTED
+2025-12-18 06:41:29 +00:00: ============================================================
+2025-12-18 06:41:29 +00:00: 📹 Video: https://www.youtube.com/watch?v=eV6jQPwK3qE
+2025-12-18 06:41:29 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-18 06:41:29 +00:00: 🤖 Model: gemini-3.0-flash
+2025-12-18 06:41:29 +00:00: 🔑 API Pool: 3 keys available
+2025-12-18 06:41:29 +00:00: ============================================================
+2025-12-18 06:41:29 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-18 06:41:29 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-18 06:41:29 +00:00: INFO:     127.0.0.1:47116 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-18 06:41:29 +00:00: ✅ Pipeline started from 0s
+2025-12-18 06:41:29 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-18 06:41:29 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-18 06:41:38 +00:00: 
+2025-12-18 06:41:38 +00:00: 🚀 [00:00 - 00:03]
+2025-12-18 06:41:40 +00:00:    🧠 gemini-2.0-flash... ✅ 1.6s
+2025-12-18 06:41:40 +00:00:    📝 Jawa: baladewa neng endi? ha pateni pisan!
+2025-12-18 06:41:40 +00:00:    🇮🇩 Indo: Baladewa di mana? Ha, bunuh sekalian!
+2025-12-18 06:41:40 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-18 06:41:40 +00:00: 
+2025-12-18 06:41:40 +00:00: 🚀 [00:03 - 00:06]
+2025-12-18 06:41:43 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 3.0s
+2025-12-18 06:41:43 +00:00:    📝 Jawa: tuk tik tak tik tuk tak tik tik tak
+2025-12-18 06:41:43 +00:00:    🇮🇩 Indo: Suara alat musik gamelan yang khas, seperti ketukan pada gong dan instrumen perkusi lainnya.
+2025-12-18 06:41:43 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-18 06:41:43 +00:00: 
+2025-12-18 06:41:43 +00:00: 🚀 [00:06 - 00:09]
+2025-12-18 06:42:18 +00:00:    🧠 gemini-2.0-flash-lite... 
+2025-12-18 06:42:18 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=eV6jQPwK3qE
+2025-12-18 06:42:23 +00:00: INFO:     127.0.0.1:49288 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-18 06:42:23 +00:00: 
+2025-12-18 06:42:23 +00:00: ▶️ ASR Resume request at 54s for https://www.youtube.com/watch?v=eV6jQPwK3qE
+2025-12-18 06:42:23 +00:00: 🌐 Target language: Indonesia
+2025-12-18 06:42:23 +00:00: 
+2025-12-18 06:42:23 +00:00: ============================================================
+2025-12-18 06:42:23 +00:00: 🎬 ASR SESSION STARTED
+2025-12-18 06:42:23 +00:00: ============================================================
+2025-12-18 06:42:23 +00:00: 📹 Video: https://www.youtube.com/watch?v=eV6jQPwK3qE
+2025-12-18 06:42:23 +00:00: ⏱️  Start time: 00:54 (54s)
+2025-12-18 06:42:23 +00:00: 🤖 Model: gemini-3.0-flash
+2025-12-18 06:42:23 +00:00: 🔑 API Pool: 3 keys available
+2025-12-18 06:42:23 +00:00: ============================================================
+2025-12-18 06:42:23 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-18 06:42:23 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-18 06:42:23 +00:00: INFO:     127.0.0.1:49290 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-18 06:42:23 +00:00: ✅ Pipeline started from 54s
+2025-12-18 06:42:23 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-18 06:42:23 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-18 06:42:33 +00:00: 
+2025-12-18 06:42:33 +00:00: 🚀 [00:54 - 00:57]
+2025-12-18 06:42:33 +00:00:    🧠 gemini-3.0-flash... 🚫 API Key #1 rate limited. Cooldown: 60s
+2025-12-18 06:42:33 +00:00: 🔄 Key #1 rate limited, retrying with 2 remaining keys...
+2025-12-18 06:42:35 +00:00:    🔄 Retry #1 with gemini-2.0-flash... ✅ 1.7s
+2025-12-18 06:42:35 +00:00:    📝 Jawa: kowe tetep isa mempertahankan ndara werkudara nora?
+2025-12-18 06:42:35 +00:00:    🇮🇩 Indo: Kamu tetap bisa mempertahankan ndara Werkudara tidak?
+2025-12-18 06:42:35 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-18 06:42:35 +00:00: 
+2025-12-18 06:42:35 +00:00: 🚀 [00:57 - 01:00]
+2025-12-18 06:42:37 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.6s
+2025-12-18 06:42:37 +00:00:    📝 Jawa: kala janaka mapane ing negara ngastina. ning waton...
+2025-12-18 06:42:37 +00:00:    🇮🇩 Indo: Saat Janaka berada di negara Ngastina. Di kampung...
+2025-12-18 06:42:37 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-18 06:42:37 +00:00: 
+2025-12-18 06:42:37 +00:00: 🚀 [01:00 - 01:03]
+2025-12-18 06:42:39 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.6s
+2025-12-18 06:42:39 +00:00:    📝 Jawa: kowe isa nglangkahi kuwandane petruk. weh, he!
+2025-12-18 06:42:39 +00:00:    🇮🇩 Indo: Kamu bisa melangkahi mayatnya Petruk. Weh, he!
+2025-12-18 06:42:39 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-18 06:42:39 +00:00: 
+2025-12-18 06:42:39 +00:00: ⏱️ Switching to REALTIME mode (audio caught up)
+2025-12-18 06:42:39 +00:00: 
+2025-12-18 06:42:39 +00:00: ⏱️ [01:03 - 01:06]
+2025-12-18 06:42:39 +00:00:    🧠 gemini-3.0-flash... 🚫 API Key #3 rate limited. Cooldown: 60s
+2025-12-18 06:42:39 +00:00: 🔄 Key #3 rate limited, retrying with 1 remaining keys...
+2025-12-18 06:42:40 +00:00:    🔄 Retry #1 with gemini-2.0-flash... ✅ 1.4s
+2025-12-18 06:42:40 +00:00: ❌ Error: Extra data: line 5 column 1 (char 94)
+2025-12-18 06:42:40 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-18 06:42:40 +00:00: 
+2025-12-18 06:42:40 +00:00: ⏱️ [01:06 - 01:09]
+2025-12-18 06:42:43 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.9s
+2025-12-18 06:42:43 +00:00:    📝 Jawa: wawu kowe iki nantang kok njur kancane si
+2025-12-18 06:42:43 +00:00:    🇮🇩 Indo: wah kamu ini menantang kok terus temannya si
+2025-12-18 06:42:43 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-18 06:42:43 +00:00: 
+2025-12-18 06:42:43 +00:00: ⏱️ [01:09 - 01:12]
+2025-12-18 06:42:45 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.5s
+2025-12-18 06:42:45 +00:00:    📝 Jawa: nggo sayembara ora. isa ngawu.
+2025-12-18 06:42:45 +00:00:    🇮🇩 Indo: Untuk sayembara tidak. Bisa mengawur.
+2025-12-18 06:42:45 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-18 06:42:45 +00:00: 
+2025-12-18 06:42:45 +00:00: ⏱️ [01:12 - 01:15]
+2025-12-18 06:42:45 +00:00:    🧠 gemini-3.0-flash... 🚫 API Key #2 rate limited. Cooldown: 60s
+2025-12-18 06:42:45 +00:00: 🚫 All keys exhausted!
+2025-12-18 06:42:45 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-18 06:42:45 +00:00:    ⏳ Waiting 10.0s for API cooldown...
+2025-12-18 06:42:46 +00:00: ✅ 63.3s
+2025-12-18 06:42:46 +00:00:    📝 Jawa: wah, bagong nek ngamuk wis ora perduli sapa.
+2025-12-18 06:42:46 +00:00:    🇮🇩 Indo: Wah, Bagong kalau marah sudah tidak peduli siapa.
+2025-12-18 06:42:46 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-18 06:42:46 +00:00: 
+2025-12-18 06:42:46 +00:00: 🏁 ASR session ended
+2025-12-18 06:42:46 +00:00:    Total chunks: 3
+2025-12-18 06:42:46 +00:00:    Successful: 3
+2025-12-18 06:42:46 +00:00:    API Pool status: 12 total requests
+2025-12-18 06:42:55 +00:00: 
+2025-12-18 06:42:55 +00:00: ⏱️ [01:15 - 01:18]
+2025-12-18 06:42:55 +00:00:    ⏭️ Skipping (all APIs in cooldown, 38s remaining)
+2025-12-18 06:42:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-18 06:42:55 +00:00:    ⏳ Waiting 10.0s for API cooldown...
+2025-12-18 06:43:05 +00:00: 
+2025-12-18 06:43:05 +00:00: ⏱️ [01:18 - 01:21]
+2025-12-18 06:43:05 +00:00:    ⏭️ Skipping (all APIs in cooldown, 28s remaining)
+2025-12-18 06:43:05 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-18 06:43:05 +00:00:    ⏳ Waiting 10.0s for API cooldown...
+2025-12-18 06:43:13 +00:00: 
+2025-12-18 06:43:13 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=eV6jQPwK3qE
+2025-12-18 06:43:15 +00:00: 
+2025-12-18 06:43:15 +00:00: 🏁 ASR session ended
+2025-12-18 06:43:15 +00:00:    Total chunks: 9
+2025-12-18 06:43:15 +00:00:    Successful: 5
+2025-12-18 06:43:15 +00:00:    API Pool status: 12 total requests
+2025-12-18 06:43:15 +00:00: INFO:     127.0.0.1:59870 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-18 06:46:28 +00:00: ⚠️ WebRTC VAD not available, trying Silero...
+2025-12-18 06:46:32 +00:00: Using cache found in /root/.cache/torch/hub/snakers4_silero-vad_master
+2025-12-18 06:46:32 +00:00: ⚠️ Silero VAD failed: type object 'RecursiveScriptModule' has no attribute '_construct'. Using energy-based VAD.
+2025-12-18 06:46:32 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:368: DeprecationWarning: 
+2025-12-18 06:46:32 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-18 06:46:32 +00:00: 
+2025-12-18 06:46:32 +00:00:         Read more about it in the
+2025-12-18 06:46:32 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-18 06:46:32 +00:00:         
+2025-12-18 06:46:32 +00:00:   @app.on_event("startup")
+2025-12-18 06:46:32 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:382: DeprecationWarning: 
+2025-12-18 06:46:32 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-18 06:46:32 +00:00: 
+2025-12-18 06:46:32 +00:00:         Read more about it in the
+2025-12-18 06:46:32 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-18 06:46:32 +00:00:         
+2025-12-18 06:46:32 +00:00:   @app.on_event("shutdown")
+2025-12-18 06:46:32 +00:00: INFO:     Started server process [555345]
+2025-12-18 06:46:32 +00:00: INFO:     Waiting for application startup.
+2025-12-18 06:46:32 +00:00: ✅ API Pool: Loaded 3 API key(s)
+2025-12-18 06:46:32 +00:00: ✅ API Pool: Loaded 4 model(s): ['gemini-2.0-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash-lite', 'gemini-3.0-flash-preview']
+2025-12-18 06:46:32 +00:00: 
+2025-12-18 06:46:32 +00:00: ============================================================
+2025-12-18 06:46:32 +00:00: 🎬 CoWayangAI ASR Service Starting...
+2025-12-18 06:46:32 +00:00: ============================================================
+2025-12-18 06:46:32 +00:00:    API Keys loaded: 3
+2025-12-18 06:46:32 +00:00:    Cooldown time: 60s
+2025-12-18 06:46:32 +00:00: ============================================================
+2025-12-18 06:46:32 +00:00: 
+2025-12-18 06:46:32 +00:00: INFO:     Application startup complete.
+2025-12-18 06:46:32 +00:00: INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2025-12-18 06:46:46 +00:00: INFO:     127.0.0.1:41196 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-18 06:46:51 +00:00: 🌐 Target language: Indonesia
+2025-12-18 06:46:51 +00:00: 
+2025-12-18 06:46:51 +00:00: ============================================================
+2025-12-18 06:46:51 +00:00: 🎬 ASR SESSION STARTED
+2025-12-18 06:46:51 +00:00: ============================================================
+2025-12-18 06:46:51 +00:00: 📹 Video: https://www.youtube.com/watch?v=BgJlUmNvF00
+2025-12-18 06:46:51 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-18 06:46:51 +00:00: 🤖 Model: gemini-3.0-flash-preview
+2025-12-18 06:46:51 +00:00: 🔑 API Pool: 3 keys available
+2025-12-18 06:46:51 +00:00: ============================================================
+2025-12-18 06:46:51 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-18 06:46:51 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-18 06:46:51 +00:00: INFO:     127.0.0.1:41204 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-18 06:46:51 +00:00: ✅ Pipeline started from 0s
+2025-12-18 06:46:51 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-18 06:46:51 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-18 06:46:52 +00:00: INFO:     127.0.0.1:41204 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-18 06:46:54 +00:00: 
+2025-12-18 06:46:54 +00:00: ▶️ ASR Resume request at 0s for https://www.youtube.com/watch?v=BgJlUmNvF00
+2025-12-18 06:46:59 +00:00: 📼 Stream ended
+2025-12-18 06:46:59 +00:00: 
+2025-12-18 06:46:59 +00:00: 🏁 ASR session ended
+2025-12-18 06:46:59 +00:00:    Total chunks: 0🌐 Target language: Indonesia
+2025-12-18 06:46:59 +00:00: 
+2025-12-18 06:46:59 +00:00:    Successful: 0
+2025-12-18 06:46:59 +00:00:    API Pool status: 0 total requests
+2025-12-18 06:46:59 +00:00: INFO:     127.0.0.1:41204 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-18 06:46:59 +00:00: 
+2025-12-18 06:46:59 +00:00: ============================================================
+2025-12-18 06:46:59 +00:00: 🎬 ASR SESSION STARTED
+2025-12-18 06:46:59 +00:00: ============================================================
+2025-12-18 06:46:59 +00:00: 📹 Video: https://www.youtube.com/watch?v=BgJlUmNvF00
+2025-12-18 06:46:59 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-18 06:46:59 +00:00: 🤖 Model: gemini-3.0-flash-preview
+2025-12-18 06:46:59 +00:00: 🔑 API Pool: 3 keys available
+2025-12-18 06:46:59 +00:00: ============================================================
+2025-12-18 06:46:59 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-18 06:46:59 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-18 06:46:59 +00:00: ✅ Pipeline started from 0s
+2025-12-18 06:46:59 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-18 06:46:59 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-18 06:47:10 +00:00: 
+2025-12-18 06:47:10 +00:00: 🚀 [00:12 - 00:15]
+2025-12-18 06:47:12 +00:00:    🧠 gemini-2.0-flash... ✅ 1.7s
+2025-12-18 06:47:12 +00:00:    📝 Jawa: nganggenya memberi hiburan.
+2025-12-18 06:47:12 +00:00:    🇮🇩 Indo: Gunanya memberi hiburan.
+2025-12-18 06:47:12 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-18 06:47:12 +00:00: 
+2025-12-18 06:47:12 +00:00: 🚀 [00:15 - 00:18]
+2025-12-18 06:47:15 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.3s
+2025-12-18 06:47:15 +00:00:    📝 Jawa: tapi juga menyampaikan nilai, filosofi
+2025-12-18 06:47:15 +00:00:    🇮🇩 Indo: tapi juga menyampaikan nilai, filosofi
+2025-12-18 06:47:15 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-18 06:47:15 +00:00: 
+2025-12-18 06:47:15 +00:00: ⏱️ Switching to REALTIME mode (audio caught up)
+2025-12-18 06:47:16 +00:00: 
+2025-12-18 06:47:16 +00:00: ⏱️ [00:18 - 00:21]
+2025-12-18 06:47:17 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.4s
+2025-12-18 06:47:17 +00:00:    📝 Jawa: karya kearifan lokal yang patut terus dijaga.
+2025-12-18 06:47:17 +00:00:    🇮🇩 Indo: karya kearifan lokal yang patut terus dijaga.
+2025-12-18 06:47:17 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-18 06:47:18 +00:00: 
+2025-12-18 06:47:18 +00:00: ⏱️ [00:21 - 00:24]
+2025-12-18 06:47:18 +00:00:    🧠 gemini-3.0-flash-preview... 🚫 API Key #1 rate limited. Cooldown: 60s
+2025-12-18 06:47:18 +00:00: 🔄 Key #1 rate limited, retrying with 2 remaining keys...
+2025-12-18 06:47:20 +00:00:    🔄 Retry #1 with gemini-2.0-flash... ✅ 1.4s
+2025-12-18 06:47:20 +00:00:    📝 Jawa: ponorogo, yang telah mendapatkan pengakuan dunia dari...
+2025-12-18 06:47:20 +00:00:    🇮🇩 Indo: Ponorogo, yang telah mendapatkan pengakuan dunia dari...
+2025-12-18 06:47:20 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-18 06:47:21 +00:00: 
+2025-12-18 06:47:21 +00:00: ⏱️ [00:24 - 00:27]
+2025-12-18 06:47:24 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 3.7s
+2025-12-18 06:47:24 +00:00:    📝 Jawa: yudescō atas kekayaan budayanya, memiliki
+2025-12-18 06:47:24 +00:00:    🇮🇩 Indo: Yudescō (nama orang/tokoh) atas kekayaan budayanya, memiliki
+2025-12-18 06:47:24 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-18 06:47:25 +00:00: 
+2025-12-18 06:47:25 +00:00: ⏱️ [00:27 - 00:30]
+2025-12-18 06:47:27 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.4s
+2025-12-18 06:47:27 +00:00:    📝 Jawa: tanggung jawab besar untuk melestarikan sendi dan per
+2025-12-18 06:47:27 +00:00:    🇮🇩 Indo: Tanggung jawab besar untuk melestarikan sendi dan per
+2025-12-18 06:47:27 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-18 06:47:28 +00:00: 
+2025-12-18 06:47:28 +00:00: ⏱️ [00:30 - 00:33]
+2025-12-18 06:47:28 +00:00:    🧠 gemini-3.0-flash-preview... 🚫 API Key #3 rate limited. Cooldown: 60s
+2025-12-18 06:47:28 +00:00: 🔄 Key #3 rate limited, retrying with 1 remaining keys...
+2025-12-18 06:47:29 +00:00:    🔄 Retry #1 with gemini-2.0-flash... ✅ 1.5s
+2025-12-18 06:47:29 +00:00:    📝 Jawa: tradisi.
+2025-12-18 06:47:29 +00:00: maka kerja sama sinergitas
+2025-12-18 06:47:29 +00:00:    🇮🇩 Indo: tradisi.
+2025-12-18 06:47:29 +00:00: Maka kerja sama sinergitas
+2025-12-18 06:47:29 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-18 06:47:30 +00:00: 
+2025-12-18 06:47:30 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=BgJlUmNvF00
+2025-12-18 06:47:30 +00:00: 
+2025-12-18 06:47:30 +00:00: ⏱️ [00:33 - 00:36]
+2025-12-18 06:47:33 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.7s
+2025-12-18 06:47:33 +00:00:    📝 Jawa: mas dinas pariwisata dan kebudayaan provinsi
+2025-12-18 06:47:33 +00:00:    🇮🇩 Indo: mas dinas pariwisata dan kebudayaan provinsi
+2025-12-18 06:47:33 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-18 06:47:33 +00:00: 
+2025-12-18 06:47:33 +00:00: 🏁 ASR session ended
+2025-12-18 06:47:33 +00:00:    Total chunks: 12
+2025-12-18 06:47:33 +00:00:    Successful: 8
+2025-12-18 06:47:33 +00:00:    API Pool status: 10 total requests
+2025-12-18 06:47:33 +00:00: INFO:     127.0.0.1:37820 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-18 06:47:37 +00:00: 
+2025-12-18 06:47:37 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=BgJlUmNvF00
+2025-12-18 06:47:37 +00:00: INFO:     127.0.0.1:37820 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-18 06:47:37 +00:00: 
+2025-12-18 06:47:37 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=BgJlUmNvF00
+2025-12-18 06:47:37 +00:00: INFO:     127.0.0.1:41016 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-18 07:26:32 +00:00: ⚠️ WebRTC VAD not available, trying Silero...
+2025-12-18 07:26:36 +00:00: Using cache found in /root/.cache/torch/hub/snakers4_silero-vad_master
+2025-12-18 07:26:36 +00:00: ⚠️ Silero VAD failed: type object 'RecursiveScriptModule' has no attribute '_construct'. Using energy-based VAD.
+2025-12-18 07:26:36 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:368: DeprecationWarning: 
+2025-12-18 07:26:36 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-18 07:26:36 +00:00: 
+2025-12-18 07:26:36 +00:00:         Read more about it in the
+2025-12-18 07:26:36 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-18 07:26:36 +00:00:         
+2025-12-18 07:26:36 +00:00:   @app.on_event("startup")
+2025-12-18 07:26:36 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:382: DeprecationWarning: 
+2025-12-18 07:26:36 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-18 07:26:36 +00:00: 
+2025-12-18 07:26:36 +00:00:         Read more about it in the
+2025-12-18 07:26:36 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-18 07:26:36 +00:00:         
+2025-12-18 07:26:36 +00:00:   @app.on_event("shutdown")
+2025-12-18 07:26:36 +00:00: INFO:     Started server process [574264]
+2025-12-18 07:26:36 +00:00: INFO:     Waiting for application startup.
+2025-12-18 07:26:36 +00:00: ✅ API Pool: Loaded 3 API key(s)
+2025-12-18 07:26:36 +00:00: ✅ API Pool: Loaded 4 model(s): ['gemini-2.0-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash-lite', 'gemini-3-flash-preview']
+2025-12-18 07:26:36 +00:00: 
+2025-12-18 07:26:36 +00:00: ============================================================
+2025-12-18 07:26:36 +00:00: 🎬 CoWayangAI ASR Service Starting...
+2025-12-18 07:26:36 +00:00: ============================================================
+2025-12-18 07:26:36 +00:00:    API Keys loaded: 3
+2025-12-18 07:26:36 +00:00:    Cooldown time: 60s
+2025-12-18 07:26:36 +00:00: ============================================================
+2025-12-18 07:26:36 +00:00: 
+2025-12-18 07:26:36 +00:00: INFO:     Application startup complete.
+2025-12-18 07:26:36 +00:00: INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2025-12-18 07:27:47 +00:00: ⚠️ WebRTC VAD not available, trying Silero...
+2025-12-18 07:27:50 +00:00: Using cache found in /root/.cache/torch/hub/snakers4_silero-vad_master
+2025-12-18 07:27:50 +00:00: ⚠️ Silero VAD failed: type object 'RecursiveScriptModule' has no attribute '_construct'. Using energy-based VAD.
+2025-12-18 07:27:50 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:368: DeprecationWarning: 
+2025-12-18 07:27:50 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-18 07:27:50 +00:00: 
+2025-12-18 07:27:50 +00:00:         Read more about it in the
+2025-12-18 07:27:50 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-18 07:27:50 +00:00:         
+2025-12-18 07:27:50 +00:00:   @app.on_event("startup")
+2025-12-18 07:27:50 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:382: DeprecationWarning: 
+2025-12-18 07:27:50 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-18 07:27:50 +00:00: 
+2025-12-18 07:27:50 +00:00:         Read more about it in the
+2025-12-18 07:27:50 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-18 07:27:50 +00:00:         
+2025-12-18 07:27:50 +00:00:   @app.on_event("shutdown")
+2025-12-18 07:27:50 +00:00: INFO:     Started server process [575232]
+2025-12-18 07:27:50 +00:00: INFO:     Waiting for application startup.
+2025-12-18 07:27:50 +00:00: ✅ API Pool: Loaded 3 API key(s)
+2025-12-18 07:27:50 +00:00: ✅ API Pool: Loaded 4 model(s): ['gemini-2.0-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash-lite', 'gemini-3-flash-preview']
+2025-12-18 07:27:50 +00:00: 
+2025-12-18 07:27:50 +00:00: ============================================================
+2025-12-18 07:27:50 +00:00: 🎬 CoWayangAI ASR Service Starting...
+2025-12-18 07:27:50 +00:00: ============================================================
+2025-12-18 07:27:50 +00:00:    API Keys loaded: 3
+2025-12-18 07:27:50 +00:00:    Cooldown time: 60s
+2025-12-18 07:27:50 +00:00: ============================================================
+2025-12-18 07:27:50 +00:00: 
+2025-12-18 07:27:50 +00:00: INFO:     Application startup complete.
+2025-12-18 07:27:50 +00:00: INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2025-12-18 09:07:23 +00:00: INFO:     127.0.0.1:56720 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-19 07:44:32 +00:00: INFO:     127.0.0.1:59448 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-19 08:58:59 +00:00: INFO:     127.0.0.1:51878 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-19 08:59:35 +00:00: INFO:     127.0.0.1:60980 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-19 09:00:12 +00:00: INFO:     127.0.0.1:33346 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-19 09:00:26 +00:00: INFO:     127.0.0.1:56552 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-19 09:00:28 +00:00: INFO:     127.0.0.1:56552 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-19 09:01:14 +00:00: INFO:     127.0.0.1:33782 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-19 11:41:29 +00:00: INFO:     127.0.0.1:49262 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-19 16:28:59 +00:00: INFO:     127.0.0.1:45924 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-19 18:11:21 +00:00: 🌐 Target language: Indonesia
+2025-12-19 18:11:21 +00:00: 
+2025-12-19 18:11:21 +00:00: ============================================================
+2025-12-19 18:11:21 +00:00: 🎬 ASR SESSION STARTED
+2025-12-19 18:11:21 +00:00: ============================================================
+2025-12-19 18:11:21 +00:00: 📹 Video: https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:11:21 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-19 18:11:21 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-19 18:11:21 +00:00: 🔑 API Pool: 3 keys available
+2025-12-19 18:11:21 +00:00: ============================================================
+2025-12-19 18:11:21 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-19 18:11:21 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-19 18:11:21 +00:00: INFO:     127.0.0.1:48044 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-19 18:11:21 +00:00: ✅ Pipeline started from 0s
+2025-12-19 18:11:21 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-19 18:11:21 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-19 18:11:22 +00:00: INFO:     127.0.0.1:48044 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-19 18:11:26 +00:00: 
+2025-12-19 18:11:26 +00:00: ▶️ ASR Resume request at 0s for https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:11:31 +00:00: 📼 Stream ended
+2025-12-19 18:11:31 +00:00: 🌐 Target language: Indonesia
+2025-12-19 18:11:31 +00:00: 
+2025-12-19 18:11:31 +00:00: ============================================================
+2025-12-19 18:11:31 +00:00: 🎬 ASR SESSION STARTED
+2025-12-19 18:11:31 +00:00: ============================================================
+2025-12-19 18:11:31 +00:00: 📹 Video: https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:11:31 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-19 18:11:31 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-19 18:11:31 +00:00: 🔑 API Pool: 3 keys available
+2025-12-19 18:11:31 +00:00: ============================================================
+2025-12-19 18:11:31 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-19 18:11:31 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-19 18:11:31 +00:00: INFO:     127.0.0.1:48044 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-19 18:11:31 +00:00: ✅ Pipeline started from 0s
+2025-12-19 18:11:31 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-19 18:11:31 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-19 18:11:32 +00:00: 
+2025-12-19 18:11:32 +00:00: 🏁 ASR session ended
+2025-12-19 18:11:32 +00:00:    Total chunks: 0
+2025-12-19 18:11:32 +00:00:    Successful: 0
+2025-12-19 18:11:32 +00:00:    API Pool status: 0 total requests
+2025-12-19 18:11:41 +00:00: 
+2025-12-19 18:11:41 +00:00: 🚀 [00:09 - 00:12]
+2025-12-19 18:11:43 +00:00:    🧠 gemini-2.0-flash... ✅ 1.6s
+2025-12-19 18:11:43 +00:00:    📝 Jawa: dateng bapak feri.
+2025-12-19 18:11:43 +00:00:    🇮🇩 Indo: datang Bapak Feri.
+2025-12-19 18:11:43 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-19 18:11:43 +00:00: 
+2025-12-19 18:11:43 +00:00: 🚀 [00:12 - 00:15]
+2025-12-19 18:11:45 +00:00:    🧠 gemini-2.5-flash-lite... 
+2025-12-19 18:11:45 +00:00: ⏩ ASR Seek request: 6104s for https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:11:45 +00:00: ✅ 2.6s
+2025-12-19 18:11:45 +00:00:    📝 Jawa: bapak agung sn, bates jengker.
+2025-12-19 18:11:45 +00:00:    🇮🇩 Indo: Bapak Agung SN, batas bengkok.
+2025-12-19 18:11:45 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-19 18:11:45 +00:00: 
+2025-12-19 18:11:45 +00:00: 🏁 ASR session ended
+2025-12-19 18:11:45 +00:00:    Total chunks: 5
+2025-12-19 18:11:45 +00:00:    Successful: 2
+2025-12-19 18:11:45 +00:00:    API Pool status: 2 total requests
+2025-12-19 18:11:45 +00:00: 🌐 Target language: Indonesia
+2025-12-19 18:11:45 +00:00: 
+2025-12-19 18:11:45 +00:00: ============================================================
+2025-12-19 18:11:45 +00:00: 🎬 ASR SESSION STARTED
+2025-12-19 18:11:45 +00:00: ============================================================
+2025-12-19 18:11:45 +00:00: 📹 Video: https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:11:45 +00:00: ⏱️  Start time: 101:44 (6104s)
+2025-12-19 18:11:45 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-19 18:11:45 +00:00: 🔑 API Pool: 3 keys available
+2025-12-19 18:11:45 +00:00: ============================================================
+2025-12-19 18:11:45 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-19 18:11:45 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-19 18:11:45 +00:00: INFO:     127.0.0.1:49004 - "POST /seek-asr HTTP/1.1" 200 OK
+2025-12-19 18:11:45 +00:00: ✅ Pipeline started from 6104s
+2025-12-19 18:11:45 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-19 18:11:45 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-19 18:11:47 +00:00: 
+2025-12-19 18:11:47 +00:00: ▶️ ASR Resume request at 6104s for https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:11:52 +00:00: 📼 Stream ended
+2025-12-19 18:11:52 +00:00: 
+2025-12-19 18:11:52 +00:00: 🏁 ASR session ended
+2025-12-19 18:11:52 +00:00:    Total chunks: 0
+2025-12-19 18:11:52 +00:00:    Successful: 0
+2025-12-19 18:11:52 +00:00:    API Pool status: 2 total requests
+2025-12-19 18:11:52 +00:00: 🌐 Target language: Indonesia
+2025-12-19 18:11:52 +00:00: 
+2025-12-19 18:11:52 +00:00: ============================================================
+2025-12-19 18:11:52 +00:00: 🎬 ASR SESSION STARTED
+2025-12-19 18:11:52 +00:00: ============================================================
+2025-12-19 18:11:52 +00:00: 📹 Video: https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:11:52 +00:00: ⏱️  Start time: 101:44 (6104s)
+2025-12-19 18:11:52 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-19 18:11:52 +00:00: 🔑 API Pool: 3 keys available
+2025-12-19 18:11:52 +00:00: ============================================================
+2025-12-19 18:11:52 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-19 18:11:52 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-19 18:11:52 +00:00: INFO:     127.0.0.1:49004 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-19 18:11:52 +00:00: ✅ Pipeline started from 6104s
+2025-12-19 18:11:52 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-19 18:11:52 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-19 18:11:55 +00:00: 
+2025-12-19 18:11:55 +00:00: ⏩ ASR Seek request: 13459s for https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:12:00 +00:00: 📼 Stream ended
+2025-12-19 18:12:00 +00:00: 
+2025-12-19 18:12:00 +00:00: 🏁 ASR session ended🌐 Target language: Indonesia
+2025-12-19 18:12:00 +00:00: 
+2025-12-19 18:12:00 +00:00:    Total chunks: 0
+2025-12-19 18:12:00 +00:00:    Successful: 0
+2025-12-19 18:12:00 +00:00:    API Pool status: 2 total requests
+2025-12-19 18:12:00 +00:00: 
+2025-12-19 18:12:00 +00:00: ============================================================
+2025-12-19 18:12:00 +00:00: 🎬 ASR SESSION STARTED
+2025-12-19 18:12:00 +00:00: ============================================================
+2025-12-19 18:12:00 +00:00: 📹 Video: https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:12:00 +00:00: ⏱️  Start time: 224:19 (13459s)
+2025-12-19 18:12:00 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-19 18:12:00 +00:00: 🔑 API Pool: 3 keys available
+2025-12-19 18:12:00 +00:00: ============================================================
+2025-12-19 18:12:00 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-19 18:12:00 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-19 18:12:00 +00:00: INFO:     127.0.0.1:34888 - "POST /seek-asr HTTP/1.1" 200 OK
+2025-12-19 18:12:00 +00:00: 
+2025-12-19 18:12:00 +00:00: ⏩ ASR Seek request: 14019s for https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:12:00 +00:00: ✅ Pipeline started from 13459s
+2025-12-19 18:12:00 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-19 18:12:00 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-19 18:12:00 +00:00: 
+2025-12-19 18:12:00 +00:00: 🏁 ASR session ended
+2025-12-19 18:12:00 +00:00:    Total chunks: 0
+2025-12-19 18:12:00 +00:00:    Successful: 0
+2025-12-19 18:12:00 +00:00:    API Pool status: 2 total requests
+2025-12-19 18:12:00 +00:00: 🌐 Target language: Indonesia
+2025-12-19 18:12:00 +00:00: 
+2025-12-19 18:12:00 +00:00: ============================================================
+2025-12-19 18:12:00 +00:00: 🎬 ASR SESSION STARTED
+2025-12-19 18:12:00 +00:00: ============================================================
+2025-12-19 18:12:00 +00:00: 📹 Video: https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:12:00 +00:00: ⏱️  Start time: 233:39 (14019s)
+2025-12-19 18:12:00 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-19 18:12:00 +00:00: 🔑 API Pool: 3 keys available
+2025-12-19 18:12:00 +00:00: ============================================================
+2025-12-19 18:12:00 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-19 18:12:00 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-19 18:12:00 +00:00: INFO:     127.0.0.1:34904 - "POST /seek-asr HTTP/1.1" 200 OK
+2025-12-19 18:12:00 +00:00: ✅ Pipeline started from 14019s
+2025-12-19 18:12:00 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-19 18:12:00 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-19 18:12:06 +00:00: 
+2025-12-19 18:12:06 +00:00: ⏩ ASR Seek request: 17080s for https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:12:11 +00:00: 
+2025-12-19 18:12:11 +00:00: 🏁 ASR session ended
+2025-12-19 18:12:11 +00:00:    Total chunks: 0
+2025-12-19 18:12:11 +00:00:    Successful: 0
+2025-12-19 18:12:11 +00:00:    API Pool status: 2 total requests
+2025-12-19 18:12:11 +00:00: 🌐 Target language: Indonesia
+2025-12-19 18:12:11 +00:00: INFO:     127.0.0.1:36102 - "POST /seek-asr HTTP/1.1" 200 OK
+2025-12-19 18:12:11 +00:00: 
+2025-12-19 18:12:11 +00:00: ============================================================
+2025-12-19 18:12:11 +00:00: 🎬 ASR SESSION STARTED
+2025-12-19 18:12:11 +00:00: ============================================================
+2025-12-19 18:12:11 +00:00: 📹 Video: https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:12:11 +00:00: ⏱️  Start time: 284:40 (17080s)
+2025-12-19 18:12:11 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-19 18:12:11 +00:00: 🔑 API Pool: 3 keys available
+2025-12-19 18:12:11 +00:00: ============================================================
+2025-12-19 18:12:11 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-19 18:12:11 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-19 18:12:11 +00:00: ✅ Pipeline started from 17080s
+2025-12-19 18:12:11 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-19 18:12:11 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-19 18:12:15 +00:00: 
+2025-12-19 18:12:15 +00:00: ⏩ ASR Seek request: 19544s for https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:12:20 +00:00: 📼 Stream ended
+2025-12-19 18:12:20 +00:00: 
+2025-12-19 18:12:20 +00:00: 🏁 ASR session ended
+2025-12-19 18:12:20 +00:00:    Total chunks: 0
+2025-12-19 18:12:20 +00:00:    Successful: 0
+2025-12-19 18:12:20 +00:00:    API Pool status: 2 total requests
+2025-12-19 18:12:20 +00:00: 🌐 Target language: Indonesia
+2025-12-19 18:12:20 +00:00: 
+2025-12-19 18:12:20 +00:00: ============================================================INFO:     127.0.0.1:50416 - "POST /seek-asr HTTP/1.1" 200 OK
+2025-12-19 18:12:20 +00:00: 
+2025-12-19 18:12:20 +00:00: 🎬 ASR SESSION STARTED
+2025-12-19 18:12:20 +00:00: ============================================================
+2025-12-19 18:12:20 +00:00: 📹 Video: https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:12:20 +00:00: ⏱️  Start time: 325:44 (19544s)
+2025-12-19 18:12:20 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-19 18:12:20 +00:00: 🔑 API Pool: 3 keys available
+2025-12-19 18:12:20 +00:00: ============================================================
+2025-12-19 18:12:20 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-19 18:12:20 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-19 18:12:20 +00:00: ✅ Pipeline started from 19544s
+2025-12-19 18:12:20 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-19 18:12:20 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-19 18:12:31 +00:00: 
+2025-12-19 18:12:31 +00:00: 🚀 [325:44 - 325:47]
+2025-12-19 18:12:33 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.4s
+2025-12-19 18:12:33 +00:00:    📝 Jawa: sat mata, woh. ora kasat.
+2025-12-19 18:12:33 +00:00:    🇮🇩 Indo: Satu mata, woh. Tidak terlihat.
+2025-12-19 18:12:33 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-19 18:12:33 +00:00: 
+2025-12-19 18:12:33 +00:00: 🚀 [325:47 - 325:50]
+2025-12-19 18:12:34 +00:00:    🧠 gemini-3-flash-preview... 
+2025-12-19 18:12:34 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:12:39 +00:00: INFO:     127.0.0.1:34038 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-19 18:12:41 +00:00: ✅ 7.8s
+2025-12-19 18:12:41 +00:00:    📝 Jawa: wadhuh dalah! menika kados pundi, menika kados pundi niki? tegese iki sing...
+2025-12-19 18:12:41 +00:00:    🇮🇩 Indo: Waduh, gawat! Bagaimana ini, bagaimana ini? Artinya ini yang...
+2025-12-19 18:12:41 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-19 18:12:41 +00:00: 
+2025-12-19 18:12:41 +00:00: 🏁 ASR session ended
+2025-12-19 18:12:41 +00:00:    Total chunks: 2
+2025-12-19 18:12:41 +00:00:    Successful: 2
+2025-12-19 18:12:41 +00:00:    API Pool status: 4 total requests
+2025-12-20 06:29:25 +00:00: INFO:     127.0.0.1:41400 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-20 13:19:31 +00:00: 🌐 Target language: Indonesia
+2025-12-20 13:19:31 +00:00: 
+2025-12-20 13:19:31 +00:00: ============================================================
+2025-12-20 13:19:31 +00:00: 🎬 ASR SESSION STARTED
+2025-12-20 13:19:31 +00:00: ============================================================
+2025-12-20 13:19:31 +00:00: 📹 Video: https://www.youtube.com/watch?v=yCuOxj5lnC4
+2025-12-20 13:19:31 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-20 13:19:31 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-20 13:19:31 +00:00: 🔑 API Pool: 3 keys available
+2025-12-20 13:19:31 +00:00: ============================================================
+2025-12-20 13:19:31 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-20 13:19:31 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-20 13:19:31 +00:00: INFO:     127.0.0.1:53768 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-20 13:19:31 +00:00: ✅ Pipeline started from 0s
+2025-12-20 13:19:31 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-20 13:19:31 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-20 13:19:32 +00:00: INFO:     127.0.0.1:53768 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-20 13:19:34 +00:00: 
+2025-12-20 13:19:34 +00:00: ▶️ ASR Resume request at 0s for https://www.youtube.com/watch?v=yCuOxj5lnC4
+2025-12-20 13:19:39 +00:00: 📼 Stream ended
+2025-12-20 13:19:39 +00:00: 
+2025-12-20 13:19:39 +00:00: 🏁 ASR session ended🌐 Target language: Indonesia
+2025-12-20 13:19:39 +00:00: 
+2025-12-20 13:19:39 +00:00: ============================================================
+2025-12-20 13:19:39 +00:00:    Total chunks: 0
+2025-12-20 13:19:39 +00:00:    Successful: 0
+2025-12-20 13:19:39 +00:00:    API Pool status: 4 total requests
+2025-12-20 13:19:39 +00:00: 
+2025-12-20 13:19:39 +00:00: 🎬 ASR SESSION STARTED
+2025-12-20 13:19:39 +00:00: ============================================================
+2025-12-20 13:19:39 +00:00: 📹 Video: https://www.youtube.com/watch?v=yCuOxj5lnC4
+2025-12-20 13:19:39 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-20 13:19:39 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-20 13:19:39 +00:00: 🔑 API Pool: 3 keys available
+2025-12-20 13:19:39 +00:00: ============================================================
+2025-12-20 13:19:39 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-20 13:19:39 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-20 13:19:39 +00:00: INFO:     127.0.0.1:53768 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-20 13:19:39 +00:00: ✅ Pipeline started from 0s
+2025-12-20 13:19:39 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-20 13:19:39 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-20 13:19:50 +00:00: 
+2025-12-20 13:19:50 +00:00: 🚀 [00:00 - 00:03]
+2025-12-20 13:19:51 +00:00:    🧠 gemini-2.0-flash... ✅ 1.4s
+2025-12-20 13:19:51 +00:00:    📝 Jawa: kowe ora mentolo karo patiku ta? ora.
+2025-12-20 13:19:51 +00:00:    🇮🇩 Indo: Kamu tidak tega dengan kematianku toh? Tidak.
+2025-12-20 13:19:51 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:19:51 +00:00: 
+2025-12-20 13:19:51 +00:00: 🚀 [00:03 - 00:06]
+2025-12-20 13:19:54 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.8s
+2025-12-20 13:19:54 +00:00:    📝 Jawa: nek aku lara kowe mesti sedih
+2025-12-20 13:19:54 +00:00: mesti
+2025-12-20 13:19:54 +00:00:    🇮🇩 Indo: kalau aku sakit kamu pasti sedih
+2025-12-20 13:19:54 +00:00: pasti
+2025-12-20 13:19:54 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:19:54 +00:00: 
+2025-12-20 13:19:54 +00:00: ⏱️ Switching to REALTIME mode (audio caught up)
+2025-12-20 13:19:54 +00:00: 
+2025-12-20 13:19:54 +00:00: ⏱️ [00:06 - 00:09]
+2025-12-20 13:19:55 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.5s
+2025-12-20 13:19:55 +00:00:    📝 Jawa: diku sing tak tresnani kok. nek nganti tekaning
+2025-12-20 13:19:55 +00:00:    🇮🇩 Indo: Diku yang kucintai kok. Kalau sampai datangnya
+2025-12-20 13:19:55 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:19:55 +00:00: 
+2025-12-20 13:19:55 +00:00: ⏱️ [00:09 - 00:12]
+2025-12-20 13:20:01 +00:00:    🧠 gemini-3-flash-preview... ✅ 5.1s
+2025-12-20 13:20:01 +00:00:    📝 Jawa: ati-ati, mesthi kowe rekasa ndadak mendhem aku ta?
+2025-12-20 13:20:01 +00:00:    🇮🇩 Indo: Hati-hati, pasti kamu akan kesulitan karena harus menguburku, kan?
+2025-12-20 13:20:01 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:01 +00:00: 
+2025-12-20 13:20:01 +00:00: ⏱️ [00:12 - 00:15]
+2025-12-20 13:20:02 +00:00:    🧠 gemini-2.0-flash... ✅ 1.8s
+2025-12-20 13:20:02 +00:00:    📝 Jawa: heem.
+2025-12-20 13:20:02 +00:00: aku ewangi ya? siap.
+2025-12-20 13:20:02 +00:00:    🇮🇩 Indo: Heem.
+2025-12-20 13:20:02 +00:00: Aku bantu ya? Siap.
+2025-12-20 13:20:02 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:02 +00:00: 
+2025-12-20 13:20:02 +00:00: ⏱️ [00:15 - 00:18]
+2025-12-20 13:20:05 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.6s
+2025-12-20 13:20:05 +00:00:    📝 Jawa: nduk, ngger, ngapa ta kowe?
+2025-12-20 13:20:05 +00:00:    🇮🇩 Indo: Nak, anakku, kenapa kamu?
+2025-12-20 13:20:05 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:05 +00:00: 
+2025-12-20 13:20:05 +00:00: ⏱️ [00:18 - 00:21]
+2025-12-20 13:20:07 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.6s
+2025-12-20 13:20:07 +00:00:    📝 Jawa: ora sah ngewangi ra popo, reng. merga kowe iki wonge cetho.
+2025-12-20 13:20:07 +00:00:    🇮🇩 Indo: Tidak usah membantu tidak apa-apa, Reng. Karena kamu ini orangnya jelas.
+2025-12-20 13:20:07 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:07 +00:00: 
+2025-12-20 13:20:07 +00:00: ⏱️ [00:21 - 00:24]
+2025-12-20 13:20:13 +00:00:    🧠 gemini-3-flash-preview... ✅ 6.1s
+2025-12-20 13:20:13 +00:00:    📝 Jawa: adat... wis mangsa borong.
+2025-12-20 13:20:13 +00:00:    🇮🇩 Indo: Begitulah... sudah terserah sepenuhnya (kepadamu).
+2025-12-20 13:20:13 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:13 +00:00: 
+2025-12-20 13:20:13 +00:00: ⏱️ [00:24 - 00:27]
+2025-12-20 13:20:15 +00:00:    🧠 gemini-2.0-flash... ✅ 1.8s
+2025-12-20 13:20:15 +00:00:    📝 Jawa: lipat dekira, tangane ceklek, sikile becik.
+2025-12-20 13:20:15 +00:00:    🇮🇩 Indo: Lipat dikira, tangannya patah, kakinya baik.
+2025-12-20 13:20:15 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:15 +00:00: 
+2025-12-20 13:20:15 +00:00: ⏱️ [00:27 - 00:30]
+2025-12-20 13:20:17 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.7s
+2025-12-20 13:20:17 +00:00:    📝 Jawa: arep perang yo ora trampil, yakin
+2025-12-20 13:20:17 +00:00:    🇮🇩 Indo: Mau perang ya tidak terampil, yakin
+2025-12-20 13:20:17 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:17 +00:00: 
+2025-12-20 13:20:17 +00:00: ⏱️ [00:30 - 00:33]
+2025-12-20 13:20:19 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.4s
+2025-12-20 13:20:19 +00:00:    📝 Jawa: kon kono kowe mundur kono. ya ra.
+2025-12-20 13:20:19 +00:00:    🇮🇩 Indo: Sana, kamu mundur sana. Ya tidak.
+2025-12-20 13:20:19 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:19 +00:00: 
+2025-12-20 13:20:19 +00:00: ⏱️ [00:33 - 00:36]
+2025-12-20 13:20:23 +00:00:    🧠 gemini-3-flash-preview... ✅ 4.6s
+2025-12-20 13:20:23 +00:00:    📝 Jawa: aku ya adhiku ya tak ewangi. rasah!
+2025-12-20 13:20:23 +00:00:    🇮🇩 Indo: Aku pun akan membantu adikku. Tidak usah!
+2025-12-20 13:20:23 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:23 +00:00: 
+2025-12-20 13:20:23 +00:00: ⏱️ [00:36 - 00:39]
+2025-12-20 13:20:25 +00:00:    🧠 gemini-2.0-flash... ✅ 1.5s
+2025-12-20 13:20:25 +00:00:    📝 Jawa: wong kowe iki nek mandeng ya ora medeni.
+2025-12-20 13:20:25 +00:00:    🇮🇩 Indo: Kamu ini kalau menatap ya tidak menakutkan.
+2025-12-20 13:20:25 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:25 +00:00: 
+2025-12-20 13:20:25 +00:00: ⏱️ [00:39 - 00:42]
+2025-12-20 13:20:28 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.9s
+2025-12-20 13:20:28 +00:00:    📝 Jawa: mandhegke wong matamu malah gathuk dadi siji
+2025-12-20 13:20:28 +00:00:    🇮🇩 Indo: hentikan matamu malah bersatu menjadi satu
+2025-12-20 13:20:28 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:28 +00:00: 
+2025-12-20 13:20:28 +00:00: ⏱️ [00:42 - 00:45]
+2025-12-20 13:20:29 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.5s
+2025-12-20 13:20:29 +00:00: ❌ Error: Extra data: line 5 column 1 (char 109)
+2025-12-20 13:20:29 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-20 13:20:29 +00:00: 
+2025-12-20 13:20:29 +00:00: ⏱️ [00:45 - 00:48]
+2025-12-20 13:20:39 +00:00:    🧠 gemini-3-flash-preview... ✅ 9.7s
+2025-12-20 13:20:39 +00:00:    📝 Jawa: tadhah masa! ya semene nek kakangne arep ngewangi ya ora apa-apa, gole.
+2025-12-20 13:20:39 +00:00:    🇮🇩 Indo: Terimalah tantanganku! Ya, begini saja kalau kakaknya mau membantu ya tidak apa-apa, Nak.
+2025-12-20 13:20:39 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:39 +00:00: 
+2025-12-20 13:20:39 +00:00: ⏱️ [00:48 - 00:51]
+2025-12-20 13:20:40 +00:00:    🧠 gemini-2.0-flash... ✅ 1.4s
+2025-12-20 13:20:40 +00:00:    📝 Jawa: wah, wis jan. engko nek kowe nganti cilik lara ati.
+2025-12-20 13:20:40 +00:00:    🇮🇩 Indo: Wah, sudah jelas. Nanti kalau kamu sampai kecil sakit hati.
+2025-12-20 13:20:40 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:40 +00:00: 
+2025-12-20 13:20:40 +00:00: ⏱️ [00:51 - 00:54]
+2025-12-20 13:20:43 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.5s
+2025-12-20 13:20:43 +00:00:    📝 Jawa: dhe tekaning pati, mesthi kowe ora ikhlas, ikhlas
+2025-12-20 13:20:43 +00:00:    🇮🇩 Indo: sampai ajal menjemput, pasti kamu tidak ikhlas, ikhlas
+2025-12-20 13:20:43 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:43 +00:00: 
+2025-12-20 13:20:43 +00:00: ⏱️ [00:54 - 00:57]
+2025-12-20 13:20:44 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.3s
+2025-12-20 13:20:44 +00:00:    📝 Jawa: a-e. ora njarat.
+2025-12-20 13:20:44 +00:00:    🇮🇩 Indo: A-e. Tidak berani.
+2025-12-20 13:20:44 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:44 +00:00: 
+2025-12-20 13:20:44 +00:00: ⏱️ [00:57 - 01:00]
+2025-12-20 13:20:51 +00:00:    🧠 gemini-3-flash-preview... ✅ 7.1s
+2025-12-20 13:20:51 +00:00:    📝 Jawa: ngapa nduwe kakang thing penthalit ngono, mbok modar ya wis.
+2025-12-20 13:20:51 +00:00:    🇮🇩 Indo: Kenapa punya kakak yang menyebalkan begitu, lebih baik mati saja sudah.
+2025-12-20 13:20:51 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:51 +00:00: 
+2025-12-20 13:20:51 +00:00: ⏱️ [01:00 - 01:03]
+2025-12-20 13:20:53 +00:00:    🧠 gemini-2.0-flash... ✅ 1.5s
+2025-12-20 13:20:53 +00:00:    📝 Jawa: man. ha ya uwis. ya wis.
+2025-12-20 13:20:53 +00:00:    🇮🇩 Indo: Man. Ya sudahlah. Ya sudah.
+2025-12-20 13:20:53 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:53 +00:00: 
+2025-12-20 13:20:53 +00:00: ⏱️ [01:03 - 01:06]
+2025-12-20 13:20:56 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 3.1s
+2025-12-20 13:20:56 +00:00:    📝 Jawa: ora ngewangi rapopo. malahane kepenak.
+2025-12-20 13:20:56 +00:00:    🇮🇩 Indo: Tidak membantu tidak apa-apa. Malah lebih enak.
+2025-12-20 13:20:56 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:56 +00:00: 
+2025-12-20 13:20:56 +00:00: ⏱️ [01:06 - 01:09]
+2025-12-20 13:20:58 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.5s
+2025-12-20 13:20:58 +00:00:    📝 Jawa: uripku. tur turuk.
+2025-12-20 13:20:58 +00:00:    🇮🇩 Indo: hidupku. Tur turuk (tidak jelas, seperti gumaman).
+2025-12-20 13:20:58 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:20:58 +00:00: 
+2025-12-20 13:20:58 +00:00: ⏱️ [01:09 - 01:12]
+2025-12-20 13:21:06 +00:00:    🧠 gemini-3-flash-preview... ✅ 8.1s
+2025-12-20 13:21:06 +00:00:    📝 Jawa: lha... ha... hayo... piye, nung?
+2025-12-20 13:21:06 +00:00:    🇮🇩 Indo: Lha... Ha... Ayo... Bagaimana, Nung?
+2025-12-20 13:21:06 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:06 +00:00: 
+2025-12-20 13:21:06 +00:00: ⏱️ [01:12 - 01:15]
+2025-12-20 13:21:07 +00:00:    🧠 gemini-2.0-flash... ✅ 1.5s
+2025-12-20 13:21:07 +00:00:    📝 Jawa: apike ha wis ditataki. wo nek niat yo niat.
+2025-12-20 13:21:07 +00:00:    🇮🇩 Indo: Baiknya sudah ditata. Kalau niat ya niat.
+2025-12-20 13:21:07 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:07 +00:00: 
+2025-12-20 13:21:07 +00:00: ⏱️ [01:15 - 01:18]
+2025-12-20 13:21:10 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.9s
+2025-12-20 13:21:10 +00:00:    📝 Jawa: kui duwe kepenginan, duwe kegayuhan, aja mung kang
+2025-12-20 13:21:10 +00:00:    🇮🇩 Indo: Dia punya keinginan, punya cita-cita, jangan hanya
+2025-12-20 13:21:10 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:10 +00:00: 
+2025-12-20 13:21:10 +00:00: ⏱️ [01:18 - 01:21]
+2025-12-20 13:21:12 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.7s
+2025-12-20 13:21:12 +00:00:    📝 Jawa: ing karep ning ke kakna tekad. mergo tekad
+2025-12-20 13:21:12 +00:00:    🇮🇩 Indo: kehendak, kemudian dikuatkan tekadnya. Karena tekad
+2025-12-20 13:21:12 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:12 +00:00: 
+2025-12-20 13:21:12 +00:00: ⏱️ [01:21 - 01:24]
+2025-12-20 13:21:18 +00:00:    🧠 gemini-3-flash-preview... ✅ 6.4s
+2025-12-20 13:21:18 +00:00:    📝 Jawa: pok ing karep, nek wis nekat, kowe dasare wis wani ngono.
+2025-12-20 13:21:18 +00:00:    🇮🇩 Indo: Inti dari keinginan, kalau sudah nekat, kamu dasarnya memang sudah berani begitu.
+2025-12-20 13:21:18 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:18 +00:00: 
+2025-12-20 13:21:18 +00:00: ⏱️ [01:24 - 01:27]
+2025-12-20 13:21:20 +00:00:    🧠 gemini-2.0-flash... ✅ 1.6s
+2025-12-20 13:21:20 +00:00:    📝 Jawa: ngunek-unekke bethara guru kuwi nek cara aku wis sesuatu sing
+2025-12-20 13:21:20 +00:00:    🇮🇩 Indo: mengkritik Bethara Guru itu kalau menurutku sudah sesuatu yang
+2025-12-20 13:21:20 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:20 +00:00: 
+2025-12-20 13:21:20 +00:00: ⏱️ [01:27 - 01:30]
+2025-12-20 13:21:23 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 3.5s
+2025-12-20 13:21:23 +00:00:    📝 Jawa: anekh loh, gong. ora ono wong sak jagat ki sing wani.
+2025-12-20 13:21:23 +00:00:    🇮🇩 Indo: Aneh lho, gong. Tidak ada orang di seluruh dunia ini yang berani.
+2025-12-20 13:21:23 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:23 +00:00: 
+2025-12-20 13:21:23 +00:00: ⏱️ [01:30 - 01:33]
+2025-12-20 13:21:25 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.4s
+2025-12-20 13:21:25 +00:00:    📝 Jawa: para batara guru nyawang kowe. ha ta?
+2025-12-20 13:21:25 +00:00:    🇮🇩 Indo: Para Batara Guru melihat kamu. Ya, kan?
+2025-12-20 13:21:25 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:25 +00:00: 
+2025-12-20 13:21:25 +00:00: ⏱️ [01:33 - 01:36]
+2025-12-20 13:21:32 +00:00:    🧠 gemini-3-flash-preview... ✅ 7.3s
+2025-12-20 13:21:32 +00:00:    📝 Jawa: hem... saiki tadhange.
+2025-12-20 13:21:32 +00:00:    🇮🇩 Indo: Hem... sekarang saatnya bertindak.
+2025-12-20 13:21:32 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:32 +00:00: 
+2025-12-20 13:21:32 +00:00: ⏱️ [01:36 - 01:39]
+2025-12-20 13:21:34 +00:00:    🧠 gemini-2.0-flash... ✅ 1.4s
+2025-12-20 13:21:34 +00:00: ❌ Error: Extra data: line 5 column 1 (char 133)
+2025-12-20 13:21:34 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-20 13:21:34 +00:00: 
+2025-12-20 13:21:34 +00:00: ⏱️ [01:39 - 01:42]
+2025-12-20 13:21:36 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.6s
+2025-12-20 13:21:36 +00:00:    📝 Jawa: dewi arindro, dra hadana, dra kasim
+2025-12-20 13:21:36 +00:00:    🇮🇩 Indo: Dewi Arindro, Dra Hadana, Dra Kasim
+2025-12-20 13:21:36 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:36 +00:00: 
+2025-12-20 13:21:36 +00:00: ⏱️ [01:42 - 01:45]
+2025-12-20 13:21:37 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.2s
+2025-12-20 13:21:37 +00:00:    📝 Jawa: ora. kuwi warkop.
+2025-12-20 13:21:37 +00:00:    🇮🇩 Indo: Tidak. Itu warkop.
+2025-12-20 13:21:37 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:37 +00:00: 
+2025-12-20 13:21:37 +00:00: ⏱️ [01:45 - 01:48]
+2025-12-20 13:21:42 +00:00:    🧠 gemini-3-flash-preview... ✅ 5.0s
+2025-12-20 13:21:42 +00:00:    📝 Jawa: wicara bangkit beda.
+2025-12-20 13:21:42 +00:00:    🇮🇩 Indo: Pembicaraan bisa berbeda.
+2025-12-20 13:21:42 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:42 +00:00: 
+2025-12-20 13:21:42 +00:00: ⏱️ [01:48 - 01:51]
+2025-12-20 13:21:44 +00:00:    🧠 gemini-2.0-flash... ✅ 1.3s
+2025-12-20 13:21:44 +00:00:    📝 Jawa: bethara indra, bethara brahma.
+2025-12-20 13:21:44 +00:00:    🇮🇩 Indo: Batara Indra, Batara Brahma.
+2025-12-20 13:21:44 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:44 +00:00: 
+2025-12-20 13:21:44 +00:00: ⏱️ [01:51 - 01:54]
+2025-12-20 13:21:46 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.7s
+2025-12-20 13:21:46 +00:00:    📝 Jawa: wawu, bhatara, bhatara dewaning geni. oh iya.
+2025-12-20 13:21:46 +00:00:    🇮🇩 Indo: Wawu, Dewa Api. Oh ya.
+2025-12-20 13:21:46 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:46 +00:00: 
+2025-12-20 13:21:46 +00:00: ⏱️ [01:54 - 01:57]
+2025-12-20 13:21:48 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.3s
+2025-12-20 13:21:48 +00:00:    📝 Jawa: oke, oke ra masalah. he'em. kudu ta.
+2025-12-20 13:21:48 +00:00:    🇮🇩 Indo: Oke, oke tidak masalah. He'em. Harus ya.
+2025-12-20 13:21:48 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:48 +00:00: 
+2025-12-20 13:21:48 +00:00: ⏱️ [01:57 - 02:00]
+2025-12-20 13:21:55 +00:00:    🧠 gemini-3-flash-preview... ✅ 6.8s
+2025-12-20 13:21:55 +00:00:    📝 Jawa: simpen dhisik, carane piye ngalahke bethara indra iki.
+2025-12-20 13:21:55 +00:00:    🇮🇩 Indo: Simpan dulu, bagaimana caranya mengalahkan Batara Indra ini.
+2025-12-20 13:21:55 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:55 +00:00: 
+2025-12-20 13:21:55 +00:00: ⏱️ [02:00 - 02:03]
+2025-12-20 13:21:56 +00:00:    🧠 gemini-2.0-flash... ✅ 1.6s
+2025-12-20 13:21:56 +00:00:    📝 Jawa: piye yo? gelut. heeh. bethoro
+2025-12-20 13:21:56 +00:00:    🇮🇩 Indo: Bagaimana ya? Berkelahi. Heeh. Batara
+2025-12-20 13:21:56 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:56 +00:00: 
+2025-12-20 13:21:56 +00:00: ⏱️ [02:03 - 02:06]
+2025-12-20 13:21:59 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.6s
+2025-12-20 13:21:59 +00:00:    📝 Jawa: brama. cara brama dewane geni, maju.
+2025-12-20 13:21:59 +00:00:    🇮🇩 Indo: Brahma. Cara Brahma dewa api, maju.
+2025-12-20 13:21:59 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:21:59 +00:00: 
+2025-12-20 13:21:59 +00:00: ⏱️ [02:06 - 02:09]
+2025-12-20 13:22:00 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.5s
+2025-12-20 13:22:00 +00:00:    📝 Jawa: ngger sik awake. ha iya. kana ngetokke geni.
+2025-12-20 13:22:00 +00:00:    🇮🇩 Indo: Sabar dulu, badannya. Iya. Sana mengeluarkan api.
+2025-12-20 13:22:00 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:22:00 +00:00: 
+2025-12-20 13:22:00 +00:00: ⏱️ [02:09 - 02:12]
+2025-12-20 13:22:04 +00:00:    🧠 gemini-3-flash-preview... 
+2025-12-20 13:22:04 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=yCuOxj5lnC4
+2025-12-20 13:22:04 +00:00: ✅ 3.9s
+2025-12-20 13:22:04 +00:00:    📝 Jawa: ora bakal temama. bethara bayu...
+2025-12-20 13:22:04 +00:00:    🇮🇩 Indo: Tidak akan mempan. Batara Bayu...
+2025-12-20 13:22:04 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:22:04 +00:00: 
+2025-12-20 13:22:04 +00:00: 🏁 ASR session ended
+2025-12-20 13:22:04 +00:00:    Total chunks: 44
+2025-12-20 13:22:04 +00:00:    Successful: 42
+2025-12-20 13:22:04 +00:00:    API Pool status: 48 total requests
+2025-12-20 13:22:04 +00:00: INFO:     127.0.0.1:60492 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-20 13:22:04 +00:00: 
+2025-12-20 13:22:04 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=yCuOxj5lnC4
+2025-12-20 13:22:04 +00:00: INFO:     127.0.0.1:60500 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-20 13:22:04 +00:00: INFO:     127.0.0.1:60506 - "POST /stop-asr HTTP/1.1" 404 Not Found
+2025-12-20 13:22:20 +00:00: 🌐 Target language: Indonesia
+2025-12-20 13:22:20 +00:00: 
+2025-12-20 13:22:20 +00:00: ============================================================
+2025-12-20 13:22:20 +00:00: INFO:     127.0.0.1:59840 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-20 13:22:20 +00:00: 🎬 ASR SESSION STARTED
+2025-12-20 13:22:20 +00:00: ============================================================
+2025-12-20 13:22:20 +00:00: 📹 Video: https://www.youtube.com/watch?v=DEFjV4qkIIw
+2025-12-20 13:22:20 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-20 13:22:20 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-20 13:22:20 +00:00: 🔑 API Pool: 3 keys available
+2025-12-20 13:22:20 +00:00: ============================================================
+2025-12-20 13:22:20 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-20 13:22:20 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-20 13:22:20 +00:00: ✅ Pipeline started from 0s
+2025-12-20 13:22:20 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-20 13:22:20 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-20 13:22:20 +00:00: INFO:     127.0.0.1:59840 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-20 13:22:22 +00:00: 
+2025-12-20 13:22:22 +00:00: ▶️ ASR Resume request at 0s for https://www.youtube.com/watch?v=DEFjV4qkIIw
+2025-12-20 13:22:27 +00:00: 📼 Stream ended
+2025-12-20 13:22:27 +00:00: 
+2025-12-20 13:22:27 +00:00: 🏁 ASR session ended
+2025-12-20 13:22:27 +00:00:    Total chunks: 0
+2025-12-20 13:22:27 +00:00:    Successful: 0
+2025-12-20 13:22:27 +00:00:    API Pool status: 48 total requests
+2025-12-20 13:22:27 +00:00: 🌐 Target language: Indonesia
+2025-12-20 13:22:27 +00:00: 
+2025-12-20 13:22:27 +00:00: ============================================================INFO:     127.0.0.1:59840 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-20 13:22:27 +00:00: 
+2025-12-20 13:22:27 +00:00: 🎬 ASR SESSION STARTED
+2025-12-20 13:22:27 +00:00: ============================================================
+2025-12-20 13:22:27 +00:00: 📹 Video: https://www.youtube.com/watch?v=DEFjV4qkIIw
+2025-12-20 13:22:27 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-20 13:22:27 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-20 13:22:27 +00:00: 🔑 API Pool: 3 keys available
+2025-12-20 13:22:27 +00:00: ============================================================
+2025-12-20 13:22:27 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-20 13:22:27 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-20 13:22:27 +00:00: ✅ Pipeline started from 0s
+2025-12-20 13:22:27 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-20 13:22:27 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-20 13:22:37 +00:00: 
+2025-12-20 13:22:37 +00:00: 🚀 [00:00 - 00:03]
+2025-12-20 13:22:39 +00:00:    🧠 gemini-2.0-flash... ✅ 1.7s
+2025-12-20 13:22:39 +00:00:    📝 Jawa: he, bagong, arep ngapa kowe?
+2025-12-20 13:22:39 +00:00:    🇮🇩 Indo: Hei, Bagong, mau apa kamu?
+2025-12-20 13:22:39 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:22:39 +00:00: 
+2025-12-20 13:22:39 +00:00: 🚀 [00:03 - 00:06]
+2025-12-20 13:22:42 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.8s
+2025-12-20 13:22:42 +00:00:    📝 Jawa: bàgong, kowé sabar, kowé.
+2025-12-20 13:22:42 +00:00:    🇮🇩 Indo: Bagong, kamu sabar, kamu.
+2025-12-20 13:22:42 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:22:42 +00:00: 
+2025-12-20 13:22:42 +00:00: ⏱️ Switching to REALTIME mode (audio caught up)
+2025-12-20 13:22:42 +00:00: 
+2025-12-20 13:22:42 +00:00: ⏱️ [00:06 - 00:09]
+2025-12-20 13:22:43 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.2s
+2025-12-20 13:22:43 +00:00:    📝 Jawa: kowe ojo celandhakan, sing ning ngarepmu iki
+2025-12-20 13:22:43 +00:00:    🇮🇩 Indo: Kamu jangan main-main, yang di depanmu ini
+2025-12-20 13:22:43 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:22:43 +00:00: 
+2025-12-20 13:22:43 +00:00: ⏱️ [00:09 - 00:12]
+2025-12-20 13:22:48 +00:00:    🧠 gemini-3-flash-preview... 
+2025-12-20 13:22:48 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=DEFjV4qkIIw
+2025-12-20 13:22:50 +00:00: ✅ 7.0s
+2025-12-20 13:22:50 +00:00:    📝 Jawa: piyayi luhur, piyayi luhur! arep piyayi, arep piyayi...
+2025-12-20 13:22:50 +00:00:    🇮🇩 Indo: Bangsawan mulia, bangsawan mulia! Mau itu bangsawan, mau itu bangsawan...
+2025-12-20 13:22:50 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:22:50 +00:00: 
+2025-12-20 13:22:50 +00:00: 🏁 ASR session ended
+2025-12-20 13:22:50 +00:00:    Total chunks: 4
+2025-12-20 13:22:50 +00:00:    Successful: 4
+2025-12-20 13:22:50 +00:00:    API Pool status: 52 total requests
+2025-12-20 13:22:50 +00:00: INFO:     127.0.0.1:46828 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-20 13:22:50 +00:00: 
+2025-12-20 13:22:50 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=DEFjV4qkIIw
+2025-12-20 13:22:50 +00:00: INFO:     127.0.0.1:46840 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-20 13:22:50 +00:00: INFO:     127.0.0.1:46846 - "POST /stop-asr HTTP/1.1" 404 Not Found
+2025-12-20 13:22:58 +00:00: 🌐 Target language: Indonesia
+2025-12-20 13:22:58 +00:00: 
+2025-12-20 13:22:58 +00:00: ============================================================INFO:     127.0.0.1:54852 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-20 13:22:58 +00:00: 
+2025-12-20 13:22:58 +00:00: 🎬 ASR SESSION STARTED
+2025-12-20 13:22:58 +00:00: ============================================================
+2025-12-20 13:22:58 +00:00: 📹 Video: https://www.youtube.com/watch?v=DEFjV4qkIIw
+2025-12-20 13:22:58 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-20 13:22:58 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-20 13:22:58 +00:00: 🔑 API Pool: 3 keys available
+2025-12-20 13:22:58 +00:00: ============================================================
+2025-12-20 13:22:58 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-20 13:22:58 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-20 13:22:58 +00:00: ✅ Pipeline started from 0s
+2025-12-20 13:22:58 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-20 13:22:58 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-20 13:22:59 +00:00: INFO:     127.0.0.1:54852 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-20 13:22:59 +00:00: 
+2025-12-20 13:22:59 +00:00: ▶️ ASR Resume request at 0s for https://www.youtube.com/watch?v=DEFjV4qkIIw
+2025-12-20 13:23:04 +00:00: 📼 Stream ended
+2025-12-20 13:23:04 +00:00: 
+2025-12-20 13:23:04 +00:00: 🏁 ASR session ended
+2025-12-20 13:23:04 +00:00:    Total chunks: 0
+2025-12-20 13:23:04 +00:00:    Successful: 0
+2025-12-20 13:23:04 +00:00:    API Pool status: 52 total requests
+2025-12-20 13:23:04 +00:00: 🌐 Target language: Indonesia
+2025-12-20 13:23:04 +00:00: 
+2025-12-20 13:23:04 +00:00: ============================================================INFO:     127.0.0.1:54852 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-20 13:23:04 +00:00: 
+2025-12-20 13:23:04 +00:00: 🎬 ASR SESSION STARTED
+2025-12-20 13:23:04 +00:00: ============================================================
+2025-12-20 13:23:04 +00:00: 📹 Video: https://www.youtube.com/watch?v=DEFjV4qkIIw
+2025-12-20 13:23:04 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-20 13:23:04 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-20 13:23:04 +00:00: 🔑 API Pool: 3 keys available
+2025-12-20 13:23:04 +00:00: ============================================================
+2025-12-20 13:23:04 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-20 13:23:04 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-20 13:23:04 +00:00: ✅ Pipeline started from 0s
+2025-12-20 13:23:04 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-20 13:23:04 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-20 13:23:16 +00:00: 
+2025-12-20 13:23:16 +00:00: 🚀 [00:00 - 00:03]
+2025-12-20 13:23:17 +00:00:    🧠 gemini-2.0-flash... ✅ 1.5s
+2025-12-20 13:23:17 +00:00:    📝 Jawa: bagong, arep ngopo kowe?
+2025-12-20 13:23:17 +00:00:    🇮🇩 Indo: Bagong, mau apa kamu?
+2025-12-20 13:23:17 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:23:17 +00:00: 
+2025-12-20 13:23:17 +00:00: 🚀 [00:03 - 00:06]
+2025-12-20 13:23:20 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.4s
+2025-12-20 13:23:20 +00:00:    📝 Jawa: eee bagong kowe sabar kowe
+2025-12-20 13:23:20 +00:00:    🇮🇩 Indo: Eee Bagong, kamu sabar, kamu
+2025-12-20 13:23:20 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:23:20 +00:00: 
+2025-12-20 13:23:20 +00:00: ⏱️ Switching to REALTIME mode (audio caught up)
+2025-12-20 13:23:20 +00:00: 
+2025-12-20 13:23:20 +00:00: ⏱️ [00:06 - 00:09]
+2025-12-20 13:23:21 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.3s
+2025-12-20 13:23:21 +00:00:    📝 Jawa: kowe aja celandhakan, sing ning ngarepmu iki
+2025-12-20 13:23:21 +00:00:    🇮🇩 Indo: Kamu jangan main-main, yang di hadapanmu ini
+2025-12-20 13:23:21 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:23:21 +00:00: 
+2025-12-20 13:23:21 +00:00: ⏱️ [00:09 - 00:12]
+2025-12-20 13:23:27 +00:00:    🧠 gemini-3-flash-preview... ✅ 5.6s
+2025-12-20 13:23:27 +00:00:    📝 Jawa: piyayi luhur, piyayi luhur! arep piyayi, arep piyayi...
+2025-12-20 13:23:27 +00:00:    🇮🇩 Indo: Bangsawan mulia, bangsawan mulia! Mau itu bangsawan, mau itu bangsawan...
+2025-12-20 13:23:27 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:23:27 +00:00: 
+2025-12-20 13:23:27 +00:00: ⏱️ [00:12 - 00:15]
+2025-12-20 13:23:28 +00:00:    🧠 gemini-2.0-flash... ✅ 1.4s
+2025-12-20 13:23:28 +00:00:    📝 Jawa: ana ora masalah.
+2025-12-20 13:23:28 +00:00:    🇮🇩 Indo: ada, tidak masalah.
+2025-12-20 13:23:28 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:23:28 +00:00: 
+2025-12-20 13:23:28 +00:00: ⏱️ [00:15 - 00:18]
+2025-12-20 13:23:31 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.7s
+2025-12-20 13:23:31 +00:00:    📝 Jawa: iki menyangot harga diri, pak. kowe dunakke
+2025-12-20 13:23:31 +00:00:    🇮🇩 Indo: Ini menyangkut harga diri, Pak. Kamu rendahkan
+2025-12-20 13:23:31 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:23:31 +00:00: 
+2025-12-20 13:23:31 +00:00: ⏱️ [00:18 - 00:21]
+2025-12-20 13:23:33 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.6s
+2025-12-20 13:23:33 +00:00:    📝 Jawa: lha kok meneng wae kowe ki. semar asli wae uthu.
+2025-12-20 13:23:33 +00:00:    🇮🇩 Indo: Lha kok diam saja kamu ini. Semar asli saja utuh.
+2025-12-20 13:23:33 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:23:33 +00:00: 
+2025-12-20 13:23:33 +00:00: ⏱️ [00:21 - 00:24]
+2025-12-20 13:23:39 +00:00:    🧠 gemini-3-flash-preview... ✅ 6.8s
+2025-12-20 13:23:39 +00:00:    📝 Jawa: bagong nesu ring nesu.
+2025-12-20 13:23:39 +00:00:    🇮🇩 Indo: Bagong marah sejadi-jadinya.
+2025-12-20 13:23:39 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:23:39 +00:00: 
+2025-12-20 13:23:39 +00:00: ⏱️ [00:24 - 00:27]
+2025-12-20 13:23:41 +00:00:    🧠 gemini-2.0-flash... ✅ 1.4s
+2025-12-20 13:23:41 +00:00:    📝 Jawa: meneng. aku sing nandhangi pati.
+2025-12-20 13:23:41 +00:00:    🇮🇩 Indo: Diam. Aku yang akan menyebabkan kematian.
+2025-12-20 13:23:41 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:23:41 +00:00: 
+2025-12-20 13:23:41 +00:00: ⏱️ [00:27 - 00:30]
+2025-12-20 13:23:41 +00:00:    🧠 gemini-2.5-flash-lite... 
+2025-12-20 13:23:41 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=DEFjV4qkIIw
+2025-12-20 13:23:44 +00:00: ✅ 2.9s
+2025-12-20 13:23:44 +00:00:    📝 Jawa: patih sengkuni. oh, kuwi patih. ora wedi.
+2025-12-20 13:23:44 +00:00:    🇮🇩 Indo: Patih Sengkuni. Oh, itu Patih. Tidak takut.
+2025-12-20 13:23:44 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:23:44 +00:00: 
+2025-12-20 13:23:44 +00:00: 🏁 ASR session ended
+2025-12-20 13:23:44 +00:00:    Total chunks: 10
+2025-12-20 13:23:44 +00:00:    Successful: 10
+2025-12-20 13:23:44 +00:00:    API Pool status: 62 total requests
+2025-12-20 13:23:44 +00:00: INFO:     127.0.0.1:50928 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-20 13:23:44 +00:00: 
+2025-12-20 13:23:44 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=DEFjV4qkIIw
+2025-12-20 13:23:44 +00:00: INFO:     127.0.0.1:50934 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-20 13:23:44 +00:00: INFO:     127.0.0.1:50950 - "POST /stop-asr HTTP/1.1" 404 Not Found
+2025-12-20 13:24:25 +00:00: 🌐 Target language: Indonesia
+2025-12-20 13:24:25 +00:00: 
+2025-12-20 13:24:25 +00:00: ============================================================
+2025-12-20 13:24:25 +00:00: 🎬 ASR SESSION STARTED
+2025-12-20 13:24:25 +00:00: INFO:     127.0.0.1:44486 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-20 13:24:25 +00:00: ============================================================
+2025-12-20 13:24:25 +00:00: 📹 Video: https://www.youtube.com/watch?v=VFGvurFOfKo
+2025-12-20 13:24:25 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-20 13:24:25 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-20 13:24:25 +00:00: 🔑 API Pool: 3 keys available
+2025-12-20 13:24:25 +00:00: ============================================================
+2025-12-20 13:24:25 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-20 13:24:25 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-20 13:24:25 +00:00: ✅ Pipeline started from 0s
+2025-12-20 13:24:25 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-20 13:24:25 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-20 13:24:26 +00:00: INFO:     127.0.0.1:44486 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-20 13:24:27 +00:00: 
+2025-12-20 13:24:27 +00:00: ▶️ ASR Resume request at 0s for https://www.youtube.com/watch?v=VFGvurFOfKo
+2025-12-20 13:24:32 +00:00: 📼 Stream ended
+2025-12-20 13:24:32 +00:00: 
+2025-12-20 13:24:32 +00:00: 🏁 ASR session ended
+2025-12-20 13:24:32 +00:00:    Total chunks: 0
+2025-12-20 13:24:32 +00:00:    Successful: 0
+2025-12-20 13:24:32 +00:00:    API Pool status: 62 total requests
+2025-12-20 13:24:32 +00:00: 🌐 Target language: Indonesia
+2025-12-20 13:24:32 +00:00: 
+2025-12-20 13:24:32 +00:00: ============================================================
+2025-12-20 13:24:32 +00:00: 🎬 ASR SESSION STARTED
+2025-12-20 13:24:32 +00:00: ============================================================
+2025-12-20 13:24:32 +00:00: 📹 Video: https://www.youtube.com/watch?v=VFGvurFOfKo
+2025-12-20 13:24:32 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-20 13:24:32 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-20 13:24:32 +00:00: 🔑 API Pool: 3 keys available
+2025-12-20 13:24:32 +00:00: ============================================================
+2025-12-20 13:24:32 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-20 13:24:32 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-20 13:24:32 +00:00: INFO:     127.0.0.1:44486 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-20 13:24:32 +00:00: ✅ Pipeline started from 0s
+2025-12-20 13:24:32 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-20 13:24:32 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-20 13:24:42 +00:00: 
+2025-12-20 13:24:42 +00:00: 🚀 [00:00 - 00:03]
+2025-12-20 13:24:44 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.7s
+2025-12-20 13:24:44 +00:00:    📝 Jawa: tung tung tung! wok wok wok!
+2025-12-20 13:24:44 +00:00:    🇮🇩 Indo: Tung tung tung! Wok wok wok!
+2025-12-20 13:24:44 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:24:44 +00:00: 
+2025-12-20 13:24:44 +00:00: 🚀 [00:03 - 00:06]
+2025-12-20 13:24:49 +00:00:    🧠 gemini-3-flash-preview... ✅ 4.9s
+2025-12-20 13:24:49 +00:00:    📝 Jawa: wédan!
+2025-12-20 13:24:49 +00:00:    🇮🇩 Indo: Gila!
+2025-12-20 13:24:49 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-20 13:24:49 +00:00: 
+2025-12-20 13:24:49 +00:00: 🏁 ASR session ended
+2025-12-20 13:24:49 +00:00:    Total chunks: 2
+2025-12-20 13:24:49 +00:00:    Successful: 2
+2025-12-20 13:24:49 +00:00:    API Pool status: 64 total requests
+2025-12-20 13:24:49 +00:00: INFO:     127.0.0.1:50216 - "POST /stop-asr HTTP/1.1" 200 OK
+2025-12-20 13:25:47 +00:00: 🌐 Target language: Indonesia
+2025-12-20 13:25:47 +00:00: 
+2025-12-20 13:25:47 +00:00: ============================================================
+2025-12-20 13:25:47 +00:00: 🎬 ASR SESSION STARTED
+2025-12-20 13:25:47 +00:00: ============================================================
+2025-12-20 13:25:47 +00:00: 📹 Video: https://www.youtube.com/watch?v=VFGvurFOfKoINFO:     127.0.0.1:44490 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-20 13:25:47 +00:00: 
+2025-12-20 13:25:47 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-20 13:25:47 +00:00: 🤖 Model: gemini-3-flash-preview
+2025-12-20 13:25:47 +00:00: 🔑 API Pool: 3 keys available
+2025-12-20 13:25:47 +00:00: ============================================================
+2025-12-20 13:25:47 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-20 13:25:47 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-20 13:25:47 +00:00: ✅ Pipeline started from 0s
+2025-12-20 13:25:47 +00:00: ✅ ASR loop started. Window: 3.0s, Stride: 3.0s
+2025-12-20 13:25:47 +00:00: 🚀 Burst mode: ON (first 15.0s)
+2025-12-20 13:25:50 +00:00: 
+2025-12-20 13:25:50 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=VFGvurFOfKo
+2025-12-20 13:25:55 +00:00: 📼 Stream ended
+2025-12-20 13:25:55 +00:00: 
+2025-12-20 13:25:55 +00:00: 🏁 ASR session ended
+2025-12-20 13:25:55 +00:00:    Total chunks: 0
+2025-12-20 13:25:55 +00:00:    Successful: 0
+2025-12-20 13:25:55 +00:00:    API Pool status: 64 total requests
+2025-12-20 13:25:55 +00:00: INFO:     127.0.0.1:44490 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-20 13:25:55 +00:00: INFO:     127.0.0.1:44498 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-20 18:24:11 +00:00: INFO:     127.0.0.1:55958 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-21 06:33:07 +00:00: INFO:     127.0.0.1:59190 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-21 09:23:48 +00:00: INFO:     127.0.0.1:43528 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-21 09:24:15 +00:00: INFO:     127.0.0.1:40668 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-21 10:16:08 +00:00: INFO:     127.0.0.1:41138 - "POST /stop-all HTTP/1.1" 200 OK

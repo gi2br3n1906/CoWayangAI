@@ -57,3 +57,16 @@
 2025-12-12 09:53:29 +00:00: [Node] Error starting ASR: socket hang up
 2025-12-12 11:41:07 +00:00: [Node] Error starting Python Backend: Error: spawn python ENOENT
 2025-12-12 11:41:07 +00:00: [Node] Error starting ASR Server: Error: spawn python ENOENT
+2025-12-17 17:23:55 +00:00: [Node] ❌ Error: YOUTUBE_API_KEY tidak dikonfigurasi!
+2025-12-17 17:24:35 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-17 17:25:32 +00:00: [Node] ❌ Error seeking AI: connect ECONNREFUSED 127.0.0.1:8000
+2025-12-18 06:21:52 +00:00: [Node] Error starting Python Backend: Error: spawn python ENOENT
+2025-12-18 06:21:52 +00:00: [Node] Error starting ASR Server: Error: spawn python ENOENT
+2025-12-18 06:24:47 +00:00: [Node] Error starting Python Backend: Error: spawn python ENOENT
+2025-12-18 06:24:47 +00:00: [Node] Error starting ASR Server: Error: spawn python ENOENT
+2025-12-18 06:25:47 +00:00: [Node] Error starting Python Backend: Error: spawn python ENOENT
+2025-12-18 06:25:47 +00:00: [Node] Error starting ASR Server: Error: spawn python ENOENT
+2025-12-18 06:26:06 +00:00: [Node] ❌ Error: YOUTUBE_API_KEY tidak dikonfigurasi!
+2025-12-18 06:27:40 +00:00: [Node] Error starting Python Backend: Error: spawn python ENOENT
+2025-12-18 06:27:40 +00:00: [Node] Error starting ASR Server: Error: spawn python ENOENT
+2025-12-18 06:29:18 +00:00: [Node] ❌ Error: YOUTUBE_API_KEY tidak dikonfigurasi!

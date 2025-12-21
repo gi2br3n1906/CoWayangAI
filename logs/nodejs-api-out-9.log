@@ -18996,3 +18996,716 @@
 2025-12-14 02:03:36 +00:00: [Socket] Client connected: twn1gn3Me3mZSX40AABU
 2025-12-14 02:03:36 +00:00: [Socket] 🐍 Python worker registering: worker-5
 2025-12-14 02:03:36 +00:00: [SessionManager] 🐍 Python worker worker-5 registered (socket: twn1gn3Me3mZSX40AABU)
+2025-12-14 04:11:36 +00:00: [Socket] Client connected: myHNtedJapAI_mIJAABX
+2025-12-14 04:11:37 +00:00: [Socket] Client disconnected: myHNtedJapAI_mIJAABX
+2025-12-14 04:11:37 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-14 04:11:37 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-14 04:11:37 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-14 04:11:37 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-14 04:30:54 +00:00: [Socket] Client connected: fJjQgg144iXNyFuSAABZ
+2025-12-14 04:31:22 +00:00: [Socket] Client disconnected: fJjQgg144iXNyFuSAABZ
+2025-12-14 04:31:22 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-14 04:31:22 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-14 04:31:22 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-14 04:31:22 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-14 05:21:55 +00:00: [Socket] Client connected: rnEREarmIOYSOuGpAABb
+2025-12-14 05:23:28 +00:00: [Socket] Client disconnected: rnEREarmIOYSOuGpAABb
+2025-12-14 05:23:28 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-14 05:23:28 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-14 05:23:28 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-14 05:23:28 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-14 07:25:07 +00:00: [Socket] Client connected: BbhZocZDCTyvqOdrAABd
+2025-12-14 07:45:56 +00:00: [Socket] Client disconnected: BbhZocZDCTyvqOdrAABd
+2025-12-14 07:45:56 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-14 07:45:56 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-14 07:45:56 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-14 07:45:56 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-14 07:50:15 +00:00: [Socket] Client connected: 0KjRyTl1QhLxJXT6AABf
+2025-12-14 07:50:21 +00:00: [Socket] Client disconnected: 0KjRyTl1QhLxJXT6AABf
+2025-12-14 07:50:21 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-14 07:50:21 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-14 07:50:21 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-14 07:50:21 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-14 07:51:33 +00:00: [Socket] Client connected: MyRkzVwNMoXKhqrhAABh
+2025-12-14 07:51:49 +00:00: [Socket] Client connected: 8DPO6wac3eSaJi83AABj
+2025-12-14 07:52:18 +00:00: [Socket] Client disconnected: MyRkzVwNMoXKhqrhAABh
+2025-12-14 07:52:18 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-14 07:52:18 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-14 08:07:43 +00:00: [Socket] Client connected: 9YQqrmnVjaUouD0TAABl
+2025-12-14 08:07:45 +00:00: [Socket] Client disconnected: 9YQqrmnVjaUouD0TAABl
+2025-12-14 08:07:45 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-14 08:07:45 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-14 09:01:30 +00:00: [Socket] Client disconnected: 8DPO6wac3eSaJi83AABj
+2025-12-14 09:01:30 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-14 09:01:30 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-14 09:01:30 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-14 09:01:30 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-14 09:11:08 +00:00: [Socket] Client connected: 3cCwR0C9SdFIEDerAABo
+2025-12-14 09:11:21 +00:00: [Socket] Client disconnected: 3cCwR0C9SdFIEDerAABo
+2025-12-14 09:11:21 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-14 09:11:21 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-14 09:11:21 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-14 09:11:21 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-14 09:11:21 +00:00: [Socket] Client connected: tMyOix9A9K3zJLheAABq
+2025-12-14 09:11:22 +00:00: [Socket] Client disconnected: tMyOix9A9K3zJLheAABq
+2025-12-14 09:11:22 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-14 09:11:22 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-14 09:11:22 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-14 09:11:22 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-14 09:11:36 +00:00: [Socket] Client connected: foHEKRDG8liZ5pX1AABt
+2025-12-14 09:11:38 +00:00: [Socket] Client disconnected: foHEKRDG8liZ5pX1AABt
+2025-12-14 09:11:38 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-14 09:11:38 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-14 09:11:38 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-14 09:11:38 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-14 09:11:40 +00:00: [Socket] Client connected: ZJyHixOf5K5uow-0AABw
+2025-12-14 09:12:23 +00:00: [Socket] Client disconnected: ZJyHixOf5K5uow-0AABw
+2025-12-14 09:12:23 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-14 09:12:23 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-14 09:12:23 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-14 09:12:24 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-14 09:27:19 +00:00: [Socket] Client connected: bX6Ga73032yrYnZwAABy
+2025-12-14 09:53:08 +00:00: [Socket] Client disconnected: bX6Ga73032yrYnZwAABy
+2025-12-14 09:53:08 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-14 09:53:08 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-14 09:53:08 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-14 09:53:08 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-14 20:01:19 +00:00: [Socket] Client connected: p0bOVWr0VJcECHjXAAB0
+2025-12-14 20:01:21 +00:00: [Socket] Client disconnected: p0bOVWr0VJcECHjXAAB0
+2025-12-14 20:01:21 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-14 20:01:21 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-14 20:01:21 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-14 20:01:21 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-14 20:01:23 +00:00: [Socket] Client connected: PoWvAvAkmQ-NkpFTAAB2
+2025-12-14 20:01:29 +00:00: [Socket] Client disconnected: PoWvAvAkmQ-NkpFTAAB2
+2025-12-14 20:01:29 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-14 20:01:29 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-14 20:01:29 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-14 20:01:29 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-15 02:27:30 +00:00: [Socket] Client disconnected: 0tNVf_oq08SpZp50AABQ
+2025-12-15 02:27:30 +00:00: [SessionManager] 🐍 Python worker worker-3 unregistered
+2025-12-15 02:27:31 +00:00: [Socket] Client connected: oSlh9BjrODrNy5BtAAB4
+2025-12-15 02:27:31 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-15 02:27:31 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: oSlh9BjrODrNy5BtAAB4)
+2025-12-15 03:05:49 +00:00: [Socket] Client connected: 6_2or8-_t_y3pqALAAB6
+2025-12-15 03:06:32 +00:00: [Socket] Client disconnected: 6_2or8-_t_y3pqALAAB6
+2025-12-15 03:06:32 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-15 03:06:32 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-15 03:06:32 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-15 03:06:32 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-15 06:42:57 +00:00: [Socket] Client connected: oJcYVdI7bXXFWKzgAAB8
+2025-12-15 06:43:19 +00:00: [Socket] Client disconnected: oJcYVdI7bXXFWKzgAAB8
+2025-12-15 06:43:19 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-15 06:43:19 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-15 06:43:19 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-15 06:43:19 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-15 13:04:04 +00:00: [Socket] Client disconnected: oSlh9BjrODrNy5BtAAB4
+2025-12-15 13:04:04 +00:00: [SessionManager] 🐍 Python worker worker-3 unregistered
+2025-12-15 13:04:05 +00:00: [Socket] Client connected: TdIL9qCT3RGy9uKcAAB-
+2025-12-15 13:04:05 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-15 13:04:05 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: TdIL9qCT3RGy9uKcAAB-)
+2025-12-15 19:06:12 +00:00: [Socket] Client connected: I1pbln2wMsUqss4wAACA
+2025-12-15 19:06:16 +00:00: [Socket] Client disconnected: I1pbln2wMsUqss4wAACA
+2025-12-15 19:06:16 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-15 19:06:16 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-15 19:06:16 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-15 19:06:16 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-16 04:52:36 +00:00: [Socket] Client connected: le547PqPX_-gzT1fAACD
+2025-12-16 04:55:25 +00:00: [Socket] Client connected: s65lC9gd-3xaglIPAACF
+2025-12-16 04:55:42 +00:00: [Socket] Client disconnected: s65lC9gd-3xaglIPAACF
+2025-12-16 04:55:42 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-16 04:55:42 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-16 04:55:42 +00:00: [Socket] Client disconnected: le547PqPX_-gzT1fAACD
+2025-12-16 04:55:42 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-16 04:55:42 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-16 04:55:42 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-16 04:55:42 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-16 04:55:45 +00:00: [Socket] Client connected: SJDQwja5cwOnLO36AACH
+2025-12-16 04:55:46 +00:00: [Socket] Client connected: tqGAh9gVge0dSAhTAACJ
+2025-12-16 04:57:59 +00:00: [Socket] Client disconnected: SJDQwja5cwOnLO36AACH
+2025-12-16 04:57:59 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-16 04:57:59 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-16 04:57:59 +00:00: [Socket] Client disconnected: tqGAh9gVge0dSAhTAACJ
+2025-12-16 04:57:59 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-16 04:57:59 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-16 04:57:59 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-16 04:57:59 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-16 04:57:59 +00:00: [Socket] Client connected: ajBv_htEIvVKsFBTAACL
+2025-12-16 05:00:27 +00:00: [Socket] Client disconnected: ajBv_htEIvVKsFBTAACL
+2025-12-16 05:00:27 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-16 05:00:27 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-16 05:00:27 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-16 05:00:27 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-16 05:00:29 +00:00: [Socket] Client connected: ggYqOgeGEFS_xaOzAACN
+2025-12-16 05:00:34 +00:00: [Socket] Client disconnected: ggYqOgeGEFS_xaOzAACN
+2025-12-16 05:00:34 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-16 05:00:34 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-16 05:00:34 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-16 05:00:34 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-16 05:00:34 +00:00: [Socket] Client connected: W2GzlL_O-VEwnnqnAACP
+2025-12-16 05:18:45 +00:00: [Socket] Client disconnected: W2GzlL_O-VEwnnqnAACP
+2025-12-16 05:18:45 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-16 05:18:45 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-16 05:18:45 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-16 05:18:45 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-16 05:45:48 +00:00: [Socket] Client connected: X5bhQFTg7z7sNaoNAACS
+2025-12-16 05:47:52 +00:00: [Socket] Client disconnected: X5bhQFTg7z7sNaoNAACS
+2025-12-16 05:47:52 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-16 05:47:52 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-16 05:47:52 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-16 05:47:52 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-16 05:50:36 +00:00: [Socket] Client connected: c-3LQcP_Q-4MrfoCAACV
+2025-12-16 05:52:41 +00:00: [Socket] Client disconnected: c-3LQcP_Q-4MrfoCAACV
+2025-12-16 05:52:41 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-16 05:52:41 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-16 05:52:41 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-16 05:52:41 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-16 05:56:54 +00:00: [Socket] Client connected: TjQRFBri83-tFINzAACY
+2025-12-16 05:59:00 +00:00: [Socket] Client disconnected: TjQRFBri83-tFINzAACY
+2025-12-16 05:59:00 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-16 05:59:00 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-16 05:59:00 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-16 05:59:00 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-16 06:00:39 +00:00: [Socket] Client connected: kFgiRMmxBhDzaXLoAACb
+2025-12-16 06:01:41 +00:00: [Socket] Client disconnected: kFgiRMmxBhDzaXLoAACb
+2025-12-16 06:01:41 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-16 06:01:41 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-16 06:01:41 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-16 06:01:41 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-16 06:01:41 +00:00: [Socket] Client connected: NAYIsuDuGzPmSqGyAACd
+2025-12-16 06:20:10 +00:00: [Socket] Client disconnected: NAYIsuDuGzPmSqGyAACd
+2025-12-16 06:20:10 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-16 06:20:10 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-16 06:20:10 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-16 06:20:10 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-16 06:21:44 +00:00: [Socket] Client connected: v35EnRq4gBXEfB2TAACf
+2025-12-16 06:22:08 +00:00: [Socket] Client disconnected: v35EnRq4gBXEfB2TAACf
+2025-12-16 06:22:08 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-16 06:22:08 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-16 06:22:08 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-16 06:22:08 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-17 01:11:45 +00:00: [Socket] Client connected: QRLO81YLsqBbpVpWAACm
+2025-12-17 01:11:47 +00:00: [Socket] Client disconnected: QRLO81YLsqBbpVpWAACm
+2025-12-17 01:11:47 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-17 01:11:47 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-17 01:11:47 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-17 01:11:47 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-17 03:15:58 +00:00: [Socket] Client connected: kboXMY0qTOZFGdmHAACo
+2025-12-17 03:16:05 +00:00: [Socket] Client disconnected: kboXMY0qTOZFGdmHAACo
+2025-12-17 03:16:05 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-17 03:16:05 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-17 03:16:05 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-17 03:16:05 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-17 06:17:10 +00:00: [Socket] Client connected: k86myjuPNlAGxOh5AACr
+2025-12-17 06:17:12 +00:00: [Socket] Client disconnected: k86myjuPNlAGxOh5AACr
+2025-12-17 06:17:12 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-17 06:17:12 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-17 06:17:12 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-17 06:17:12 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-17 06:17:19 +00:00: [Socket] Client connected: pwhSu6GoaJ9UmWRyAACt
+2025-12-17 06:17:19 +00:00: [Socket] Client disconnected: pwhSu6GoaJ9UmWRyAACt
+2025-12-17 06:17:19 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-17 06:17:19 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-17 06:17:19 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-17 06:17:19 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-17 06:17:22 +00:00: [Socket] Client connected: XpEi6YCVlIUyyDobAACv
+2025-12-17 06:17:24 +00:00: [Socket] Client disconnected: XpEi6YCVlIUyyDobAACv
+2025-12-17 06:17:24 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-17 06:17:24 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-17 06:17:24 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-17 06:17:24 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-17 09:08:58 +00:00: [Socket] Client disconnected: TdIL9qCT3RGy9uKcAAB-
+2025-12-17 09:08:58 +00:00: [SessionManager] 🐍 Python worker worker-3 unregistered
+2025-12-17 09:08:58 +00:00: [Socket] Client disconnected: k3lw2oSqDsI1gCAXAABS
+2025-12-17 09:08:58 +00:00: [SessionManager] 🐍 Python worker worker-4 unregistered
+2025-12-17 09:08:59 +00:00: [Socket] Client connected: VJTc5hdm0bKnkKoTAACx
+2025-12-17 09:08:59 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-17 09:08:59 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: VJTc5hdm0bKnkKoTAACx)
+2025-12-17 09:09:00 +00:00: [Socket] Client connected: TzQOplBZ6WykByjWAACz
+2025-12-17 09:09:00 +00:00: [Socket] 🐍 Python worker registering: worker-4
+2025-12-17 09:09:00 +00:00: [SessionManager] 🐍 Python worker worker-4 registered (socket: TzQOplBZ6WykByjWAACz)
+2025-12-17 12:46:53 +00:00: [Socket] Client connected: BE0mipIG3HyFVDS7AAC1
+2025-12-17 13:49:24 +00:00: [Socket] Client connected: p91_NFx8GqIOdZbOAAC3
+2025-12-17 14:06:03 +00:00: [Socket] Client disconnected: p91_NFx8GqIOdZbOAAC3
+2025-12-17 14:06:03 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-17 14:06:03 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-17 14:06:13 +00:00: [Socket] Client connected: XSYHx_d9lp9bzsIoAAC5
+2025-12-17 14:40:11 +00:00: [Socket] Client disconnected: XSYHx_d9lp9bzsIoAAC5
+2025-12-17 14:40:11 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-17 14:40:11 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-17 14:40:34 +00:00: [Socket] Client connected: MyZuckQnzj81iymzAAC7
+2025-12-17 14:53:23 +00:00: [Socket] Client disconnected: BE0mipIG3HyFVDS7AAC1
+2025-12-17 14:53:23 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-17 14:53:23 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-17 14:55:35 +00:00: [Socket] Client disconnected: MyZuckQnzj81iymzAAC7
+2025-12-17 14:55:35 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-17 14:55:35 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-17 14:55:35 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-17 14:55:35 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-17 15:05:26 +00:00: [Socket] Client connected: r8AN-mZcL1GHhJRBAAC9
+2025-12-17 15:05:59 +00:00: [Socket] Client disconnected: r8AN-mZcL1GHhJRBAAC9
+2025-12-17 15:05:59 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-17 15:05:59 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-17 15:05:59 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-17 15:05:59 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-17 16:07:26 +00:00: [Socket] Client disconnected: 4MMedrLURaZl2fLPAABM
+2025-12-17 16:07:26 +00:00: [SessionManager] 🐍 Python worker worker-1 unregistered
+2025-12-17 16:07:28 +00:00: [Socket] Client connected: 03uwGX418PM8RPnjAAC_
+2025-12-17 16:07:28 +00:00: [Socket] 🐍 Python worker registering: worker-1
+2025-12-17 16:07:28 +00:00: [SessionManager] 🐍 Python worker worker-1 registered (socket: 03uwGX418PM8RPnjAAC_)
+2025-12-17 17:23:49 +00:00: [Socket] Client connected: ErILQSujddj2T75QAADB
+2025-12-17 17:23:55 +00:00: 
+========================================
+2025-12-17 17:23:55 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-17 17:23:55 +00:00: [Node]    Query: bagong lucu
+2025-12-17 17:24:06 +00:00: 
+========================================
+2025-12-17 17:24:06 +00:00: [Node] 1. Menerima Request ASR dari Frontend...
+2025-12-17 17:24:06 +00:00: ========================================
+
+2025-12-17 17:24:06 +00:00: [Node] 🎙️ Starting ASR for: https://www.youtube.com/watch?v=UFDGJs7VYvM at 0 (lang: id)
+2025-12-17 17:24:06 +00:00: [Node] ASR Server Response: {
+  status: 'started',
+  video: 'https://www.youtube.com/watch?v=UFDGJs7VYvM',
+  startTime: 0,
+  targetLanguage: 'id',
+  api_keys_available: 15
+}
+2025-12-17 17:24:07 +00:00: [Socket] Client connected: OL0dNpQjmHqek1tEAADD
+2025-12-17 17:24:08 +00:00: [Socket] 🎬 Frontend request live stream: {
+  videoUrl: 'https://www.youtube.com/watch?v=UFDGJs7VYvM',
+  existingSessionId: null,
+  currentTime: 0
+}
+2025-12-17 17:24:08 +00:00: [Socket]    Socket ID: OL0dNpQjmHqek1tEAADD
+2025-12-17 17:24:08 +00:00: [Socket]    Current player time: 0s
+2025-12-17 17:24:08 +00:00: [SessionManager] ✅ Created session sess_1765992248094_oeelyc on worker-1
+2025-12-17 17:24:08 +00:00: [SessionManager]    Video: https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-17 17:24:08 +00:00: [SessionManager]    Status: 19/20 available
+2025-12-17 17:24:08 +00:00: [SessionManager] 🔄 Updated socketId for sess_1765992248094_oeelyc: OL0dNpQjmHqek1tEAADD -> OL0dNpQjmHqek1tEAADD
+2025-12-17 17:24:08 +00:00: [Socket] 📤 Sent start-processing to worker-1 at time 0s
+2025-12-17 17:24:08 +00:00: [Socket] 🎙️ Auto-starting ASR at 0s
+2025-12-17 17:24:08 +00:00: [Socket] ✅ ASR started at 0s
+2025-12-17 17:24:13 +00:00: [Socket] ✅ Python started streaming: {
+  sessionId: 'sess_1765992248094_oeelyc',
+  videoUrl: 'https://www.youtube.com/watch?v=UFDGJs7VYvM',
+  duration: 27395.266666666666
+}
+2025-12-17 17:24:20 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1765992248094_oeelyc',
+  state: 'playing',
+  time: 0.21711088746643065
+}
+2025-12-17 17:24:20 +00:00: [Socket] ▶️ Resuming ASR for playback
+2025-12-17 17:24:21 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:36',
+    start_time: 36.0200000000005,
+    end_time: 39.0200000000005,
+    text: 'mugi mugi',
+    translation: 'semoga semoga'
+  }
+}
+2025-12-17 17:24:33 +00:00: [Socket] ⏩ Player seek to: { sessionId: 'sess_1765992248094_oeelyc', time: 6474.9149580065205 }
+2025-12-17 17:24:33 +00:00: [Socket] 🎙️ Syncing ASR to seek position: 6474.9149580065205s
+2025-12-17 17:24:34 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:33',
+    start_time: 33.02000000000003,
+    end_time: 36.02000000000003,
+    text: 'kanjeng rama, kawula nuwun. sinuwun prabu, kula sowan. kula badhe matur, awit wonten ingkang dados gela ing penggalih kawula.',
+    translation: 'Kanjeng Rama, hamba mohon izin. Sinuwun Prabu, hamba menghadap. Hamba akan menyampaikan sesuatu, karena ada hal yang membuat hati hamba gelisah.'
+  }
+}
+2025-12-17 17:24:35 +00:00: 
+========================================
+2025-12-17 17:24:35 +00:00: [Node] 📍 Seek AI Analysis Request...
+2025-12-17 17:24:35 +00:00: [Node]    Seeking to: 6474 seconds
+2025-12-17 17:24:35 +00:00: [Node]    Video: https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-17 17:24:35 +00:00: [Node] 🛑 Stopping current AI analysis...
+2025-12-17 17:24:35 +00:00: [Node] Note: Stop request completed or timed out
+2025-12-17 17:24:35 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1765992248094_oeelyc',
+  state: 'playing',
+  time: 6474.974037835968
+}
+2025-12-17 17:24:35 +00:00: [Socket] ⏭️ Skipping ASR resume - seek in progress (debounce)
+2025-12-17 17:24:35 +00:00: [Node] 🚀 Starting AI analysis from seek position...
+2025-12-17 17:24:35 +00:00: ========================================
+
+2025-12-17 17:24:55 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '107:54',
+    start_time: 6474.020000000066,
+    end_time: 6477.020000000066,
+    text: 'satemmah ndadar pepadhanganing jagad ngesot.',
+    translation: 'Pada akhirnya, cahaya dunia memancar, menjalar.'
+  }
+}
+2025-12-17 17:24:59 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '107:57',
+    start_time: 6477.020000000131,
+    end_time: 6480.020000000131,
+    text: 'wonten ing margi dina',
+    translation: 'di jalan pada hari itu'
+  }
+}
+2025-12-17 17:25:10 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '108:00',
+    start_time: 6480.020000000197,
+    end_time: 6483.020000000197,
+    text: 'kawula nuwun sewu bapa durna.',
+    translation: 'Saya mohon maaf, Bapak Durna.'
+  }
+}
+2025-12-17 17:25:13 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '108:03',
+    start_time: 6483.020000000262,
+    end_time: 6486.020000000262,
+    text: 'sarawipun wonten ing setinggil binota rata',
+    translation: 'Busur panahannya berada di atas tingkat (yang) sama'
+  }
+}
+2025-12-17 17:25:28 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1765992248094_oeelyc',
+  state: 'paused',
+  time: 6507.572256
+}
+2025-12-17 17:25:28 +00:00: [Socket] ⏸️ Pausing ASR due to player paused
+2025-12-17 17:25:28 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1765992248094_oeelyc',
+  state: 'paused',
+  time: 6497.572256
+}
+2025-12-17 17:25:28 +00:00: [Socket] ⏸️ Pausing ASR due to player paused
+2025-12-17 17:25:29 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1765992248094_oeelyc',
+  state: 'playing',
+  time: 6497.215249881744
+}
+2025-12-17 17:25:29 +00:00: [Socket] ▶️ Resuming ASR for playback
+2025-12-17 17:25:30 +00:00: [Socket] ⏩ Player seek to: { sessionId: 'sess_1765992248094_oeelyc', time: 6497.606034139237 }
+2025-12-17 17:25:30 +00:00: [Socket] 🎙️ Syncing ASR to seek position: 6497.606034139237s
+2025-12-17 17:25:31 +00:00: [Socket] ⚠️ ASR pause failed: timeout of 3000ms exceeded
+2025-12-17 17:25:31 +00:00: 
+========================================
+2025-12-17 17:25:31 +00:00: [Node] 📍 Seek AI Analysis Request...
+2025-12-17 17:25:31 +00:00: [Node]    Seeking to: 6497 seconds
+2025-12-17 17:25:31 +00:00: [Node]    Video: https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-17 17:25:31 +00:00: [Node] 🛑 Stopping current AI analysis...
+2025-12-17 17:25:31 +00:00: [Node] Note: Stop request completed or timed out
+2025-12-17 17:25:31 +00:00: [Socket] ⚠️ ASR pause failed: timeout of 3000ms exceeded
+2025-12-17 17:25:32 +00:00: [Node] 🚀 Starting AI analysis from seek position...
+2025-12-17 17:25:32 +00:00: ========================================
+
+2025-12-17 17:25:32 +00:00: [Socket] ⚠️ ASR resume failed: timeout of 3000ms exceeded
+2025-12-17 17:25:33 +00:00: [Socket] ⚠️ ASR seek failed: timeout of 3000ms exceeded
+2025-12-17 17:25:36 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '108:06',
+    start_time: 6486.020000000328,
+    end_time: 6489.020000000328,
+    text: 'paring ngastina, kula ingkang putra ngaturaken pambekti.',
+    translation: 'Raja Hastina, hamba putramu menghaturkan bakti.'
+  }
+}
+2025-12-17 17:25:38 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1765992248094_oeelyc',
+  state: 'paused',
+  time: 6505.025481
+}
+2025-12-17 17:25:38 +00:00: [Socket] ⏸️ Pausing ASR due to player paused
+2025-12-17 17:25:38 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1765992248094_oeelyc',
+  state: 'paused',
+  time: 6505.025481
+}
+2025-12-17 17:25:38 +00:00: [Socket] ⏸️ Pausing ASR due to player paused
+2025-12-17 17:25:41 +00:00: [Socket] ⚠️ ASR pause failed: timeout of 3000ms exceeded
+2025-12-17 17:25:41 +00:00: [Socket] ⚠️ ASR pause failed: timeout of 3000ms exceeded
+2025-12-17 17:26:03 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1765992248094_oeelyc',
+  state: 'playing',
+  time: 6505.140746961853
+}
+2025-12-17 17:26:03 +00:00: [Socket] ▶️ Resuming ASR for playback
+2025-12-17 17:26:18 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '108:25',
+    start_time: 6505.020000000066,
+    end_time: 6508.020000000066,
+    text: 'inggih-inggih, ranak prabu jakaputana, ngaturaken',
+    translation: 'Ya, ya, putra dari Raja Jakaputana, menyampaikan'
+  }
+}
+2025-12-17 17:26:24 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '108:28',
+    start_time: 6508.020000000131,
+    end_time: 6511.020000000131,
+    text: 'kang tanpa upami dene semanten anggen paduka',
+    translation: 'yang tiada bandingnya, padahal demikian tindakan Paduka'
+  }
+}
+2025-12-17 17:26:28 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '108:34',
+    start_time: 6514.020000000262,
+    end_time: 6517.020000000262,
+    text: 'dhasaripun wilujeng neng skala nering sambikala',
+    translation: 'Pada dasarnya selamat dalam skala segala macam bahaya.'
+  }
+}
+2025-12-17 17:26:30 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '108:37',
+    start_time: 6517.020000000328,
+    end_time: 6520.020000000328,
+    text: 'kula sowan mboten langkung salam taklimipun ingkang bapak suka.',
+    translation: 'Saya datang, tidak lebih dari salam hormat dari Bapak Suka.'
+  }
+}
+2025-12-17 17:26:35 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '108:40',
+    start_time: 6520.020000000393,
+    end_time: 6523.020000000393,
+    text: 'mugi konjuk wonten ngarsa paduka anak prabu jaga.',
+    translation: 'Semoga dipersembahkan di hadapan paduka, Pangeran Jaga.'
+  }
+}
+2025-12-17 17:26:39 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '108:43',
+    start_time: 6523.020000000459,
+    end_time: 6526.020000000459,
+    text: 'kapitané,\nkurawa',
+    translation: 'kaptennya,\nKurawa'
+  }
+}
+2025-12-17 17:26:58 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '108:46',
+    start_time: 6526.020000000524,
+    end_time: 6529.020000000524,
+    text: 'anggen kula mundhut tinampi tangan kula kalih mugi and',
+    translation: 'Permohonan saya, diterima oleh kedua tangan saya, semoga dan'
+  }
+}
+2025-12-17 17:27:02 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '108:49',
+    start_time: 6529.02000000059,
+    end_time: 6532.02000000059,
+    text: 'nalika jimat ing gesang kula.',
+    translation: 'Ketika jimat dalam hidup saya.'
+  }
+}
+2025-12-17 17:27:08 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1765992248094_oeelyc',
+  state: 'paused',
+  time: 6569.987702
+}
+2025-12-17 17:27:08 +00:00: [Socket] ⏸️ Pausing ASR due to player paused
+2025-12-17 17:27:09 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1765992248094_oeelyc',
+  state: 'paused',
+  time: 6569.987702
+}
+2025-12-17 17:27:09 +00:00: [Socket] ⏸️ Pausing ASR due to player paused
+2025-12-17 17:27:11 +00:00: [Socket] ⚠️ ASR pause failed: timeout of 3000ms exceeded
+2025-12-17 17:27:12 +00:00: [Socket] ⚠️ ASR pause failed: timeout of 3000ms exceeded
+2025-12-17 17:27:12 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '108:52',
+    start_time: 6532.020000000655,
+    end_time: 6535.020000000655,
+    text: 'kanggo mangga kula dherekaken lenggah ing kanthi merdikaning.',
+    translation: 'Untuk itu, silakan saya persilakan duduk dengan leluasa.'
+  }
+}
+2025-12-17 17:27:15 +00:00: [Socket] 🛑 Frontend ending session: sess_1765992248094_oeelyc (user_close)
+2025-12-17 17:27:15 +00:00: [SessionManager] 🛑 Ended session sess_1765992248094_oeelyc (user_close)
+2025-12-17 17:27:15 +00:00: [SessionManager]    Released worker-1
+2025-12-17 17:27:15 +00:00: [SessionManager]    Status: 20/20 available
+2025-12-17 17:27:16 +00:00: [Socket] 🎙️ Stopping ASR due to session end
+2025-12-17 17:27:16 +00:00: [Socket] 🛑 Frontend request stop live stream (legacy)
+2025-12-17 17:27:16 +00:00: [Socket] 🎙️ Stopping ASR (legacy stop)
+2025-12-17 17:27:16 +00:00: 
+========================================
+2025-12-17 17:27:16 +00:00: [Node] Stopping ASR process...
+2025-12-17 17:27:16 +00:00: ========================================
+
+2025-12-17 17:27:16 +00:00: [Socket] Client disconnected: OL0dNpQjmHqek1tEAADD
+2025-12-17 17:27:16 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-17 17:27:16 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-17 17:29:10 +00:00: [Socket] Client disconnected: ErILQSujddj2T75QAADB
+2025-12-17 17:29:10 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-17 17:29:10 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-17 17:29:10 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-17 17:29:10 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-17 18:20:32 +00:00: [Socket] Client connected: NSLCtcDMXz9oGmLsAADF
+2025-12-17 18:20:33 +00:00: [Socket] Client disconnected: NSLCtcDMXz9oGmLsAADF
+2025-12-17 18:20:33 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-17 18:20:33 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-17 18:20:33 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-17 18:20:33 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-17 19:09:40 +00:00: [Socket] Client connected: Ua0hUGKMMtwHitYrAADH
+2025-12-17 19:09:42 +00:00: [Socket] Client disconnected: Ua0hUGKMMtwHitYrAADH
+2025-12-17 19:09:42 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-17 19:09:42 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-17 19:09:42 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-17 19:09:42 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-18 02:45:33 +00:00: [Socket] Client disconnected: 03uwGX418PM8RPnjAAC_
+2025-12-18 02:45:33 +00:00: [SessionManager] 🐍 Python worker worker-1 unregistered
+2025-12-18 02:45:35 +00:00: [Socket] Client connected: Zx38k6Xzji7ow_i4AADK
+2025-12-18 02:45:35 +00:00: [Socket] 🐍 Python worker registering: worker-1
+2025-12-18 02:45:35 +00:00: [SessionManager] 🐍 Python worker worker-1 registered (socket: Zx38k6Xzji7ow_i4AADK)
+2025-12-18 06:21:52 +00:00: [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+2025-12-18 06:21:52 +00:00: [SessionManager] Initialized with 20 workers
+2025-12-18 06:21:52 +00:00: [Config] ASR Server: http://127.0.0.1:8001
+2025-12-18 06:21:52 +00:00: [Config] Python AI: http://127.0.0.1:8000
+2025-12-18 06:21:52 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:21:52 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:21:52 +00:00: 🚀 Server Backend Node.js jalan di http://0.0.0.0:3000
+2025-12-18 06:21:52 +00:00: 📊 Worker Pool: 20 workers available
+2025-12-18 06:21:52 +00:00: [Socket] Client connected: 31NKt9C14PUzFkNdAAAB
+2025-12-18 06:21:52 +00:00: [Socket] 🐍 Python worker registering: worker-1
+2025-12-18 06:21:52 +00:00: [SessionManager] 🐍 Python worker worker-1 registered (socket: 31NKt9C14PUzFkNdAAAB)
+2025-12-18 06:21:53 +00:00: [Socket] Client connected: M0fXYmzci7oENlzIAAAD
+2025-12-18 06:21:53 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-18 06:21:53 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: M0fXYmzci7oENlzIAAAD)
+2025-12-18 06:21:53 +00:00: [Socket] Client connected: UB6lSN2KP4tQSVAMAAAF
+2025-12-18 06:21:53 +00:00: [Socket] 🐍 Python worker registering: worker-4
+2025-12-18 06:21:53 +00:00: [SessionManager] 🐍 Python worker worker-4 registered (socket: UB6lSN2KP4tQSVAMAAAF)
+2025-12-18 06:21:53 +00:00: [Socket] Client connected: TLQQcplsAUy1-eF0AAAH
+2025-12-18 06:21:53 +00:00: [Socket] 🐍 Python worker registering: worker-2
+2025-12-18 06:21:53 +00:00: [SessionManager] 🐍 Python worker worker-2 registered (socket: TLQQcplsAUy1-eF0AAAH)
+2025-12-18 06:24:47 +00:00: [dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+2025-12-18 06:24:47 +00:00: [SessionManager] Initialized with 20 workers
+2025-12-18 06:24:47 +00:00: [Config] ASR Server: http://127.0.0.1:8001
+2025-12-18 06:24:47 +00:00: [Config] Python AI: http://127.0.0.1:8000
+2025-12-18 06:24:47 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:24:47 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:24:47 +00:00: 🚀 Server Backend Node.js jalan di http://0.0.0.0:3000
+2025-12-18 06:24:47 +00:00: 📊 Worker Pool: 20 workers available
+2025-12-18 06:24:47 +00:00: [Socket] Client connected: LYCLqrZXdcNcgh55AAAB
+2025-12-18 06:24:47 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-18 06:24:47 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: LYCLqrZXdcNcgh55AAAB)
+2025-12-18 06:24:47 +00:00: [Socket] Client connected: o7kraIZBBFNhZcDvAAAD
+2025-12-18 06:24:48 +00:00: [Socket] 🐍 Python worker registering: worker-1
+2025-12-18 06:24:48 +00:00: [SessionManager] 🐍 Python worker worker-1 registered (socket: o7kraIZBBFNhZcDvAAAD)
+2025-12-18 06:24:48 +00:00: [Socket] Client connected: 3CijzQ3Cl6GcN7MaAAAF
+2025-12-18 06:24:48 +00:00: [Socket] 🐍 Python worker registering: worker-4
+2025-12-18 06:24:48 +00:00: [SessionManager] 🐍 Python worker worker-4 registered (socket: 3CijzQ3Cl6GcN7MaAAAF)
+2025-12-18 06:24:48 +00:00: [Socket] Client connected: ecNdkG-2uHViEaO6AAAH
+2025-12-18 06:24:48 +00:00: [Socket] 🐍 Python worker registering: worker-2
+2025-12-18 06:24:48 +00:00: [SessionManager] 🐍 Python worker worker-2 registered (socket: ecNdkG-2uHViEaO6AAAH)
+2025-12-18 06:25:46 +00:00: [dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+2025-12-18 06:25:47 +00:00: [SessionManager] Initialized with 20 workers
+2025-12-18 06:25:47 +00:00: [Config] ASR Server: http://127.0.0.1:8001
+2025-12-18 06:25:47 +00:00: [Config] Python AI: http://127.0.0.1:8000
+2025-12-18 06:25:47 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:25:47 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:25:47 +00:00: 🚀 Server Backend Node.js jalan di http://0.0.0.0:3000
+2025-12-18 06:25:47 +00:00: 📊 Worker Pool: 20 workers available
+2025-12-18 06:25:47 +00:00: [Socket] Client connected: qLV_UiU3gKNBfNc9AAAB
+2025-12-18 06:25:47 +00:00: [Socket] 🐍 Python worker registering: worker-2
+2025-12-18 06:25:47 +00:00: [SessionManager] 🐍 Python worker worker-2 registered (socket: qLV_UiU3gKNBfNc9AAAB)
+2025-12-18 06:25:47 +00:00: [Socket] Client connected: 06eUaS0rACyC1eniAAAD
+2025-12-18 06:25:47 +00:00: [Socket] 🐍 Python worker registering: worker-4
+2025-12-18 06:25:47 +00:00: [SessionManager] 🐍 Python worker worker-4 registered (socket: 06eUaS0rACyC1eniAAAD)
+2025-12-18 06:25:49 +00:00: [Socket] Client connected: BiWkphIUHX80jzJeAAAF
+2025-12-18 06:25:49 +00:00: [Socket] 🐍 Python worker registering: worker-1
+2025-12-18 06:25:49 +00:00: [SessionManager] 🐍 Python worker worker-1 registered (socket: BiWkphIUHX80jzJeAAAF)
+2025-12-18 06:25:49 +00:00: [Socket] Client connected: _MUaJWNV5iTloOtAAAAH
+2025-12-18 06:25:49 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-18 06:25:49 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: _MUaJWNV5iTloOtAAAAH)
+2025-12-18 06:26:03 +00:00: [Socket] Client connected: GjgWbEGBgJ4qR6QaAAAJ
+2025-12-18 06:26:06 +00:00: 
+========================================
+2025-12-18 06:26:06 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-18 06:26:06 +00:00: [Node]    Query: tes
+2025-12-18 06:27:40 +00:00: [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+2025-12-18 06:27:40 +00:00: [SessionManager] Initialized with 20 workers
+2025-12-18 06:27:40 +00:00: [Config] ASR Server: http://127.0.0.1:8001
+2025-12-18 06:27:40 +00:00: [Config] Python AI: http://127.0.0.1:8000
+2025-12-18 06:27:40 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:27:40 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:27:40 +00:00: 🚀 Server Backend Node.js jalan di http://0.0.0.0:3000
+2025-12-18 06:27:40 +00:00: 📊 Worker Pool: 20 workers available
+2025-12-18 06:27:40 +00:00: [Socket] Client connected: 1RWeUKsI0QYDkBImAAAB
+2025-12-18 06:27:40 +00:00: [Socket] 🐍 Python worker registering: worker-4
+2025-12-18 06:27:40 +00:00: [SessionManager] 🐍 Python worker worker-4 registered (socket: 1RWeUKsI0QYDkBImAAAB)
+2025-12-18 06:27:52 +00:00: [Socket] Client connected: g2JxVf7iSvnkxe96AAAD
+2025-12-18 06:27:52 +00:00: [Socket] 🐍 Python worker registering: worker-2
+2025-12-18 06:27:52 +00:00: [SessionManager] 🐍 Python worker worker-2 registered (socket: g2JxVf7iSvnkxe96AAAD)
+2025-12-18 06:27:54 +00:00: [Socket] Client connected: 3uLAFEr0-9U87xhGAAAF
+2025-12-18 06:28:04 +00:00: [Socket] Client connected: HtHrLVGcPux0SYjOAAAH
+2025-12-18 06:28:04 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-18 06:28:04 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: HtHrLVGcPux0SYjOAAAH)
+2025-12-18 06:28:15 +00:00: [Socket] Client connected: hneyxIQC2tq7uzLtAAAJ
+2025-12-18 06:28:15 +00:00: [Socket] 🐍 Python worker registering: worker-1
+2025-12-18 06:28:15 +00:00: [SessionManager] 🐍 Python worker worker-1 registered (socket: hneyxIQC2tq7uzLtAAAJ)
+2025-12-18 06:29:16 +00:00: [Socket] Client disconnected: 3uLAFEr0-9U87xhGAAAF
+2025-12-18 06:29:16 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-18 06:29:16 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-18 06:29:16 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-18 06:29:16 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-18 06:29:16 +00:00: [Socket] Client connected: aDDoIJ9GLjmppPjCAAAL
+2025-12-18 06:29:18 +00:00: 
+========================================
+2025-12-18 06:29:18 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-18 06:29:18 +00:00: [Node]    Query: bagong
+2025-12-18 06:32:25 +00:00: [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+2025-12-18 06:32:25 +00:00: [SessionManager] Initialized with 20 workers
+2025-12-18 06:32:25 +00:00: [Config] ASR Server: http://127.0.0.1:8001
+2025-12-18 06:32:25 +00:00: [Config] Python AI: http://127.0.0.1:8000
+2025-12-18 06:32:25 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:32:25 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:32:25 +00:00: 🚀 Server Backend Node.js jalan di http://0.0.0.0:3000
+2025-12-18 06:32:25 +00:00: 📊 Worker Pool: 20 workers available
+2025-12-18 06:32:26 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:32:29 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:32:31 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:32:31 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:32:32 +00:00: [Socket] Client connected: m8IWQJmJSJrdXQtgAAAB
+2025-12-18 06:32:32 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-18 06:32:32 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: m8IWQJmJSJrdXQtgAAAB)
+2025-12-18 06:32:32 +00:00: [Socket] Client connected: nLh8lhoZT4zKg2NYAAAD
+2025-12-18 06:32:32 +00:00: [Socket] 🐍 Python worker registering: worker-4
+2025-12-18 06:32:32 +00:00: [SessionManager] 🐍 Python worker worker-4 registered (socket: nLh8lhoZT4zKg2NYAAAD)
+2025-12-18 06:32:33 +00:00: [Socket] Client connected: F4WlG7Df8zMFzlcMAAAF
+2025-12-18 06:32:33 +00:00: [Socket] 🐍 Python worker registering: worker-1
+2025-12-18 06:32:33 +00:00: [SessionManager] 🐍 Python worker worker-1 registered (socket: F4WlG7Df8zMFzlcMAAAF)
+2025-12-18 06:32:34 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:32:35 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:32:36 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:32:36 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:32:37 +00:00: [Socket] Client connected: U68kMxpcn1M_QssMAAAH
+2025-12-18 06:32:37 +00:00: [Socket] 🐍 Python worker registering: worker-2
+2025-12-18 06:32:37 +00:00: [SessionManager] 🐍 Python worker worker-2 registered (socket: U68kMxpcn1M_QssMAAAH)
+2025-12-18 06:32:40 +00:00: [Socket] Client connected: gKwhxFPBRBWHAjUHAAAJ
+2025-12-18 06:32:40 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:32:41 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:32:41 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:32:42 +00:00: [Node] ASR Server exited with code: 1
