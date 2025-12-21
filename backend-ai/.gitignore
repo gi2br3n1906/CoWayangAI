@@ -31,3 +31,6 @@ temp_audio_chunks/*.wav
 
 # macOS
 .DS_Store
+
+
+live_stream_socket.py

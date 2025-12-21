@@ -6,7 +6,19 @@
       <div class="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <!-- Loading State -->
+    <div v-if="isLoading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div v-for="i in 3" :key="i" class="bg-slate-800/50 rounded-xl overflow-hidden border border-white/5 animate-pulse">
+        <div class="aspect-video bg-slate-700/50"></div>
+        <div class="p-4 space-y-3">
+          <div class="h-4 bg-slate-700/50 rounded w-3/4"></div>
+          <div class="h-3 bg-slate-700/50 rounded w-1/2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video Grid -->
+    <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
       <div 
         v-for="video in recommendedVideos" 
         :key="video.id"
@@ -27,10 +39,6 @@
                 <path d="M8 5v14l11-7z" />
               </svg>
             </div>
-          </div>
-
-          <div v-if="video.startMinute > 0" class="absolute top-2 left-2 px-2 py-1 bg-indigo-600/90 backdrop-blur-md rounded text-[10px] text-white font-bold uppercase tracking-wide shadow-lg">
-            Skip Intro {{ video.startMinute }}m
           </div>
 
           <div class="absolute bottom-2 right-2 px-2 py-1 bg-black/80 backdrop-blur-sm rounded text-xs text-gray-300 font-medium font-mono border border-white/10">
@@ -60,51 +68,136 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
+
 // Definisikan Event yang benar sesuai App.vue
 const emit = defineEmits(['select-video']);
 
-const recommendedVideos = [
+// Pool 10 video wayang untuk di-random
+const allVideos = [
   {
     id: 1,
-    title: 'WAYANG KULIT KI CAHYO KUNTADI || LAKON WAHYU KATENTREMAN',
-    dalang: 'Ki Cahyo Kuntadi',
-    duration: '7 jam 40 menit',
-    videoId: 'Ib5_4dbTK8E', // ID Asli yang kita pakai demo
-    thumbnail: 'https://img.youtube.com/vi/Ib5_4dbTK8E/mqdefault.jpg',
-    startMinute: 0 // Skip 1 jam intro
+    title: 'KI SENO NUGROHO - WAHYU CAKRANINGRAT',
+    dalang: 'Ki Seno Nugroho',
+    videoId: 'aOtB-yw9GSE',
   },
   {
     id: 2,
-    title: 'KI SENO NUGROHO - WAHYU CAKRANINGRAT',
-    dalang: 'Ki Seno Nugroho',
-    duration: '6 jam 11 menit',
-    videoId: 'aOtB-yw9GSE', 
-    thumbnail: 'https://img.youtube.com/vi/aOtB-yw9GSE/mqdefault.jpg',
-    startMinute: 30 // Skip 30 menit
+    title: 'KI MANTEB SUDARSONO - Lakon Pilihan',
+    dalang: 'Ki Manteb Sudarsono',
+    videoId: 'M_3XC2KMK50',
   },
   {
     id: 3,
-    title: 'Gatotkoco Gugur - KI MANTEB SUDARSONO',
-    dalang: 'Ki Manteb Soedharsono',
-    duration: '6 jam 53 menit',
-    videoId: 'PqvOeI6WHbQ', 
-    thumbnail: 'https://img.youtube.com/vi/PqvOeI6WHbQ/mqdefault.jpg',
-    startMinute: 15
-  }
+    title: 'Pagelaran Wayang Kulit Semalam Suntuk',
+    dalang: 'Ki Dalang',
+    videoId: 'Qwbun_3nP60',
+  },
+  {
+    id: 4,
+    title: 'Wayang Kulit - Lakon Spesial',
+    dalang: 'Ki Dalang',
+    videoId: 'hgMMNutlGdw',
+  },
+  {
+    id: 5,
+    title: 'Pagelaran Wayang Kulit Klasik',
+    dalang: 'Ki Dalang',
+    videoId: 'hpnBgToKT_w',
+  },
+  {
+    id: 6,
+    title: 'Wayang Kulit - Cerita Ramayana',
+    dalang: 'Ki Dalang',
+    videoId: 'BgJlUmNvF00',
+  },
+  {
+    id: 7,
+    title: 'Ki Dalang - Lakon Mahabharata',
+    dalang: 'Ki Dalang',
+    videoId: 'UFDGJs7VYvM',
+  },
+  {
+    id: 8,
+    title: 'Wayang Kulit Full - Semalam Suntuk',
+    dalang: 'Ki Dalang',
+    videoId: 'vFcYyWJzy4E',
+  },
+  {
+    id: 9,
+    title: 'Pagelaran Wayang Kulit Terbaru',
+    dalang: 'Ki Dalang',
+    videoId: 'cy3ZYEnlO_M',
+  },
+  {
+    id: 10,
+    title: 'Wayang Kulit - Lakon Favorit',
+    dalang: 'Ki Dalang',
+    videoId: '6nVXtRo9uM8',
+  },
 ];
+
+// State untuk 3 video yang ditampilkan
+const recommendedVideos = ref([]);
+const isLoading = ref(true);
+
+// Fungsi shuffle array (Fisher-Yates)
+const shuffleArray = (array) => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
+// Fetch video info dari YouTube API atau gunakan default
+const fetchVideoInfo = async (video) => {
+  try {
+    // Coba ambil info dari API kita
+    const response = await fetch(`/api/youtube-info?videoId=${video.videoId}`);
+    if (response.ok) {
+      const data = await response.json();
+      if (data.status === 'success') {
+        return {
+          ...video,
+          title: data.title || video.title,
+          dalang: data.channelTitle || video.dalang,
+          duration: data.duration || 'Live',
+          thumbnail: `https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg`,
+        };
+      }
+    }
+  } catch (error) {
+    console.log('Using default video info for:', video.videoId);
+  }
+  
+  // Fallback ke data default
+  return {
+    ...video,
+    duration: 'Video Panjang',
+    thumbnail: `https://img.youtube.com/vi/${video.videoId}/mqdefault.jpg`,
+  };
+};
+
+// Load 3 random videos saat mount
+onMounted(async () => {
+  // Shuffle dan ambil 3 video
+  const shuffled = shuffleArray(allVideos);
+  const selected = shuffled.slice(0, 3);
+  
+  // Fetch info untuk masing-masing video
+  const videosWithInfo = await Promise.all(
+    selected.map(video => fetchVideoInfo(video))
+  );
+  
+  recommendedVideos.value = videosWithInfo;
+  isLoading.value = false;
+});
 
 // Fungsi Helper untuk mengirim URL lengkap
 const selectVideo = (video) => {
   const fullUrl = `https://www.youtube.com/watch?v=${video.videoId}`;
-  // Emit event ke App.vue dengan format yang diharapkan
-  // App.vue mengharapkan parameter pertama adalah URL string.
-  // Tapi handleAnalyze di App.vue butuh object { url, startMinute }.
-  // Jadi kita biarkan App.vue menangani logika defaultnya (startMinute: 0)
-  // ATAU kita modif App.vue agar VideoGallery bisa kirim startMinute juga.
-  
-  // Opsi paling aman (sesuai kode App.vue yang saya kasih sebelumnya):
-  // App.vue: <VideoGallery @select-video="(url) => handleAnalyze({ url, startMinute: 0 })" />
-  // Jadi kita kirim URL string saja.
   emit('select-video', fullUrl);
 };
 </script>

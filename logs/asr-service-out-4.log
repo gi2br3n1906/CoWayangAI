@@ -1,0 +1,1110 @@
+2025-12-06 23:59:39 +00:00: ⚠️ WebRTC VAD not available, trying Silero...
+2025-12-06 23:59:42 +00:00: Using cache found in /root/.cache/torch/hub/snakers4_silero-vad_master
+2025-12-06 23:59:43 +00:00: ⚠️ Silero VAD failed: type object 'RecursiveScriptModule' has no attribute '_construct'. Using energy-based VAD.
+2025-12-06 23:59:43 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:368: DeprecationWarning: 
+2025-12-06 23:59:43 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-06 23:59:43 +00:00: 
+2025-12-06 23:59:43 +00:00:         Read more about it in the
+2025-12-06 23:59:43 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-06 23:59:43 +00:00:         
+2025-12-06 23:59:43 +00:00:   @app.on_event("startup")
+2025-12-06 23:59:43 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:382: DeprecationWarning: 
+2025-12-06 23:59:43 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-06 23:59:43 +00:00: 
+2025-12-06 23:59:43 +00:00:         Read more about it in the
+2025-12-06 23:59:43 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-06 23:59:43 +00:00:         
+2025-12-06 23:59:43 +00:00:   @app.on_event("shutdown")
+2025-12-06 23:59:43 +00:00: INFO:     Started server process [2329591]
+2025-12-06 23:59:43 +00:00: INFO:     Waiting for application startup.
+2025-12-06 23:59:43 +00:00: ✅ API Pool: Loaded 14 API key(s)
+2025-12-06 23:59:43 +00:00: ✅ API Pool: Loaded 4 model(s): ['gemini-2.0-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash-lite', 'gemini-2.5-flash']
+2025-12-06 23:59:43 +00:00: 
+2025-12-06 23:59:43 +00:00: ============================================================
+2025-12-06 23:59:43 +00:00: 🎬 CoWayangAI ASR Service Starting...
+2025-12-06 23:59:43 +00:00: ============================================================
+2025-12-06 23:59:43 +00:00:    API Keys loaded: 14
+2025-12-06 23:59:43 +00:00:    Cooldown time: 60s
+2025-12-06 23:59:43 +00:00: ============================================================
+2025-12-06 23:59:43 +00:00: 
+2025-12-06 23:59:43 +00:00: INFO:     Application startup complete.
+2025-12-06 23:59:43 +00:00: INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2025-12-07 00:01:21 +00:00: 
+2025-12-07 00:01:21 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=aOtB-yw9GSE
+2025-12-07 00:01:21 +00:00: INFO:     127.0.0.1:56922 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 00:01:21 +00:00: 
+2025-12-07 00:01:21 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=aOtB-yw9GSE
+2025-12-07 00:01:21 +00:00: INFO:     127.0.0.1:56924 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 00:01:23 +00:00: INFO:     127.0.0.1:56924 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-07 00:01:27 +00:00: 🌐 Target language: English
+2025-12-07 00:01:27 +00:00: 
+2025-12-07 00:01:27 +00:00: ============================================================
+2025-12-07 00:01:27 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 00:01:27 +00:00: ============================================================
+2025-12-07 00:01:27 +00:00: 📹 Video: https://www.youtube.com/watch?v=aOtB-yw9GSE
+2025-12-07 00:01:27 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-07 00:01:27 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 00:01:27 +00:00: 🔑 API Pool: 14 keys available
+2025-12-07 00:01:27 +00:00: ============================================================
+2025-12-07 00:01:27 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 00:01:27 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 00:01:27 +00:00: INFO:     127.0.0.1:56924 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-07 00:01:27 +00:00: ✅ Pipeline started from 0s
+2025-12-07 00:01:27 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 00:01:27 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 00:01:28 +00:00: 
+2025-12-07 00:01:28 +00:00: ▶️ ASR Resume request at 0s for https://www.youtube.com/watch?v=aOtB-yw9GSE
+2025-12-07 00:01:33 +00:00: 📼 Stream ended
+2025-12-07 00:01:33 +00:00: 
+2025-12-07 00:01:33 +00:00: 🏁 ASR session ended
+2025-12-07 00:01:33 +00:00:    Total chunks: 0
+2025-12-07 00:01:33 +00:00:    Successful: 0
+2025-12-07 00:01:33 +00:00:    API Pool status: 0 total requests
+2025-12-07 00:01:33 +00:00: 🌐 Target language: Indonesia
+2025-12-07 00:01:33 +00:00: 
+2025-12-07 00:01:33 +00:00: ============================================================
+2025-12-07 00:01:33 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 00:01:33 +00:00: ============================================================
+2025-12-07 00:01:33 +00:00: 📹 Video: https://www.youtube.com/watch?v=aOtB-yw9GSE
+2025-12-07 00:01:33 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-07 00:01:33 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 00:01:33 +00:00: 🔑 API Pool: 14 keys available
+2025-12-07 00:01:33 +00:00: ============================================================
+2025-12-07 00:01:33 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 00:01:33 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 00:01:33 +00:00: INFO:     127.0.0.1:56924 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-07 00:01:33 +00:00: ✅ Pipeline started from 0s
+2025-12-07 00:01:33 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 00:01:33 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 00:01:43 +00:00: 
+2025-12-07 00:01:43 +00:00: 🚀 [00:00 - 00:04]
+2025-12-07 00:01:43 +00:00:    🧠 gemini-2.0-flash... 🚫 API Key #1 rate limited. Cooldown: 60s
+2025-12-07 00:01:43 +00:00: 🔄 Key #1 rate limited, 13 keys remaining
+2025-12-07 00:01:43 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:43 +00:00: 
+2025-12-07 00:01:43 +00:00: 🚀 [00:04 - 00:08]
+2025-12-07 00:01:43 +00:00:    🧠 gemini-2.5-flash-lite... 🚫 API Key #2 rate limited. Cooldown: 60s
+2025-12-07 00:01:43 +00:00: 🔄 Key #2 rate limited, 12 keys remaining
+2025-12-07 00:01:43 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:43 +00:00: 
+2025-12-07 00:01:43 +00:00: 🚀 [00:08 - 00:12]
+2025-12-07 00:01:43 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #3 rate limited. Cooldown: 60s
+2025-12-07 00:01:43 +00:00: 🔄 Key #3 rate limited, 11 keys remaining
+2025-12-07 00:01:43 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:43 +00:00: 
+2025-12-07 00:01:43 +00:00: 🚀 [00:12 - 00:16]
+2025-12-07 00:01:44 +00:00:    🧠 gemini-2.5-flash... 🚫 API Key #4 rate limited. Cooldown: 60s
+2025-12-07 00:01:44 +00:00: 🔄 Key #4 rate limited, 10 keys remaining
+2025-12-07 00:01:44 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:44 +00:00: 
+2025-12-07 00:01:44 +00:00: 🚀 [00:16 - 00:20]
+2025-12-07 00:01:44 +00:00:    🧠 gemini-2.0-flash... ❌ gemini-2.0-flash not available
+2025-12-07 00:01:44 +00:00: 🚫 Model 'gemini-2.0-flash' rate limited. Cooldown: 60s
+2025-12-07 00:01:44 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:44 +00:00: 
+2025-12-07 00:01:44 +00:00: 🚀 [00:20 - 00:24]
+2025-12-07 00:01:44 +00:00:    🧠 gemini-2.5-flash-lite... 🚫 API Key #6 rate limited. Cooldown: 60s
+2025-12-07 00:01:44 +00:00: 🔄 Key #6 rate limited, 9 keys remaining
+2025-12-07 00:01:44 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:44 +00:00: 
+2025-12-07 00:01:44 +00:00: 🚀 [00:24 - 00:28]
+2025-12-07 00:01:44 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #7 rate limited. Cooldown: 60s
+2025-12-07 00:01:44 +00:00: 🔄 Key #7 rate limited, 8 keys remaining
+2025-12-07 00:01:44 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:44 +00:00: 
+2025-12-07 00:01:44 +00:00: 🚀 [00:28 - 00:32]
+2025-12-07 00:01:44 +00:00:    🧠 gemini-2.5-flash... ❌ gemini-2.5-flash not available
+2025-12-07 00:01:44 +00:00: 🚫 Model 'gemini-2.5-flash' rate limited. Cooldown: 60s
+2025-12-07 00:01:44 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:44 +00:00: 
+2025-12-07 00:01:44 +00:00: 🚀 [00:32 - 00:36]
+2025-12-07 00:01:44 +00:00:    🧠 gemini-2.5-flash-lite... 🚫 API Key #9 rate limited. Cooldown: 60s
+2025-12-07 00:01:44 +00:00: 🔄 Key #9 rate limited, 7 keys remaining
+2025-12-07 00:01:44 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:44 +00:00: 
+2025-12-07 00:01:44 +00:00: 🚀 [00:36 - 00:40]
+2025-12-07 00:01:45 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #10 rate limited. Cooldown: 60s
+2025-12-07 00:01:45 +00:00: 🔄 Key #10 rate limited, 6 keys remaining
+2025-12-07 00:01:45 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:45 +00:00: 
+2025-12-07 00:01:45 +00:00: 🚀 [00:40 - 00:44]
+2025-12-07 00:01:45 +00:00:    🧠 gemini-2.5-flash-lite... 🚫 API Key #11 rate limited. Cooldown: 60s
+2025-12-07 00:01:45 +00:00: 🔄 Key #11 rate limited, 5 keys remaining
+2025-12-07 00:01:45 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:45 +00:00: 
+2025-12-07 00:01:45 +00:00: 🚀 [00:44 - 00:48]
+2025-12-07 00:01:45 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #12 rate limited. Cooldown: 60s
+2025-12-07 00:01:45 +00:00: 🔄 Key #12 rate limited, 4 keys remaining
+2025-12-07 00:01:45 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:45 +00:00: 
+2025-12-07 00:01:45 +00:00: 🚀 [00:48 - 00:52]
+2025-12-07 00:01:45 +00:00:    🧠 gemini-2.5-flash-lite... 🚫 API Key #13 rate limited. Cooldown: 60s
+2025-12-07 00:01:45 +00:00: 🔄 Key #13 rate limited, 3 keys remaining
+2025-12-07 00:01:45 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:45 +00:00: 
+2025-12-07 00:01:45 +00:00: 🚀 [00:52 - 00:56]
+2025-12-07 00:01:45 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #14 rate limited. Cooldown: 60s
+2025-12-07 00:01:45 +00:00: 🔄 Key #14 rate limited, 2 keys remaining
+2025-12-07 00:01:45 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:45 +00:00: 
+2025-12-07 00:01:45 +00:00: 🚀 [00:56 - 01:00]
+2025-12-07 00:01:45 +00:00:    🧠 gemini-2.5-flash-lite... ❌ gemini-2.5-flash-lite not available
+2025-12-07 00:01:45 +00:00: 🚫 Model 'gemini-2.5-flash-lite' rate limited. Cooldown: 60s
+2025-12-07 00:01:45 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:45 +00:00: 
+2025-12-07 00:01:45 +00:00: 🚀 [01:00 - 01:04]
+2025-12-07 00:01:45 +00:00:    🧠 gemini-2.0-flash-lite... ❌ gemini-2.0-flash-lite not available
+2025-12-07 00:01:45 +00:00: 🚫 Model 'gemini-2.0-flash-lite' rate limited. Cooldown: 60s
+2025-12-07 00:01:45 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:45 +00:00: 
+2025-12-07 00:01:45 +00:00: 🚀 [01:04 - 01:08]
+2025-12-07 00:01:45 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:45 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:45 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:45 +00:00: 
+2025-12-07 00:01:45 +00:00: 🚀 [01:08 - 01:12]
+2025-12-07 00:01:45 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:45 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:45 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [01:20 - 01:24]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [01:24 - 01:28]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [01:28 - 01:32]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [01:32 - 01:36]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [01:36 - 01:40]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [01:40 - 01:44]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [01:44 - 01:48]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [01:48 - 01:52]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [01:52 - 01:56]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [01:56 - 02:00]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [02:00 - 02:04]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [02:04 - 02:08]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [02:08 - 02:12]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [02:12 - 02:16]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [02:16 - 02:20]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [02:20 - 02:24]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [02:24 - 02:28]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:46 +00:00: 
+2025-12-07 00:01:46 +00:00: 🚀 [02:28 - 02:32]
+2025-12-07 00:01:46 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:46 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:46 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [02:32 - 02:36]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [02:36 - 02:40]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [02:40 - 02:44]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [02:44 - 02:48]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [02:48 - 02:52]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [02:52 - 02:56]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [02:56 - 03:00]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [03:00 - 03:04]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [03:04 - 03:08]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [03:08 - 03:12]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [03:12 - 03:16]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [03:16 - 03:20]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [03:20 - 03:24]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [03:24 - 03:28]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [03:28 - 03:32]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [03:32 - 03:36]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [03:36 - 03:40]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:47 +00:00: 
+2025-12-07 00:01:47 +00:00: 🚀 [03:40 - 03:44]
+2025-12-07 00:01:47 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:47 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:48 +00:00: 
+2025-12-07 00:01:48 +00:00: 🚀 [03:44 - 03:48]
+2025-12-07 00:01:48 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:48 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:48 +00:00: 
+2025-12-07 00:01:48 +00:00: 🚀 [03:48 - 03:52]
+2025-12-07 00:01:48 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:48 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:48 +00:00: 
+2025-12-07 00:01:48 +00:00: 🚀 [03:52 - 03:56]
+2025-12-07 00:01:48 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:48 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:48 +00:00: 
+2025-12-07 00:01:48 +00:00: 🚀 [03:56 - 04:00]
+2025-12-07 00:01:48 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:48 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:48 +00:00: 
+2025-12-07 00:01:48 +00:00: 🚀 [04:00 - 04:04]
+2025-12-07 00:01:48 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:48 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:48 +00:00: 
+2025-12-07 00:01:48 +00:00: 🚀 [04:04 - 04:08]
+2025-12-07 00:01:48 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:48 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:48 +00:00: 
+2025-12-07 00:01:48 +00:00: 🚀 [04:08 - 04:12]
+2025-12-07 00:01:48 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:48 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:48 +00:00: 
+2025-12-07 00:01:48 +00:00: 🚀 [04:12 - 04:16]
+2025-12-07 00:01:48 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:48 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:48 +00:00: 
+2025-12-07 00:01:48 +00:00: 🚀 [04:16 - 04:20]
+2025-12-07 00:01:48 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:48 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:48 +00:00: 
+2025-12-07 00:01:48 +00:00: 🚀 [04:20 - 04:24]
+2025-12-07 00:01:48 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:48 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:48 +00:00: 
+2025-12-07 00:01:48 +00:00: 🚀 [04:24 - 04:28]
+2025-12-07 00:01:48 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:48 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:48 +00:00: 
+2025-12-07 00:01:48 +00:00: 🚀 [04:28 - 04:32]
+2025-12-07 00:01:48 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:48 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:48 +00:00: 
+2025-12-07 00:01:48 +00:00: 🚀 [04:32 - 04:36]
+2025-12-07 00:01:48 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:48 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:48 +00:00: 
+2025-12-07 00:01:48 +00:00: 🚀 [04:36 - 04:40]
+2025-12-07 00:01:48 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:48 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:48 +00:00: 
+2025-12-07 00:01:48 +00:00: 🚀 [04:40 - 04:44]
+2025-12-07 00:01:48 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:48 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:48 +00:00: 
+2025-12-07 00:01:48 +00:00: 🚀 [04:44 - 04:48]
+2025-12-07 00:01:48 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:48 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [04:48 - 04:52]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [04:52 - 04:56]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [04:56 - 05:00]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [05:00 - 05:04]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [05:04 - 05:08]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [05:08 - 05:12]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [05:12 - 05:16]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [05:16 - 05:20]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [05:20 - 05:24]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [05:24 - 05:28]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [05:28 - 05:32]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [05:32 - 05:36]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [05:36 - 05:40]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [05:40 - 05:44]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [05:44 - 05:48]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [05:48 - 05:52]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [05:52 - 05:56]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [05:56 - 06:00]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [06:00 - 06:04]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:49 +00:00: 
+2025-12-07 00:01:49 +00:00: 🚀 [06:04 - 06:08]
+2025-12-07 00:01:49 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:49 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [06:08 - 06:12]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [06:12 - 06:16]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [06:16 - 06:20]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [06:20 - 06:24]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [06:24 - 06:28]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [06:28 - 06:32]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [06:32 - 06:36]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [06:36 - 06:40]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [06:48 - 06:52]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [06:52 - 06:56]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [06:56 - 07:00]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [07:00 - 07:04]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [07:04 - 07:08]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [07:08 - 07:12]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [07:12 - 07:16]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [07:16 - 07:20]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [07:20 - 07:24]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [07:24 - 07:28]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:50 +00:00: 
+2025-12-07 00:01:50 +00:00: 🚀 [07:28 - 07:32]
+2025-12-07 00:01:50 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:50 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:51 +00:00: 
+2025-12-07 00:01:51 +00:00: 🚀 [07:32 - 07:36]
+2025-12-07 00:01:51 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:51 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:51 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:51 +00:00: 
+2025-12-07 00:01:51 +00:00: 🚀 [07:36 - 07:40]
+2025-12-07 00:01:51 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:51 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:51 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:51 +00:00: 
+2025-12-07 00:01:51 +00:00: 🚀 [07:40 - 07:44]
+2025-12-07 00:01:51 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:51 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:51 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:51 +00:00: 
+2025-12-07 00:01:51 +00:00: 🚀 [07:44 - 07:48]
+2025-12-07 00:01:51 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:51 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:51 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:51 +00:00: 
+2025-12-07 00:01:51 +00:00: 🚀 [07:48 - 07:52]
+2025-12-07 00:01:51 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:51 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:51 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:51 +00:00: 
+2025-12-07 00:01:51 +00:00: 🚀 [07:52 - 07:56]
+2025-12-07 00:01:51 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:51 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:51 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:51 +00:00: 
+2025-12-07 00:01:51 +00:00: 🚀 [07:56 - 08:00]
+2025-12-07 00:01:51 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:51 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:51 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:51 +00:00: 
+2025-12-07 00:01:51 +00:00: 🚀 [08:00 - 08:04]
+2025-12-07 00:01:51 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:51 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:51 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:51 +00:00: 
+2025-12-07 00:01:51 +00:00: 🚀 [08:04 - 08:08]
+2025-12-07 00:01:51 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:51 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:51 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:51 +00:00: 
+2025-12-07 00:01:51 +00:00: 🚀 [08:08 - 08:12]
+2025-12-07 00:01:51 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:51 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:51 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:51 +00:00: 
+2025-12-07 00:01:51 +00:00: 🚀 [08:12 - 08:16]
+2025-12-07 00:01:51 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:51 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:51 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:51 +00:00: 
+2025-12-07 00:01:51 +00:00: 🚀 [08:16 - 08:20]
+2025-12-07 00:01:51 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:51 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:51 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:51 +00:00: 
+2025-12-07 00:01:51 +00:00: 🚀 [08:20 - 08:24]
+2025-12-07 00:01:51 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:51 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:51 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:51 +00:00: 
+2025-12-07 00:01:51 +00:00: 🚀 [08:24 - 08:28]
+2025-12-07 00:01:51 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:51 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:51 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:52 +00:00: 
+2025-12-07 00:01:52 +00:00: 🚀 [08:28 - 08:32]
+2025-12-07 00:01:52 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:52 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:52 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:52 +00:00: 
+2025-12-07 00:01:52 +00:00: 🚀 [08:32 - 08:36]
+2025-12-07 00:01:52 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:52 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:52 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:52 +00:00: 
+2025-12-07 00:01:52 +00:00: 🚀 [08:36 - 08:40]
+2025-12-07 00:01:52 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:52 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:52 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:52 +00:00: 
+2025-12-07 00:01:52 +00:00: 🚀 [08:40 - 08:44]
+2025-12-07 00:01:52 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:52 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:52 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:52 +00:00: 
+2025-12-07 00:01:52 +00:00: 🚀 [08:44 - 08:48]
+2025-12-07 00:01:52 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:52 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:52 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:52 +00:00: 
+2025-12-07 00:01:52 +00:00: 🚀 [08:48 - 08:52]
+2025-12-07 00:01:52 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:52 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:52 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:52 +00:00: 
+2025-12-07 00:01:52 +00:00: 🚀 [08:52 - 08:56]
+2025-12-07 00:01:52 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:52 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:52 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:52 +00:00: 
+2025-12-07 00:01:52 +00:00: 🚀 [08:56 - 09:00]
+2025-12-07 00:01:52 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:52 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:52 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:52 +00:00: 
+2025-12-07 00:01:52 +00:00: 🚀 [09:00 - 09:04]
+2025-12-07 00:01:52 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:52 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:52 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:52 +00:00: 
+2025-12-07 00:01:52 +00:00: 🚀 [09:04 - 09:08]
+2025-12-07 00:01:52 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:52 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:52 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:52 +00:00: 
+2025-12-07 00:01:52 +00:00: 🚀 [09:08 - 09:12]
+2025-12-07 00:01:52 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:52 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:52 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:52 +00:00: 
+2025-12-07 00:01:52 +00:00: 🚀 [09:12 - 09:16]
+2025-12-07 00:01:52 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:52 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:52 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:52 +00:00: 
+2025-12-07 00:01:52 +00:00: 🚀 [09:16 - 09:20]
+2025-12-07 00:01:52 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:52 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:52 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [09:20 - 09:24]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [09:24 - 09:28]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [09:28 - 09:32]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [09:32 - 09:36]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [09:36 - 09:40]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [09:40 - 09:44]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [09:44 - 09:48]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [09:48 - 09:52]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [09:52 - 09:56]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [09:56 - 10:00]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [10:00 - 10:04]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [10:04 - 10:08]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [10:08 - 10:12]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [10:12 - 10:16]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [10:16 - 10:20]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [10:20 - 10:24]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [10:24 - 10:28]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [10:28 - 10:32]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [10:32 - 10:36]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:53 +00:00: 
+2025-12-07 00:01:53 +00:00: 🚀 [10:36 - 10:40]
+2025-12-07 00:01:53 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:53 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:53 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [10:40 - 10:44]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [10:44 - 10:48]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [10:48 - 10:52]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [10:52 - 10:56]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [10:56 - 11:00]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [11:00 - 11:04]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [11:04 - 11:08]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [11:08 - 11:12]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [11:12 - 11:16]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [11:16 - 11:20]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [11:20 - 11:24]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [11:24 - 11:28]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [11:28 - 11:32]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [11:32 - 11:36]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [11:36 - 11:40]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [11:40 - 11:44]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [11:44 - 11:48]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [11:48 - 11:52]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [11:52 - 11:56]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [11:56 - 12:00]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [12:00 - 12:04]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [12:04 - 12:08]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [12:08 - 12:12]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:54 +00:00: 
+2025-12-07 00:01:54 +00:00: 🚀 [12:12 - 12:16]
+2025-12-07 00:01:54 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:54 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:54 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [12:16 - 12:20]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [12:20 - 12:24]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [12:24 - 12:28]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [12:28 - 12:32]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [12:32 - 12:36]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [12:36 - 12:40]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [12:40 - 12:44]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [12:44 - 12:48]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [12:48 - 12:52]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [12:52 - 12:56]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [12:56 - 13:00]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [13:00 - 13:04]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [13:04 - 13:08]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [13:08 - 13:12]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [13:12 - 13:16]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [13:16 - 13:20]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [13:20 - 13:24]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [13:24 - 13:28]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [13:28 - 13:32]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [13:32 - 13:36]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:55 +00:00: 
+2025-12-07 00:01:55 +00:00: 🚀 [13:36 - 13:40]
+2025-12-07 00:01:55 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:55 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:55 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:56 +00:00: 
+2025-12-07 00:01:56 +00:00: 🚀 [13:40 - 13:44]
+2025-12-07 00:01:56 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:56 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:56 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:56 +00:00: 
+2025-12-07 00:01:56 +00:00: 🚀 [13:44 - 13:48]
+2025-12-07 00:01:56 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:56 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:56 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:56 +00:00: 
+2025-12-07 00:01:56 +00:00: 🚀 [13:48 - 13:52]
+2025-12-07 00:01:56 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 00:01:56 +00:00: ⚠️ All models in cooldown.
+2025-12-07 00:01:56 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 00:01:56 +00:00: 
+2025-12-07 00:01:56 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=aOtB-yw9GSE
+2025-12-07 00:01:56 +00:00: 
+2025-12-07 00:01:56 +00:00: 🏁 ASR session ended
+2025-12-07 00:01:56 +00:00:    Total chunks: 208
+2025-12-07 00:01:56 +00:00:    Successful: 0
+2025-12-07 00:01:56 +00:00:    API Pool status: 204 total requests
+2025-12-07 00:01:56 +00:00: INFO:     127.0.0.1:58862 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 00:01:56 +00:00: 
+2025-12-07 00:01:56 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=aOtB-yw9GSE
+2025-12-07 00:01:56 +00:00: INFO:     127.0.0.1:58872 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 00:01:56 +00:00: INFO:     127.0.0.1:58874 - "POST /stop-asr HTTP/1.1" 404 Not Found

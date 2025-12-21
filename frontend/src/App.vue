@@ -17,7 +17,7 @@ import UserProfileModal from './components/UserProfileModal.vue'
 import HeroSection from './components/HeroSection.vue'
 import VideoGallery from './components/VideoGallery.vue'
 import VideoPlayer from './components/VideoPlayer.vue'
-import CharacterList from './components/CharacterList.vue'
+import DetectionPanel from './components/DetectionPanel.vue'
 import LiveTranscription from './components/LiveTranscription.vue'
 import KeyboardShortcutsModal from './components/KeyboardShortcutsModal.vue'
 import TutorialModal from './components/TutorialModal.vue'
@@ -70,6 +70,8 @@ const authStore = useAuthStore()
 // Pastikan backend Node.js jalan di port 3000
 const socket = io("/", { path: "/socket.io" });
 const currentVideoId = ref(null)
+const liveStreamUrl = ref(null)
+const liveVideoUrl = ref(null)  // YouTube URL for live mode
 const currentStartTime = ref(0)
 const isLoading = ref(false)
 const isASRLoadng = ref(false)
@@ -90,6 +92,14 @@ const shouldAutoPlay = ref(false)
 // Data Hasil AI
 const characters = ref([])
 const currentVideoTime = ref(0)
+const aiConnected = ref(false)
+
+// AI Control Settings
+const showBoundingBox = ref(true)
+const showLabels = ref(true)
+const confidenceThreshold = ref(50)
+const targetLanguage = ref('id') // 'id' for Indonesia, 'en' for English
+const videoInfo = ref(null)
 
 const isAchievementVisible = ref(false)
 const achievementMessage = ref('')
@@ -224,6 +234,46 @@ const handleAnalyze = async (payload) => {
   } finally {
     isLoading.value = false;
   }
+};
+
+const handleLiveStream = async (payload) => {
+  const videoUrl = payload.videoUrl;
+  console.log("[App] Starting Live Stream with URL:", videoUrl);
+  
+  // Reset state
+  currentVideoId.value = 'live-stream'; // Dummy ID to trigger view switch
+  liveStreamUrl.value = 'socket-relay'; // Flag for socket mode
+  liveVideoUrl.value = videoUrl; // Pass YouTube URL to player
+  currentStartTime.value = 0;
+  
+  characters.value = [];
+  subtitlesQueue.value = [];
+  displayedSubtitles.value = [];
+  
+  // NOTE: Don't emit start-live-stream here!
+  // VideoPlayer.vue will handle session request when it mounts
+  // This prevents double session creation
+  console.log("[App] Live Stream mode set, VideoPlayer will request session");
+  
+  // Start ASR untuk Live Stream juga
+  try {
+    console.log("[App] Starting ASR for Live Stream...");
+    await axios.post('/api/start-asr', {
+      videoUrl: videoUrl,
+      startTime: '0'
+    });
+    console.log("[App] ASR started for Live Stream");
+  } catch (error) {
+    console.error("[App] Failed to start ASR:", error);
+  }
+  
+  shouldAutoPlay.value = true;
+  
+  // Auto Scroll ke Player
+  nextTick(() => {
+    const playerSection = document.getElementById('player-section');
+    if (playerSection) playerSection.scrollIntoView({ behavior: 'smooth' });
+  });
 };
 
 const handleStartASR = async (payload) => {
@@ -393,11 +443,51 @@ const handlePlayerReady = () => {
   console.log("[App] Video player ready");
 }
 
-const handleCloseVideo = () => {
+const handleBoxesUpdate = (boxes) => {
+  characters.value = boxes;
+  console.log("[App] Boxes updated:", boxes.length, "objects detected");
+}
+
+const handleChangeLanguage = async (lang) => {
+  targetLanguage.value = lang;
+  console.log("[App] Changing target language to:", lang);
+  
+  try {
+    const response = await axios.post('/api/change-language', {
+      targetLanguage: lang
+    });
+    console.log("[App] Language change response:", response.data);
+  } catch (error) {
+    console.error("[App] Failed to change language:", error.message);
+  }
+}
+
+const handleCloseVideo = async () => {
+  // If live streaming, send stop signal
+  if (liveStreamUrl.value === 'socket-relay') {
+    socket.emit('stop-live-stream');
+    console.log("[App] Sent stop-live-stream event");
+  }
+  
+  // Also explicitly stop ASR via API
+  try {
+    await axios.post('/api/stop-asr');
+    console.log("[App] ASR stopped via API");
+  } catch (error) {
+    console.log("[App] Failed to stop ASR:", error.message);
+  }
+  
   currentVideoId.value = null;
+  liveStreamUrl.value = null;
+  liveVideoUrl.value = null;
   shouldAutoPlay.value = false;
   subtitlesQueue.value = [];
   displayedSubtitles.value = [];
+  
+  // Reset search bar loading state
+  if (stickySearchBarRef.value && stickySearchBarRef.value.resetLiveLoading) {
+    stickySearchBarRef.value.resetLiveLoading();
+  }
 }
 
 // Handle search results from StickySearchBar
@@ -418,6 +508,15 @@ const handleSelectSearchVideo = (video) => {
     stickySearchBarRef.value.setVideoUrl(`https://www.youtube.com/watch?v=${video.videoId}`)
   }
   searchResults.value = []
+}
+
+// Handle video selection from gallery - just set URL to input, don't auto-play
+const handleGalleryVideoSelect = (url) => {
+  if (stickySearchBarRef.value) {
+    stickySearchBarRef.value.setVideoUrl(url)
+  }
+  // Scroll to top so user can see the input
+  window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 // --- SOCKET LISTENER ---
@@ -478,6 +577,26 @@ onMounted(() => {
         if (sub) sub.isNew = false;
       }, 3000);
     }
+  });
+
+  // Listen for stream started event from Python
+  socket.on('stream-started', (data) => {
+    console.log('[Frontend] Stream started:', data);
+    // Reset loading state
+    if (stickySearchBarRef.value && stickySearchBarRef.value.resetLiveLoading) {
+      stickySearchBarRef.value.resetLiveLoading();
+    }
+  });
+
+  // Listen for stream error
+  socket.on('stream-error', (data) => {
+    console.error('[Frontend] Stream error:', data);
+    alert('Gagal memulai stream: ' + (data.message || 'Unknown error'));
+    // Reset state
+    if (stickySearchBarRef.value && stickySearchBarRef.value.resetLiveLoading) {
+      stickySearchBarRef.value.resetLiveLoading();
+    }
+    handleCloseVideo();
   });
   
   // Start sync interval (backup untuk sinkronisasi)
@@ -656,7 +775,7 @@ onUnmounted(() => {
         <StickySearchBar 
           ref="stickySearchBarRef"
           :loading="isLoading"
-          @analyze="handleAnalyze"
+          @live-stream="handleLiveStream"
           @search-results="handleSearchResults"
           @sticky-change="handleStickyChange"
         />
@@ -703,7 +822,7 @@ onUnmounted(() => {
           {{ searchError }}
         </div>
         
-        <VideoGallery @select-video="(url) => handleAnalyze({ url, startMinute: 0 })" />
+        <VideoGallery @select-video="handleGalleryVideoSelect" />
       
       </div>
 
@@ -719,27 +838,48 @@ onUnmounted(() => {
           Kembali ke Pencarian
         </button>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[85vh]">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[75vh] max-h-[700px]">
           
-          <div class="lg:col-span-3 h-full overflow-hidden" :class="{'hidden lg:block': activeMobileTab !== 'characters'}">
-            <CharacterList :characters="characters" />
+          <div class="lg:col-span-3 h-full overflow-hidden max-h-[700px]" :class="{'hidden lg:block': activeMobileTab !== 'characters'}">
+            <DetectionPanel 
+              :characters="characters"
+              :ai-connected="aiConnected"
+              :video-info="videoInfo"
+              :current-time="currentVideoTime"
+              :show-bounding-box="showBoundingBox"
+              :show-labels="showLabels"
+              :confidence-threshold="confidenceThreshold"
+              :target-language="targetLanguage"
+              @toggle-bbox="showBoundingBox = $event"
+              @toggle-labels="showLabels = $event"
+              @update-confidence="confidenceThreshold = $event"
+              @change-language="handleChangeLanguage"
+            />
           </div>
 
           <div class="lg:col-span-6 flex flex-col h-full">
             <VideoPlayer 
               ref="videoPlayerRef"
               :video-id="currentVideoId" 
+              :stream-url="liveStreamUrl"
+              :live-video-url="liveVideoUrl"
               :start-time="currentStartTime"
               :auto-play="shouldAutoPlay"
+              :characters="characters"
+              :show-bounding-box="showBoundingBox"
+              :show-labels="showLabels"
+              :confidence-threshold="confidenceThreshold"
               @close="handleCloseVideo"
               @timeUpdate="currentVideoTime = $event"
               @seek="handleVideoSeek"
               @playerReady="handlePlayerReady"
+              @ai-connected="aiConnected = $event"
+              @boxes-update="handleBoxesUpdate"
             />
             
             <div class="flex lg:hidden mt-4 bg-white/5 rounded-xl p-1 border border-white/10 backdrop-blur">
               <button @click="activeMobileTab = 'characters'" class="flex-1 py-2 rounded-lg text-sm font-bold transition-all" :class="activeMobileTab === 'characters' ? 'bg-wayang-primary text-white' : 'text-gray-400'">
-                🎭 Tokoh
+                🤖 Panel AI
               </button>
               <button @click="activeMobileTab = 'subtitles'" class="flex-1 py-2 rounded-lg text-sm font-bold transition-all" :class="activeMobileTab === 'subtitles' ? 'bg-wayang-primary text-white' : 'text-gray-400'">
                 📜 Subtitle
@@ -747,7 +887,7 @@ onUnmounted(() => {
             </div>
           </div>
 
-          <div class="lg:col-span-3 h-full overflow-hidden" :class="{'hidden lg:block': activeMobileTab !== 'subtitles'}">
+          <div class="lg:col-span-3 h-full overflow-hidden max-h-[700px]" :class="{'hidden lg:block': activeMobileTab !== 'subtitles'}">
             <LiveTranscription :subtitles="syncedSubtitles" :currentTime="currentVideoTime" :queueCount="subtitlesQueue.length" />
           </div>
 

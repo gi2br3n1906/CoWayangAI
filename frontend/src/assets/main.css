@@ -6,9 +6,10 @@
 
 @layer base {
   body {
-    background: linear-gradient(165deg, rgba(120,29,66,0.95) 0%, rgba(67,11,29,0.97) 45%, rgba(163,66,60,0.9) 90%);
+    background: linear-gradient(135deg, #781D42 0%, #5a1632 50%, #3d0f22 100%);
     color: #FCEFE4;
     font-family: 'Poppins', 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
   }
   
   html {

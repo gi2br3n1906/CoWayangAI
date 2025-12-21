@@ -1,0 +1,963 @@
+2025-12-07 02:09:28 +00:00: ⚠️ WebRTC VAD not available, trying Silero...
+2025-12-07 02:09:33 +00:00: Using cache found in /root/.cache/torch/hub/snakers4_silero-vad_master
+2025-12-07 02:09:33 +00:00: ⚠️ Silero VAD failed: type object 'RecursiveScriptModule' has no attribute '_construct'. Using energy-based VAD.
+2025-12-07 02:09:33 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:368: DeprecationWarning: 
+2025-12-07 02:09:33 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 02:09:33 +00:00: 
+2025-12-07 02:09:33 +00:00:         Read more about it in the
+2025-12-07 02:09:33 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 02:09:33 +00:00:         
+2025-12-07 02:09:33 +00:00:   @app.on_event("startup")
+2025-12-07 02:09:33 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:382: DeprecationWarning: 
+2025-12-07 02:09:33 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 02:09:33 +00:00: 
+2025-12-07 02:09:33 +00:00:         Read more about it in the
+2025-12-07 02:09:33 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 02:09:33 +00:00:         
+2025-12-07 02:09:33 +00:00:   @app.on_event("shutdown")
+2025-12-07 02:09:33 +00:00: INFO:     Started server process [2382905]
+2025-12-07 02:09:33 +00:00: INFO:     Waiting for application startup.
+2025-12-07 02:09:33 +00:00: ✅ API Pool: Loaded 14 API key(s)
+2025-12-07 02:09:33 +00:00: ✅ API Pool: Loaded 4 model(s): ['gemini-2.0-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash-lite', 'gemini-2.5-flash']
+2025-12-07 02:09:33 +00:00: 
+2025-12-07 02:09:33 +00:00: ============================================================
+2025-12-07 02:09:33 +00:00: 🎬 CoWayangAI ASR Service Starting...
+2025-12-07 02:09:33 +00:00: ============================================================
+2025-12-07 02:09:33 +00:00:    API Keys loaded: 14
+2025-12-07 02:09:33 +00:00:    Cooldown time: 60s
+2025-12-07 02:09:33 +00:00: ============================================================
+2025-12-07 02:09:33 +00:00: 
+2025-12-07 02:09:33 +00:00: INFO:     Application startup complete.
+2025-12-07 02:09:33 +00:00: INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2025-12-07 02:09:37 +00:00: ⚠️ WebRTC VAD not available, trying Silero...
+2025-12-07 02:09:40 +00:00: Using cache found in /root/.cache/torch/hub/snakers4_silero-vad_master
+2025-12-07 02:09:40 +00:00: ⚠️ Silero VAD failed: type object 'RecursiveScriptModule' has no attribute '_construct'. Using energy-based VAD.
+2025-12-07 02:09:40 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:368: DeprecationWarning: 
+2025-12-07 02:09:40 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 02:09:40 +00:00: 
+2025-12-07 02:09:40 +00:00:         Read more about it in the
+2025-12-07 02:09:40 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 02:09:40 +00:00:         
+2025-12-07 02:09:40 +00:00:   @app.on_event("startup")
+2025-12-07 02:09:40 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:382: DeprecationWarning: 
+2025-12-07 02:09:40 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 02:09:40 +00:00: 
+2025-12-07 02:09:40 +00:00:         Read more about it in the
+2025-12-07 02:09:40 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 02:09:40 +00:00:         
+2025-12-07 02:09:40 +00:00:   @app.on_event("shutdown")
+2025-12-07 02:09:40 +00:00: INFO:     Started server process [2383101]
+2025-12-07 02:09:40 +00:00: INFO:     Waiting for application startup.
+2025-12-07 02:09:40 +00:00: ✅ API Pool: Loaded 14 API key(s)
+2025-12-07 02:09:40 +00:00: ✅ API Pool: Loaded 4 model(s): ['gemini-2.0-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash-lite', 'gemini-2.5-flash']
+2025-12-07 02:09:40 +00:00: 
+2025-12-07 02:09:40 +00:00: ============================================================
+2025-12-07 02:09:40 +00:00: 🎬 CoWayangAI ASR Service Starting...
+2025-12-07 02:09:40 +00:00: ============================================================
+2025-12-07 02:09:40 +00:00:    API Keys loaded: 14
+2025-12-07 02:09:40 +00:00:    Cooldown time: 60s
+2025-12-07 02:09:40 +00:00: ============================================================
+2025-12-07 02:09:40 +00:00: 
+2025-12-07 02:09:40 +00:00: INFO:     Application startup complete.
+2025-12-07 02:09:40 +00:00: INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2025-12-07 02:36:35 +00:00: ⚠️ WebRTC VAD not available, trying Silero...
+2025-12-07 02:36:40 +00:00: Using cache found in /root/.cache/torch/hub/snakers4_silero-vad_master
+2025-12-07 02:36:40 +00:00: ⚠️ Silero VAD failed: type object 'RecursiveScriptModule' has no attribute '_construct'. Using energy-based VAD.
+2025-12-07 02:36:40 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:368: DeprecationWarning: 
+2025-12-07 02:36:40 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 02:36:40 +00:00: 
+2025-12-07 02:36:40 +00:00:         Read more about it in the
+2025-12-07 02:36:40 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 02:36:40 +00:00:         
+2025-12-07 02:36:40 +00:00:   @app.on_event("startup")
+2025-12-07 02:36:40 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:382: DeprecationWarning: 
+2025-12-07 02:36:40 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 02:36:40 +00:00: 
+2025-12-07 02:36:40 +00:00:         Read more about it in the
+2025-12-07 02:36:40 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 02:36:40 +00:00:         
+2025-12-07 02:36:40 +00:00:   @app.on_event("shutdown")
+2025-12-07 02:36:40 +00:00: INFO:     Started server process [2395926]
+2025-12-07 02:36:40 +00:00: INFO:     Waiting for application startup.
+2025-12-07 02:36:40 +00:00: ✅ API Pool: Loaded 12 API key(s)
+2025-12-07 02:36:40 +00:00: ✅ API Pool: Loaded 4 model(s): ['gemini-2.0-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash-lite', 'gemini-2.5-flash']
+2025-12-07 02:36:40 +00:00: 
+2025-12-07 02:36:40 +00:00: ============================================================
+2025-12-07 02:36:40 +00:00: 🎬 CoWayangAI ASR Service Starting...
+2025-12-07 02:36:40 +00:00: ============================================================
+2025-12-07 02:36:40 +00:00:    API Keys loaded: 12
+2025-12-07 02:36:40 +00:00:    Cooldown time: 60s
+2025-12-07 02:36:40 +00:00: ============================================================
+2025-12-07 02:36:40 +00:00: 
+2025-12-07 02:36:40 +00:00: INFO:     Application startup complete.
+2025-12-07 02:36:40 +00:00: INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2025-12-07 02:37:26 +00:00: ⚠️ WebRTC VAD not available, trying Silero...
+2025-12-07 02:37:31 +00:00: Using cache found in /root/.cache/torch/hub/snakers4_silero-vad_master
+2025-12-07 02:37:31 +00:00: ⚠️ Silero VAD failed: type object 'RecursiveScriptModule' has no attribute '_construct'. Using energy-based VAD.
+2025-12-07 02:37:31 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:368: DeprecationWarning: 
+2025-12-07 02:37:31 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 02:37:31 +00:00: 
+2025-12-07 02:37:31 +00:00:         Read more about it in the
+2025-12-07 02:37:31 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 02:37:31 +00:00:         
+2025-12-07 02:37:31 +00:00:   @app.on_event("startup")
+2025-12-07 02:37:31 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:382: DeprecationWarning: 
+2025-12-07 02:37:31 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 02:37:31 +00:00: 
+2025-12-07 02:37:31 +00:00:         Read more about it in the
+2025-12-07 02:37:31 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 02:37:31 +00:00:         
+2025-12-07 02:37:31 +00:00:   @app.on_event("shutdown")
+2025-12-07 02:37:32 +00:00: INFO:     Started server process [2396368]
+2025-12-07 02:37:32 +00:00: INFO:     Waiting for application startup.
+2025-12-07 02:37:32 +00:00: ✅ API Pool: Loaded 12 API key(s)
+2025-12-07 02:37:32 +00:00: ✅ API Pool: Loaded 4 model(s): ['gemini-2.0-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash-lite', 'gemini-2.5-flash']
+2025-12-07 02:37:32 +00:00: 
+2025-12-07 02:37:32 +00:00: ============================================================
+2025-12-07 02:37:32 +00:00: 🎬 CoWayangAI ASR Service Starting...
+2025-12-07 02:37:32 +00:00: ============================================================
+2025-12-07 02:37:32 +00:00:    API Keys loaded: 12
+2025-12-07 02:37:32 +00:00:    Cooldown time: 60s
+2025-12-07 02:37:32 +00:00: ============================================================
+2025-12-07 02:37:32 +00:00: 
+2025-12-07 02:37:32 +00:00: INFO:     Application startup complete.
+2025-12-07 02:37:32 +00:00: INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2025-12-07 02:42:54 +00:00: ⚠️ WebRTC VAD not available, trying Silero...
+2025-12-07 02:42:58 +00:00: Using cache found in /root/.cache/torch/hub/snakers4_silero-vad_master
+2025-12-07 02:42:58 +00:00: ⚠️ Silero VAD failed: type object 'RecursiveScriptModule' has no attribute '_construct'. Using energy-based VAD.
+2025-12-07 02:42:58 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:368: DeprecationWarning: 
+2025-12-07 02:42:58 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 02:42:58 +00:00: 
+2025-12-07 02:42:58 +00:00:         Read more about it in the
+2025-12-07 02:42:58 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 02:42:58 +00:00:         
+2025-12-07 02:42:58 +00:00:   @app.on_event("startup")
+2025-12-07 02:42:58 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:382: DeprecationWarning: 
+2025-12-07 02:42:58 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 02:42:58 +00:00: 
+2025-12-07 02:42:58 +00:00:         Read more about it in the
+2025-12-07 02:42:58 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 02:42:58 +00:00:         
+2025-12-07 02:42:58 +00:00:   @app.on_event("shutdown")
+2025-12-07 02:42:58 +00:00: INFO:     Started server process [2398677]
+2025-12-07 02:42:58 +00:00: INFO:     Waiting for application startup.
+2025-12-07 02:42:58 +00:00: ✅ API Pool: Loaded 15 API key(s)
+2025-12-07 02:42:58 +00:00: ✅ API Pool: Loaded 4 model(s): ['gemini-2.0-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash-lite', 'gemini-2.5-flash']
+2025-12-07 02:42:58 +00:00: 
+2025-12-07 02:42:58 +00:00: ============================================================
+2025-12-07 02:42:58 +00:00: 🎬 CoWayangAI ASR Service Starting...
+2025-12-07 02:42:58 +00:00: ============================================================
+2025-12-07 02:42:58 +00:00:    API Keys loaded: 15
+2025-12-07 02:42:58 +00:00:    Cooldown time: 60s
+2025-12-07 02:42:58 +00:00: ============================================================
+2025-12-07 02:42:58 +00:00: 
+2025-12-07 02:42:58 +00:00: INFO:     Application startup complete.
+2025-12-07 02:42:58 +00:00: INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2025-12-07 02:43:35 +00:00: ⚠️ WebRTC VAD not available, trying Silero...
+2025-12-07 02:43:38 +00:00: Using cache found in /root/.cache/torch/hub/snakers4_silero-vad_master
+2025-12-07 02:43:38 +00:00: ⚠️ Silero VAD failed: type object 'RecursiveScriptModule' has no attribute '_construct'. Using energy-based VAD.
+2025-12-07 02:43:38 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:368: DeprecationWarning: 
+2025-12-07 02:43:38 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 02:43:38 +00:00: 
+2025-12-07 02:43:38 +00:00:         Read more about it in the
+2025-12-07 02:43:38 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 02:43:38 +00:00:         
+2025-12-07 02:43:38 +00:00:   @app.on_event("startup")
+2025-12-07 02:43:38 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:382: DeprecationWarning: 
+2025-12-07 02:43:38 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 02:43:38 +00:00: 
+2025-12-07 02:43:38 +00:00:         Read more about it in the
+2025-12-07 02:43:38 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 02:43:38 +00:00:         
+2025-12-07 02:43:38 +00:00:   @app.on_event("shutdown")
+2025-12-07 02:43:38 +00:00: INFO:     Started server process [2399154]
+2025-12-07 02:43:38 +00:00: INFO:     Waiting for application startup.
+2025-12-07 02:43:38 +00:00: ✅ API Pool: Loaded 15 API key(s)
+2025-12-07 02:43:38 +00:00: ✅ API Pool: Loaded 4 model(s): ['gemini-2.0-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash-lite', 'gemini-2.5-flash']
+2025-12-07 02:43:38 +00:00: 
+2025-12-07 02:43:38 +00:00: ============================================================
+2025-12-07 02:43:38 +00:00: 🎬 CoWayangAI ASR Service Starting...
+2025-12-07 02:43:38 +00:00: ============================================================
+2025-12-07 02:43:38 +00:00:    API Keys loaded: 15
+2025-12-07 02:43:38 +00:00:    Cooldown time: 60s
+2025-12-07 02:43:38 +00:00: ============================================================
+2025-12-07 02:43:38 +00:00: 
+2025-12-07 02:43:38 +00:00: INFO:     Application startup complete.
+2025-12-07 02:43:38 +00:00: INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2025-12-07 02:54:18 +00:00: ⚠️ WebRTC VAD not available, trying Silero...
+2025-12-07 02:54:22 +00:00: Using cache found in /root/.cache/torch/hub/snakers4_silero-vad_master
+2025-12-07 02:54:23 +00:00: ⚠️ Silero VAD failed: type object 'RecursiveScriptModule' has no attribute '_construct'. Using energy-based VAD.
+2025-12-07 02:54:23 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:368: DeprecationWarning: 
+2025-12-07 02:54:23 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 02:54:23 +00:00: 
+2025-12-07 02:54:23 +00:00:         Read more about it in the
+2025-12-07 02:54:23 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 02:54:23 +00:00:         
+2025-12-07 02:54:23 +00:00:   @app.on_event("startup")
+2025-12-07 02:54:23 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:382: DeprecationWarning: 
+2025-12-07 02:54:23 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 02:54:23 +00:00: 
+2025-12-07 02:54:23 +00:00:         Read more about it in the
+2025-12-07 02:54:23 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 02:54:23 +00:00:         
+2025-12-07 02:54:23 +00:00:   @app.on_event("shutdown")
+2025-12-07 02:54:23 +00:00: INFO:     Started server process [2403677]
+2025-12-07 02:54:23 +00:00: INFO:     Waiting for application startup.
+2025-12-07 02:54:23 +00:00: ✅ API Pool: Loaded 15 API key(s)
+2025-12-07 02:54:23 +00:00: ✅ API Pool: Loaded 4 model(s): ['gemini-2.0-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash-lite', 'gemini-2.5-flash']
+2025-12-07 02:54:23 +00:00: 
+2025-12-07 02:54:23 +00:00: ============================================================
+2025-12-07 02:54:23 +00:00: 🎬 CoWayangAI ASR Service Starting...
+2025-12-07 02:54:23 +00:00: ============================================================
+2025-12-07 02:54:23 +00:00:    API Keys loaded: 15
+2025-12-07 02:54:23 +00:00:    Cooldown time: 60s
+2025-12-07 02:54:23 +00:00: ============================================================
+2025-12-07 02:54:23 +00:00: 
+2025-12-07 02:54:23 +00:00: INFO:     Application startup complete.
+2025-12-07 02:54:23 +00:00: INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2025-12-07 02:54:43 +00:00: 
+2025-12-07 02:54:43 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=M_3XC2KMK50
+2025-12-07 02:54:43 +00:00: INFO:     127.0.0.1:59918 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 02:54:44 +00:00: INFO:     127.0.0.1:59918 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-07 02:55:17 +00:00: 🌐 Target language: English
+2025-12-07 02:55:17 +00:00: 
+2025-12-07 02:55:17 +00:00: ============================================================
+2025-12-07 02:55:17 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 02:55:17 +00:00: ============================================================INFO:     127.0.0.1:59208 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-07 02:55:17 +00:00: 
+2025-12-07 02:55:17 +00:00: 📹 Video: https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 02:55:17 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-07 02:55:17 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 02:55:17 +00:00: 🔑 API Pool: 15 keys available
+2025-12-07 02:55:17 +00:00: ============================================================
+2025-12-07 02:55:17 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 02:55:17 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 02:55:17 +00:00: ✅ Pipeline started from 0s
+2025-12-07 02:55:17 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 02:55:17 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 02:55:19 +00:00: 
+2025-12-07 02:55:19 +00:00: ▶️ ASR Resume request at 0s for https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 02:55:24 +00:00: 📼 Stream ended
+2025-12-07 02:55:24 +00:00: 🌐 Target language: Indonesia
+2025-12-07 02:55:24 +00:00: 
+2025-12-07 02:55:24 +00:00: ============================================================
+2025-12-07 02:55:24 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 02:55:24 +00:00: ============================================================
+2025-12-07 02:55:24 +00:00: 📹 Video: https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 02:55:24 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-07 02:55:24 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 02:55:24 +00:00: 🔑 API Pool: 15 keys available
+2025-12-07 02:55:24 +00:00: ============================================================
+2025-12-07 02:55:24 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 02:55:24 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 02:55:24 +00:00: INFO:     127.0.0.1:59208 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-07 02:55:24 +00:00: 
+2025-12-07 02:55:24 +00:00: 🏁 ASR session ended
+2025-12-07 02:55:24 +00:00:    Total chunks: 0
+2025-12-07 02:55:24 +00:00:    Successful: 0
+2025-12-07 02:55:24 +00:00:    API Pool status: 0 total requests
+2025-12-07 02:55:24 +00:00: ✅ Pipeline started from 0s
+2025-12-07 02:55:24 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 02:55:24 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 02:55:26 +00:00: 
+2025-12-07 02:55:26 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 02:55:31 +00:00: 📼 Stream ended
+2025-12-07 02:55:31 +00:00: 
+2025-12-07 02:55:31 +00:00: 🏁 ASR session ended
+2025-12-07 02:55:31 +00:00:    Total chunks: 0
+2025-12-07 02:55:31 +00:00:    Successful: 0
+2025-12-07 02:55:31 +00:00:    API Pool status: 0 total requests
+2025-12-07 02:55:31 +00:00: INFO:     127.0.0.1:40380 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 02:55:31 +00:00: 
+2025-12-07 02:55:31 +00:00: ▶️ ASR Resume request at 5348s for https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 02:55:31 +00:00: 🌐 Target language: Indonesia
+2025-12-07 02:55:31 +00:00: 
+2025-12-07 02:55:31 +00:00: ============================================================
+2025-12-07 02:55:31 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 02:55:31 +00:00: ============================================================
+2025-12-07 02:55:31 +00:00: 📹 Video: https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 02:55:31 +00:00: ⏱️  Start time: 89:08 (5348s)
+2025-12-07 02:55:31 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 02:55:31 +00:00: 🔑 API Pool: 15 keys available
+2025-12-07 02:55:31 +00:00: ============================================================
+2025-12-07 02:55:31 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 02:55:31 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 02:55:31 +00:00: INFO:     127.0.0.1:40396 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-07 02:55:31 +00:00: 
+2025-12-07 02:55:31 +00:00: ⏩ ASR Seek request: 5348s for https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 02:55:31 +00:00: ✅ Pipeline started from 5348s
+2025-12-07 02:55:31 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 02:55:31 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 02:55:31 +00:00: 
+2025-12-07 02:55:31 +00:00: 🏁 ASR session ended
+2025-12-07 02:55:31 +00:00:    Total chunks: 0
+2025-12-07 02:55:31 +00:00:    Successful: 0
+2025-12-07 02:55:31 +00:00:    API Pool status: 0 total requests
+2025-12-07 02:55:31 +00:00: 🌐 Target language: Indonesia
+2025-12-07 02:55:31 +00:00: 
+2025-12-07 02:55:31 +00:00: ============================================================
+2025-12-07 02:55:31 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 02:55:31 +00:00: ============================================================
+2025-12-07 02:55:31 +00:00: 📹 Video: https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 02:55:31 +00:00: ⏱️  Start time: 89:08 (5348s)
+2025-12-07 02:55:31 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 02:55:31 +00:00: 🔑 API Pool: 15 keys available
+2025-12-07 02:55:31 +00:00: ============================================================
+2025-12-07 02:55:31 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 02:55:31 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 02:55:31 +00:00: INFO:     127.0.0.1:40402 - "POST /seek-asr HTTP/1.1" 200 OK
+2025-12-07 02:55:31 +00:00: ✅ Pipeline started from 5348s
+2025-12-07 02:55:31 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 02:55:31 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 02:55:42 +00:00: 
+2025-12-07 02:55:42 +00:00: 🚀 [89:08 - 89:12]
+2025-12-07 02:55:44 +00:00:    🧠 gemini-2.0-flash... ✅ 1.7s
+2025-12-07 02:55:44 +00:00:    📝 Jawa: ing kuwe...
+2025-12-07 02:55:44 +00:00:    🇮🇩 Indo: di situ...
+2025-12-07 02:55:44 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 02:55:44 +00:00: 
+2025-12-07 02:55:44 +00:00: 🚀 [89:12 - 89:16]
+2025-12-07 02:55:46 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.5s
+2025-12-07 02:55:46 +00:00:    📝 Jawa: wa engkang...
+2025-12-07 02:55:46 +00:00:    🇮🇩 Indo: Yang...
+2025-12-07 02:55:46 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 02:55:46 +00:00: 
+2025-12-07 02:55:46 +00:00: 🚀 [89:16 - 89:20]
+2025-12-07 02:55:48 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.5s
+2025-12-07 02:55:48 +00:00:    📝 Jawa: a- yen kanang siji.
+2025-12-07 02:55:48 +00:00:    🇮🇩 Indo: A- Jika itu satu.
+2025-12-07 02:55:48 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 02:55:48 +00:00: 
+2025-12-07 02:55:48 +00:00: 🚀 [89:20 - 89:24]
+2025-12-07 02:55:48 +00:00:    🧠 gemini-2.5-flash... 🚫 API Key #4 rate limited. Cooldown: 60s
+2025-12-07 02:55:48 +00:00: 🔄 Key #4 rate limited, 14 keys remaining
+2025-12-07 02:55:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:55:48 +00:00: 
+2025-12-07 02:55:48 +00:00: 🚀 [89:24 - 89:28]
+2025-12-07 02:55:48 +00:00:    🧠 gemini-2.0-flash... 🚫 API Key #5 rate limited. Cooldown: 60s
+2025-12-07 02:55:48 +00:00: 🔄 Key #5 rate limited, 13 keys remaining
+2025-12-07 02:55:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:55:48 +00:00: 
+2025-12-07 02:55:48 +00:00: 🚀 [89:28 - 89:32]
+2025-12-07 02:55:48 +00:00:    🧠 gemini-2.5-flash-lite... 🚫 API Key #6 rate limited. Cooldown: 60s
+2025-12-07 02:55:48 +00:00: 🔄 Key #6 rate limited, 12 keys remaining
+2025-12-07 02:55:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:55:48 +00:00: 
+2025-12-07 02:55:48 +00:00: 🚀 [89:32 - 89:36]
+2025-12-07 02:55:48 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #7 rate limited. Cooldown: 60s
+2025-12-07 02:55:48 +00:00: 🔄 Key #7 rate limited, 11 keys remaining
+2025-12-07 02:55:48 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:55:48 +00:00: 
+2025-12-07 02:55:48 +00:00: 🚀 [89:36 - 89:40]
+2025-12-07 02:55:49 +00:00:    🧠 gemini-2.5-flash... 🚫 API Key #9 rate limited. Cooldown: 60s
+2025-12-07 02:55:49 +00:00: 🔄 Key #9 rate limited, 10 keys remaining
+2025-12-07 02:55:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:55:49 +00:00: 
+2025-12-07 02:55:49 +00:00: 🚀 [89:40 - 89:44]
+2025-12-07 02:55:49 +00:00:    🧠 gemini-2.0-flash... 🚫 API Key #10 rate limited. Cooldown: 60s
+2025-12-07 02:55:49 +00:00: 🔄 Key #10 rate limited, 9 keys remaining
+2025-12-07 02:55:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:55:49 +00:00: 
+2025-12-07 02:55:49 +00:00: 🚀 [89:44 - 89:48]
+2025-12-07 02:55:49 +00:00:    🧠 gemini-2.5-flash-lite... 🚫 API Key #12 rate limited. Cooldown: 60s
+2025-12-07 02:55:49 +00:00: 🔄 Key #12 rate limited, 8 keys remaining
+2025-12-07 02:55:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:55:49 +00:00: 
+2025-12-07 02:55:49 +00:00: 🚀 [89:48 - 89:52]
+2025-12-07 02:55:49 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #13 rate limited. Cooldown: 60s
+2025-12-07 02:55:49 +00:00: 🔄 Key #13 rate limited, 7 keys remaining
+2025-12-07 02:55:49 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:55:49 +00:00: 
+2025-12-07 02:55:49 +00:00: 🚀 [89:52 - 89:56]
+2025-12-07 02:55:50 +00:00:    🧠 gemini-2.5-flash... 🚫 API Key #14 rate limited. Cooldown: 60s
+2025-12-07 02:55:50 +00:00: 🔄 Key #14 rate limited, 6 keys remaining
+2025-12-07 02:55:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:55:50 +00:00: 
+2025-12-07 02:55:50 +00:00: 🚀 [89:56 - 90:00]
+2025-12-07 02:55:50 +00:00:    🧠 gemini-2.0-flash... 🚫 API Key #15 rate limited. Cooldown: 60s
+2025-12-07 02:55:50 +00:00: 🔄 Key #15 rate limited, 5 keys remaining
+2025-12-07 02:55:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:55:50 +00:00: 
+2025-12-07 02:55:50 +00:00: 🚀 [90:00 - 90:04]
+2025-12-07 02:55:50 +00:00:    🧠 gemini-2.5-flash-lite... 🚫 API Key #16 rate limited. Cooldown: 60s
+2025-12-07 02:55:50 +00:00: 🔄 Key #16 rate limited, 4 keys remaining
+2025-12-07 02:55:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:55:50 +00:00: 
+2025-12-07 02:55:50 +00:00: 🚀 [90:04 - 90:08]
+2025-12-07 02:55:50 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #17 rate limited. Cooldown: 60s
+2025-12-07 02:55:50 +00:00: 🔄 Key #17 rate limited, 3 keys remaining
+2025-12-07 02:55:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:55:50 +00:00: 
+2025-12-07 02:55:50 +00:00: 🚀 [90:08 - 90:12]
+2025-12-07 02:55:58 +00:00:    🧠 gemini-2.5-flash... ✅ 7.9s
+2025-12-07 02:55:58 +00:00:    📝 Jawa: sang prabu duryudana kang lagya lenggah ing palenggahan ngarsa para kawula dalem, kanthi gumyak gumrenggeng para kadang sentana lan manca praja.
+2025-12-07 02:55:58 +00:00:    🇮🇩 Indo: Sang Prabu Duryudana yang sedang duduk di singgasana, di hadapan para abdi kerajaan, dengan riuh rendah para kerabat istana dan utusan dari negara-negara mancanegara.
+2025-12-07 02:55:58 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 02:55:58 +00:00: 
+2025-12-07 02:55:58 +00:00: 🚀 [90:12 - 90:16]
+2025-12-07 02:56:00 +00:00:    🧠 gemini-2.0-flash... ✅ 1.4s
+2025-12-07 02:56:00 +00:00:    📝 Jawa: saklir.
+2025-12-07 02:56:00 +00:00:    🇮🇩 Indo: Saklar.
+2025-12-07 02:56:00 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 02:56:00 +00:00: 
+2025-12-07 02:56:00 +00:00: 🚀 [90:16 - 90:20]
+2025-12-07 02:56:02 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.7s
+2025-12-07 02:56:02 +00:00:    📝 Jawa: guna wang...
+2025-12-07 02:56:02 +00:00:    🇮🇩 Indo: Baiklah (suara) manusia...
+2025-12-07 02:56:02 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 02:56:02 +00:00: 
+2025-12-07 02:56:02 +00:00: ⏱️ Switching to REALTIME mode (audio caught up)
+2025-12-07 02:56:06 +00:00: 
+2025-12-07 02:56:06 +00:00: ⏱️ [90:20 - 90:24]
+2025-12-07 02:56:08 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.4s
+2025-12-07 02:56:08 +00:00:    📝 Jawa: heee... aaa... anan...
+2025-12-07 02:56:08 +00:00:    🇮🇩 Indo: Heee... aaa... anan...
+2025-12-07 02:56:08 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 02:56:10 +00:00: 
+2025-12-07 02:56:10 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 02:56:12 +00:00: 
+2025-12-07 02:56:12 +00:00: ⏱️ [90:24 - 90:28]
+2025-12-07 02:56:15 +00:00:    🧠 gemini-2.5-flash... INFO:     127.0.0.1:33294 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 02:56:15 +00:00: 
+2025-12-07 02:56:15 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 02:56:15 +00:00: INFO:     127.0.0.1:33308 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 02:56:15 +00:00: INFO:     127.0.0.1:33324 - "POST /stop-asr HTTP/1.1" 404 Not Found
+2025-12-07 02:56:23 +00:00: ✅ 11.1s
+2025-12-07 02:56:23 +00:00:    📝 Jawa: o, ndes! sang sukane sang dukane.
+2025-12-07 02:56:23 +00:00:    🇮🇩 Indo: Oh, Ndes! Kesenangan dan kesedihan.
+2025-12-07 02:56:23 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 02:56:23 +00:00: 
+2025-12-07 02:56:23 +00:00: 🏁 ASR session ended
+2025-12-07 02:56:23 +00:00:    Total chunks: 20
+2025-12-07 02:56:23 +00:00:    Successful: 8
+2025-12-07 02:56:23 +00:00:    API Pool status: 20 total requests
+2025-12-07 02:59:45 +00:00: ⚠️ WebRTC VAD not available, trying Silero...
+2025-12-07 02:59:49 +00:00: Using cache found in /root/.cache/torch/hub/snakers4_silero-vad_master
+2025-12-07 02:59:49 +00:00: ⚠️ Silero VAD failed: type object 'RecursiveScriptModule' has no attribute '_construct'. Using energy-based VAD.
+2025-12-07 02:59:49 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:368: DeprecationWarning: 
+2025-12-07 02:59:49 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 02:59:49 +00:00: 
+2025-12-07 02:59:49 +00:00:         Read more about it in the
+2025-12-07 02:59:49 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 02:59:49 +00:00:         
+2025-12-07 02:59:49 +00:00:   @app.on_event("startup")
+2025-12-07 02:59:49 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:382: DeprecationWarning: 
+2025-12-07 02:59:49 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 02:59:49 +00:00: 
+2025-12-07 02:59:49 +00:00:         Read more about it in the
+2025-12-07 02:59:49 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 02:59:49 +00:00:         
+2025-12-07 02:59:49 +00:00:   @app.on_event("shutdown")
+2025-12-07 02:59:49 +00:00: INFO:     Started server process [2406126]
+2025-12-07 02:59:49 +00:00: INFO:     Waiting for application startup.
+2025-12-07 02:59:49 +00:00: ✅ API Pool: Loaded 15 API key(s)
+2025-12-07 02:59:49 +00:00: ✅ API Pool: Loaded 4 model(s): ['gemini-2.0-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash-lite', 'gemini-2.5-flash']
+2025-12-07 02:59:49 +00:00: 
+2025-12-07 02:59:49 +00:00: ============================================================
+2025-12-07 02:59:49 +00:00: 🎬 CoWayangAI ASR Service Starting...
+2025-12-07 02:59:49 +00:00: ============================================================
+2025-12-07 02:59:49 +00:00:    API Keys loaded: 15
+2025-12-07 02:59:49 +00:00:    Cooldown time: 60s
+2025-12-07 02:59:49 +00:00: ============================================================
+2025-12-07 02:59:49 +00:00: 
+2025-12-07 02:59:49 +00:00: INFO:     Application startup complete.
+2025-12-07 02:59:49 +00:00: INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2025-12-07 02:59:56 +00:00: 🌐 Target language: English
+2025-12-07 02:59:56 +00:00: 
+2025-12-07 02:59:56 +00:00: ============================================================
+2025-12-07 02:59:56 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 02:59:56 +00:00: ============================================================
+2025-12-07 02:59:56 +00:00: 📹 Video: https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 02:59:56 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-07 02:59:56 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 02:59:56 +00:00: 🔑 API Pool: 15 keys available
+2025-12-07 02:59:56 +00:00: ============================================================
+2025-12-07 02:59:56 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 02:59:56 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 02:59:56 +00:00: INFO:     127.0.0.1:50274 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-07 02:59:56 +00:00: ✅ Pipeline started from 0s
+2025-12-07 02:59:56 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 02:59:56 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 02:59:58 +00:00: 
+2025-12-07 02:59:58 +00:00: ▶️ ASR Resume request at 0s for https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 03:00:03 +00:00: 📼 Stream ended
+2025-12-07 03:00:04 +00:00: 🌐 Target language: Indonesia
+2025-12-07 03:00:04 +00:00: 
+2025-12-07 03:00:04 +00:00: 🏁 ASR session ended
+2025-12-07 03:00:04 +00:00:    Total chunks: 0
+2025-12-07 03:00:04 +00:00:    Successful: 0
+2025-12-07 03:00:04 +00:00:    API Pool status: 0 total requests
+2025-12-07 03:00:04 +00:00: 
+2025-12-07 03:00:04 +00:00: ============================================================
+2025-12-07 03:00:04 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 03:00:04 +00:00: ============================================================
+2025-12-07 03:00:04 +00:00: 📹 Video: https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 03:00:04 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-07 03:00:04 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 03:00:04 +00:00: 🔑 API Pool: 15 keys available
+2025-12-07 03:00:04 +00:00: ============================================================
+2025-12-07 03:00:04 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 03:00:04 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 03:00:04 +00:00: INFO:     127.0.0.1:50274 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-07 03:00:04 +00:00: ✅ Pipeline started from 0s
+2025-12-07 03:00:04 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 03:00:04 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 03:00:15 +00:00: 
+2025-12-07 03:00:15 +00:00: 🚀 [00:36 - 00:40]
+2025-12-07 03:00:16 +00:00:    🧠 gemini-2.0-flash... ✅ 1.7s
+2025-12-07 03:00:16 +00:00:    📝 Jawa: muk ya ngerang...
+2025-12-07 03:00:16 +00:00:    🇮🇩 Indo: Mulutnya menganga...
+2025-12-07 03:00:16 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:00:16 +00:00: 
+2025-12-07 03:00:16 +00:00: 🚀 [00:40 - 00:44]
+2025-12-07 03:00:20 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 3.5s
+2025-12-07 03:00:20 +00:00:    📝 Jawa: bapa...
+2025-12-07 03:00:20 +00:00:    🇮🇩 Indo: Ayah...
+2025-12-07 03:00:20 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:00:20 +00:00: 
+2025-12-07 03:00:20 +00:00: 🚀 [00:44 - 00:48]
+2025-12-07 03:00:21 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.3s
+2025-12-07 03:00:21 +00:00:    📝 Jawa: ngaraa ngadaraa.
+2025-12-07 03:00:21 +00:00:    🇮🇩 Indo: Berteriak berteriak.
+2025-12-07 03:00:21 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:00:21 +00:00: 
+2025-12-07 03:00:21 +00:00: 🚀 [00:48 - 00:52]
+2025-12-07 03:00:28 +00:00:    🧠 gemini-2.5-flash... 
+2025-12-07 03:00:28 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 03:00:33 +00:00: INFO:     127.0.0.1:56712 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 03:00:33 +00:00: 
+2025-12-07 03:00:33 +00:00: ▶️ ASR Resume request at 4655s for https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 03:00:33 +00:00: 🌐 Target language: Indonesia
+2025-12-07 03:00:33 +00:00: 
+2025-12-07 03:00:33 +00:00: ============================================================
+2025-12-07 03:00:33 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 03:00:33 +00:00: INFO:     127.0.0.1:56718 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-07 03:00:33 +00:00: 
+2025-12-07 03:00:33 +00:00: ⏩ ASR Seek request: 4656s for https://www.youtube.com/watch?v=UFDGJs7VYvM============================================================
+2025-12-07 03:00:33 +00:00: 📹 Video: https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 03:00:33 +00:00: ⏱️  Start time: 77:35 (4655s)
+2025-12-07 03:00:33 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 03:00:33 +00:00: 🔑 API Pool: 15 keys available
+2025-12-07 03:00:33 +00:00: ============================================================
+2025-12-07 03:00:33 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 03:00:33 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 03:00:33 +00:00: 
+2025-12-07 03:00:33 +00:00: ✅ Pipeline started from 4655s
+2025-12-07 03:00:33 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 03:00:33 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 03:00:33 +00:00: 
+2025-12-07 03:00:33 +00:00: 🏁 ASR session ended
+2025-12-07 03:00:33 +00:00:    Total chunks: 0
+2025-12-07 03:00:33 +00:00:    Successful: 0
+2025-12-07 03:00:33 +00:00:    API Pool status: 4 total requests
+2025-12-07 03:00:33 +00:00: 🌐 Target language: Indonesia
+2025-12-07 03:00:33 +00:00: 
+2025-12-07 03:00:33 +00:00: ============================================================INFO:     127.0.0.1:56722 - "POST /seek-asr HTTP/1.1" 200 OK
+2025-12-07 03:00:33 +00:00: 
+2025-12-07 03:00:33 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 03:00:33 +00:00: ============================================================
+2025-12-07 03:00:33 +00:00: 📹 Video: https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 03:00:33 +00:00: ⏱️  Start time: 77:36 (4656s)
+2025-12-07 03:00:33 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 03:00:33 +00:00: 🔑 API Pool: 15 keys available
+2025-12-07 03:00:33 +00:00: ============================================================
+2025-12-07 03:00:33 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 03:00:33 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 03:00:33 +00:00: ✅ Pipeline started from 4656s
+2025-12-07 03:00:33 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 03:00:33 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 03:00:33 +00:00: ✅ 11.8s
+2025-12-07 03:00:33 +00:00:    📝 Jawa: matesi, matesi, ananging manise.
+2025-12-07 03:00:33 +00:00:    🇮🇩 Indo: Mengatasi, mengatasi, tetapi manisnya.
+2025-12-07 03:00:33 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:00:33 +00:00: 
+2025-12-07 03:00:33 +00:00: 🏁 ASR session ended
+2025-12-07 03:00:33 +00:00:    Total chunks: 13
+2025-12-07 03:00:33 +00:00:    Successful: 4
+2025-12-07 03:00:33 +00:00:    API Pool status: 4 total requests
+2025-12-07 03:00:37 +00:00: 
+2025-12-07 03:00:37 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 03:00:42 +00:00: 📼 Stream ended
+2025-12-07 03:00:42 +00:00: 
+2025-12-07 03:00:42 +00:00: 🏁 ASR session ended
+2025-12-07 03:00:42 +00:00:    Total chunks: 0
+2025-12-07 03:00:42 +00:00:    Successful: 0
+2025-12-07 03:00:42 +00:00:    API Pool status: 4 total requests
+2025-12-07 03:00:42 +00:00: INFO:     127.0.0.1:52456 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 03:00:42 +00:00: 
+2025-12-07 03:00:42 +00:00: ▶️ ASR Resume request at 24201s for https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 03:00:42 +00:00: 🌐 Target language: Indonesia
+2025-12-07 03:00:42 +00:00: 
+2025-12-07 03:00:42 +00:00: ============================================================
+2025-12-07 03:00:42 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 03:00:42 +00:00: ============================================================
+2025-12-07 03:00:42 +00:00: 📹 Video: https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 03:00:42 +00:00: ⏱️  Start time: 403:21 (24201s)
+2025-12-07 03:00:42 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 03:00:42 +00:00: 🔑 API Pool: 15 keys available
+2025-12-07 03:00:42 +00:00: ============================================================
+2025-12-07 03:00:42 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 03:00:42 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 03:00:42 +00:00: INFO:     127.0.0.1:52472 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-07 03:00:42 +00:00: 
+2025-12-07 03:00:42 +00:00: ⏩ ASR Seek request: 24202s for https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 03:00:42 +00:00: ✅ Pipeline started from 24201s
+2025-12-07 03:00:42 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 03:00:42 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 03:00:42 +00:00: 
+2025-12-07 03:00:42 +00:00: 🏁 ASR session ended
+2025-12-07 03:00:42 +00:00:    Total chunks: 0
+2025-12-07 03:00:42 +00:00:    Successful: 0
+2025-12-07 03:00:42 +00:00:    API Pool status: 4 total requests
+2025-12-07 03:00:42 +00:00: 🌐 Target language: Indonesia
+2025-12-07 03:00:42 +00:00: 
+2025-12-07 03:00:42 +00:00: ============================================================INFO:     127.0.0.1:52478 - "POST /seek-asr HTTP/1.1" 200 OK
+2025-12-07 03:00:42 +00:00: 
+2025-12-07 03:00:42 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 03:00:42 +00:00: ============================================================
+2025-12-07 03:00:42 +00:00: 📹 Video: https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 03:00:42 +00:00: ⏱️  Start time: 403:22 (24202s)
+2025-12-07 03:00:42 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 03:00:42 +00:00: 🔑 API Pool: 15 keys available
+2025-12-07 03:00:42 +00:00: ============================================================
+2025-12-07 03:00:42 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 03:00:42 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 03:00:42 +00:00: 
+2025-12-07 03:00:42 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 03:00:42 +00:00: ✅ Pipeline started from 24202s
+2025-12-07 03:00:42 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 03:00:42 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 03:00:42 +00:00: 
+2025-12-07 03:00:42 +00:00: 🏁 ASR session ended
+2025-12-07 03:00:42 +00:00:    Total chunks: 0
+2025-12-07 03:00:42 +00:00:    Successful: 0
+2025-12-07 03:00:42 +00:00:    API Pool status: 4 total requests
+2025-12-07 03:00:42 +00:00: INFO:     127.0.0.1:52480 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 03:00:44 +00:00: 
+2025-12-07 03:00:44 +00:00: ⏩ ASR Seek request: 25895s for https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 03:00:44 +00:00: INFO:     127.0.0.1:52480 - "POST /seek-asr HTTP/1.1" 200 OK
+2025-12-07 03:01:08 +00:00: 
+2025-12-07 03:01:08 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 03:01:08 +00:00: INFO:     127.0.0.1:46366 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 03:01:08 +00:00: 
+2025-12-07 03:01:08 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=UFDGJs7VYvM
+2025-12-07 03:01:08 +00:00: INFO:     127.0.0.1:46376 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 03:01:08 +00:00: INFO:     127.0.0.1:46390 - "POST /stop-asr HTTP/1.1" 404 Not Found
+2025-12-07 03:01:11 +00:00: 🌐 Target language: English
+2025-12-07 03:01:11 +00:00: 
+2025-12-07 03:01:11 +00:00: ============================================================
+2025-12-07 03:01:11 +00:00: INFO:     127.0.0.1:46390 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-07 03:01:11 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 03:01:11 +00:00: ============================================================
+2025-12-07 03:01:11 +00:00: 📹 Video: https://www.youtube.com/watch?v=vFcYyWJzy4E
+2025-12-07 03:01:11 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-07 03:01:11 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 03:01:11 +00:00: 🔑 API Pool: 15 keys available
+2025-12-07 03:01:11 +00:00: ============================================================
+2025-12-07 03:01:11 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 03:01:11 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 03:01:11 +00:00: ✅ Pipeline started from 0s
+2025-12-07 03:01:11 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 03:01:11 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 03:01:12 +00:00: 
+2025-12-07 03:01:12 +00:00: ▶️ ASR Resume request at 0s for https://www.youtube.com/watch?v=vFcYyWJzy4E
+2025-12-07 03:01:17 +00:00: 📼 Stream ended
+2025-12-07 03:01:17 +00:00: 
+2025-12-07 03:01:17 +00:00: 🏁 ASR session ended🌐 Target language: Indonesia
+2025-12-07 03:01:17 +00:00:    Total chunks: 0
+2025-12-07 03:01:17 +00:00:    Successful: 0
+2025-12-07 03:01:17 +00:00:    API Pool status: 4 total requests
+2025-12-07 03:01:17 +00:00: 
+2025-12-07 03:01:17 +00:00: 
+2025-12-07 03:01:17 +00:00: ============================================================
+2025-12-07 03:01:17 +00:00: INFO:     127.0.0.1:46390 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-07 03:01:17 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 03:01:17 +00:00: ============================================================
+2025-12-07 03:01:17 +00:00: 📹 Video: https://www.youtube.com/watch?v=vFcYyWJzy4E
+2025-12-07 03:01:17 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-07 03:01:17 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 03:01:17 +00:00: 🔑 API Pool: 15 keys available
+2025-12-07 03:01:17 +00:00: ============================================================
+2025-12-07 03:01:17 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 03:01:17 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 03:01:17 +00:00: ✅ Pipeline started from 0s
+2025-12-07 03:01:17 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 03:01:17 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 03:01:20 +00:00: 
+2025-12-07 03:01:20 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=vFcYyWJzy4E
+2025-12-07 03:01:25 +00:00: 📼 Stream ended
+2025-12-07 03:01:25 +00:00: 
+2025-12-07 03:01:25 +00:00: 🏁 ASR session ended
+2025-12-07 03:01:25 +00:00:    Total chunks: 0
+2025-12-07 03:01:25 +00:00:    Successful: 0
+2025-12-07 03:01:25 +00:00:    API Pool status: 4 total requests
+2025-12-07 03:01:25 +00:00: INFO:     127.0.0.1:41758 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 03:01:25 +00:00: 
+2025-12-07 03:01:25 +00:00: ▶️ ASR Resume request at 4946s for https://www.youtube.com/watch?v=vFcYyWJzy4E
+2025-12-07 03:01:25 +00:00: 🌐 Target language: Indonesia
+2025-12-07 03:01:25 +00:00: 
+2025-12-07 03:01:25 +00:00: ============================================================INFO:     127.0.0.1:41760 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-07 03:01:25 +00:00: 
+2025-12-07 03:01:25 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 03:01:25 +00:00: ============================================================
+2025-12-07 03:01:25 +00:00: 📹 Video: https://www.youtube.com/watch?v=vFcYyWJzy4E
+2025-12-07 03:01:25 +00:00: ⏱️  Start time: 82:26 (4946s)
+2025-12-07 03:01:25 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 03:01:25 +00:00: 🔑 API Pool: 15 keys available
+2025-12-07 03:01:25 +00:00: ============================================================
+2025-12-07 03:01:25 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 03:01:25 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 03:01:25 +00:00: 
+2025-12-07 03:01:25 +00:00: ⏩ ASR Seek request: 4946s for https://www.youtube.com/watch?v=vFcYyWJzy4E
+2025-12-07 03:01:25 +00:00: ✅ Pipeline started from 4946s
+2025-12-07 03:01:25 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 03:01:25 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 03:01:25 +00:00: 
+2025-12-07 03:01:25 +00:00: 🏁 ASR session ended
+2025-12-07 03:01:25 +00:00:    Total chunks: 0
+2025-12-07 03:01:25 +00:00:    Successful: 0
+2025-12-07 03:01:25 +00:00:    API Pool status: 4 total requests
+2025-12-07 03:01:25 +00:00: 🌐 Target language: Indonesia
+2025-12-07 03:01:25 +00:00: 
+2025-12-07 03:01:25 +00:00: ============================================================
+2025-12-07 03:01:25 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 03:01:25 +00:00: ============================================================
+2025-12-07 03:01:25 +00:00: 📹 Video: https://www.youtube.com/watch?v=vFcYyWJzy4E
+2025-12-07 03:01:25 +00:00: ⏱️  Start time: 82:26 (4946s)
+2025-12-07 03:01:25 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 03:01:25 +00:00: 🔑 API Pool: 15 keys available
+2025-12-07 03:01:25 +00:00: ============================================================
+2025-12-07 03:01:25 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 03:01:25 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 03:01:25 +00:00: INFO:     127.0.0.1:41766 - "POST /seek-asr HTTP/1.1" 200 OK
+2025-12-07 03:01:25 +00:00: ✅ Pipeline started from 4946s
+2025-12-07 03:01:25 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 03:01:25 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 03:01:36 +00:00: 
+2025-12-07 03:01:36 +00:00: 🚀 [82:26 - 82:30]
+2025-12-07 03:01:36 +00:00:    🧠 gemini-2.0-flash... 🚫 API Key #5 rate limited. Cooldown: 60s
+2025-12-07 03:01:36 +00:00: 🔄 Key #5 rate limited, 14 keys remaining
+2025-12-07 03:01:36 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:01:36 +00:00: 
+2025-12-07 03:01:36 +00:00: 🚀 [82:30 - 82:34]
+2025-12-07 03:01:37 +00:00:    🧠 gemini-2.5-flash-lite... 🚫 API Key #6 rate limited. Cooldown: 60s
+2025-12-07 03:01:37 +00:00: 🔄 Key #6 rate limited, 13 keys remaining
+2025-12-07 03:01:37 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:01:37 +00:00: 
+2025-12-07 03:01:37 +00:00: 🚀 [82:34 - 82:38]
+2025-12-07 03:01:37 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #7 rate limited. Cooldown: 60s
+2025-12-07 03:01:37 +00:00: 🔄 Key #7 rate limited, 12 keys remaining
+2025-12-07 03:01:37 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:01:37 +00:00: 
+2025-12-07 03:01:37 +00:00: 🚀 [82:38 - 82:42]
+2025-12-07 03:01:37 +00:00:    🧠 gemini-2.5-flash... 🚫 API Key #9 rate limited. Cooldown: 60s
+2025-12-07 03:01:37 +00:00: 🔄 Key #9 rate limited, 11 keys remaining
+2025-12-07 03:01:37 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:01:37 +00:00: 
+2025-12-07 03:01:37 +00:00: 🚀 [82:42 - 82:46]
+2025-12-07 03:01:37 +00:00:    🧠 gemini-2.0-flash... 🚫 API Key #10 rate limited. Cooldown: 60s
+2025-12-07 03:01:37 +00:00: 🔄 Key #10 rate limited, 10 keys remaining
+2025-12-07 03:01:37 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:01:37 +00:00: 
+2025-12-07 03:01:37 +00:00: 🚀 [82:46 - 82:50]
+2025-12-07 03:01:38 +00:00:    🧠 gemini-2.5-flash-lite... 🚫 API Key #12 rate limited. Cooldown: 60s
+2025-12-07 03:01:38 +00:00: 🔄 Key #12 rate limited, 9 keys remaining
+2025-12-07 03:01:38 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:01:38 +00:00: 
+2025-12-07 03:01:38 +00:00: 🚀 [82:50 - 82:54]
+2025-12-07 03:01:38 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #13 rate limited. Cooldown: 60s
+2025-12-07 03:01:38 +00:00: 🔄 Key #13 rate limited, 8 keys remaining
+2025-12-07 03:01:38 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:01:38 +00:00: 
+2025-12-07 03:01:38 +00:00: 🚀 [82:54 - 82:58]
+2025-12-07 03:01:38 +00:00:    🧠 gemini-2.5-flash... 🚫 API Key #14 rate limited. Cooldown: 60s
+2025-12-07 03:01:38 +00:00: 🔄 Key #14 rate limited, 7 keys remaining
+2025-12-07 03:01:38 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:01:38 +00:00: 
+2025-12-07 03:01:38 +00:00: 🚀 [82:58 - 83:02]
+2025-12-07 03:01:38 +00:00:    🧠 gemini-2.0-flash... 🚫 API Key #15 rate limited. Cooldown: 60s
+2025-12-07 03:01:38 +00:00: 🔄 Key #15 rate limited, 6 keys remaining
+2025-12-07 03:01:38 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:01:38 +00:00: 
+2025-12-07 03:01:38 +00:00: 🚀 [83:02 - 83:06]
+2025-12-07 03:01:38 +00:00:    🧠 gemini-2.5-flash-lite... 🚫 API Key #16 rate limited. Cooldown: 60s
+2025-12-07 03:01:38 +00:00: 🔄 Key #16 rate limited, 5 keys remaining
+2025-12-07 03:01:38 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:01:38 +00:00: 
+2025-12-07 03:01:38 +00:00: 🚀 [83:06 - 83:10]
+2025-12-07 03:01:39 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #17 rate limited. Cooldown: 60s
+2025-12-07 03:01:39 +00:00: 🔄 Key #17 rate limited, 4 keys remaining
+2025-12-07 03:01:39 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:01:39 +00:00: 
+2025-12-07 03:01:39 +00:00: 🚀 [83:10 - 83:14]
+2025-12-07 03:01:49 +00:00:    🧠 gemini-2.5-flash... ✅ 10.7s
+2025-12-07 03:01:49 +00:00:    📝 Jawa: henta...
+2025-12-07 03:01:49 +00:00:    🇮🇩 Indo: Vokalisasi
+2025-12-07 03:01:49 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:01:49 +00:00: 
+2025-12-07 03:01:49 +00:00: 🚀 [83:14 - 83:18]
+2025-12-07 03:01:51 +00:00:    🧠 gemini-2.0-flash... ✅ 1.5s
+2025-12-07 03:01:51 +00:00:    📝 Jawa: adahing
+2025-12-07 03:01:51 +00:00:    🇮🇩 Indo: Adanya
+2025-12-07 03:01:51 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:01:51 +00:00: 
+2025-12-07 03:01:51 +00:00: 🚀 [83:18 - 83:22]
+2025-12-07 03:01:54 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.8s
+2025-12-07 03:01:54 +00:00:    📝 Jawa: pangat (mantra yang diucapkan untuk memberi kekuatan)
+2025-12-07 03:01:54 +00:00:    🇮🇩 Indo: pangat (mantra yang diucapkan untuk memberi kekuatan)
+2025-12-07 03:01:54 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:01:54 +00:00: 
+2025-12-07 03:01:54 +00:00: 🚀 [83:22 - 83:26]
+2025-12-07 03:01:55 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.5s
+2025-12-07 03:01:55 +00:00:    📝 Jawa: i-i-i-i-i-i-i-wan.
+2025-12-07 03:01:55 +00:00:    🇮🇩 Indo: I-i-i-i-i-i-i-wan.
+2025-12-07 03:01:55 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:01:55 +00:00: 
+2025-12-07 03:01:55 +00:00: 🚀 [83:26 - 83:30]
+2025-12-07 03:02:13 +00:00:    🧠 gemini-2.5-flash... ✅ 17.9s
+2025-12-07 03:02:13 +00:00:    📝 Jawa: lèngsèr wèwè lèwiyå
+2025-12-07 03:02:13 +00:00:    🇮🇩 Indo: Bergeser (vokalistik melodi)
+2025-12-07 03:02:13 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:02:13 +00:00: 
+2025-12-07 03:02:13 +00:00: ⏱️ Switching to REALTIME mode (audio caught up)
+2025-12-07 03:02:17 +00:00: 
+2025-12-07 03:02:17 +00:00: ⏱️ [83:30 - 83:34]
+2025-12-07 03:02:18 +00:00:    🧠 gemini-2.0-flash... ✅ 1.4s
+2025-12-07 03:02:18 +00:00:    📝 Jawa: tranggana
+2025-12-07 03:02:18 +00:00:    🇮🇩 Indo: Tranggana
+2025-12-07 03:02:18 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:02:22 +00:00: 
+2025-12-07 03:02:22 +00:00: ⏱️ [83:34 - 83:38]
+2025-12-07 03:02:25 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.7s
+2025-12-07 03:02:25 +00:00:    📝 Jawa: nggong.. nggeh.. ingkang...
+2025-12-07 03:02:25 +00:00:    🇮🇩 Indo: Tentu.. ya.. yang...
+2025-12-07 03:02:25 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:02:29 +00:00: 
+2025-12-07 03:02:29 +00:00: ⏱️ [83:38 - 83:42]
+2025-12-07 03:02:31 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.4s
+2025-12-07 03:02:31 +00:00:    📝 Jawa: penganten...
+2025-12-07 03:02:31 +00:00:    🇮🇩 Indo: Pengantin...
+2025-12-07 03:02:31 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:02:35 +00:00: 
+2025-12-07 03:02:35 +00:00: ⏱️ [83:42 - 83:46]
+2025-12-07 03:02:44 +00:00:    🧠 gemini-2.5-flash... ✅ 9.5s
+2025-12-07 03:02:44 +00:00:    📝 Jawa: mempit gempil wong.
+2025-12-07 03:02:44 +00:00:    🇮🇩 Indo: Orang yang hancur lebur.
+2025-12-07 03:02:44 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:02:44 +00:00: 
+2025-12-07 03:02:44 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=vFcYyWJzy4E
+2025-12-07 03:02:48 +00:00: 
+2025-12-07 03:02:48 +00:00: ⏱️ [83:46 - 83:50]
+2025-12-07 03:02:49 +00:00:    🧠 gemini-2.0-flash... INFO:     127.0.0.1:54532 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 03:02:49 +00:00: 
+2025-12-07 03:02:49 +00:00: ▶️ ASR Resume request at 5029s for https://www.youtube.com/watch?v=vFcYyWJzy4E
+2025-12-07 03:02:49 +00:00: 🌐 Target language: Indonesia
+2025-12-07 03:02:49 +00:00: 
+2025-12-07 03:02:49 +00:00: ============================================================
+2025-12-07 03:02:49 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 03:02:49 +00:00: ============================================================
+2025-12-07 03:02:49 +00:00: INFO:     127.0.0.1:54546 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-07 03:02:49 +00:00: 📹 Video: https://www.youtube.com/watch?v=vFcYyWJzy4E
+2025-12-07 03:02:49 +00:00: ⏱️  Start time: 83:49 (5029s)
+2025-12-07 03:02:49 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 03:02:49 +00:00: 🔑 API Pool: 15 keys available
+2025-12-07 03:02:49 +00:00: ============================================================
+2025-12-07 03:02:49 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 03:02:49 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 03:02:49 +00:00: ✅ Pipeline started from 5029s
+2025-12-07 03:02:49 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 03:02:49 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 03:02:49 +00:00: ✅ 1.3s
+2025-12-07 03:02:49 +00:00:    📝 Jawa: kados.
+2025-12-07 03:02:49 +00:00:    🇮🇩 Indo: Seperti itu.
+2025-12-07 03:02:49 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:02:49 +00:00: 
+2025-12-07 03:02:49 +00:00: 🏁 ASR session ended
+2025-12-07 03:02:49 +00:00:    Total chunks: 21
+2025-12-07 03:02:49 +00:00:    Successful: 10
+2025-12-07 03:02:49 +00:00:    API Pool status: 25 total requests
+2025-12-07 03:03:00 +00:00: 
+2025-12-07 03:03:00 +00:00: 🚀 [83:49 - 83:53]
+2025-12-07 03:03:03 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.9s
+2025-12-07 03:03:03 +00:00:    📝 Jawa: eeeeee.. ee.. ee.. ee..
+2025-12-07 03:03:03 +00:00:    🇮🇩 Indo: Suara seruling yang mengalun panjang dan merdu, mengiringi suasana pertunjukan wayang.
+2025-12-07 03:03:03 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:03:03 +00:00: 
+2025-12-07 03:03:03 +00:00: 🚀 [83:53 - 83:57]
+2025-12-07 03:03:04 +00:00:    🧠 gemini-2.0-flash-lite... ✅ 1.3s
+2025-12-07 03:03:04 +00:00:    📝 Jawa: aaaaa aaaaa aaaaa
+2025-12-07 03:03:04 +00:00:    🇮🇩 Indo: aaaaa aaaaa aaaaa
+2025-12-07 03:03:04 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:03:04 +00:00: 
+2025-12-07 03:03:04 +00:00: 🚀 [83:57 - 84:01]
+2025-12-07 03:03:05 +00:00:    🧠 gemini-2.5-flash... 🚫 API Key #5 rate limited. Cooldown: 60s
+2025-12-07 03:03:05 +00:00: 🔄 Key #5 rate limited, 14 keys remaining
+2025-12-07 03:03:05 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:03:05 +00:00: 
+2025-12-07 03:03:05 +00:00: 🚀 [84:01 - 84:05]
+2025-12-07 03:03:05 +00:00:    🧠 gemini-2.0-flash... 🚫 API Key #6 rate limited. Cooldown: 60s
+2025-12-07 03:03:05 +00:00: 🔄 Key #6 rate limited, 13 keys remaining
+2025-12-07 03:03:05 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:03:05 +00:00: 
+2025-12-07 03:03:05 +00:00: 🚀 [84:05 - 84:09]
+2025-12-07 03:03:05 +00:00:    🧠 gemini-2.5-flash-lite... 🚫 API Key #7 rate limited. Cooldown: 60s
+2025-12-07 03:03:05 +00:00: 🔄 Key #7 rate limited, 12 keys remaining
+2025-12-07 03:03:05 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:03:05 +00:00: 
+2025-12-07 03:03:05 +00:00: 🚀 [84:09 - 84:13]
+2025-12-07 03:03:05 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #9 rate limited. Cooldown: 60s
+2025-12-07 03:03:05 +00:00: 🔄 Key #9 rate limited, 11 keys remaining
+2025-12-07 03:03:05 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:03:05 +00:00: 
+2025-12-07 03:03:05 +00:00: 🚀 [84:13 - 84:17]
+2025-12-07 03:03:06 +00:00:    🧠 gemini-2.5-flash... 🚫 API Key #10 rate limited. Cooldown: 60s
+2025-12-07 03:03:06 +00:00: 🔄 Key #10 rate limited, 10 keys remaining
+2025-12-07 03:03:06 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:03:06 +00:00: 
+2025-12-07 03:03:06 +00:00: 🚀 [84:17 - 84:21]
+2025-12-07 03:03:06 +00:00:    🧠 gemini-2.0-flash... 🚫 API Key #12 rate limited. Cooldown: 60s
+2025-12-07 03:03:06 +00:00: 🔄 Key #12 rate limited, 9 keys remaining
+2025-12-07 03:03:06 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:03:06 +00:00: 
+2025-12-07 03:03:06 +00:00: 🚀 [84:21 - 84:25]
+2025-12-07 03:03:06 +00:00:    🧠 gemini-2.5-flash-lite... 🚫 API Key #13 rate limited. Cooldown: 60s
+2025-12-07 03:03:06 +00:00: 🔄 Key #13 rate limited, 8 keys remaining
+2025-12-07 03:03:06 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:03:06 +00:00: 
+2025-12-07 03:03:06 +00:00: 🚀 [84:25 - 84:29]
+2025-12-07 03:03:06 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #14 rate limited. Cooldown: 60s
+2025-12-07 03:03:06 +00:00: 🔄 Key #14 rate limited, 7 keys remaining
+2025-12-07 03:03:06 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:03:06 +00:00: 
+2025-12-07 03:03:06 +00:00: 🚀 [84:29 - 84:33]
+2025-12-07 03:03:07 +00:00:    🧠 gemini-2.5-flash... 🚫 API Key #15 rate limited. Cooldown: 60s
+2025-12-07 03:03:07 +00:00: 🔄 Key #15 rate limited, 6 keys remaining
+2025-12-07 03:03:07 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:03:07 +00:00: 
+2025-12-07 03:03:07 +00:00: 🚀 [84:33 - 84:37]
+2025-12-07 03:03:07 +00:00:    🧠 gemini-2.0-flash... 🚫 API Key #16 rate limited. Cooldown: 60s
+2025-12-07 03:03:07 +00:00: 🔄 Key #16 rate limited, 5 keys remaining
+2025-12-07 03:03:07 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:03:07 +00:00: 
+2025-12-07 03:03:07 +00:00: 🚀 [84:37 - 84:41]
+2025-12-07 03:03:07 +00:00:    🧠 gemini-2.5-flash-lite... 🚫 API Key #17 rate limited. Cooldown: 60s
+2025-12-07 03:03:07 +00:00: 🔄 Key #17 rate limited, 4 keys remaining
+2025-12-07 03:03:07 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 03:03:07 +00:00: 
+2025-12-07 03:03:07 +00:00: 🚀 [84:41 - 84:45]
+2025-12-07 03:03:08 +00:00:    🧠 gemini-2.0-flash-lite... 
+2025-12-07 03:03:08 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=vFcYyWJzy4E
+2025-12-07 03:03:09 +00:00: ✅ 1.5s
+2025-12-07 03:03:09 +00:00:    📝 Jawa: e-e-e... pas pasan pas...
+2025-12-07 03:03:09 +00:00:    🇮🇩 Indo: e-e-e... pas pasan pas...
+2025-12-07 03:03:09 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 03:03:09 +00:00: 
+2025-12-07 03:03:09 +00:00: 🏁 ASR session ended
+2025-12-07 03:03:09 +00:00:    Total chunks: 14
+2025-12-07 03:03:09 +00:00:    Successful: 3
+2025-12-07 03:03:09 +00:00:    API Pool status: 39 total requests
+2025-12-07 03:03:09 +00:00: INFO:     127.0.0.1:39510 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 03:03:09 +00:00: 
+2025-12-07 03:03:09 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=vFcYyWJzy4E
+2025-12-07 03:03:09 +00:00: INFO:     127.0.0.1:39522 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 03:03:09 +00:00: INFO:     127.0.0.1:39532 - "POST /stop-asr HTTP/1.1" 404 Not Found

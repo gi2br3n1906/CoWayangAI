@@ -11,3 +11,5 @@ google-generativeai
 soundfile
 torch
 webrtcvad
+python-socketio[client]
+websocket-client

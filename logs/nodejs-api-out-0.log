@@ -1,0 +1,2343 @@
+2025-12-04 14:33:52 +00:00: [dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+2025-12-04 14:33:53 +00:00: [Config] ASR Server: http://127.0.0.1:8001
+2025-12-04 14:33:53 +00:00: [Config] Python AI: http://127.0.0.1:8000
+2025-12-04 14:33:53 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-04 14:33:53 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-04 14:33:53 +00:00: 🚀 Server Backend Node.js jalan di http://0.0.0.0:3000
+2025-12-04 14:34:01 +00:00: [Socket] Client connected: 3SaKU2Cj0T3TUWARAAAB
+2025-12-04 14:34:01 +00:00: [Socket] Client connected: c-tzYlRA6PvLuxjvAAAD
+2025-12-04 14:34:03 +00:00: [Socket] Client connected: UyHIPYx68J3Cm8JIAAAF
+2025-12-04 14:34:04 +00:00: [Socket] Client connected: 9Frt1gGbZFPjJP7MAAAH
+2025-12-04 14:35:39 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:00',
+    start_time: 0.020000000000002238,
+    end_time: 4.020000000000002,
+    text: 'berarti bapak kuwi pancen lair batin nggone mbantu.',
+    translation: 'Berarti ayah itu memang sepenuh hati dalam membantu.'
+  }
+}
+2025-12-04 14:35:48 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:02',
+    start_time: 2.0199999999999596,
+    end_time: 6.01999999999996,
+    text: 'lahir batin nggone mbantu karo anakmu bagong',
+    translation: 'Lahir batin dalam membantu anakmu Bagong'
+  }
+}
+2025-12-04 14:36:14 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:08',
+    start_time: 8.019999999999833,
+    end_time: 12.019999999999833,
+    text: 'lha gareng piye iki?',
+    translation: 'Nah Gareng bagaimana ini?'
+  }
+}
+2025-12-04 14:36:23 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:10',
+    start_time: 10.01999999999979,
+    end_time: 14.01999999999979,
+    text: 'gareng piye iki? mangga kersane bapak pripun?',
+    translation: 'Gareng bagaimana ini? Silakan, keinginan Bapak bagaimana?'
+  }
+}
+2025-12-04 14:36:31 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:12',
+    start_time: 12.019999999999747,
+    end_time: 16.019999999999747,
+    text: 'lah monggo kersane bapak pripun? hem, nggih truk, nggih.',
+    translation: 'Nah, silakan kehendak Bapak bagaimana? Hem, iya Truk, iya.'
+  }
+}
+2025-12-04 14:36:41 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:14',
+    start_time: 14.019999999999705,
+    end_time: 18.019999999999705,
+    text: 'ho petruk piye? lah ya ora ngerti.',
+    translation: 'Ho Petruk bagaimana? Ya tidak tahu.'
+  }
+}
+2025-12-04 14:36:49 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:16',
+    start_time: 16.019999999999662,
+    end_time: 20.019999999999662,
+    text: 'weh, kowe ora ngerti. pun rasah taring-taring.',
+    translation: 'Wah, kamu tidak mengerti. Tidak usah berdebat.'
+  }
+}
+2025-12-04 14:37:07 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:20',
+    start_time: 20.019999999999577,
+    end_time: 24.019999999999577,
+    text: 'cekat-cekat menyang. iki ana apa?',
+    translation: 'Cepat-cepat pergi ke sana. Ini ada apa?'
+  }
+}
+2025-12-04 14:37:15 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:22',
+    start_time: 22.019999999999534,
+    end_time: 26.019999999999534,
+    text: 'nggih wonten transport kula aturi unjuk rumiyin, menapa menika dipun tampi ing nala kula menika...',
+    translation: 'Iya ada transport, silakan silakan dulu minum, apakah ini diterima di hati saya ini...'
+  }
+}
+2025-12-04 14:37:23 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:24',
+    start_time: 24.01999999999949,
+    end_time: 28.01999999999949,
+    text: 'transport. lawong.',
+    translation: 'transport. Padahal.'
+  }
+}
+2025-12-04 14:37:40 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:30',
+    start_time: 30.01999999999972,
+    end_time: 34.01999999999972,
+    text: 'iki tekan ngendi gong, tekan kayangan kok selawu ewu. pripun, pak?',
+    translation: 'ini sampai mana Gong, sampai kahyangan kok dua puluh lima ribu. Bagaimana, Pak?'
+  }
+}
+2025-12-04 14:37:50 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:32',
+    start_time: 32.02000000000003,
+    end_time: 36.02000000000003,
+    text: '00:00 lalah-lalah 00:01 piye to ngger? 00:02 piye ta, pak? 00:03 nek upama',
+    translation: '00:00 kenapa-kenapa 00:01 bagaimana nak? 00:02 bagaimana, Pak? 00:03 kalau misalnya'
+  }
+}
+2025-12-04 14:37:58 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:34',
+    start_time: 34.020000000000344,
+    end_time: 38.020000000000344,
+    text: 'nek upama aku ora usah munggah ning kayangan piye?',
+    translation: 'Kalau seumpama aku tidak usah naik ke kahyangan bagaimana?'
+  }
+}
+2025-12-04 14:38:08 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:36',
+    start_time: 36.02000000000066,
+    end_time: 40.02000000000066,
+    text: 'aku ora sah munggah ning kahyangan piye? lha terus?',
+    translation: 'Aku tidak usah naik ke kahyangan bagaimana? Lalu?'
+  }
+}
+2025-12-04 14:38:16 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:38',
+    start_time: 38.02000000000097,
+    end_time: 42.02000000000097,
+    text: '00:00 aduh, 00:01 lah terus 00:02 aduh 00:03 adiku guru tak undang',
+    translation: '00:00 Aduh, 00:01 Lalu terus 00:02 Aduh 00:03 Adikku guru saya panggil'
+  }
+}
+2025-12-04 14:38:25 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:40',
+    start_time: 40.02000000000128,
+    end_time: 44.02000000000128,
+    text: 'adhiku guru tak undange mrene. we lah iki',
+    translation: 'adikku guru, aku panggil ke sini. We lah ini'
+  }
+}
+2025-12-04 14:38:36 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:42',
+    start_time: 42.020000000001595,
+    end_time: 46.020000000001595,
+    text: 'ing mrene. weh, lah iki, iki. ngetoke ketoke...',
+    translation: 'ke sini. Wah, ini dia, ini. Menunjukkannya sepertinya...'
+  }
+}
+2025-12-04 14:38:44 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:44',
+    start_time: 44.02000000000191,
+    end_time: 48.02000000000191,
+    text: 'geh gek.. gek.. gek.. wingi netoke ketrampilan keketene bapak. coba...',
+    translation: 'Ya, ayo.. ayo.. ayo.. kemarin menunjukkan keterampilan kesetiaan bapak. Coba...'
+  }
+}
+2025-12-04 14:38:52 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:46',
+    start_time: 46.02000000000222,
+    end_time: 50.02000000000222,
+    text: 'ampilan kesektene bapak. coba. guru kok',
+    translation: 'kesaktian Bapak. Coba. Guru kok'
+  }
+}
+2025-12-04 14:39:05 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:48',
+    start_time: 48.02000000000253,
+    end_time: 52.02000000000253,
+    text: 'guru kon mrene ning ojo sak murid e lo, nak ngono.',
+    translation: 'Guru disuruh kesini tapi jangan semua muridnya ya, kalau begitu.'
+  }
+}
+2025-12-04 14:39:21 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:50',
+    start_time: 50.020000000002845,
+    end_time: 54.020000000002845,
+    text: 'rene ning aja sak muride lo nak ngebak-baki guru',
+    translation: 'Sini tapi jangan seenaknya sendiri kalau memenuhi mengisi Guru'
+  }
+}
+2025-12-04 14:39:28 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:52',
+    start_time: 52.02000000000316,
+    end_time: 56.02000000000316,
+    text: 'gurune tok wae',
+    translation: 'gurunya saja'
+  }
+}
+2025-12-04 14:39:36 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:54',
+    start_time: 54.02000000000347,
+    end_time: 58.02000000000347,
+    text: 'ketok wae. ee iyo, yo. gurune tok..',
+    translation: 'kelihatan saja. Ee iya, ya. Gurunya saja..'
+  }
+}
+2025-12-04 14:39:51 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:56',
+    start_time: 56.02000000000378,
+    end_time: 60.02000000000378,
+    text: 'iyo, iyo. gurune tok. hemm. engko ndak ngobah-obahi aku ngono.',
+    translation: 'Iya, iya. Gurunya saja. Hemm. Nanti jangan mengubah-ubah aku begitu.'
+  }
+}
+2025-12-04 14:40:14 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:58',
+    start_time: 58.020000000004096,
+    end_time: 62.020000000004096,
+    text: 'engko ndak ngebabahe aku malah kewuhan nyuguh aku.',
+    translation: 'Nanti jangan sampai merepotkan saya, saya malah akan kesulitan untuk menjamu.'
+  }
+}
+2025-12-04 14:40:19 +00:00: [Socket] Client connected: mHPc9OmcrsBMZC0rAAAJ
+2025-12-04 14:40:21 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:00',
+    start_time: 60.0200000000044,
+    end_time: 64.0200000000044,
+    text: 'lah, kewanene nyuguh aku. oh iya. heh, tak mangani.',
+    translation: 'Nah, binatangnya menyuguhi aku. Oh iya. Heh, aku akan memakannya.'
+  }
+}
+2025-12-04 14:40:29 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:02',
+    start_time: 62.020000000004,
+    end_time: 66.020000000004,
+    text: 'ho, tak matek aji ya bagong, matek aji.',
+    translation: 'Ho, akan ku keluarkan ajiku ya Bagong, mengeluarkan aji.'
+  }
+}
+2025-12-04 14:40:29 +00:00: 
+========================================
+2025-12-04 14:40:29 +00:00: [Node] 1. Menerima Request dari Frontend...
+2025-12-04 14:40:29 +00:00: [Node]    URL: https://www.youtube.com/watch?v=aOtB-yw9GSE
+2025-12-04 14:40:29 +00:00: [Node]    Start: undefined menit (0 detik)
+2025-12-04 14:40:29 +00:00: [Node] 2. Mencoba menghubungi Python AI (Port 8000)...
+2025-12-04 14:40:29 +00:00: [Node] ⚠️ Python AI tidak tersedia, lanjut dengan ASR saja...
+2025-12-04 14:40:29 +00:00: [Node] 4. Starting ASR...
+2025-12-04 14:40:29 +00:00: [Node] 🛑 Stopping ASR for current video...
+2025-12-04 14:40:29 +00:00: [Node] 🎙️ Starting ASR for: https://www.youtube.com/watch?v=aOtB-yw9GSE at 0
+2025-12-04 14:40:29 +00:00: [Node] ASR Server Response: {
+  status: 'started',
+  video: 'https://www.youtube.com/watch?v=aOtB-yw9GSE',
+  startTime: 0,
+  api_keys_available: 1
+}
+2025-12-04 14:40:29 +00:00: ========================================
+
+2025-12-04 14:40:51 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:06',
+    start_time: 66.02000000000321,
+    end_time: 70.02000000000321,
+    text: 'aji pamêlik, bêthara guru mêntekan ana ing kene.',
+    translation: 'Aji pamêlik, Batara Guru muncul di sini.'
+  }
+}
+2025-12-04 14:42:03 +00:00: [Socket] Client disconnected: mHPc9OmcrsBMZC0rAAAJ
+2025-12-04 14:46:13 +00:00: [Socket] Client connected: of61fE-M7SyweSxsAAAL
+2025-12-04 14:46:27 +00:00: [Socket] 🛑 Frontend request stop live stream
+2025-12-04 14:46:27 +00:00: [Socket] Client disconnected: c-tzYlRA6PvLuxjvAAAD
+2025-12-04 14:46:35 +00:00: 
+========================================
+2025-12-04 14:46:35 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-04 14:46:35 +00:00: [Node]    Query: https://www.youtube.com/watch?v=6nVXtRo9uM8&t=4215s
+2025-12-04 14:46:38 +00:00: [Socket] 🎬 Frontend request live stream: { videoUrl: 'https://www.youtube.com/watch?v=6nVXtRo9uM8&t=4215s' }
+2025-12-04 14:46:38 +00:00: [Socket] 📤 Broadcasting start-processing to 3 other clients
+2025-12-04 14:46:38 +00:00: 
+========================================
+2025-12-04 14:46:38 +00:00: [Node] 1. Menerima Request ASR dari Frontend...
+2025-12-04 14:46:38 +00:00: [Node] 🛑 Stopping ASR for current video...
+2025-12-04 14:46:38 +00:00: ========================================
+
+2025-12-04 14:46:38 +00:00: [Node] 🎙️ Starting ASR for: https://www.youtube.com/watch?v=6nVXtRo9uM8&t=4215s at 0
+2025-12-04 14:46:38 +00:00: [Node] ASR Server Response: {
+  status: 'started',
+  video: 'https://www.youtube.com/watch?v=6nVXtRo9uM8&t=4215s',
+  startTime: 0,
+  api_keys_available: 1
+}
+2025-12-04 14:46:38 +00:00: [Socket] Client connected: -HReVpeeKxE5PBF9AAAN
+2025-12-04 14:46:43 +00:00: [Socket] Client disconnected: -HReVpeeKxE5PBF9AAAN
+2025-12-04 14:46:43 +00:00: [Socket] 🛑 Frontend request stop live stream
+2025-12-04 14:46:43 +00:00: [Socket] ✅ Python started streaming: {
+  videoUrl: 'https://www.youtube.com/watch?v=6nVXtRo9uM8&t=4215s',
+  duration: 25560
+}
+2025-12-04 14:46:45 +00:00: 
+========================================
+2025-12-04 14:46:45 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-04 14:46:45 +00:00: [Node]    Query: bagong lucu
+2025-12-04 14:46:47 +00:00: 
+========================================
+2025-12-04 14:46:47 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-04 14:46:47 +00:00: [Node]    Query: bagong lucu
+2025-12-04 14:49:17 +00:00: [Socket] Client disconnected: 9Frt1gGbZFPjJP7MAAAH
+2025-12-04 14:49:18 +00:00: [Socket] Client connected: c_PvfPld4w_IjFEqAAAP
+2025-12-04 14:49:21 +00:00: 
+========================================
+2025-12-04 14:49:21 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-04 14:49:21 +00:00: [Node]    Query: bagong lucu
+2025-12-04 14:51:21 +00:00: [dotenv@17.2.3] injecting env (0) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+2025-12-04 14:51:21 +00:00: [Config] ASR Server: http://127.0.0.1:8001
+2025-12-04 14:51:21 +00:00: [Config] Python AI: http://127.0.0.1:8000
+2025-12-04 14:51:21 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-04 14:51:21 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-04 14:51:21 +00:00: 🚀 Server Backend Node.js jalan di http://0.0.0.0:3000
+2025-12-04 14:51:22 +00:00: [Socket] Client connected: rofzyb1TCfARLxmyAAAB
+2025-12-04 14:51:22 +00:00: [Socket] Client connected: vEA7AL8sU9HWEbSnAAAE
+2025-12-04 14:51:22 +00:00: [Socket] Client connected: 2z-Hi3uQ9jFqe217AAAF
+2025-12-04 14:51:33 +00:00: [Socket] Client connected: x6_MbBKNaqH8cDh_AAAH
+2025-12-04 14:51:35 +00:00: 
+========================================
+2025-12-04 14:51:35 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-04 14:51:35 +00:00: [Node]    Query: bagong lucu
+2025-12-04 14:51:37 +00:00: [Socket] Client disconnected: vEA7AL8sU9HWEbSnAAAE
+2025-12-04 14:51:40 +00:00: [Socket] Client connected: wi-DTwikX2gzt-UrAAAJ
+2025-12-04 14:51:45 +00:00: 
+========================================
+2025-12-04 14:51:45 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-04 14:51:45 +00:00: [Node]    Query: bagong lucu
+2025-12-04 14:52:50 +00:00: [dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+2025-12-04 14:52:50 +00:00: [Config] ASR Server: http://127.0.0.1:8001
+2025-12-04 14:52:50 +00:00: [Config] Python AI: http://127.0.0.1:8000
+2025-12-04 14:52:50 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-04 14:52:50 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-04 14:52:50 +00:00: 🚀 Server Backend Node.js jalan di http://0.0.0.0:3000
+2025-12-04 14:52:51 +00:00: [Socket] Client connected: JjD-t2fVoR3B2myZAAAB
+2025-12-04 14:53:03 +00:00: [Socket] Client connected: 4Hw-snAKAOoHlp36AAAD
+2025-12-04 14:53:16 +00:00: [Socket] Client connected: Wn169bm1VGodBewNAAAF
+2025-12-04 14:53:17 +00:00: [Socket] Client connected: 7A-oOgz13-kS4_evAAAH
+2025-12-18 06:32:44 +00:00: [dotenv@17.2.3] injecting env (4) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+2025-12-18 06:32:45 +00:00: [SessionManager] Initialized with 20 workers
+2025-12-18 06:32:45 +00:00: [Config] ASR Server: http://127.0.0.1:8001
+2025-12-18 06:32:45 +00:00: [Config] Python AI: http://127.0.0.1:8000
+2025-12-18 06:32:45 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:32:45 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:32:45 +00:00: 🚀 Server Backend Node.js jalan di http://0.0.0.0:3000
+2025-12-18 06:32:45 +00:00: 📊 Worker Pool: 20 workers available
+2025-12-18 06:32:45 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:32:47 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:32:50 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:32:50 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:32:52 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:32:54 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:32:55 +00:00: [Socket] Client connected: 4MXXWUuHDnQZvoRlAAAB
+2025-12-18 06:32:55 +00:00: [Socket] 🐍 Python worker registering: worker-4
+2025-12-18 06:32:55 +00:00: [SessionManager] 🐍 Python worker worker-4 registered (socket: 4MXXWUuHDnQZvoRlAAAB)
+2025-12-18 06:32:55 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:32:55 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:32:59 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:33:00 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:33:00 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:33:01 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:33:05 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:33:06 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:33:06 +00:00: [Socket] Client connected: Uz82zP3mPr3GEAovAAAD
+2025-12-18 06:33:06 +00:00: [Socket] 🐍 Python worker registering: worker-2
+2025-12-18 06:33:06 +00:00: [SessionManager] 🐍 Python worker worker-2 registered (socket: Uz82zP3mPr3GEAovAAAD)
+2025-12-18 06:33:06 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:33:07 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:33:11 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:33:11 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:33:12 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:33:13 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:33:16 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:33:16 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:33:17 +00:00: [Socket] Client connected: 4lUsfuKIuK1gh2BLAAAF
+2025-12-18 06:33:17 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-18 06:33:17 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: 4lUsfuKIuK1gh2BLAAAF)
+2025-12-18 06:33:18 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:33:20 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:33:21 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:33:21 +00:00: [Socket] Client connected: 7Q8sBYcb5SdEpXvuAAAH
+2025-12-18 06:33:21 +00:00: [Socket] 🐍 Python worker registering: worker-1
+2025-12-18 06:33:21 +00:00: [SessionManager] 🐍 Python worker worker-1 registered (socket: 7Q8sBYcb5SdEpXvuAAAH)
+2025-12-18 06:33:21 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:33:25 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:33:26 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:33:27 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:33:27 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:33:31 +00:00: [Socket] Client connected: MxUltNNs55f1_vX5AAAJ
+2025-12-18 06:33:32 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:33:32 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:33:32 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:33:32 +00:00: [Socket] Client connected: -wTGWt8Rs4lDVKMOAAAL
+2025-12-18 06:33:33 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:33:37 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:33:37 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:33:38 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:33:39 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:33:42 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:33:42 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:33:44 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:33:46 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:33:47 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:33:47 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:33:51 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:33:52 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:33:52 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:33:53 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:33:57 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:33:58 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:33:58 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:33:59 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:34:03 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:34:03 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:34:04 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:34:06 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:34:08 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:34:08 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:34:11 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:34:13 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:34:13 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:34:13 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:34:16 +00:00: [Socket] Client disconnected: MxUltNNs55f1_vX5AAAJ
+2025-12-18 06:34:16 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-18 06:34:16 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-18 06:34:18 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:34:18 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:34:18 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:34:19 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:34:23 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:34:23 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:34:24 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:34:26 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:34:28 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:34:29 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:34:31 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:34:32 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:34:34 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:34:34 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:34:37 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:34:39 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:34:39 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:34:39 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:34:44 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:34:44 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:34:44 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:34:45 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:34:49 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:34:49 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:34:50 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:34:52 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:34:54 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:34:54 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:34:57 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:34:58 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:34:59 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:35:00 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:35:03 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:35:05 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:35:05 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:35:05 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:35:10 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:35:10 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:35:10 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:35:12 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:35:15 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:35:15 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:35:17 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:35:18 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:35:20 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:35:20 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:35:23 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:35:24 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:35:25 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:35:25 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:35:29 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:35:30 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:35:31 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:35:31 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:35:36 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:35:36 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:35:36 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:35:37 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:35:41 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:35:41 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:35:42 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:35:44 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:35:46 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:35:46 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:35:49 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:35:50 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:35:51 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:35:51 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:35:55 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:35:56 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:35:56 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:35:57 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:36:01 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:36:01 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:36:02 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:36:03 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:36:06 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:36:07 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:36:08 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:36:09 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:36:12 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:36:12 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:36:14 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:36:16 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:36:17 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:36:17 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:36:21 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:36:22 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:36:22 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:36:23 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:36:27 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:36:27 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:36:28 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:36:29 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:36:32 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:36:32 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:36:34 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:36:35 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:36:37 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:36:38 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:36:40 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:36:42 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:36:43 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:36:43 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:36:47 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:36:48 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:36:48 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:36:48 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:36:53 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:36:53 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:36:53 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:36:55 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:36:58 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:36:58 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:37:00 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:37:01 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:37:03 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:37:03 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:37:06 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:37:08 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:37:08 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:37:08 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:37:13 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:37:13 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:37:14 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:37:15 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:37:19 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:37:19 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:37:20 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:37:21 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:37:24 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:37:24 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:37:26 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:37:28 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:37:29 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:37:29 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:37:33 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:37:34 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:37:34 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:37:34 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:37:39 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:37:39 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:37:40 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:37:41 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:37:45 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:37:45 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:37:46 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:37:48 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:37:50 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:37:50 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:37:53 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:37:55 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:37:55 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:37:55 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:38:00 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:38:00 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:38:00 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:38:02 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:38:05 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:38:06 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:38:07 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:38:09 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:38:11 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:38:11 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:38:14 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:38:15 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:38:16 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:38:16 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:38:20 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:38:21 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:38:21 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:38:22 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:38:26 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:38:27 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:38:27 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:38:29 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:38:32 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:38:32 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:38:34 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:38:36 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:38:37 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:38:37 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:38:41 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:38:42 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:38:42 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:38:43 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:38:47 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:38:47 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:38:48 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:38:49 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:38:52 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:38:52 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:38:54 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:38:56 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:38:57 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:38:57 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:39:01 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:39:02 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:39:03 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:39:03 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:39:08 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:39:08 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:39:08 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:39:10 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:39:13 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:39:13 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:39:15 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:39:17 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:39:18 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:39:18 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:39:22 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:39:23 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:39:23 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:39:24 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:39:28 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:39:29 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:39:29 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:39:30 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:39:34 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:39:34 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:39:35 +00:00: [Node] 🎙️ Starting ASR Server...
+2025-12-18 06:39:37 +00:00: [Node] ASR Server exited with code: 1
+2025-12-18 06:39:39 +00:00: [Node] 🚀 Starting Python Backend AI...
+2025-12-18 06:39:39 +00:00: [Node] Python Backend exited with code: 0
+2025-12-18 06:39:41 +00:00: [dotenv@17.2.3] injecting env (6) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+2025-12-18 06:39:42 +00:00: [SessionManager] Initialized with 20 workers
+2025-12-18 06:39:42 +00:00: [Config] ASR Server: http://127.0.0.1:8001
+2025-12-18 06:39:42 +00:00: [Config] Python AI: http://127.0.0.1:8000
+2025-12-18 06:39:42 +00:00: [Node] ⏭️ Skipping Python Backend (running externally)
+2025-12-18 06:39:42 +00:00: [Node] ⏭️ Skipping ASR Server (running externally)
+2025-12-18 06:39:42 +00:00: 🚀 Server Backend Node.js jalan di http://0.0.0.0:3000
+2025-12-18 06:39:42 +00:00: 📊 Worker Pool: 20 workers available
+2025-12-18 06:39:54 +00:00: [Socket] Client connected: 8cYLuLK4JUHVq4UdAAAB
+2025-12-18 06:39:54 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-18 06:39:54 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: 8cYLuLK4JUHVq4UdAAAB)
+2025-12-18 06:39:54 +00:00: [Socket] Client connected: U0jaIpADLmDwi84XAAAD
+2025-12-18 06:39:54 +00:00: [Socket] 🐍 Python worker registering: worker-1
+2025-12-18 06:39:54 +00:00: [SessionManager] 🐍 Python worker worker-1 registered (socket: U0jaIpADLmDwi84XAAAD)
+2025-12-18 06:39:54 +00:00: [Socket] Client connected: dGX-7cKbGZttfYIoAAAF
+2025-12-18 06:39:55 +00:00: [Socket] 🐍 Python worker registering: worker-4
+2025-12-18 06:39:55 +00:00: [SessionManager] 🐍 Python worker worker-4 registered (socket: dGX-7cKbGZttfYIoAAAF)
+2025-12-18 06:39:55 +00:00: [Socket] Client connected: hhLM_XreIjg602z0AAAH
+2025-12-18 06:39:55 +00:00: [Socket] 🐍 Python worker registering: worker-2
+2025-12-18 06:39:55 +00:00: [SessionManager] 🐍 Python worker worker-2 registered (socket: hhLM_XreIjg602z0AAAH)
+2025-12-18 06:39:57 +00:00: [Socket] Client connected: 3o5gsybO6iuQvKvpAAAJ
+2025-12-18 06:40:03 +00:00: 
+========================================
+2025-12-18 06:40:03 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-18 06:40:03 +00:00: [Node]    Query: bagong
+2025-12-18 06:40:03 +00:00: [Node] ✅ Ditemukan 6 video
+2025-12-18 06:40:03 +00:00: ========================================
+
+2025-12-18 06:41:09 +00:00: [Socket] Client disconnected: 3o5gsybO6iuQvKvpAAAJ
+2025-12-18 06:41:09 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-18 06:41:09 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-18 06:41:09 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-18 06:41:09 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-18 06:41:09 +00:00: [Socket] Client connected: 37S6d8pLfNzn9VcLAAAL
+2025-12-18 06:41:14 +00:00: 
+========================================
+2025-12-18 06:41:14 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-18 06:41:14 +00:00: [Node]    Query: bagong lucu
+2025-12-18 06:41:14 +00:00: [Node] ✅ Ditemukan 6 video
+2025-12-18 06:41:14 +00:00: ========================================
+
+2025-12-18 06:41:20 +00:00: 
+========================================
+2025-12-18 06:41:20 +00:00: [Node] 1. Menerima Request ASR dari Frontend...
+2025-12-18 06:41:20 +00:00: ========================================
+
+2025-12-18 06:41:20 +00:00: [Node] 🎙️ Starting ASR for: https://www.youtube.com/watch?v=eV6jQPwK3qE at 0 (lang: id)
+2025-12-18 06:41:20 +00:00: [Node] ASR Server Response: {
+  status: 'started',
+  video: 'https://www.youtube.com/watch?v=eV6jQPwK3qE',
+  startTime: 0,
+  targetLanguage: 'id',
+  api_keys_available: 3
+}
+2025-12-18 06:41:20 +00:00: [Socket] Client connected: XQBHXRknv0s4_mz1AAAN
+2025-12-18 06:41:21 +00:00: [Socket] 🎬 Frontend request live stream: {
+  videoUrl: 'https://www.youtube.com/watch?v=eV6jQPwK3qE',
+  existingSessionId: null,
+  currentTime: 0
+}
+2025-12-18 06:41:21 +00:00: [Socket]    Socket ID: XQBHXRknv0s4_mz1AAAN
+2025-12-18 06:41:21 +00:00: [Socket]    Current player time: 0s
+2025-12-18 06:41:21 +00:00: [SessionManager] ✅ Created session sess_1766040081518_t64cc7 on worker-1
+2025-12-18 06:41:21 +00:00: [SessionManager]    Video: https://www.youtube.com/watch?v=eV6jQPwK3qE
+2025-12-18 06:41:21 +00:00: [SessionManager]    Status: 19/20 available
+2025-12-18 06:41:21 +00:00: [SessionManager] 🔄 Updated socketId for sess_1766040081518_t64cc7: XQBHXRknv0s4_mz1AAAN -> XQBHXRknv0s4_mz1AAAN
+2025-12-18 06:41:21 +00:00: [Socket] 📤 Sent start-processing to worker-1 at time 0s
+2025-12-18 06:41:21 +00:00: [Socket] 🎙️ Auto-starting ASR at 0s
+2025-12-18 06:41:21 +00:00: [Socket] ✅ ASR started at 0s
+2025-12-18 06:41:24 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1766040081518_t64cc7',
+  state: 'playing',
+  time: 0.022659135421752928
+}
+2025-12-18 06:41:24 +00:00: [Socket] ▶️ Resuming ASR for playback
+2025-12-18 06:41:25 +00:00: [Socket] ✅ Python started streaming: {
+  sessionId: 'sess_1766040081518_t64cc7',
+  videoUrl: 'https://www.youtube.com/watch?v=eV6jQPwK3qE',
+  duration: 6525.4
+}
+2025-12-18 06:41:27 +00:00: [Socket] ⚠️ ASR resume failed: timeout of 3000ms exceeded
+2025-12-18 06:41:40 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:00',
+    start_time: 0.020000000000002238,
+    end_time: 3.0200000000000022,
+    text: 'baladewa neng endi? ha pateni pisan!',
+    translation: 'Baladewa di mana? Ha, bunuh sekalian!'
+  }
+}
+2025-12-18 06:41:43 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:03',
+    start_time: 3.0199999999999596,
+    end_time: 6.01999999999996,
+    text: 'tuk tik tak tik tuk tak tik tik tak',
+    translation: 'Suara alat musik gamelan yang khas, seperti ketukan pada gong dan instrumen perkusi lainnya.'
+  }
+}
+2025-12-18 06:42:18 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1766040081518_t64cc7',
+  state: 'paused',
+  time: 54.055541
+}
+2025-12-18 06:42:18 +00:00: [Socket] ⏸️ Pausing ASR due to player paused
+2025-12-18 06:42:19 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1766040081518_t64cc7',
+  state: 'playing',
+  time: 54.343705020980835
+}
+2025-12-18 06:42:19 +00:00: [Socket] ▶️ Resuming ASR for playback
+2025-12-18 06:42:21 +00:00: [Socket] ⚠️ ASR pause failed: timeout of 3000ms exceeded
+2025-12-18 06:42:22 +00:00: [Socket] ⚠️ ASR resume failed: timeout of 3000ms exceeded
+2025-12-18 06:42:35 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:54',
+    start_time: 54.02000000000047,
+    end_time: 57.02000000000047,
+    text: 'kowe tetep isa mempertahankan ndara werkudara nora?',
+    translation: 'Kamu tetap bisa mempertahankan ndara Werkudara tidak?'
+  }
+}
+2025-12-18 06:42:37 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:57',
+    start_time: 57.02000000000094,
+    end_time: 60.02000000000094,
+    text: 'kala janaka mapane ing negara ngastina. ning waton...',
+    translation: 'Saat Janaka berada di negara Ngastina. Di kampung...'
+  }
+}
+2025-12-18 06:42:39 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:00',
+    start_time: 60.02000000000141,
+    end_time: 63.02000000000141,
+    text: 'kowe isa nglangkahi kuwandane petruk. weh, he!',
+    translation: 'Kamu bisa melangkahi mayatnya Petruk. Weh, he!'
+  }
+}
+2025-12-18 06:42:43 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:06',
+    start_time: 66.02000000000056,
+    end_time: 69.02000000000056,
+    text: 'wawu kowe iki nantang kok njur kancane si',
+    translation: 'wah kamu ini menantang kok terus temannya si'
+  }
+}
+2025-12-18 06:42:45 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:09',
+    start_time: 69.01999999999997,
+    end_time: 72.01999999999997,
+    text: 'nggo sayembara ora. isa ngawu.',
+    translation: 'Untuk sayembara tidak. Bisa mengawur.'
+  }
+}
+2025-12-18 06:42:46 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:06',
+    start_time: 6.0199999999998965,
+    end_time: 9.019999999999897,
+    text: 'wah, bagong nek ngamuk wis ora perduli sapa.',
+    translation: 'Wah, Bagong kalau marah sudah tidak peduli siapa.'
+  }
+}
+2025-12-18 06:43:13 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1766040081518_t64cc7',
+  state: 'paused',
+  time: 108.847704
+}
+2025-12-18 06:43:13 +00:00: [Socket] ⏸️ Pausing ASR due to player paused
+2025-12-18 06:46:25 +00:00: [dotenv@17.2.3] injecting env (6) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+2025-12-18 06:46:25 +00:00: [SessionManager] Initialized with 20 workers
+2025-12-18 06:46:25 +00:00: [Config] ASR Server: http://127.0.0.1:8001
+2025-12-18 06:46:25 +00:00: [Config] Python AI: http://127.0.0.1:8000
+2025-12-18 06:46:25 +00:00: [Node] ⏭️ Skipping Python Backend (running externally)
+2025-12-18 06:46:25 +00:00: [Node] ⏭️ Skipping ASR Server (running externally)
+2025-12-18 06:46:25 +00:00: 🚀 Server Backend Node.js jalan di http://0.0.0.0:3000
+2025-12-18 06:46:25 +00:00: 📊 Worker Pool: 20 workers available
+2025-12-18 06:46:26 +00:00: [Socket] Client connected: VVANNmkygkx7zL77AAAB
+2025-12-18 06:46:26 +00:00: [Socket] 🐍 Python worker registering: worker-2
+2025-12-18 06:46:26 +00:00: [SessionManager] 🐍 Python worker worker-2 registered (socket: VVANNmkygkx7zL77AAAB)
+2025-12-18 06:46:26 +00:00: [Socket] Client connected: PtbtXZ-cNnyWs6KnAAAD
+2025-12-18 06:46:26 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-18 06:46:26 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: PtbtXZ-cNnyWs6KnAAAD)
+2025-12-18 06:46:26 +00:00: [Socket] Client connected: YZp1Frj_B7WgeCjwAAAH
+2025-12-18 06:46:26 +00:00: [Socket] Client connected: AoGfD-MOu9MIHtzsAAAI
+2025-12-18 06:46:26 +00:00: [Socket] Client connected: XBdzWo5zV2odxwz-AAAJ
+2025-12-18 06:46:26 +00:00: [Socket] 🐍 Python worker registering: worker-1
+2025-12-18 06:46:26 +00:00: [SessionManager] 🐍 Python worker worker-1 registered (socket: YZp1Frj_B7WgeCjwAAAH)
+2025-12-18 06:46:26 +00:00: [Socket] 🐍 Python worker registering: worker-4
+2025-12-18 06:46:26 +00:00: [SessionManager] 🐍 Python worker worker-4 registered (socket: AoGfD-MOu9MIHtzsAAAI)
+2025-12-18 06:46:27 +00:00: [Socket] Client connected: PyX0cet6HLnhnnepAAAL
+2025-12-18 06:46:45 +00:00: [Socket] 🛑 Frontend ending session: sess_1766040081518_t64cc7 (tab_close)
+2025-12-18 06:46:46 +00:00: [Socket] Client disconnected: XBdzWo5zV2odxwz-AAAJ
+2025-12-18 06:46:46 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-18 06:46:46 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-18 06:46:46 +00:00: [Socket] Client disconnected: PyX0cet6HLnhnnepAAAL
+2025-12-18 06:46:46 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-18 06:46:46 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-18 06:46:46 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-18 06:46:46 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-18 06:46:46 +00:00: [Socket] Client connected: Lc-FQtiadj_EEwT9AAAN
+2025-12-18 06:46:51 +00:00: 
+========================================
+2025-12-18 06:46:51 +00:00: [Node] 1. Menerima Request ASR dari Frontend...
+2025-12-18 06:46:51 +00:00: ========================================
+
+2025-12-18 06:46:51 +00:00: [Node] 🎙️ Starting ASR for: https://www.youtube.com/watch?v=BgJlUmNvF00 at 0 (lang: id)
+2025-12-18 06:46:51 +00:00: [Node] ASR Server Response: {
+  status: 'started',
+  video: 'https://www.youtube.com/watch?v=BgJlUmNvF00',
+  startTime: 0,
+  targetLanguage: 'id',
+  api_keys_available: 3
+}
+2025-12-18 06:46:51 +00:00: [Socket] Client connected: JQLJYGmP6ZihLAAGAAAP
+2025-12-18 06:46:52 +00:00: [Socket] 🎬 Frontend request live stream: {
+  videoUrl: 'https://www.youtube.com/watch?v=BgJlUmNvF00',
+  existingSessionId: null,
+  currentTime: 0
+}
+2025-12-18 06:46:52 +00:00: [Socket]    Socket ID: JQLJYGmP6ZihLAAGAAAP
+2025-12-18 06:46:52 +00:00: [Socket]    Current player time: 0s
+2025-12-18 06:46:52 +00:00: [SessionManager] ✅ Created session sess_1766040412411_78ths9 on worker-1
+2025-12-18 06:46:52 +00:00: [SessionManager]    Video: https://www.youtube.com/watch?v=BgJlUmNvF00
+2025-12-18 06:46:52 +00:00: [SessionManager]    Status: 19/20 available
+2025-12-18 06:46:52 +00:00: [SessionManager] 🔄 Updated socketId for sess_1766040412411_78ths9: JQLJYGmP6ZihLAAGAAAP -> JQLJYGmP6ZihLAAGAAAP
+2025-12-18 06:46:52 +00:00: [Socket] 📤 Sent start-processing to worker-1 at time 0s
+2025-12-18 06:46:52 +00:00: [Socket] 🎙️ Auto-starting ASR at 0s
+2025-12-18 06:46:52 +00:00: [Socket] ✅ ASR started at 0s
+2025-12-18 06:46:54 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1766040412411_78ths9',
+  state: 'playing',
+  time: 0.06227478256225586
+}
+2025-12-18 06:46:54 +00:00: [Socket] ▶️ Resuming ASR for playback
+2025-12-18 06:46:57 +00:00: [Socket] ⚠️ ASR resume failed: timeout of 3000ms exceeded
+2025-12-18 06:47:12 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:12',
+    start_time: 12.019999999999769,
+    end_time: 15.019999999999769,
+    text: 'nganggenya memberi hiburan.',
+    translation: 'Gunanya memberi hiburan.'
+  }
+}
+2025-12-18 06:47:15 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:15',
+    start_time: 15.019999999999705,
+    end_time: 18.019999999999705,
+    text: 'tapi juga menyampaikan nilai, filosofi',
+    translation: 'tapi juga menyampaikan nilai, filosofi'
+  }
+}
+2025-12-18 06:47:17 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:18',
+    start_time: 18.01999999999964,
+    end_time: 21.01999999999964,
+    text: 'karya kearifan lokal yang patut terus dijaga.',
+    translation: 'karya kearifan lokal yang patut terus dijaga.'
+  }
+}
+2025-12-18 06:47:20 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:21',
+    start_time: 21.019999999999577,
+    end_time: 24.019999999999577,
+    text: 'ponorogo, yang telah mendapatkan pengakuan dunia dari...',
+    translation: 'Ponorogo, yang telah mendapatkan pengakuan dunia dari...'
+  }
+}
+2025-12-18 06:47:24 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:24',
+    start_time: 24.019999999999513,
+    end_time: 27.019999999999513,
+    text: 'yudescō atas kekayaan budayanya, memiliki',
+    translation: 'Yudescō (nama orang/tokoh) atas kekayaan budayanya, memiliki'
+  }
+}
+2025-12-18 06:47:27 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:27',
+    start_time: 27.01999999999945,
+    end_time: 30.01999999999945,
+    text: 'tanggung jawab besar untuk melestarikan sendi dan per',
+    translation: 'Tanggung jawab besar untuk melestarikan sendi dan per'
+  }
+}
+2025-12-18 06:47:28 +00:00: [Socket] ✅ Python started streaming: {
+  sessionId: 'sess_1766040412411_78ths9',
+  videoUrl: 'https://www.youtube.com/watch?v=BgJlUmNvF00',
+  duration: -0.03333333333333333
+}
+2025-12-18 06:47:29 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:30',
+    start_time: 30.019999999999563,
+    end_time: 33.01999999999956,
+    text: 'tradisi.\nmaka kerja sama sinergitas',
+    translation: 'tradisi.\nMaka kerja sama sinergitas'
+  }
+}
+2025-12-18 06:47:30 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1766040412411_78ths9',
+  state: 'paused',
+  time: 35.907296
+}
+2025-12-18 06:47:30 +00:00: [Socket] ⏸️ Pausing ASR due to player paused
+2025-12-18 06:47:33 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:33',
+    start_time: 33.02000000000003,
+    end_time: 36.02000000000003,
+    text: 'mas dinas pariwisata dan kebudayaan provinsi',
+    translation: 'mas dinas pariwisata dan kebudayaan provinsi'
+  }
+}
+2025-12-18 06:47:37 +00:00: [Socket] 🛑 Frontend request stop live stream (legacy)
+2025-12-18 06:47:37 +00:00: [Socket] 🎙️ Stopping ASR (legacy stop)
+2025-12-18 06:47:37 +00:00: [Socket] 🛑 Frontend ending session: sess_1766040412411_78ths9 (user_close)
+2025-12-18 06:47:37 +00:00: [SessionManager] 🛑 Ended session sess_1766040412411_78ths9 (user_close)
+2025-12-18 06:47:37 +00:00: [SessionManager]    Released worker-1
+2025-12-18 06:47:37 +00:00: [SessionManager]    Status: 20/20 available
+2025-12-18 06:47:37 +00:00: [Socket] 🎙️ Stopping ASR due to session end
+2025-12-18 06:47:37 +00:00: 
+========================================
+2025-12-18 06:47:37 +00:00: [Node] Stopping ASR process...
+2025-12-18 06:47:37 +00:00: ========================================
+
+2025-12-18 06:47:37 +00:00: [Socket] Client disconnected: JQLJYGmP6ZihLAAGAAAP
+2025-12-18 06:47:37 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-18 06:47:37 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-18 07:26:31 +00:00: [Socket] Client connected: XChZxQn6cziGcZtMAAAR
+2025-12-18 07:26:44 +00:00: [Socket] Client disconnected: XChZxQn6cziGcZtMAAAR
+2025-12-18 07:26:44 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-18 07:26:44 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-18 07:26:57 +00:00: [Socket] Client connected: 2n2Lm-5T4KkPzfoiAAAT
+2025-12-18 07:27:10 +00:00: [Socket] Client disconnected: 2n2Lm-5T4KkPzfoiAAAT
+2025-12-18 07:27:10 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-18 07:27:10 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-18 07:27:44 +00:00: [dotenv@17.2.3] injecting env (6) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+2025-12-18 07:27:44 +00:00: [SessionManager] Initialized with 20 workers
+2025-12-18 07:27:44 +00:00: [Config] ASR Server: http://127.0.0.1:8001
+2025-12-18 07:27:44 +00:00: [Config] Python AI: http://127.0.0.1:8000
+2025-12-18 07:27:44 +00:00: [Node] ⏭️ Skipping Python Backend (running externally)
+2025-12-18 07:27:44 +00:00: [Node] ⏭️ Skipping ASR Server (running externally)
+2025-12-18 07:27:44 +00:00: 🚀 Server Backend Node.js jalan di http://0.0.0.0:3000
+2025-12-18 07:27:44 +00:00: 📊 Worker Pool: 20 workers available
+2025-12-18 07:27:51 +00:00: [Socket] Client connected: GnS4KziX7smv54mcAAAB
+2025-12-18 07:27:51 +00:00: [Socket] 🐍 Python worker registering: worker-4
+2025-12-18 07:27:51 +00:00: [SessionManager] 🐍 Python worker worker-4 registered (socket: GnS4KziX7smv54mcAAAB)
+2025-12-18 07:27:52 +00:00: [Socket] Client connected: jmxN2Dj4yqwTDQOiAAAD
+2025-12-18 07:27:52 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-18 07:27:52 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: jmxN2Dj4yqwTDQOiAAAD)
+2025-12-18 07:27:56 +00:00: [Socket] Client connected: 2TnXYRhr19FSbQ_3AAAF
+2025-12-18 07:27:56 +00:00: [Socket] 🐍 Python worker registering: worker-1
+2025-12-18 07:27:56 +00:00: [SessionManager] 🐍 Python worker worker-1 registered (socket: 2TnXYRhr19FSbQ_3AAAF)
+2025-12-18 07:27:57 +00:00: [Socket] Client connected: TNcRoLPZRjeX8DazAAAH
+2025-12-18 07:27:57 +00:00: [Socket] 🐍 Python worker registering: worker-2
+2025-12-18 07:27:57 +00:00: [SessionManager] 🐍 Python worker worker-2 registered (socket: TNcRoLPZRjeX8DazAAAH)
+2025-12-18 07:27:59 +00:00: [Socket] Client connected: fTdrEADuMglive7JAAAJ
+2025-12-18 07:46:55 +00:00: [Socket] Client connected: 3yTkRheinaVmTbVSAAAL
+2025-12-18 07:47:38 +00:00: [Socket] Client disconnected: 3yTkRheinaVmTbVSAAAL
+2025-12-18 07:47:38 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-18 07:47:38 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-18 07:52:54 +00:00: [Socket] Client connected: mHBiP_spkoeMq9bkAAAO
+2025-12-18 07:53:21 +00:00: [Socket] Client disconnected: mHBiP_spkoeMq9bkAAAO
+2025-12-18 07:53:21 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-18 07:53:21 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-18 09:07:23 +00:00: [Socket] Client disconnected: fTdrEADuMglive7JAAAJ
+2025-12-18 09:07:23 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-18 09:07:23 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-18 09:07:23 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-18 09:07:23 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-18 14:24:45 +00:00: [Socket] Client disconnected: TNcRoLPZRjeX8DazAAAH
+2025-12-18 14:24:45 +00:00: [SessionManager] 🐍 Python worker worker-2 unregistered
+2025-12-18 14:24:46 +00:00: [Socket] Client connected: V_OkN8Ccs94fPesUAAAQ
+2025-12-18 14:24:46 +00:00: [Socket] 🐍 Python worker registering: worker-2
+2025-12-18 14:24:46 +00:00: [SessionManager] 🐍 Python worker worker-2 registered (socket: V_OkN8Ccs94fPesUAAAQ)
+2025-12-19 07:44:19 +00:00: [Socket] Client connected: 6Oy8GJbu8Pln1MQaAAAU
+2025-12-19 07:44:32 +00:00: [Socket] Client disconnected: 6Oy8GJbu8Pln1MQaAAAU
+2025-12-19 07:44:32 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-19 07:44:32 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-19 07:44:32 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-19 07:44:32 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-19 08:58:46 +00:00: [Socket] Client connected: ReSjHGWhkZlj3UCpAAAW
+2025-12-19 08:58:59 +00:00: [Socket] Client disconnected: ReSjHGWhkZlj3UCpAAAW
+2025-12-19 08:58:59 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-19 08:58:59 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-19 08:58:59 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-19 08:58:59 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-19 08:59:28 +00:00: [Socket] Client connected: _7qowrPwzk9piUCzAAAa
+2025-12-19 08:59:35 +00:00: [Socket] Client disconnected: _7qowrPwzk9piUCzAAAa
+2025-12-19 08:59:35 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-19 08:59:35 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-19 08:59:35 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-19 08:59:35 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-19 08:59:59 +00:00: [Socket] Client connected: mHpIVa1NFmUIPX37AAAd
+2025-12-19 09:00:12 +00:00: [Socket] Client disconnected: mHpIVa1NFmUIPX37AAAd
+2025-12-19 09:00:12 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-19 09:00:12 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-19 09:00:12 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-19 09:00:12 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-19 09:00:13 +00:00: [Socket] Client connected: ByoRTb6dc1EB5SuuAAAf
+2025-12-19 09:00:26 +00:00: [Socket] Client disconnected: ByoRTb6dc1EB5SuuAAAf
+2025-12-19 09:00:26 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-19 09:00:26 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-19 09:00:26 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-19 09:00:26 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-19 09:00:27 +00:00: [Socket] Client connected: vHoTPp_d84e0Z-PTAAAh
+2025-12-19 09:00:28 +00:00: [Socket] Client disconnected: vHoTPp_d84e0Z-PTAAAh
+2025-12-19 09:00:28 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-19 09:00:28 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-19 09:00:28 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-19 09:00:28 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-19 09:00:30 +00:00: [Socket] Client connected: CSxtj5ntoaXOzk1NAAAk
+2025-12-19 09:00:35 +00:00: [Socket] Client connected: 5z0uyM9Y4iI8aucNAAAl
+2025-12-19 09:01:14 +00:00: [Socket] Client disconnected: CSxtj5ntoaXOzk1NAAAk
+2025-12-19 09:01:14 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-19 09:01:14 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-19 09:01:14 +00:00: [Socket] Client disconnected: 5z0uyM9Y4iI8aucNAAAl
+2025-12-19 09:01:14 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-19 09:01:14 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-19 09:01:14 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-19 09:01:14 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-19 11:41:25 +00:00: [Socket] Client connected: qjQWDzfJENm8P63FAAAn
+2025-12-19 11:41:26 +00:00: [Socket] Client connected: 16JjJkllD58GLCKkAAAp
+2025-12-19 11:41:27 +00:00: [Socket] Client connected: zOhjlcktEgXUeAgrAAAr
+2025-12-19 11:41:28 +00:00: [Socket] Client disconnected: qjQWDzfJENm8P63FAAAn
+2025-12-19 11:41:28 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-19 11:41:28 +00:00: [Socket] 📊 Remaining frontend clients: 2
+2025-12-19 11:41:28 +00:00: [Socket] Client disconnected: 16JjJkllD58GLCKkAAAp
+2025-12-19 11:41:28 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-19 11:41:28 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-19 11:41:29 +00:00: [Socket] Client disconnected: zOhjlcktEgXUeAgrAAAr
+2025-12-19 11:41:29 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-19 11:41:29 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-19 11:41:29 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-19 11:41:29 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-19 16:28:53 +00:00: [Socket] Client connected: eXhIUwOebsiW5RWlAAAt
+2025-12-19 16:28:59 +00:00: [Socket] Client disconnected: eXhIUwOebsiW5RWlAAAt
+2025-12-19 16:28:59 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-19 16:28:59 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-19 16:28:59 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-19 16:28:59 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-19 18:11:09 +00:00: [Socket] Client connected: Lif2lD0S7Kz9GzRPAAAv
+2025-12-19 18:11:21 +00:00: 
+========================================
+2025-12-19 18:11:21 +00:00: [Node] 1. Menerima Request ASR dari Frontend...
+2025-12-19 18:11:21 +00:00: ========================================
+
+2025-12-19 18:11:21 +00:00: [Node] 🎙️ Starting ASR for: https://www.youtube.com/watch?v=Qwbun_3nP60 at 0 (lang: id)
+2025-12-19 18:11:21 +00:00: [Node] ASR Server Response: {
+  status: 'started',
+  video: 'https://www.youtube.com/watch?v=Qwbun_3nP60',
+  startTime: 0,
+  targetLanguage: 'id',
+  api_keys_available: 3
+}
+2025-12-19 18:11:22 +00:00: [Socket] Client connected: 5m5_bDT9Aui8w9lGAAAx
+2025-12-19 18:11:22 +00:00: [Socket] 🎬 Frontend request live stream: {
+  videoUrl: 'https://www.youtube.com/watch?v=Qwbun_3nP60',
+  existingSessionId: null,
+  currentTime: 0
+}
+2025-12-19 18:11:22 +00:00: [Socket]    Socket ID: 5m5_bDT9Aui8w9lGAAAx
+2025-12-19 18:11:22 +00:00: [Socket]    Current player time: 0s
+2025-12-19 18:11:22 +00:00: [SessionManager] ✅ Created session sess_1766167882953_aieor9 on worker-1
+2025-12-19 18:11:22 +00:00: [SessionManager]    Video: https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:11:22 +00:00: [SessionManager]    Status: 19/20 available
+2025-12-19 18:11:22 +00:00: [SessionManager] 🔄 Updated socketId for sess_1766167882953_aieor9: 5m5_bDT9Aui8w9lGAAAx -> 5m5_bDT9Aui8w9lGAAAx
+2025-12-19 18:11:22 +00:00: [Socket] 📤 Sent start-processing to worker-1 at time 0s
+2025-12-19 18:11:22 +00:00: [Socket] 🎙️ Auto-starting ASR at 0s
+2025-12-19 18:11:22 +00:00: [Socket] ✅ ASR started at 0s
+2025-12-19 18:11:26 +00:00: [Socket] ✅ Python started streaming: {
+  sessionId: 'sess_1766167882953_aieor9',
+  videoUrl: 'https://www.youtube.com/watch?v=Qwbun_3nP60',
+  duration: 22885.966666666667
+}
+2025-12-19 18:11:26 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1766167882953_aieor9',
+  state: 'playing',
+  time: 0.1641710114440918
+}
+2025-12-19 18:11:26 +00:00: [Socket] ▶️ Resuming ASR for playback
+2025-12-19 18:11:29 +00:00: [Socket] ⚠️ ASR resume failed: timeout of 3000ms exceeded
+2025-12-19 18:11:41 +00:00: [Socket] Client disconnected: 2TnXYRhr19FSbQ_3AAAF
+2025-12-19 18:11:41 +00:00: [SessionManager] 🐍 Python worker worker-1 unregistered
+2025-12-19 18:11:41 +00:00: [SessionManager] 🛑 Ended session sess_1766167882953_aieor9 (worker_offline)
+2025-12-19 18:11:41 +00:00: [SessionManager]    Released worker-1
+2025-12-19 18:11:41 +00:00: [SessionManager]    Status: 20/20 available
+2025-12-19 18:11:42 +00:00: [Socket] Client connected: RwqKWjiHE6J-RsDSAAAz
+2025-12-19 18:11:42 +00:00: [Socket] 🐍 Python worker registering: worker-1
+2025-12-19 18:11:42 +00:00: [SessionManager] 🐍 Python worker worker-1 registered (socket: RwqKWjiHE6J-RsDSAAAz)
+2025-12-19 18:11:43 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:09',
+    start_time: 9.019999999999833,
+    end_time: 12.019999999999833,
+    text: 'dateng bapak feri.',
+    translation: 'datang Bapak Feri.'
+  }
+}
+2025-12-19 18:11:45 +00:00: [Socket] ⏩ Player seek to: { sessionId: 'sess_1766167882953_aieor9', time: 6104.178030544916 }
+2025-12-19 18:11:45 +00:00: [Socket] 🎙️ Syncing ASR to seek position: 6104.178030544916s
+2025-12-19 18:11:45 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:12',
+    start_time: 12.019999999999769,
+    end_time: 15.019999999999769,
+    text: 'bapak agung sn, bates jengker.',
+    translation: 'Bapak Agung SN, batas bengkok.'
+  }
+}
+2025-12-19 18:11:46 +00:00: 
+========================================
+2025-12-19 18:11:46 +00:00: [Node] 📍 Seek AI Analysis Request...
+2025-12-19 18:11:46 +00:00: [Node]    Seeking to: 6104 seconds
+2025-12-19 18:11:46 +00:00: [Node]    Video: https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:11:46 +00:00: [Node] 🛑 Stopping current AI analysis...
+2025-12-19 18:11:46 +00:00: [Node] Note: Stop request completed or timed out
+2025-12-19 18:11:47 +00:00: [Node] 🚀 Starting AI analysis from seek position...
+2025-12-19 18:11:47 +00:00: ========================================
+
+2025-12-19 18:11:47 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1766167882953_aieor9',
+  state: 'playing',
+  time: 6104.243221003815
+}
+2025-12-19 18:11:47 +00:00: [Socket] ▶️ Resuming ASR for playback
+2025-12-19 18:11:50 +00:00: [Socket] ⚠️ ASR resume failed: timeout of 3000ms exceeded
+2025-12-19 18:11:55 +00:00: [Socket] ⏩ Player seek to: { sessionId: 'sess_1766167882953_aieor9', time: 13459.06043030973 }
+2025-12-19 18:11:55 +00:00: [Socket] 🎙️ Syncing ASR to seek position: 13459.06043030973s
+2025-12-19 18:11:56 +00:00: 
+========================================
+2025-12-19 18:11:56 +00:00: [Node] 📍 Seek AI Analysis Request...
+2025-12-19 18:11:56 +00:00: [Node]    Seeking to: 13459 seconds
+2025-12-19 18:11:56 +00:00: [Node]    Video: https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:11:56 +00:00: [Node] 🛑 Stopping current AI analysis...
+2025-12-19 18:11:56 +00:00: [Node] Note: Stop request completed or timed out
+2025-12-19 18:11:57 +00:00: [Node] 🚀 Starting AI analysis from seek position...
+2025-12-19 18:11:57 +00:00: ========================================
+
+2025-12-19 18:11:58 +00:00: [Socket] ⚠️ ASR seek failed: timeout of 3000ms exceeded
+2025-12-19 18:11:58 +00:00: [Socket] ⏩ Player seek to: { sessionId: 'sess_1766167882953_aieor9', time: 14019.155502 }
+2025-12-19 18:11:58 +00:00: [Socket] 🎙️ Syncing ASR to seek position: 14019.155502s
+2025-12-19 18:11:58 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1766167882953_aieor9',
+  state: 'playing',
+  time: 14019.206859868393
+}
+2025-12-19 18:11:58 +00:00: [Socket] ⏭️ Skipping ASR resume - seek in progress (debounce)
+2025-12-19 18:12:00 +00:00: 
+========================================
+2025-12-19 18:12:00 +00:00: [Node] 📍 Seek AI Analysis Request...
+2025-12-19 18:12:00 +00:00: [Node]    Seeking to: 14019 seconds
+2025-12-19 18:12:00 +00:00: [Node]    Video: https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:12:00 +00:00: [Node] 🛑 Stopping current AI analysis...
+2025-12-19 18:12:00 +00:00: [Node] Note: Stop request completed or timed out
+2025-12-19 18:12:01 +00:00: [Node] 🚀 Starting AI analysis from seek position...
+2025-12-19 18:12:01 +00:00: ========================================
+
+2025-12-19 18:12:06 +00:00: [Socket] ⏩ Player seek to: { sessionId: 'sess_1766167882953_aieor9', time: 17080.499518545912 }
+2025-12-19 18:12:06 +00:00: [Socket] 🎙️ Syncing ASR to seek position: 17080.499518545912s
+2025-12-19 18:12:08 +00:00: 
+========================================
+2025-12-19 18:12:08 +00:00: [Node] 📍 Seek AI Analysis Request...
+2025-12-19 18:12:08 +00:00: [Node]    Seeking to: 17080 seconds
+2025-12-19 18:12:08 +00:00: [Node]    Video: https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:12:08 +00:00: [Node] 🛑 Stopping current AI analysis...
+2025-12-19 18:12:08 +00:00: [Node] Note: Stop request completed or timed out
+2025-12-19 18:12:08 +00:00: [Node] 🚀 Starting AI analysis from seek position...
+2025-12-19 18:12:08 +00:00: ========================================
+
+2025-12-19 18:12:09 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1766167882953_aieor9',
+  state: 'playing',
+  time: 17080.602414980927
+}
+2025-12-19 18:12:09 +00:00: [Socket] ⏭️ Skipping ASR resume - seek in progress (debounce)
+2025-12-19 18:12:09 +00:00: [Socket] ⚠️ ASR seek failed: timeout of 3000ms exceeded
+2025-12-19 18:12:15 +00:00: [Socket] ⏩ Player seek to: { sessionId: 'sess_1766167882953_aieor9', time: 19544.56999990651 }
+2025-12-19 18:12:15 +00:00: [Socket] 🎙️ Syncing ASR to seek position: 19544.56999990651s
+2025-12-19 18:12:17 +00:00: 
+========================================
+2025-12-19 18:12:17 +00:00: [Node] 📍 Seek AI Analysis Request...
+2025-12-19 18:12:17 +00:00: [Node]    Seeking to: 19544 seconds
+2025-12-19 18:12:17 +00:00: [Node]    Video: https://www.youtube.com/watch?v=Qwbun_3nP60
+2025-12-19 18:12:17 +00:00: [Node] 🛑 Stopping current AI analysis...
+2025-12-19 18:12:17 +00:00: [Node] Note: Stop request completed or timed out
+2025-12-19 18:12:17 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1766167882953_aieor9',
+  state: 'playing',
+  time: 19544.692772959945
+}
+2025-12-19 18:12:17 +00:00: [Socket] ⏭️ Skipping ASR resume - seek in progress (debounce)
+2025-12-19 18:12:17 +00:00: [Node] 🚀 Starting AI analysis from seek position...
+2025-12-19 18:12:17 +00:00: ========================================
+
+2025-12-19 18:12:18 +00:00: [Socket] ⚠️ ASR seek failed: timeout of 3000ms exceeded
+2025-12-19 18:12:33 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '325:44',
+    start_time: 19544.020000000066,
+    end_time: 19547.020000000066,
+    text: 'sat mata, woh. ora kasat.',
+    translation: 'Satu mata, woh. Tidak terlihat.'
+  }
+}
+2025-12-19 18:12:34 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1766167882953_aieor9',
+  state: 'paused',
+  time: 19561.406431
+}
+2025-12-19 18:12:34 +00:00: [Socket] ⏸️ Pausing ASR due to player paused
+2025-12-19 18:12:34 +00:00: [Socket] Client disconnected: 5m5_bDT9Aui8w9lGAAAx
+2025-12-19 18:12:34 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-19 18:12:34 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-19 18:12:34 +00:00: [Socket] Client disconnected: Lif2lD0S7Kz9GzRPAAAv
+2025-12-19 18:12:34 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-19 18:12:34 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-19 18:12:34 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-19 18:12:37 +00:00: [Socket] ⚠️ ASR pause failed: timeout of 3000ms exceeded
+2025-12-19 18:12:39 +00:00: [Socket] ⚠️ ASR stop-all failed: timeout of 5000ms exceeded
+2025-12-19 18:12:41 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '325:47',
+    start_time: 19547.02000000013,
+    end_time: 19550.02000000013,
+    text: 'wadhuh dalah! menika kados pundi, menika kados pundi niki? tegese iki sing...',
+    translation: 'Waduh, gawat! Bagaimana ini, bagaimana ini? Artinya ini yang...'
+  }
+}
+2025-12-19 20:33:32 +00:00: [Socket] Client disconnected: RwqKWjiHE6J-RsDSAAAz
+2025-12-19 20:33:32 +00:00: [SessionManager] 🐍 Python worker worker-1 unregistered
+2025-12-19 20:33:33 +00:00: [Socket] Client connected: xeTAj3xh0ZsepYsxAAA1
+2025-12-19 20:33:33 +00:00: [Socket] 🐍 Python worker registering: worker-1
+2025-12-19 20:33:33 +00:00: [SessionManager] 🐍 Python worker worker-1 registered (socket: xeTAj3xh0ZsepYsxAAA1)
+2025-12-20 03:16:11 +00:00: [Socket] Client disconnected: jmxN2Dj4yqwTDQOiAAAD
+2025-12-20 03:16:11 +00:00: [SessionManager] 🐍 Python worker worker-3 unregistered
+2025-12-20 03:16:11 +00:00: [Socket] Client disconnected: GnS4KziX7smv54mcAAAB
+2025-12-20 03:16:11 +00:00: [SessionManager] 🐍 Python worker worker-4 unregistered
+2025-12-20 03:16:24 +00:00: [Socket] Client disconnected: V_OkN8Ccs94fPesUAAAQ
+2025-12-20 03:16:24 +00:00: [SessionManager] 🐍 Python worker worker-2 unregistered
+2025-12-20 03:16:24 +00:00: [Socket] Client disconnected: xeTAj3xh0ZsepYsxAAA1
+2025-12-20 03:16:24 +00:00: [SessionManager] 🐍 Python worker worker-1 unregistered
+2025-12-20 03:23:32 +00:00: [Socket] Client connected: DCey5P3xS0nqdOciAAA3
+2025-12-20 03:23:32 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-20 03:23:32 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: DCey5P3xS0nqdOciAAA3)
+2025-12-20 03:23:33 +00:00: [Socket] Client connected: -TUF6B4AliS14Mv8AAA5
+2025-12-20 03:23:33 +00:00: [Socket] 🐍 Python worker registering: worker-1
+2025-12-20 03:23:33 +00:00: [SessionManager] 🐍 Python worker worker-1 registered (socket: -TUF6B4AliS14Mv8AAA5)
+2025-12-20 03:23:35 +00:00: [Socket] Client connected: QPOd_0A_kDefGLwJAAA7
+2025-12-20 03:23:35 +00:00: [Socket] 🐍 Python worker registering: worker-2
+2025-12-20 03:23:35 +00:00: [SessionManager] 🐍 Python worker worker-2 registered (socket: QPOd_0A_kDefGLwJAAA7)
+2025-12-20 03:23:36 +00:00: [Socket] Client connected: Hd6RFayBIB8ctsdIAAA9
+2025-12-20 03:23:36 +00:00: [Socket] 🐍 Python worker registering: worker-4
+2025-12-20 03:23:36 +00:00: [SessionManager] 🐍 Python worker worker-4 registered (socket: Hd6RFayBIB8ctsdIAAA9)
+2025-12-20 04:52:43 +00:00: [Socket] Client disconnected: DCey5P3xS0nqdOciAAA3
+2025-12-20 04:52:43 +00:00: [SessionManager] 🐍 Python worker worker-3 unregistered
+2025-12-20 04:52:44 +00:00: [Socket] Client disconnected: -TUF6B4AliS14Mv8AAA5
+2025-12-20 04:52:44 +00:00: [SessionManager] 🐍 Python worker worker-1 unregistered
+2025-12-20 04:52:46 +00:00: [Socket] Client disconnected: Hd6RFayBIB8ctsdIAAA9
+2025-12-20 04:52:46 +00:00: [SessionManager] 🐍 Python worker worker-4 unregistered
+2025-12-20 04:52:46 +00:00: [Socket] Client disconnected: QPOd_0A_kDefGLwJAAA7
+2025-12-20 04:52:46 +00:00: [SessionManager] 🐍 Python worker worker-2 unregistered
+2025-12-20 05:00:00 +00:00: [Socket] Client connected: T90Zsmks1iRSfOwPAAA_
+2025-12-20 05:00:00 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-20 05:00:00 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: T90Zsmks1iRSfOwPAAA_)
+2025-12-20 05:00:01 +00:00: [Socket] Client connected: tLw8Wdv7DZm4TeXOAABB
+2025-12-20 05:00:01 +00:00: [Socket] 🐍 Python worker registering: worker-2
+2025-12-20 05:00:01 +00:00: [SessionManager] 🐍 Python worker worker-2 registered (socket: tLw8Wdv7DZm4TeXOAABB)
+2025-12-20 05:00:03 +00:00: [Socket] Client connected: M6z2X6n2UzWiqOHkAABD
+2025-12-20 05:00:03 +00:00: [Socket] 🐍 Python worker registering: worker-1
+2025-12-20 05:00:03 +00:00: [SessionManager] 🐍 Python worker worker-1 registered (socket: M6z2X6n2UzWiqOHkAABD)
+2025-12-20 05:00:03 +00:00: [Socket] Client connected: sftkwL1YL4e2JFDKAABF
+2025-12-20 05:00:03 +00:00: [Socket] 🐍 Python worker registering: worker-4
+2025-12-20 05:00:03 +00:00: [SessionManager] 🐍 Python worker worker-4 registered (socket: sftkwL1YL4e2JFDKAABF)
+2025-12-20 06:29:23 +00:00: [Socket] Client connected: k6nNhhE48q4Upn9kAABH
+2025-12-20 06:29:25 +00:00: [Socket] Client disconnected: k6nNhhE48q4Upn9kAABH
+2025-12-20 06:29:25 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-20 06:29:25 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-20 06:29:25 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-20 06:29:25 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-20 13:14:17 +00:00: [Socket] Client connected: n95RrBNoRdbPt_KqAABJ
+2025-12-20 13:14:23 +00:00: 
+========================================
+2025-12-20 13:14:23 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-20 13:14:23 +00:00: [Node]    Query: wayang 
+2025-12-20 13:14:24 +00:00: [Node] ✅ Ditemukan 6 video
+2025-12-20 13:14:24 +00:00: ========================================
+
+2025-12-20 13:19:26 +00:00: 
+========================================
+2025-12-20 13:19:26 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-20 13:19:26 +00:00: [Node]    Query: bagong lucu
+2025-12-20 13:19:26 +00:00: [Node] ✅ Ditemukan 6 video
+2025-12-20 13:19:26 +00:00: ========================================
+
+2025-12-20 13:19:31 +00:00: 
+========================================
+2025-12-20 13:19:31 +00:00: [Node] 1. Menerima Request ASR dari Frontend...
+2025-12-20 13:19:31 +00:00: ========================================
+
+2025-12-20 13:19:31 +00:00: [Node] 🎙️ Starting ASR for: https://www.youtube.com/watch?v=yCuOxj5lnC4 at 0 (lang: id)
+2025-12-20 13:19:31 +00:00: [Node] ASR Server Response: {
+  status: 'started',
+  video: 'https://www.youtube.com/watch?v=yCuOxj5lnC4',
+  startTime: 0,
+  targetLanguage: 'id',
+  api_keys_available: 3
+}
+2025-12-20 13:19:31 +00:00: [Socket] Client connected: nrT4NAsey9eXDBn6AABL
+2025-12-20 13:19:32 +00:00: [Socket] 🎬 Frontend request live stream: {
+  videoUrl: 'https://www.youtube.com/watch?v=yCuOxj5lnC4',
+  existingSessionId: null,
+  currentTime: 0
+}
+2025-12-20 13:19:32 +00:00: [Socket]    Socket ID: nrT4NAsey9eXDBn6AABL
+2025-12-20 13:19:32 +00:00: [Socket]    Current player time: 0s
+2025-12-20 13:19:32 +00:00: [SessionManager] ✅ Created session sess_1766236772567_6z24ip on worker-2
+2025-12-20 13:19:32 +00:00: [SessionManager]    Video: https://www.youtube.com/watch?v=yCuOxj5lnC4
+2025-12-20 13:19:32 +00:00: [SessionManager]    Status: 19/20 available
+2025-12-20 13:19:32 +00:00: [SessionManager] 🔄 Updated socketId for sess_1766236772567_6z24ip: nrT4NAsey9eXDBn6AABL -> nrT4NAsey9eXDBn6AABL
+2025-12-20 13:19:32 +00:00: [Socket] 📤 Sent start-processing to worker-2 at time 0s
+2025-12-20 13:19:32 +00:00: [Socket] 🎙️ Auto-starting ASR at 0s
+2025-12-20 13:19:32 +00:00: [Socket] ✅ ASR started at 0s
+2025-12-20 13:19:34 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1766236772567_6z24ip',
+  state: 'playing',
+  time: 0.023999948501586914
+}
+2025-12-20 13:19:34 +00:00: [Socket] ▶️ Resuming ASR for playback
+2025-12-20 13:19:37 +00:00: [Socket] ⚠️ ASR resume failed: timeout of 3000ms exceeded
+2025-12-20 13:19:40 +00:00: [Socket] ✅ Python started streaming: {
+  sessionId: 'sess_1766236772567_6z24ip',
+  videoUrl: 'https://www.youtube.com/watch?v=yCuOxj5lnC4',
+  duration: 1607.6666666666667
+}
+2025-12-20 13:19:51 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:00',
+    start_time: 0.020000000000002238,
+    end_time: 3.0200000000000022,
+    text: 'kowe ora mentolo karo patiku ta? ora.',
+    translation: 'Kamu tidak tega dengan kematianku toh? Tidak.'
+  }
+}
+2025-12-20 13:19:54 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:03',
+    start_time: 3.0199999999999596,
+    end_time: 6.01999999999996,
+    text: 'nek aku lara kowe mesti sedih\nmesti',
+    translation: 'kalau aku sakit kamu pasti sedih\npasti'
+  }
+}
+2025-12-20 13:19:55 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:06',
+    start_time: 6.0199999999998965,
+    end_time: 9.019999999999897,
+    text: 'diku sing tak tresnani kok. nek nganti tekaning',
+    translation: 'Diku yang kucintai kok. Kalau sampai datangnya'
+  }
+}
+2025-12-20 13:20:01 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:09',
+    start_time: 9.019999999999833,
+    end_time: 12.019999999999833,
+    text: 'ati-ati, mesthi kowe rekasa ndadak mendhem aku ta?',
+    translation: 'Hati-hati, pasti kamu akan kesulitan karena harus menguburku, kan?'
+  }
+}
+2025-12-20 13:20:02 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:12',
+    start_time: 12.019999999999769,
+    end_time: 15.019999999999769,
+    text: 'heem.\naku ewangi ya? siap.',
+    translation: 'Heem.\nAku bantu ya? Siap.'
+  }
+}
+2025-12-20 13:20:05 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:15',
+    start_time: 15.019999999999705,
+    end_time: 18.019999999999705,
+    text: 'nduk, ngger, ngapa ta kowe?',
+    translation: 'Nak, anakku, kenapa kamu?'
+  }
+}
+2025-12-20 13:20:07 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:18',
+    start_time: 18.01999999999964,
+    end_time: 21.01999999999964,
+    text: 'ora sah ngewangi ra popo, reng. merga kowe iki wonge cetho.',
+    translation: 'Tidak usah membantu tidak apa-apa, Reng. Karena kamu ini orangnya jelas.'
+  }
+}
+2025-12-20 13:20:13 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:21',
+    start_time: 21.019999999999577,
+    end_time: 24.019999999999577,
+    text: 'adat... wis mangsa borong.',
+    translation: 'Begitulah... sudah terserah sepenuhnya (kepadamu).'
+  }
+}
+2025-12-20 13:20:15 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:24',
+    start_time: 24.019999999999513,
+    end_time: 27.019999999999513,
+    text: 'lipat dekira, tangane ceklek, sikile becik.',
+    translation: 'Lipat dikira, tangannya patah, kakinya baik.'
+  }
+}
+2025-12-20 13:20:17 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:27',
+    start_time: 27.01999999999945,
+    end_time: 30.01999999999945,
+    text: 'arep perang yo ora trampil, yakin',
+    translation: 'Mau perang ya tidak terampil, yakin'
+  }
+}
+2025-12-20 13:20:19 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:30',
+    start_time: 30.019999999999563,
+    end_time: 33.01999999999956,
+    text: 'kon kono kowe mundur kono. ya ra.',
+    translation: 'Sana, kamu mundur sana. Ya tidak.'
+  }
+}
+2025-12-20 13:20:23 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:33',
+    start_time: 33.02000000000003,
+    end_time: 36.02000000000003,
+    text: 'aku ya adhiku ya tak ewangi. rasah!',
+    translation: 'Aku pun akan membantu adikku. Tidak usah!'
+  }
+}
+2025-12-20 13:20:25 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:36',
+    start_time: 36.0200000000005,
+    end_time: 39.0200000000005,
+    text: 'wong kowe iki nek mandeng ya ora medeni.',
+    translation: 'Kamu ini kalau menatap ya tidak menakutkan.'
+  }
+}
+2025-12-20 13:20:28 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:39',
+    start_time: 39.02000000000097,
+    end_time: 42.02000000000097,
+    text: 'mandhegke wong matamu malah gathuk dadi siji',
+    translation: 'hentikan matamu malah bersatu menjadi satu'
+  }
+}
+2025-12-20 13:20:39 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:45',
+    start_time: 45.02000000000191,
+    end_time: 48.02000000000191,
+    text: 'tadhah masa! ya semene nek kakangne arep ngewangi ya ora apa-apa, gole.',
+    translation: 'Terimalah tantanganku! Ya, begini saja kalau kakaknya mau membantu ya tidak apa-apa, Nak.'
+  }
+}
+2025-12-20 13:20:40 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:48',
+    start_time: 48.020000000002376,
+    end_time: 51.020000000002376,
+    text: 'wah, wis jan. engko nek kowe nganti cilik lara ati.',
+    translation: 'Wah, sudah jelas. Nanti kalau kamu sampai kecil sakit hati.'
+  }
+}
+2025-12-20 13:20:43 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:51',
+    start_time: 51.020000000002845,
+    end_time: 54.020000000002845,
+    text: 'dhe tekaning pati, mesthi kowe ora ikhlas, ikhlas',
+    translation: 'sampai ajal menjemput, pasti kamu tidak ikhlas, ikhlas'
+  }
+}
+2025-12-20 13:20:44 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:54',
+    start_time: 54.020000000003314,
+    end_time: 57.020000000003314,
+    text: 'a-e. ora njarat.',
+    translation: 'A-e. Tidak berani.'
+  }
+}
+2025-12-20 13:20:51 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:57',
+    start_time: 57.02000000000378,
+    end_time: 60.02000000000378,
+    text: 'ngapa nduwe kakang thing penthalit ngono, mbok modar ya wis.',
+    translation: 'Kenapa punya kakak yang menyebalkan begitu, lebih baik mati saja sudah.'
+  }
+}
+2025-12-20 13:20:53 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:00',
+    start_time: 60.02000000000425,
+    end_time: 63.02000000000425,
+    text: 'man. ha ya uwis. ya wis.',
+    translation: 'Man. Ya sudahlah. Ya sudah.'
+  }
+}
+2025-12-20 13:20:56 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:03',
+    start_time: 63.020000000004,
+    end_time: 66.020000000004,
+    text: 'ora ngewangi rapopo. malahane kepenak.',
+    translation: 'Tidak membantu tidak apa-apa. Malah lebih enak.'
+  }
+}
+2025-12-20 13:20:58 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:06',
+    start_time: 66.0200000000034,
+    end_time: 69.0200000000034,
+    text: 'uripku. tur turuk.',
+    translation: 'hidupku. Tur turuk (tidak jelas, seperti gumaman).'
+  }
+}
+2025-12-20 13:21:06 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:09',
+    start_time: 69.02000000000281,
+    end_time: 72.02000000000281,
+    text: 'lha... ha... hayo... piye, nung?',
+    translation: 'Lha... Ha... Ayo... Bagaimana, Nung?'
+  }
+}
+2025-12-20 13:21:07 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:12',
+    start_time: 72.02000000000221,
+    end_time: 75.02000000000221,
+    text: 'apike ha wis ditataki. wo nek niat yo niat.',
+    translation: 'Baiknya sudah ditata. Kalau niat ya niat.'
+  }
+}
+2025-12-20 13:21:10 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:15',
+    start_time: 75.02000000000162,
+    end_time: 78.02000000000162,
+    text: 'kui duwe kepenginan, duwe kegayuhan, aja mung kang',
+    translation: 'Dia punya keinginan, punya cita-cita, jangan hanya'
+  }
+}
+2025-12-20 13:21:12 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:18',
+    start_time: 78.02000000000102,
+    end_time: 81.02000000000102,
+    text: 'ing karep ning ke kakna tekad. mergo tekad',
+    translation: 'kehendak, kemudian dikuatkan tekadnya. Karena tekad'
+  }
+}
+2025-12-20 13:21:18 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:21',
+    start_time: 81.02000000000042,
+    end_time: 84.02000000000042,
+    text: 'pok ing karep, nek wis nekat, kowe dasare wis wani ngono.',
+    translation: 'Inti dari keinginan, kalau sudah nekat, kamu dasarnya memang sudah berani begitu.'
+  }
+}
+2025-12-20 13:21:20 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:24',
+    start_time: 84.01999999999983,
+    end_time: 87.01999999999983,
+    text: 'ngunek-unekke bethara guru kuwi nek cara aku wis sesuatu sing',
+    translation: 'mengkritik Bethara Guru itu kalau menurutku sudah sesuatu yang'
+  }
+}
+2025-12-20 13:21:23 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:27',
+    start_time: 87.01999999999923,
+    end_time: 90.01999999999923,
+    text: 'anekh loh, gong. ora ono wong sak jagat ki sing wani.',
+    translation: 'Aneh lho, gong. Tidak ada orang di seluruh dunia ini yang berani.'
+  }
+}
+2025-12-20 13:21:25 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:30',
+    start_time: 90.01999999999863,
+    end_time: 93.01999999999863,
+    text: 'para batara guru nyawang kowe. ha ta?',
+    translation: 'Para Batara Guru melihat kamu. Ya, kan?'
+  }
+}
+2025-12-20 13:21:25 +00:00: [Socket] Client disconnected: tLw8Wdv7DZm4TeXOAABB
+2025-12-20 13:21:25 +00:00: [SessionManager] 🐍 Python worker worker-2 unregistered
+2025-12-20 13:21:25 +00:00: [SessionManager] 🛑 Ended session sess_1766236772567_6z24ip (worker_offline)
+2025-12-20 13:21:25 +00:00: [SessionManager]    Released worker-2
+2025-12-20 13:21:25 +00:00: [SessionManager]    Status: 20/20 available
+2025-12-20 13:21:27 +00:00: [Socket] Client connected: UuZYtM2T0FoQXFeMAABN
+2025-12-20 13:21:27 +00:00: [Socket] 🐍 Python worker registering: worker-2
+2025-12-20 13:21:27 +00:00: [SessionManager] 🐍 Python worker worker-2 registered (socket: UuZYtM2T0FoQXFeMAABN)
+2025-12-20 13:21:32 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:33',
+    start_time: 93.01999999999803,
+    end_time: 96.01999999999803,
+    text: 'hem... saiki tadhange.',
+    translation: 'Hem... sekarang saatnya bertindak.'
+  }
+}
+2025-12-20 13:21:36 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:39',
+    start_time: 99.01999999999684,
+    end_time: 102.01999999999684,
+    text: 'dewi arindro, dra hadana, dra kasim',
+    translation: 'Dewi Arindro, Dra Hadana, Dra Kasim'
+  }
+}
+2025-12-20 13:21:37 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:42',
+    start_time: 102.01999999999624,
+    end_time: 105.01999999999624,
+    text: 'ora. kuwi warkop.',
+    translation: 'Tidak. Itu warkop.'
+  }
+}
+2025-12-20 13:21:42 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:45',
+    start_time: 105.01999999999565,
+    end_time: 108.01999999999565,
+    text: 'wicara bangkit beda.',
+    translation: 'Pembicaraan bisa berbeda.'
+  }
+}
+2025-12-20 13:21:44 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:48',
+    start_time: 108.01999999999505,
+    end_time: 111.01999999999505,
+    text: 'bethara indra, bethara brahma.',
+    translation: 'Batara Indra, Batara Brahma.'
+  }
+}
+2025-12-20 13:21:46 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:51',
+    start_time: 111.01999999999445,
+    end_time: 114.01999999999445,
+    text: 'wawu, bhatara, bhatara dewaning geni. oh iya.',
+    translation: 'Wawu, Dewa Api. Oh ya.'
+  }
+}
+2025-12-20 13:21:48 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:54',
+    start_time: 114.01999999999386,
+    end_time: 117.01999999999386,
+    text: "oke, oke ra masalah. he'em. kudu ta.",
+    translation: "Oke, oke tidak masalah. He'em. Harus ya."
+  }
+}
+2025-12-20 13:21:55 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '01:57',
+    start_time: 117.01999999999326,
+    end_time: 120.01999999999326,
+    text: 'simpen dhisik, carane piye ngalahke bethara indra iki.',
+    translation: 'Simpan dulu, bagaimana caranya mengalahkan Batara Indra ini.'
+  }
+}
+2025-12-20 13:21:56 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '02:00',
+    start_time: 120.01999999999266,
+    end_time: 123.01999999999266,
+    text: 'piye yo? gelut. heeh. bethoro',
+    translation: 'Bagaimana ya? Berkelahi. Heeh. Batara'
+  }
+}
+2025-12-20 13:21:59 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '02:03',
+    start_time: 123.01999999999207,
+    end_time: 126.01999999999207,
+    text: 'brama. cara brama dewane geni, maju.',
+    translation: 'Brahma. Cara Brahma dewa api, maju.'
+  }
+}
+2025-12-20 13:22:00 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '02:06',
+    start_time: 126.0199999999922,
+    end_time: 129.0199999999922,
+    text: 'ngger sik awake. ha iya. kana ngetokke geni.',
+    translation: 'Sabar dulu, badannya. Iya. Sana mengeluarkan api.'
+  }
+}
+2025-12-20 13:22:04 +00:00: [Socket] 🛑 Frontend request stop live stream (legacy)
+2025-12-20 13:22:04 +00:00: [Socket] 🎙️ Stopping ASR (legacy stop)
+2025-12-20 13:22:04 +00:00: [Socket] 🛑 Frontend ending session: sess_1766236772567_6z24ip (user_close)
+2025-12-20 13:22:04 +00:00: [Socket] 🎙️ Stopping ASR due to session end
+2025-12-20 13:22:04 +00:00: 
+========================================
+2025-12-20 13:22:04 +00:00: [Node] Stopping ASR process...
+2025-12-20 13:22:04 +00:00: [Node] 🛑 Stopping ASR for current video...
+2025-12-20 13:22:04 +00:00: ========================================
+
+2025-12-20 13:22:04 +00:00: [Socket] Client disconnected: nrT4NAsey9eXDBn6AABL
+2025-12-20 13:22:04 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-20 13:22:04 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-20 13:22:04 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '02:09',
+    start_time: 129.01999999999373,
+    end_time: 132.01999999999373,
+    text: 'ora bakal temama. bethara bayu...',
+    translation: 'Tidak akan mempan. Batara Bayu...'
+  }
+}
+2025-12-20 13:22:10 +00:00: 
+========================================
+2025-12-20 13:22:10 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-20 13:22:10 +00:00: [Node]    Query: wayang live
+2025-12-20 13:22:10 +00:00: [Node] ✅ Ditemukan 6 video
+2025-12-20 13:22:10 +00:00: ========================================
+
+2025-12-20 13:22:15 +00:00: 
+========================================
+2025-12-20 13:22:15 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-20 13:22:15 +00:00: [Node]    Query: wayang live seno
+2025-12-20 13:22:15 +00:00: [Node] ✅ Ditemukan 6 video
+2025-12-20 13:22:15 +00:00: ========================================
+
+2025-12-20 13:22:20 +00:00: 
+========================================
+2025-12-20 13:22:20 +00:00: [Node] 1. Menerima Request ASR dari Frontend...
+2025-12-20 13:22:20 +00:00: ========================================
+
+2025-12-20 13:22:20 +00:00: [Node] 🎙️ Starting ASR for: https://www.youtube.com/watch?v=DEFjV4qkIIw at 0 (lang: id)
+2025-12-20 13:22:20 +00:00: [Node] ASR Server Response: {
+  status: 'started',
+  video: 'https://www.youtube.com/watch?v=DEFjV4qkIIw',
+  startTime: 0,
+  targetLanguage: 'id',
+  api_keys_available: 3
+}
+2025-12-20 13:22:20 +00:00: [Socket] Client connected: eMmcZtyiXMQLXWS7AABP
+2025-12-20 13:22:20 +00:00: [Socket] 🎬 Frontend request live stream: {
+  videoUrl: 'https://www.youtube.com/watch?v=DEFjV4qkIIw',
+  existingSessionId: null,
+  currentTime: 0
+}
+2025-12-20 13:22:20 +00:00: [Socket]    Socket ID: eMmcZtyiXMQLXWS7AABP
+2025-12-20 13:22:20 +00:00: [Socket]    Current player time: 0s
+2025-12-20 13:22:20 +00:00: [SessionManager] ✅ Created session sess_1766236940835_1xy11a on worker-3
+2025-12-20 13:22:20 +00:00: [SessionManager]    Video: https://www.youtube.com/watch?v=DEFjV4qkIIw
+2025-12-20 13:22:20 +00:00: [SessionManager]    Status: 19/20 available
+2025-12-20 13:22:20 +00:00: [SessionManager] 🔄 Updated socketId for sess_1766236940835_1xy11a: eMmcZtyiXMQLXWS7AABP -> eMmcZtyiXMQLXWS7AABP
+2025-12-20 13:22:20 +00:00: [Socket] 📤 Sent start-processing to worker-3 at time 0s
+2025-12-20 13:22:20 +00:00: [Socket] 🎙️ Auto-starting ASR at 0s
+2025-12-20 13:22:20 +00:00: [Socket] ✅ ASR started at 0s
+2025-12-20 13:22:22 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1766236940835_1xy11a',
+  state: 'playing',
+  time: 0.020999927520751954
+}
+2025-12-20 13:22:22 +00:00: [Socket] ▶️ Resuming ASR for playback
+2025-12-20 13:22:24 +00:00: [Socket] ✅ Python started streaming: {
+  sessionId: 'sess_1766236940835_1xy11a',
+  videoUrl: 'https://www.youtube.com/watch?v=DEFjV4qkIIw',
+  duration: 16316.5
+}
+2025-12-20 13:22:25 +00:00: [Socket] ⚠️ ASR resume failed: timeout of 3000ms exceeded
+2025-12-20 13:22:39 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:00',
+    start_time: 0.020000000000002238,
+    end_time: 3.0200000000000022,
+    text: 'he, bagong, arep ngapa kowe?',
+    translation: 'Hei, Bagong, mau apa kamu?'
+  }
+}
+2025-12-20 13:22:42 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:03',
+    start_time: 3.0199999999999596,
+    end_time: 6.01999999999996,
+    text: 'bàgong, kowé sabar, kowé.',
+    translation: 'Bagong, kamu sabar, kamu.'
+  }
+}
+2025-12-20 13:22:43 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:06',
+    start_time: 6.0199999999998965,
+    end_time: 9.019999999999897,
+    text: 'kowe ojo celandhakan, sing ning ngarepmu iki',
+    translation: 'Kamu jangan main-main, yang di depanmu ini'
+  }
+}
+2025-12-20 13:22:48 +00:00: [Socket] 🛑 Frontend ending session: sess_1766236940835_1xy11a (user_close)
+2025-12-20 13:22:48 +00:00: [SessionManager] 🛑 Ended session sess_1766236940835_1xy11a (user_close)
+2025-12-20 13:22:48 +00:00: [SessionManager]    Released worker-3
+2025-12-20 13:22:48 +00:00: [SessionManager]    Status: 20/20 available
+2025-12-20 13:22:48 +00:00: [Socket] 🎙️ Stopping ASR due to session end
+2025-12-20 13:22:48 +00:00: [Socket] 🛑 Frontend request stop live stream (legacy)
+2025-12-20 13:22:48 +00:00: [Socket] 🎙️ Stopping ASR (legacy stop)
+2025-12-20 13:22:48 +00:00: 
+========================================
+2025-12-20 13:22:48 +00:00: [Node] Stopping ASR process...
+2025-12-20 13:22:48 +00:00: [Node] 🛑 Stopping ASR for current video...
+2025-12-20 13:22:48 +00:00: ========================================
+
+2025-12-20 13:22:48 +00:00: [Socket] Client disconnected: eMmcZtyiXMQLXWS7AABP
+2025-12-20 13:22:48 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-20 13:22:48 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-20 13:22:50 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:09',
+    start_time: 9.019999999999833,
+    end_time: 12.019999999999833,
+    text: 'piyayi luhur, piyayi luhur! arep piyayi, arep piyayi...',
+    translation: 'Bangsawan mulia, bangsawan mulia! Mau itu bangsawan, mau itu bangsawan...'
+  }
+}
+2025-12-20 13:22:54 +00:00: 
+========================================
+2025-12-20 13:22:54 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-20 13:22:54 +00:00: [Node]    Query: wayang ki seno
+2025-12-20 13:22:55 +00:00: [Node] ✅ Ditemukan 6 video
+2025-12-20 13:22:55 +00:00: ========================================
+
+2025-12-20 13:22:58 +00:00: 
+========================================
+2025-12-20 13:22:58 +00:00: [Node] 1. Menerima Request ASR dari Frontend...
+2025-12-20 13:22:58 +00:00: ========================================
+
+2025-12-20 13:22:58 +00:00: [Node] 🎙️ Starting ASR for: https://www.youtube.com/watch?v=DEFjV4qkIIw at 0 (lang: id)
+2025-12-20 13:22:58 +00:00: [Node] ASR Server Response: {
+  status: 'started',
+  video: 'https://www.youtube.com/watch?v=DEFjV4qkIIw',
+  startTime: 0,
+  targetLanguage: 'id',
+  api_keys_available: 3
+}
+2025-12-20 13:22:58 +00:00: [Socket] Client connected: EPhb7JRY5DtQ1WO3AABR
+2025-12-20 13:22:59 +00:00: [Socket] 🎬 Frontend request live stream: {
+  videoUrl: 'https://www.youtube.com/watch?v=DEFjV4qkIIw',
+  existingSessionId: null,
+  currentTime: 0
+}
+2025-12-20 13:22:59 +00:00: [Socket]    Socket ID: EPhb7JRY5DtQ1WO3AABR
+2025-12-20 13:22:59 +00:00: [Socket]    Current player time: 0s
+2025-12-20 13:22:59 +00:00: [SessionManager] ✅ Created session sess_1766236979033_qe2w0s on worker-4
+2025-12-20 13:22:59 +00:00: [SessionManager]    Video: https://www.youtube.com/watch?v=DEFjV4qkIIw
+2025-12-20 13:22:59 +00:00: [SessionManager]    Status: 19/20 available
+2025-12-20 13:22:59 +00:00: [SessionManager] 🔄 Updated socketId for sess_1766236979033_qe2w0s: EPhb7JRY5DtQ1WO3AABR -> EPhb7JRY5DtQ1WO3AABR
+2025-12-20 13:22:59 +00:00: [Socket] 📤 Sent start-processing to worker-4 at time 0s
+2025-12-20 13:22:59 +00:00: [Socket] 🎙️ Auto-starting ASR at 0s
+2025-12-20 13:22:59 +00:00: [Socket] ✅ ASR started at 0s
+2025-12-20 13:22:59 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1766236979033_qe2w0s',
+  state: 'playing',
+  time: 0.018761165939331054
+}
+2025-12-20 13:22:59 +00:00: [Socket] ▶️ Resuming ASR for playback
+2025-12-20 13:23:02 +00:00: [Socket] ⚠️ ASR resume failed: timeout of 3000ms exceeded
+2025-12-20 13:23:17 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:00',
+    start_time: 0.020000000000002238,
+    end_time: 3.0200000000000022,
+    text: 'bagong, arep ngopo kowe?',
+    translation: 'Bagong, mau apa kamu?'
+  }
+}
+2025-12-20 13:23:20 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:03',
+    start_time: 3.0199999999999596,
+    end_time: 6.01999999999996,
+    text: 'eee bagong kowe sabar kowe',
+    translation: 'Eee Bagong, kamu sabar, kamu'
+  }
+}
+2025-12-20 13:23:21 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:06',
+    start_time: 6.0199999999998965,
+    end_time: 9.019999999999897,
+    text: 'kowe aja celandhakan, sing ning ngarepmu iki',
+    translation: 'Kamu jangan main-main, yang di hadapanmu ini'
+  }
+}
+2025-12-20 13:23:27 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:09',
+    start_time: 9.019999999999833,
+    end_time: 12.019999999999833,
+    text: 'piyayi luhur, piyayi luhur! arep piyayi, arep piyayi...',
+    translation: 'Bangsawan mulia, bangsawan mulia! Mau itu bangsawan, mau itu bangsawan...'
+  }
+}
+2025-12-20 13:23:28 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:12',
+    start_time: 12.019999999999769,
+    end_time: 15.019999999999769,
+    text: 'ana ora masalah.',
+    translation: 'ada, tidak masalah.'
+  }
+}
+2025-12-20 13:23:31 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:15',
+    start_time: 15.019999999999705,
+    end_time: 18.019999999999705,
+    text: 'iki menyangot harga diri, pak. kowe dunakke',
+    translation: 'Ini menyangkut harga diri, Pak. Kamu rendahkan'
+  }
+}
+2025-12-20 13:23:32 +00:00: [Socket] ✅ Python started streaming: {
+  sessionId: 'sess_1766236979033_qe2w0s',
+  videoUrl: 'https://www.youtube.com/watch?v=DEFjV4qkIIw',
+  duration: -0.03333333333333333
+}
+2025-12-20 13:23:33 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:18',
+    start_time: 18.01999999999964,
+    end_time: 21.01999999999964,
+    text: 'lha kok meneng wae kowe ki. semar asli wae uthu.',
+    translation: 'Lha kok diam saja kamu ini. Semar asli saja utuh.'
+  }
+}
+2025-12-20 13:23:39 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:21',
+    start_time: 21.019999999999577,
+    end_time: 24.019999999999577,
+    text: 'bagong nesu ring nesu.',
+    translation: 'Bagong marah sejadi-jadinya.'
+  }
+}
+2025-12-20 13:23:41 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:24',
+    start_time: 24.019999999999513,
+    end_time: 27.019999999999513,
+    text: 'meneng. aku sing nandhangi pati.',
+    translation: 'Diam. Aku yang akan menyebabkan kematian.'
+  }
+}
+2025-12-20 13:23:41 +00:00: [Socket] 🛑 Frontend request stop live stream (legacy)
+2025-12-20 13:23:41 +00:00: [Socket] 🎙️ Stopping ASR (legacy stop)
+2025-12-20 13:23:41 +00:00: [Socket] 🛑 Frontend ending session: sess_1766236979033_qe2w0s (user_close)
+2025-12-20 13:23:41 +00:00: [SessionManager] 🛑 Ended session sess_1766236979033_qe2w0s (user_close)
+2025-12-20 13:23:41 +00:00: [SessionManager]    Released worker-4
+2025-12-20 13:23:41 +00:00: [SessionManager]    Status: 20/20 available
+2025-12-20 13:23:41 +00:00: [Socket] 🎙️ Stopping ASR due to session end
+2025-12-20 13:23:41 +00:00: 
+========================================
+2025-12-20 13:23:41 +00:00: [Node] Stopping ASR process...
+2025-12-20 13:23:41 +00:00: [Node] 🛑 Stopping ASR for current video...
+2025-12-20 13:23:41 +00:00: ========================================
+
+2025-12-20 13:23:41 +00:00: [Socket] Client disconnected: EPhb7JRY5DtQ1WO3AABR
+2025-12-20 13:23:41 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-20 13:23:41 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-20 13:23:44 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:27',
+    start_time: 27.01999999999945,
+    end_time: 30.01999999999945,
+    text: 'patih sengkuni. oh, kuwi patih. ora wedi.',
+    translation: 'Patih Sengkuni. Oh, itu Patih. Tidak takut.'
+  }
+}
+2025-12-20 13:24:08 +00:00: [Socket] Client disconnected: T90Zsmks1iRSfOwPAAA_
+2025-12-20 13:24:08 +00:00: [SessionManager] 🐍 Python worker worker-3 unregistered
+2025-12-20 13:24:08 +00:00: [Socket] Client disconnected: sftkwL1YL4e2JFDKAABF
+2025-12-20 13:24:08 +00:00: [SessionManager] 🐍 Python worker worker-4 unregistered
+2025-12-20 13:24:08 +00:00: [Socket] Client disconnected: UuZYtM2T0FoQXFeMAABN
+2025-12-20 13:24:08 +00:00: [SessionManager] 🐍 Python worker worker-2 unregistered
+2025-12-20 13:24:08 +00:00: [Socket] Client disconnected: M6z2X6n2UzWiqOHkAABD
+2025-12-20 13:24:08 +00:00: [SessionManager] 🐍 Python worker worker-1 unregistered
+2025-12-20 13:24:14 +00:00: [Socket] Client connected: hnYr-SPbbLhDnoCJAABT
+2025-12-20 13:24:14 +00:00: [Socket] 🐍 Python worker registering: worker-1
+2025-12-20 13:24:14 +00:00: [SessionManager] 🐍 Python worker worker-1 registered (socket: hnYr-SPbbLhDnoCJAABT)
+2025-12-20 13:24:14 +00:00: [Socket] Client connected: Wzr_YsxE6afNc13QAABW
+2025-12-20 13:24:14 +00:00: [Socket] Client connected: mY0YkfeIY6sb4Q_9AABX
+2025-12-20 13:24:14 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-20 13:24:14 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: Wzr_YsxE6afNc13QAABW)
+2025-12-20 13:24:14 +00:00: [Socket] 🐍 Python worker registering: worker-2
+2025-12-20 13:24:14 +00:00: [SessionManager] 🐍 Python worker worker-2 registered (socket: mY0YkfeIY6sb4Q_9AABX)
+2025-12-20 13:24:14 +00:00: [Socket] Client connected: FZONKfBiAAxHrnBAAABZ
+2025-12-20 13:24:14 +00:00: [Socket] 🐍 Python worker registering: worker-4
+2025-12-20 13:24:14 +00:00: [SessionManager] 🐍 Python worker worker-4 registered (socket: FZONKfBiAAxHrnBAAABZ)
+2025-12-20 13:24:15 +00:00: [Socket] Client connected: dlAJV9AyCGHSIyNwAABb
+2025-12-20 13:24:15 +00:00: [Socket] 🐍 Python worker registering: worker-5
+2025-12-20 13:24:15 +00:00: [SessionManager] 🐍 Python worker worker-5 registered (socket: dlAJV9AyCGHSIyNwAABb)
+2025-12-20 13:24:21 +00:00: 
+========================================
+2025-12-20 13:24:21 +00:00: [Node] 🔎 YouTube Search Request...
+2025-12-20 13:24:21 +00:00: [Node]    Query: wayang kulit ki seno
+2025-12-20 13:24:22 +00:00: [Node] ✅ Ditemukan 6 video
+2025-12-20 13:24:22 +00:00: ========================================
+
+2025-12-20 13:24:25 +00:00: 
+========================================
+2025-12-20 13:24:25 +00:00: [Node] 1. Menerima Request ASR dari Frontend...
+2025-12-20 13:24:25 +00:00: ========================================
+
+2025-12-20 13:24:25 +00:00: [Node] 🎙️ Starting ASR for: https://www.youtube.com/watch?v=VFGvurFOfKo at 0 (lang: id)
+2025-12-20 13:24:25 +00:00: [Node] ASR Server Response: {
+  status: 'started',
+  video: 'https://www.youtube.com/watch?v=VFGvurFOfKo',
+  startTime: 0,
+  targetLanguage: 'id',
+  api_keys_available: 3
+}
+2025-12-20 13:24:25 +00:00: [Socket] Client connected: u19OH9hHlFSKYIjnAABd
+2025-12-20 13:24:26 +00:00: [Socket] 🎬 Frontend request live stream: {
+  videoUrl: 'https://www.youtube.com/watch?v=VFGvurFOfKo',
+  existingSessionId: null,
+  currentTime: 0
+}
+2025-12-20 13:24:26 +00:00: [Socket]    Socket ID: u19OH9hHlFSKYIjnAABd
+2025-12-20 13:24:26 +00:00: [Socket]    Current player time: 0s
+2025-12-20 13:24:26 +00:00: [SessionManager] ✅ Created session sess_1766237066198_zbitg7 on worker-5
+2025-12-20 13:24:26 +00:00: [SessionManager]    Video: https://www.youtube.com/watch?v=VFGvurFOfKo
+2025-12-20 13:24:26 +00:00: [SessionManager]    Status: 19/20 available
+2025-12-20 13:24:26 +00:00: [SessionManager] 🔄 Updated socketId for sess_1766237066198_zbitg7: u19OH9hHlFSKYIjnAABd -> u19OH9hHlFSKYIjnAABd
+2025-12-20 13:24:26 +00:00: [Socket] 📤 Sent start-processing to worker-5 at time 0s
+2025-12-20 13:24:26 +00:00: [Socket] 🎙️ Auto-starting ASR at 0s
+2025-12-20 13:24:26 +00:00: [Socket] ✅ ASR started at 0s
+2025-12-20 13:24:27 +00:00: [Socket] 🎮 Player state: {
+  sessionId: 'sess_1766237066198_zbitg7',
+  state: 'playing',
+  time: 0.021999855041503907
+}
+2025-12-20 13:24:27 +00:00: [Socket] ▶️ Resuming ASR for playback
+2025-12-20 13:24:29 +00:00: [Socket] ✅ Python started streaming: {
+  sessionId: 'sess_1766237066198_zbitg7',
+  videoUrl: 'https://www.youtube.com/watch?v=VFGvurFOfKo',
+  duration: 11391.566666666668
+}
+2025-12-20 13:24:30 +00:00: [Socket] ⚠️ ASR resume failed: timeout of 3000ms exceeded
+2025-12-20 13:24:44 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:00',
+    start_time: 0.020000000000002238,
+    end_time: 3.0200000000000022,
+    text: 'tung tung tung! wok wok wok!',
+    translation: 'Tung tung tung! Wok wok wok!'
+  }
+}
+2025-12-20 13:24:47 +00:00: [Socket] Client disconnected: u19OH9hHlFSKYIjnAABd
+2025-12-20 13:24:47 +00:00: [SessionManager] 📴 Socket disconnected for session sess_1766237066198_zbitg7
+2025-12-20 13:24:47 +00:00: [SessionManager]    Waiting for reconnect (5 min window)
+2025-12-20 13:24:47 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-20 13:24:47 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-20 13:24:47 +00:00: [Socket] 📴 Frontend disconnected, session sess_1766237066198_zbitg7 pending reconnect
+2025-12-20 13:24:47 +00:00: [Socket] 🛑 Stopping ASR for current video...
+2025-12-20 13:24:49 +00:00: [Node] Webhook masuk: subtitle {
+  type: 'subtitle',
+  data: {
+    timestamp: '00:03',
+    start_time: 3.0199999999999596,
+    end_time: 6.01999999999996,
+    text: 'wédan!',
+    translation: 'Gila!'
+  }
+}
+2025-12-20 13:24:49 +00:00: [Socket] ✅ ASR stopped successfully
+2025-12-20 13:25:47 +00:00: [Socket] Client connected: 5LOE0j0imv77inN_AABf
+2025-12-20 13:25:47 +00:00: [Socket] 🎬 Frontend request live stream: {
+  videoUrl: 'https://www.youtube.com/watch?v=VFGvurFOfKo',
+  existingSessionId: null,
+  currentTime: 0
+}
+2025-12-20 13:25:47 +00:00: [Socket]    Socket ID: 5LOE0j0imv77inN_AABf
+2025-12-20 13:25:47 +00:00: [Socket]    Current player time: 0s
+2025-12-20 13:25:47 +00:00: [SessionManager] ✅ Created session sess_1766237147838_elm0ep on worker-6
+2025-12-20 13:25:47 +00:00: [SessionManager]    Video: https://www.youtube.com/watch?v=VFGvurFOfKo
+2025-12-20 13:25:47 +00:00: [SessionManager]    Status: 18/20 available
+2025-12-20 13:25:47 +00:00: [SessionManager] 🔄 Updated socketId for sess_1766237147838_elm0ep: 5LOE0j0imv77inN_AABf -> 5LOE0j0imv77inN_AABf
+2025-12-20 13:25:47 +00:00: [Socket] ⚠️ No specific Python socket for worker-6, broadcasting to all
+2025-12-20 13:25:47 +00:00: [Socket] 🎙️ Auto-starting ASR at 0s
+2025-12-20 13:25:47 +00:00: [Socket] ✅ ASR started at 0s
+2025-12-20 13:25:50 +00:00: [Socket] 🛑 Frontend ending session: sess_1766237147838_elm0ep (tab_close)
+2025-12-20 13:25:50 +00:00: [SessionManager] 🛑 Ended session sess_1766237147838_elm0ep (tab_close)
+2025-12-20 13:25:50 +00:00: [SessionManager]    Released worker-6
+2025-12-20 13:25:50 +00:00: [SessionManager]    Status: 19/20 available
+2025-12-20 13:25:50 +00:00: [Socket] 🎙️ Stopping ASR due to session end
+2025-12-20 13:25:50 +00:00: [Socket] Client disconnected: n95RrBNoRdbPt_KqAABJ
+2025-12-20 13:25:50 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-20 13:25:50 +00:00: [Socket] 📊 Remaining frontend clients: 1
+2025-12-20 13:25:50 +00:00: [Socket] Client disconnected: 5LOE0j0imv77inN_AABf
+2025-12-20 13:25:50 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-20 13:25:50 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-20 13:25:50 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-20 13:25:53 +00:00: [Socket] ⚠️ ASR stop failed: timeout of 3000ms exceeded
+2025-12-20 13:25:55 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-20 13:30:46 +00:00: [SessionManager] 🧹 Cleaned expired session sess_1766237066198_zbitg7
+2025-12-20 13:30:46 +00:00: [SessionManager]    Status: 20/20 available
+2025-12-20 17:01:30 +00:00: [Socket] Client disconnected: Wzr_YsxE6afNc13QAABW
+2025-12-20 17:01:30 +00:00: [SessionManager] 🐍 Python worker worker-3 unregistered
+2025-12-20 17:01:31 +00:00: [Socket] Client connected: qDDlmHpK9NgCx1RPAABh
+2025-12-20 17:01:31 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-20 17:01:31 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: qDDlmHpK9NgCx1RPAABh)
+2025-12-20 18:24:06 +00:00: [Socket] Client connected: yyrk6-u8OED3qYdxAABj
+2025-12-20 18:24:11 +00:00: [Socket] Client disconnected: yyrk6-u8OED3qYdxAABj
+2025-12-20 18:24:11 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-20 18:24:11 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-20 18:24:11 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-20 18:24:11 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-21 06:32:49 +00:00: [Socket] Client disconnected: qDDlmHpK9NgCx1RPAABh
+2025-12-21 06:32:49 +00:00: [SessionManager] 🐍 Python worker worker-3 unregistered
+2025-12-21 06:33:06 +00:00: [Socket] Client connected: c2MtLCjrJ0KvHZoQAABl
+2025-12-21 06:33:07 +00:00: [Socket] Client disconnected: c2MtLCjrJ0KvHZoQAABl
+2025-12-21 06:33:07 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-21 06:33:07 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-21 06:33:07 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-21 06:33:07 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-21 06:33:09 +00:00: [Socket] Client connected: ftnblu9zdPeOxMWVAABn
+2025-12-21 06:33:09 +00:00: [Socket] 🐍 Python worker registering: worker-3
+2025-12-21 06:33:09 +00:00: [SessionManager] 🐍 Python worker worker-3 registered (socket: ftnblu9zdPeOxMWVAABn)
+2025-12-21 09:23:34 +00:00: [Socket] Client connected: XkV6CH_UpVJqsiBnAABu
+2025-12-21 09:23:48 +00:00: [Socket] Client disconnected: XkV6CH_UpVJqsiBnAABu
+2025-12-21 09:23:48 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-21 09:23:48 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-21 09:23:48 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-21 09:23:48 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-21 09:24:02 +00:00: [Socket] Client connected: l7cAiOk2zwMC2yCjAABx
+2025-12-21 09:24:15 +00:00: [Socket] Client disconnected: l7cAiOk2zwMC2yCjAABx
+2025-12-21 09:24:15 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-21 09:24:15 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-21 09:24:15 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-21 09:24:15 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-21 10:16:02 +00:00: [Socket] Client connected: tAjK6_cCGIFKCegyAAB0
+2025-12-21 10:16:08 +00:00: [Socket] Client disconnected: tAjK6_cCGIFKCegyAAB0
+2025-12-21 10:16:08 +00:00: [Socket] 🔍 Checking ASR status after disconnect...
+2025-12-21 10:16:08 +00:00: [Socket] 📊 Remaining frontend clients: 0
+2025-12-21 10:16:08 +00:00: [Socket] 🛑 No frontend clients left, stopping all ASR...
+2025-12-21 10:16:08 +00:00: [Socket] ✅ All ASR stopped successfully
+2025-12-21 10:36:47 +00:00: [Socket] Client connected: i4P536C8UAlZNJNPAAB2

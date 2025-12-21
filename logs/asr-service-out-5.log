@@ -1,0 +1,607 @@
+2025-12-07 00:05:31 +00:00: ⚠️ WebRTC VAD not available, trying Silero...
+2025-12-07 00:05:35 +00:00: Using cache found in /root/.cache/torch/hub/snakers4_silero-vad_master
+2025-12-07 00:05:35 +00:00: ⚠️ Silero VAD failed: type object 'RecursiveScriptModule' has no attribute '_construct'. Using energy-based VAD.
+2025-12-07 00:05:35 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:368: DeprecationWarning: 
+2025-12-07 00:05:35 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 00:05:35 +00:00: 
+2025-12-07 00:05:35 +00:00:         Read more about it in the
+2025-12-07 00:05:35 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 00:05:35 +00:00:         
+2025-12-07 00:05:35 +00:00:   @app.on_event("startup")
+2025-12-07 00:05:35 +00:00: /var/www/CoWayangAI/asrllmserve/asr_server.py:382: DeprecationWarning: 
+2025-12-07 00:05:35 +00:00:         on_event is deprecated, use lifespan event handlers instead.
+2025-12-07 00:05:35 +00:00: 
+2025-12-07 00:05:35 +00:00:         Read more about it in the
+2025-12-07 00:05:35 +00:00:         [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+2025-12-07 00:05:35 +00:00:         
+2025-12-07 00:05:35 +00:00:   @app.on_event("shutdown")
+2025-12-07 00:05:35 +00:00: INFO:     Started server process [2332652]
+2025-12-07 00:05:35 +00:00: INFO:     Waiting for application startup.
+2025-12-07 00:05:35 +00:00: ✅ API Pool: Loaded 14 API key(s)
+2025-12-07 00:05:35 +00:00: ✅ API Pool: Loaded 4 model(s): ['gemini-2.0-flash', 'gemini-2.5-flash-lite', 'gemini-2.0-flash-lite', 'gemini-2.5-flash']
+2025-12-07 00:05:35 +00:00: 
+2025-12-07 00:05:35 +00:00: ============================================================
+2025-12-07 00:05:35 +00:00: 🎬 CoWayangAI ASR Service Starting...
+2025-12-07 00:05:35 +00:00: ============================================================
+2025-12-07 00:05:35 +00:00:    API Keys loaded: 14
+2025-12-07 00:05:35 +00:00:    Cooldown time: 60s
+2025-12-07 00:05:35 +00:00: ============================================================
+2025-12-07 00:05:35 +00:00: 
+2025-12-07 00:05:35 +00:00: INFO:     Application startup complete.
+2025-12-07 00:05:35 +00:00: INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+2025-12-07 02:04:02 +00:00: INFO:     127.0.0.1:48850 - "POST /stop-all HTTP/1.1" 200 OK
+2025-12-07 02:04:04 +00:00: 🌐 Target language: English
+2025-12-07 02:04:04 +00:00: 
+2025-12-07 02:04:04 +00:00: ============================================================
+2025-12-07 02:04:04 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 02:04:04 +00:00: ============================================================
+2025-12-07 02:04:04 +00:00: 📹 Video: https://www.youtube.com/watch?v=M_3XC2KMK50
+2025-12-07 02:04:04 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-07 02:04:04 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 02:04:04 +00:00: 🔑 API Pool: 14 keys available
+2025-12-07 02:04:04 +00:00: ============================================================
+2025-12-07 02:04:04 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 02:04:04 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 02:04:04 +00:00: INFO:     127.0.0.1:48850 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-07 02:04:04 +00:00: ✅ Pipeline started from 0s
+2025-12-07 02:04:04 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 02:04:04 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 02:04:06 +00:00: 
+2025-12-07 02:04:06 +00:00: ▶️ ASR Resume request at 0s for https://www.youtube.com/watch?v=M_3XC2KMK50
+2025-12-07 02:04:11 +00:00: 📼 Stream ended
+2025-12-07 02:04:11 +00:00: 
+2025-12-07 02:04:11 +00:00: 🏁 ASR session ended🌐 Target language: Indonesia
+2025-12-07 02:04:11 +00:00: 
+2025-12-07 02:04:11 +00:00:    Total chunks: 0
+2025-12-07 02:04:11 +00:00:    Successful: 0
+2025-12-07 02:04:11 +00:00:    API Pool status: 0 total requests
+2025-12-07 02:04:11 +00:00: 
+2025-12-07 02:04:11 +00:00: ============================================================
+2025-12-07 02:04:11 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 02:04:11 +00:00: ============================================================
+2025-12-07 02:04:11 +00:00: 📹 Video: https://www.youtube.com/watch?v=M_3XC2KMK50
+2025-12-07 02:04:11 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-07 02:04:11 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 02:04:11 +00:00: 🔑 API Pool: 14 keys available
+2025-12-07 02:04:11 +00:00: ============================================================
+2025-12-07 02:04:11 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 02:04:11 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 02:04:11 +00:00: INFO:     127.0.0.1:48850 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-07 02:04:11 +00:00: ✅ Pipeline started from 0s
+2025-12-07 02:04:11 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 02:04:11 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 02:04:16 +00:00: 
+2025-12-07 02:04:16 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=M_3XC2KMK50
+2025-12-07 02:04:21 +00:00: 📼 Stream ended
+2025-12-07 02:04:21 +00:00: 
+2025-12-07 02:04:21 +00:00: 🏁 ASR session ended
+2025-12-07 02:04:21 +00:00:    Total chunks: 0
+2025-12-07 02:04:21 +00:00:    Successful: 0
+2025-12-07 02:04:21 +00:00:    API Pool status: 0 total requests
+2025-12-07 02:04:21 +00:00: INFO:     127.0.0.1:36980 - "POST /pause-asr HTTP/1.1" 200 OK
+2025-12-07 02:04:21 +00:00: 
+2025-12-07 02:04:21 +00:00: ▶️ ASR Resume request at 3733s for https://www.youtube.com/watch?v=M_3XC2KMK50
+2025-12-07 02:04:21 +00:00: 🌐 Target language: Indonesia
+2025-12-07 02:04:21 +00:00: 
+2025-12-07 02:04:21 +00:00: ============================================================
+2025-12-07 02:04:21 +00:00: INFO:     127.0.0.1:36988 - "POST /resume-asr HTTP/1.1" 200 OK
+2025-12-07 02:04:21 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 02:04:21 +00:00: ============================================================
+2025-12-07 02:04:21 +00:00: 📹 Video: https://www.youtube.com/watch?v=M_3XC2KMK50
+2025-12-07 02:04:21 +00:00: ⏱️  Start time: 62:13 (3733s)
+2025-12-07 02:04:21 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 02:04:21 +00:00: 🔑 API Pool: 14 keys available
+2025-12-07 02:04:21 +00:00: ============================================================
+2025-12-07 02:04:21 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 02:04:21 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 02:04:21 +00:00: 
+2025-12-07 02:04:21 +00:00: ⏩ ASR Seek request: 3734s for https://www.youtube.com/watch?v=M_3XC2KMK50
+2025-12-07 02:04:21 +00:00: ✅ Pipeline started from 3733s
+2025-12-07 02:04:21 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 02:04:21 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 02:04:21 +00:00: 
+2025-12-07 02:04:21 +00:00: 🏁 ASR session ended
+2025-12-07 02:04:21 +00:00:    Total chunks: 0
+2025-12-07 02:04:21 +00:00:    Successful: 0
+2025-12-07 02:04:21 +00:00:    API Pool status: 0 total requests
+2025-12-07 02:04:21 +00:00: 🌐 Target language: Indonesia
+2025-12-07 02:04:21 +00:00: 
+2025-12-07 02:04:21 +00:00: ============================================================
+2025-12-07 02:04:21 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 02:04:21 +00:00: ============================================================
+2025-12-07 02:04:21 +00:00: 📹 Video: https://www.youtube.com/watch?v=M_3XC2KMK50
+2025-12-07 02:04:21 +00:00: ⏱️  Start time: 62:14 (3734s)
+2025-12-07 02:04:21 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 02:04:21 +00:00: 🔑 API Pool: 14 keys available
+2025-12-07 02:04:21 +00:00: ============================================================
+2025-12-07 02:04:21 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipelineINFO:     127.0.0.1:36994 - "POST /seek-asr HTTP/1.1" 200 OK
+2025-12-07 02:04:21 +00:00: 
+2025-12-07 02:04:21 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 02:04:21 +00:00: ✅ Pipeline started from 3734s
+2025-12-07 02:04:21 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 02:04:21 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 02:04:32 +00:00: 
+2025-12-07 02:04:32 +00:00: 🚀 [62:14 - 62:18]
+2025-12-07 02:04:32 +00:00:    🧠 gemini-2.0-flash... 🚫 API Key #1 rate limited. Cooldown: 60s
+2025-12-07 02:04:32 +00:00: 🔄 Key #1 rate limited, 13 keys remaining
+2025-12-07 02:04:32 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:04:32 +00:00: 
+2025-12-07 02:04:32 +00:00: 🚀 [62:18 - 62:22]
+2025-12-07 02:04:35 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 3.1s
+2025-12-07 02:04:35 +00:00:    📝 Jawa: ngutus marang sira insun dadi
+2025-12-07 02:04:35 +00:00:    🇮🇩 Indo: mengutus kepadamu saya menjadi
+2025-12-07 02:04:35 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 02:04:35 +00:00: 
+2025-12-07 02:04:35 +00:00: 🚀 [62:22 - 62:26]
+2025-12-07 02:04:35 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #3 rate limited. Cooldown: 60s
+2025-12-07 02:04:35 +00:00: 🔄 Key #3 rate limited, 12 keys remaining
+2025-12-07 02:04:35 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:04:35 +00:00: 
+2025-12-07 02:04:35 +00:00: 🚀 [62:26 - 62:30]
+2025-12-07 02:04:44 +00:00:    🧠 gemini-2.5-flash... ✅ 8.2s
+2025-12-07 02:04:44 +00:00:    📝 Jawa: apa ya bocah iki seta? ih, kasinggihan, kanjeng rama.
+2025-12-07 02:04:44 +00:00:    🇮🇩 Indo: Apakah ini Seta, anak ini? Ya, benar, Ayahanda.
+2025-12-07 02:04:44 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 02:04:44 +00:00: 
+2025-12-07 02:04:44 +00:00: 🚀 [62:30 - 62:34]
+2025-12-07 02:04:44 +00:00:    🧠 gemini-2.0-flash... ❌ gemini-2.0-flash not available
+2025-12-07 02:04:44 +00:00: 🚫 Model 'gemini-2.0-flash' rate limited. Cooldown: 60s
+2025-12-07 02:04:44 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:04:44 +00:00: 
+2025-12-07 02:04:44 +00:00: 🚀 [62:34 - 62:38]
+2025-12-07 02:04:46 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.7s
+2025-12-07 02:04:46 +00:00:    📝 Jawa: apa kira-kira bilawa iki bisa kanggo jago
+2025-12-07 02:04:46 +00:00:    🇮🇩 Indo: Apa kira-kira buaya ini bisa menjadi ayam jago
+2025-12-07 02:04:46 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 02:04:47 +00:00: 
+2025-12-07 02:04:47 +00:00: 🚀 [62:38 - 62:42]
+2025-12-07 02:04:47 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #7 rate limited. Cooldown: 60s
+2025-12-07 02:04:47 +00:00: 🔄 Key #7 rate limited, 11 keys remaining
+2025-12-07 02:04:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:04:47 +00:00: 
+2025-12-07 02:04:47 +00:00: 🚀 [62:42 - 62:46]
+2025-12-07 02:04:47 +00:00:    🧠 gemini-2.5-flash... ❌ gemini-2.5-flash not available
+2025-12-07 02:04:47 +00:00: 🚫 Model 'gemini-2.5-flash' rate limited. Cooldown: 60s
+2025-12-07 02:04:47 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:04:47 +00:00: 
+2025-12-07 02:04:47 +00:00: 🚀 [62:46 - 62:50]
+2025-12-07 02:04:50 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 3.6s
+2025-12-07 02:04:50 +00:00:    📝 Jawa: duh, kanjeng rama, saking pandugi kula inggih,
+2025-12-07 02:04:50 +00:00:    🇮🇩 Indo: Duh, Sri Baginda, dari dugaan saya yaitu,
+2025-12-07 02:04:50 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 02:04:50 +00:00: 
+2025-12-07 02:04:50 +00:00: 🚀 [62:50 - 62:54]
+2025-12-07 02:04:50 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #10 rate limited. Cooldown: 60s
+2025-12-07 02:04:50 +00:00: 🔄 Key #10 rate limited, 10 keys remaining
+2025-12-07 02:04:50 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:04:50 +00:00: 
+2025-12-07 02:04:50 +00:00: 🚀 [62:54 - 62:58]
+2025-12-07 02:04:54 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 3.6s
+2025-12-07 02:04:54 +00:00:    📝 Jawa: junjung dateng asma prabu paduka kanjeng roo prabu
+2025-12-07 02:04:54 +00:00:    🇮🇩 Indo: menjunjung tinggi nama Sri Baginda Raja Yang Mulia Raja
+2025-12-07 02:04:54 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 02:04:54 +00:00: 
+2025-12-07 02:04:54 +00:00: ⏱️ Switching to REALTIME mode (audio caught up)
+2025-12-07 02:04:58 +00:00: 
+2025-12-07 02:04:58 +00:00: ⏱️ [62:58 - 63:02]
+2025-12-07 02:04:58 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #12 rate limited. Cooldown: 60s
+2025-12-07 02:04:58 +00:00: 🔄 Key #12 rate limited, 9 keys remaining
+2025-12-07 02:04:58 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:05:02 +00:00: 
+2025-12-07 02:05:02 +00:00: ⏱️ [63:02 - 63:06]
+2025-12-07 02:05:05 +00:00:    🧠 gemini-2.5-flash-lite... ✅ 2.5s
+2025-12-07 02:05:05 +00:00:    📝 Jawa: inggih punika
+2025-12-07 02:05:05 +00:00:    🇮🇩 Indo: begitulah adanya
+2025-12-07 02:05:05 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 02:05:09 +00:00: 
+2025-12-07 02:05:09 +00:00: ⏱️ [63:06 - 63:10]
+2025-12-07 02:05:09 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #14 rate limited. Cooldown: 60s
+2025-12-07 02:05:09 +00:00: 🔄 Key #14 rate limited, 8 keys remaining
+2025-12-07 02:05:09 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:05:13 +00:00: 
+2025-12-07 02:05:13 +00:00: ⏱️ [63:10 - 63:14]
+2025-12-07 02:05:13 +00:00:    🧠 gemini-2.5-flash-lite... 🚫 API Key #2 rate limited. Cooldown: 60s
+2025-12-07 02:05:13 +00:00: 🔄 Key #2 rate limited, 7 keys remaining
+2025-12-07 02:05:13 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:05:17 +00:00: 
+2025-12-07 02:05:17 +00:00: ⏱️ [63:14 - 63:18]
+2025-12-07 02:05:17 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #4 rate limited. Cooldown: 60s
+2025-12-07 02:05:17 +00:00: 🔄 Key #4 rate limited, 6 keys remaining
+2025-12-07 02:05:17 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:05:21 +00:00: 
+2025-12-07 02:05:21 +00:00: ⏱️ [63:18 - 63:22]
+2025-12-07 02:05:21 +00:00:    🧠 gemini-2.5-flash-lite... ❌ gemini-2.5-flash-lite not available
+2025-12-07 02:05:21 +00:00: 🚫 Model 'gemini-2.5-flash-lite' rate limited. Cooldown: 60s
+2025-12-07 02:05:21 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:05:25 +00:00: 
+2025-12-07 02:05:25 +00:00: ⏱️ [63:22 - 63:26]
+2025-12-07 02:05:25 +00:00:    🧠 gemini-2.0-flash-lite... 🚫 API Key #6 rate limited. Cooldown: 60s
+2025-12-07 02:05:25 +00:00: 🔄 Key #6 rate limited, 5 keys remaining
+2025-12-07 02:05:25 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:05:29 +00:00: 
+2025-12-07 02:05:29 +00:00: ⏱️ [63:26 - 63:30]
+2025-12-07 02:05:29 +00:00:    🧠 gemini-2.0-flash-lite... ❌ gemini-2.0-flash-lite not available
+2025-12-07 02:05:29 +00:00: 🚫 Model 'gemini-2.0-flash-lite' rate limited. Cooldown: 60s
+2025-12-07 02:05:29 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:05:33 +00:00: 
+2025-12-07 02:05:33 +00:00: ⏱️ [63:30 - 63:34]
+2025-12-07 02:05:33 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:05:33 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:05:33 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:05:37 +00:00: 
+2025-12-07 02:05:37 +00:00: ⏱️ [63:34 - 63:38]
+2025-12-07 02:05:37 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:05:37 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:05:37 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:05:41 +00:00: 
+2025-12-07 02:05:41 +00:00: ⏱️ [63:38 - 63:42]
+2025-12-07 02:05:41 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:05:41 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:05:41 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:05:45 +00:00: 
+2025-12-07 02:05:45 +00:00: ⏱️ [63:42 - 63:46]
+2025-12-07 02:05:45 +00:00:    🧠 gemini-2.0-flash... 🚫 API Key #1 rate limited. Cooldown: 60s
+2025-12-07 02:05:45 +00:00: 🔄 Key #1 rate limited, 6 keys remaining
+2025-12-07 02:05:45 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:05:49 +00:00: 
+2025-12-07 02:05:49 +00:00: ⏱️ [63:46 - 63:50]
+2025-12-07 02:05:54 +00:00:    🧠 gemini-2.5-flash... INFO:     127.0.0.1:35386 - "POST /stop-asr HTTP/1.1" 200 OK
+2025-12-07 02:05:54 +00:00: 🌐 Target language: English
+2025-12-07 02:05:54 +00:00: 
+2025-12-07 02:05:54 +00:00: ============================================================
+2025-12-07 02:05:54 +00:00: 🎬 ASR SESSION STARTED
+2025-12-07 02:05:54 +00:00: ============================================================
+2025-12-07 02:05:54 +00:00: 📹 Video: https://www.youtube.com/watch?v=M_3XC2KMK50
+2025-12-07 02:05:54 +00:00: ⏱️  Start time: 00:00 (0s)
+2025-12-07 02:05:54 +00:00: 🤖 Model: gemini-2.0-flash
+2025-12-07 02:05:54 +00:00: 🔑 API Pool: 14 keys available
+2025-12-07 02:05:54 +00:00: ============================================================
+2025-12-07 02:05:54 +00:00: 🎵 Starting yt-dlp -> FFmpeg pipeline
+2025-12-07 02:05:54 +00:00:    yt-dlp: yt-dlp --quiet --no-warnings -f 93/94/95/92/91/bestaudio/best -o - --cookies...
+2025-12-07 02:05:54 +00:00: INFO:     127.0.0.1:35386 - "POST /start-asr HTTP/1.1" 200 OK
+2025-12-07 02:05:54 +00:00: ✅ Pipeline started from 0s
+2025-12-07 02:05:54 +00:00: ✅ ASR loop started. Window: 4.0s, Stride: 4.0s
+2025-12-07 02:05:54 +00:00: 🚀 Burst mode: ON (first 30.0s)
+2025-12-07 02:05:55 +00:00: ✅ 5.9s
+2025-12-07 02:05:55 +00:00:    📝 Jawa: iki. ning ya wis ora dadi ngapa mbok menawa pancen pinasthi.
+2025-12-07 02:05:55 +00:00:    🇮🇩 Indo: ini. Tapi ya sudah tidak apa-apa, barangkali memang sudah ditakdirkan.
+2025-12-07 02:05:55 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 02:05:55 +00:00: 
+2025-12-07 02:05:55 +00:00: 🏁 ASR session ended
+2025-12-07 02:05:55 +00:00:    Total chunks: 24
+2025-12-07 02:05:55 +00:00:    Successful: 7
+2025-12-07 02:05:55 +00:00:    API Pool status: 24 total requests
+2025-12-07 02:06:04 +00:00: 
+2025-12-07 02:06:04 +00:00: 🚀 [00:12 - 00:16]
+2025-12-07 02:06:04 +00:00:    🧠 gemini-2.0-flash... ❌ gemini-2.0-flash not available
+2025-12-07 02:06:04 +00:00: 🚫 Model 'gemini-2.0-flash' rate limited. Cooldown: 60s
+2025-12-07 02:06:04 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:04 +00:00: 
+2025-12-07 02:06:04 +00:00: 🚀 [00:16 - 00:20]
+2025-12-07 02:06:12 +00:00:    🧠 gemini-2.5-flash... ✅ 8.0s
+2025-12-07 02:06:12 +00:00:    📝 Jawa: lan maneh kantha anggare.
+2025-12-07 02:06:12 +00:00:    🇮🇩 Indo: And again the form of its figure.
+2025-12-07 02:06:12 +00:00:    📤 Webhook sent to http://localhost:3000/api/webhook
+2025-12-07 02:06:13 +00:00: 
+2025-12-07 02:06:13 +00:00: 🚀 [01:00 - 01:04]
+2025-12-07 02:06:13 +00:00:    🧠 gemini-2.5-flash... ❌ gemini-2.5-flash not available
+2025-12-07 02:06:13 +00:00: 🚫 Model 'gemini-2.5-flash' rate limited. Cooldown: 60s
+2025-12-07 02:06:13 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:13 +00:00: 
+2025-12-07 02:06:13 +00:00: 🚀 [01:04 - 01:08]
+2025-12-07 02:06:13 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:13 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:13 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:14 +00:00: 
+2025-12-07 02:06:14 +00:00: 🚀 [01:08 - 01:12]
+2025-12-07 02:06:14 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:14 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:14 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:14 +00:00: 
+2025-12-07 02:06:14 +00:00: 🚀 [01:12 - 01:16]
+2025-12-07 02:06:14 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:14 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:14 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:14 +00:00: 
+2025-12-07 02:06:14 +00:00: 🚀 [01:16 - 01:20]
+2025-12-07 02:06:14 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:14 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:14 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:14 +00:00: 
+2025-12-07 02:06:14 +00:00: 🚀 [01:20 - 01:24]
+2025-12-07 02:06:14 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:14 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:14 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:14 +00:00: 
+2025-12-07 02:06:14 +00:00: 🚀 [01:24 - 01:28]
+2025-12-07 02:06:14 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:14 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:14 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:14 +00:00: 
+2025-12-07 02:06:14 +00:00: 🚀 [01:28 - 01:32]
+2025-12-07 02:06:14 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:14 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:14 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:14 +00:00: 
+2025-12-07 02:06:14 +00:00: 🚀 [01:32 - 01:36]
+2025-12-07 02:06:14 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:14 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:14 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:14 +00:00: 
+2025-12-07 02:06:14 +00:00: 🚀 [01:36 - 01:40]
+2025-12-07 02:06:14 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:14 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:14 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:14 +00:00: 
+2025-12-07 02:06:14 +00:00: 🚀 [01:40 - 01:44]
+2025-12-07 02:06:14 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:14 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:14 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:14 +00:00: 
+2025-12-07 02:06:14 +00:00: 🚀 [01:44 - 01:48]
+2025-12-07 02:06:14 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:14 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:14 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:15 +00:00: 
+2025-12-07 02:06:15 +00:00: 🚀 [01:48 - 01:52]
+2025-12-07 02:06:15 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:15 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:15 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:16 +00:00: 
+2025-12-07 02:06:16 +00:00: 🚀 [01:52 - 01:56]
+2025-12-07 02:06:16 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:16 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:16 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:16 +00:00: 
+2025-12-07 02:06:16 +00:00: 🚀 [01:56 - 02:00]
+2025-12-07 02:06:16 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:16 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:16 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:16 +00:00: 
+2025-12-07 02:06:16 +00:00: 🚀 [02:00 - 02:04]
+2025-12-07 02:06:16 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:16 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:16 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:16 +00:00: 
+2025-12-07 02:06:16 +00:00: 🚀 [02:04 - 02:08]
+2025-12-07 02:06:16 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:16 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:16 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:16 +00:00: 
+2025-12-07 02:06:16 +00:00: 🚀 [02:08 - 02:12]
+2025-12-07 02:06:16 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:16 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:16 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:16 +00:00: 
+2025-12-07 02:06:16 +00:00: 🚀 [02:12 - 02:16]
+2025-12-07 02:06:16 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:16 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:16 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:16 +00:00: 
+2025-12-07 02:06:16 +00:00: 🚀 [02:16 - 02:20]
+2025-12-07 02:06:16 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:16 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:16 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:16 +00:00: 
+2025-12-07 02:06:16 +00:00: 🚀 [02:20 - 02:24]
+2025-12-07 02:06:16 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:16 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:16 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:16 +00:00: 
+2025-12-07 02:06:16 +00:00: 🚀 [02:24 - 02:28]
+2025-12-07 02:06:16 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:16 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:16 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:16 +00:00: 
+2025-12-07 02:06:16 +00:00: 🚀 [02:28 - 02:32]
+2025-12-07 02:06:16 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:16 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:16 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:17 +00:00: 
+2025-12-07 02:06:17 +00:00: 🚀 [02:32 - 02:36]
+2025-12-07 02:06:17 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:17 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:17 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:17 +00:00: 
+2025-12-07 02:06:17 +00:00: 🚀 [02:36 - 02:40]
+2025-12-07 02:06:17 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:17 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:17 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:17 +00:00: 
+2025-12-07 02:06:17 +00:00: 🚀 [02:40 - 02:44]
+2025-12-07 02:06:17 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:17 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:17 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:17 +00:00: 
+2025-12-07 02:06:17 +00:00: 🚀 [02:44 - 02:48]
+2025-12-07 02:06:17 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:17 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:17 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:17 +00:00: 
+2025-12-07 02:06:17 +00:00: 🚀 [02:48 - 02:52]
+2025-12-07 02:06:17 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:17 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:17 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:17 +00:00: 
+2025-12-07 02:06:17 +00:00: 🚀 [02:52 - 02:56]
+2025-12-07 02:06:17 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:17 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:17 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:18 +00:00: 
+2025-12-07 02:06:18 +00:00: 🚀 [02:56 - 03:00]
+2025-12-07 02:06:18 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:18 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:18 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:18 +00:00: 
+2025-12-07 02:06:18 +00:00: 🚀 [03:00 - 03:04]
+2025-12-07 02:06:18 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:18 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:18 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:18 +00:00: 
+2025-12-07 02:06:18 +00:00: 🚀 [03:04 - 03:08]
+2025-12-07 02:06:18 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:18 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:18 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:18 +00:00: 
+2025-12-07 02:06:18 +00:00: 🚀 [03:08 - 03:12]
+2025-12-07 02:06:18 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:18 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:18 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:18 +00:00: 
+2025-12-07 02:06:18 +00:00: 🚀 [03:12 - 03:16]
+2025-12-07 02:06:18 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:18 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:18 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:18 +00:00: 
+2025-12-07 02:06:18 +00:00: 🚀 [03:16 - 03:20]
+2025-12-07 02:06:18 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:18 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:18 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:18 +00:00: 
+2025-12-07 02:06:18 +00:00: 🚀 [03:20 - 03:24]
+2025-12-07 02:06:18 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:18 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:18 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:18 +00:00: 
+2025-12-07 02:06:18 +00:00: 🚀 [03:24 - 03:28]
+2025-12-07 02:06:18 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:18 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:18 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:18 +00:00: 
+2025-12-07 02:06:18 +00:00: 🚀 [03:28 - 03:32]
+2025-12-07 02:06:18 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:18 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:18 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:19 +00:00: 
+2025-12-07 02:06:19 +00:00: 🚀 [03:32 - 03:36]
+2025-12-07 02:06:19 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:19 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:19 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:19 +00:00: 
+2025-12-07 02:06:19 +00:00: 🚀 [03:36 - 03:40]
+2025-12-07 02:06:19 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:19 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:19 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:19 +00:00: 
+2025-12-07 02:06:19 +00:00: 🚀 [03:40 - 03:44]
+2025-12-07 02:06:19 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:19 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:19 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:19 +00:00: 
+2025-12-07 02:06:19 +00:00: 🚀 [03:44 - 03:48]
+2025-12-07 02:06:19 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:19 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:19 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:19 +00:00: 
+2025-12-07 02:06:19 +00:00: 🚀 [03:48 - 03:52]
+2025-12-07 02:06:19 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:19 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:19 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:19 +00:00: 
+2025-12-07 02:06:19 +00:00: 🚀 [03:52 - 03:56]
+2025-12-07 02:06:19 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:19 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:19 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:19 +00:00: 
+2025-12-07 02:06:19 +00:00: 🚀 [03:56 - 04:00]
+2025-12-07 02:06:19 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:19 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:19 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:19 +00:00: 
+2025-12-07 02:06:19 +00:00: 🚀 [04:00 - 04:04]
+2025-12-07 02:06:19 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:19 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:19 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:20 +00:00: 
+2025-12-07 02:06:20 +00:00: 🚀 [04:04 - 04:08]
+2025-12-07 02:06:20 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:20 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:20 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:20 +00:00: 
+2025-12-07 02:06:20 +00:00: 🚀 [04:08 - 04:12]
+2025-12-07 02:06:20 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:20 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:20 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:20 +00:00: 
+2025-12-07 02:06:20 +00:00: 🚀 [04:12 - 04:16]
+2025-12-07 02:06:20 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:20 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:20 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:20 +00:00: 
+2025-12-07 02:06:20 +00:00: 🚀 [04:16 - 04:20]
+2025-12-07 02:06:20 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:20 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:20 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:20 +00:00: 
+2025-12-07 02:06:20 +00:00: 🚀 [04:20 - 04:24]
+2025-12-07 02:06:20 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:20 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:20 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:20 +00:00: 
+2025-12-07 02:06:20 +00:00: 🚀 [04:24 - 04:28]
+2025-12-07 02:06:20 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:20 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:20 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:20 +00:00: 
+2025-12-07 02:06:20 +00:00: 🚀 [04:28 - 04:32]
+2025-12-07 02:06:20 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:20 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:20 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:20 +00:00: 
+2025-12-07 02:06:20 +00:00: 🚀 [04:32 - 04:36]
+2025-12-07 02:06:20 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:20 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:20 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:21 +00:00: 
+2025-12-07 02:06:21 +00:00: 🚀 [04:36 - 04:40]
+2025-12-07 02:06:21 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:21 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:21 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:21 +00:00: 
+2025-12-07 02:06:21 +00:00: 🚀 [04:40 - 04:44]
+2025-12-07 02:06:21 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:21 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:21 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:21 +00:00: 
+2025-12-07 02:06:21 +00:00: 🚀 [04:44 - 04:48]
+2025-12-07 02:06:21 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:21 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:21 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:21 +00:00: 
+2025-12-07 02:06:21 +00:00: 🚀 [04:48 - 04:52]
+2025-12-07 02:06:21 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:21 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:21 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:21 +00:00: 
+2025-12-07 02:06:21 +00:00: 🚀 [04:52 - 04:56]
+2025-12-07 02:06:21 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:21 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:21 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:21 +00:00: 
+2025-12-07 02:06:21 +00:00: 🚀 [04:56 - 05:00]
+2025-12-07 02:06:21 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:21 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:21 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:21 +00:00: 
+2025-12-07 02:06:21 +00:00: 🚀 [05:00 - 05:04]
+2025-12-07 02:06:21 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:21 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:21 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:21 +00:00: 
+2025-12-07 02:06:21 +00:00: 🚀 [05:04 - 05:08]
+2025-12-07 02:06:21 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:21 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:21 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:21 +00:00: 
+2025-12-07 02:06:21 +00:00: 🚀 [05:08 - 05:12]
+2025-12-07 02:06:21 +00:00: ⚠️ All 4 models are in cooldown!
+2025-12-07 02:06:21 +00:00:    ⏭️ Skipping (all models in cooldown)
+2025-12-07 02:06:21 +00:00:    ⏭️ No transcription (silent/unclear)
+2025-12-07 02:06:21 +00:00: 
+2025-12-07 02:06:21 +00:00: ⏸️ ASR Pause request for https://www.youtube.com/watch?v=M_3XC2KMK50
+2025-12-07 02:06:22 +00:00: 
+2025-12-07 02:06:22 +00:00: 🏁 ASR session ended
+2025-12-07 02:06:22 +00:00:    Total chunks: 78
+2025-12-07 02:06:22 +00:00:    Successful: 1
+2025-12-07 02:06:22 +00:00:    API Pool status: 89 total requests
+2025-12-07 02:06:22 +00:00: INFO:     127.0.0.1:58604 - "POST /pause-asr HTTP/1.1" 200 OK
