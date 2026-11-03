@@ -15,6 +15,7 @@ venv/
 node_modules/
 logs/
 releases/
+frontend/tests/artifacts/
 *.log
 temp_audio_chunks/
 temp.jpg

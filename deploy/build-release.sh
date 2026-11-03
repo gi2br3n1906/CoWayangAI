@@ -14,7 +14,7 @@ trap 'rm -f "${LIST_FILE}"' EXIT
 {
   (cd "${ROOT_DIR}" && git ls-files --cached --others --exclude-standard backend frontend deploy) \
     | while IFS= read -r file; do [[ -e "${ROOT_DIR}/${file}" ]] && printf '%s\n' "${file}"; done \
-    | grep -vE '(^|/)(node_modules|dist|\.git|\.venv|venv|__pycache__|releases)(/|$)' \
+    | grep -vE '(^|/)(node_modules|dist|\.git|\.venv|venv|__pycache__|releases)(/|$)|^frontend/tests/artifacts/' \
     | grep -vE '(^|/)\.env($|\.)' \
     | grep -vE '^backend-ai(/|$)|^ai(/|$)|^runs(/|$)|^logs(/|$)|^ecosystem\.foh\.cjs$'
 } | sort -u > "${LIST_FILE}"
