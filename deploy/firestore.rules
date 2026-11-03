@@ -1,0 +1,21 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // FOH control-plane records are written only by the Node Admin SDK.
+    match /fohStreams/{streamKey} {
+      allow read, write: if false;
+    }
+    match /fohStreamAliases/{aliasKey} {
+      allow read, write: if false;
+    }
+    match /fohStreamKeys/{streamKey} {
+      allow read, write: if false;
+    }
+
+    // Existing account features retain owner-only access.
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}

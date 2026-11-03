@@ -21,11 +21,13 @@ import os
 import signal
 import time
 import argparse
+from dotenv import load_dotenv
+load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env'))
 from typing import List, Dict
 
 # Konfigurasi
 DEFAULT_WORKERS = 5
-PYTHON_SCRIPT = "live_stream_worker.py"
+PYTHON_SCRIPT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "live_stream_worker.py")
 
 # Global state
 processes: Dict[str, subprocess.Popen] = {}
@@ -39,7 +41,8 @@ def start_worker(worker_id: str, server: str, model: str) -> subprocess.Popen:
         PYTHON_SCRIPT,
         "--worker-id", worker_id,
         "--server", server,
-        "--model", model
+        "--model", model,
+        "--no-preview"
     ]
     
     print(f"🚀 Starting {worker_id}...")
@@ -51,11 +54,8 @@ def start_worker(worker_id: str, server: str, model: str) -> subprocess.Popen:
             creationflags=subprocess.CREATE_NEW_CONSOLE
         )
     else:
-        process = subprocess.Popen(
-            cmd,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT
-        )
+        # Inherit output: an unread PIPE eventually blocks a noisy worker.
+        process = subprocess.Popen(cmd)
     
     return process
 
@@ -111,9 +111,10 @@ def main():
     parser = argparse.ArgumentParser(description='CoWayang AI Worker Launcher')
     parser.add_argument('--workers', type=int, default=DEFAULT_WORKERS,
                         help=f'Number of workers to start (default: {DEFAULT_WORKERS})')
-    parser.add_argument('--server', type=str, default='https://cowayangai.site',
+    parser.add_argument('--server', type=str, default=os.getenv('COWAYANG_SERVER_URL', 'http://127.0.0.1:3000'),
                         help='Server URL')
-    parser.add_argument('--model', type=str, default='yolov12.pt',
+    default_model = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'ai', 'weight.pt'))
+    parser.add_argument('--model', type=str, default=os.getenv('YOLO_MODEL_PATH', default_model),
                         help='Model path')
     
     args = parser.parse_args()

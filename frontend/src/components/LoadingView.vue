@@ -1,0 +1,1 @@
+<template><div class="loading-view" role="status" aria-label="Memuat tampilan"><div class="skeleton h-8 w-48 mb-6" /><div class="skeleton h-64 rounded-2xl" /><span class="sr-only">Memuat tampilan…</span></div></template>

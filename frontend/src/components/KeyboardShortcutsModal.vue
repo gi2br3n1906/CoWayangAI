@@ -1,105 +1,12 @@
-<template>
-  <!-- Keyboard Shortcuts Modal -->
-  <transition name="modal">
-    <div 
-      v-if="isOpen" 
-      class="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/60 backdrop-blur-sm"
-      @click.self="$emit('close')"
-    >
-      <div class="relative w-full max-w-lg bg-wayang-card rounded-2xl shadow-2xl p-6 border border-wayang-card">
-        <!-- Close Button -->
-        <button
-          @click="$emit('close')"
-          class="absolute top-3 right-3 text-gray-400 hover:text-white transition-colors"
-        >
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-
-        <!-- Header -->
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-10 h-10 bg-wayang-primary/20 rounded-lg flex items-center justify-center">
-            <svg class="w-5 h-5 text-wayang-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-            </svg>
-          </div>
-          <div>
-            <h2 class="text-xl font-bold text-white">Keyboard Shortcuts</h2>
-            <p class="text-sm text-gray-400">Navigasi cepat dengan keyboard</p>
-          </div>
-        </div>
-
-        <!-- Shortcuts List -->
-        <div class="space-y-2">
-          <div class="grid grid-cols-2 gap-2">
-            <!-- Video Controls -->
-            <div class="col-span-2 text-xs font-semibold text-wayang-gold uppercase tracking-wider mb-1 mt-2">
-              Video Controls
-            </div>
-            
-            <ShortcutItem keys="Space" description="Play / Pause" />
-            <ShortcutItem keys="←" description="Mundur 5 detik" />
-            <ShortcutItem keys="→" description="Maju 5 detik" />
-            <ShortcutItem keys="↑" description="Volume naik" />
-            <ShortcutItem keys="↓" description="Volume turun" />
-            <ShortcutItem keys="M" description="Mute / Unmute" />
-            <ShortcutItem keys="F" description="Fullscreen" />
-
-            <!-- Navigation -->
-            <div class="col-span-2 text-xs font-semibold text-wayang-gold uppercase tracking-wider mb-1 mt-4">
-              Navigasi
-            </div>
-            
-            <ShortcutItem keys="?" description="Tampilkan shortcuts" />
-            <ShortcutItem keys="Esc" description="Tutup modal / video" />
-            <ShortcutItem keys="/" description="Fokus ke pencarian" />
-            <ShortcutItem keys="H" description="Kembali ke Home" />
-          </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="mt-6 pt-4 border-t border-wayang-card/50 text-center">
-          <p class="text-xs text-gray-500">
-            Tekan <kbd class="px-1.5 py-0.5 bg-wayang-dark rounded text-gray-300 text-xs">?</kbd> kapan saja untuk melihat shortcuts
-          </p>
-        </div>
-      </div>
-    </div>
-  </transition>
-</template>
-
 <script setup>
-defineProps({
-  isOpen: {
-    type: Boolean,
-    default: false
-  }
-})
-
+import AppIcon from './AppIcon.vue'
+defineProps({ isOpen: Boolean })
 defineEmits(['close'])
-
-// Shortcut Item Component (inline)
-const ShortcutItem = {
-  props: ['keys', 'description'],
-  template: `
-    <div class="flex items-center justify-between p-2 bg-wayang-dark/50 rounded-lg">
-      <span class="text-sm text-gray-300">{{ description }}</span>
-      <kbd class="px-2 py-1 bg-wayang-dark rounded text-xs font-mono text-wayang-gold border border-wayang-card">
-        {{ keys }}
-      </kbd>
-    </div>
-  `
-}
+const shortcuts = [ ['Space', 'Play / Pause'], ['←', 'Mundur 10 detik'], ['→', 'Maju 10 detik'], ['↑ / ↓', 'Volume naik / turun'], ['M', 'Mute / Unmute'], ['F', 'Fullscreen'], ['H', 'Tutup sesi video'], ['?', 'Tampilkan pintasan'], ['Esc', 'Tutup dialog / navigasi'] ]
 </script>
-
+<template><div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-wayang-dark/80 backdrop-blur-sm overflow-y-auto" @click.self="$emit('close')"><section class="surface w-full max-w-lg p-6 relative"><button class="icon-button absolute top-3 right-3" aria-label="Tutup pintasan keyboard" @click="$emit('close')"><AppIcon name="close" /></button><p class="eyebrow">KENDALI RUANG ANALISIS</p><h2 class="text-2xl mt-4 mb-6">Pintasan keyboard</h2><dl class="grid gap-2"><div v-for="[keys, description] in shortcuts" :key="keys" class="flex items-center justify-between gap-4 p-3 border border-wayang-gold/10 rounded-lg"><dt class="text-sm text-gray-400">{{ description }}</dt><dd><kbd class="text-xs font-mono text-wayang-gold border border-wayang-gold/20 rounded px-2 py-1">{{ keys }}</kbd></dd></div></dl><p class="text-xs text-gray-400 mt-6 leading-relaxed">Kontrol video aktif hanya selama sesi terbuka dan saat fokus tidak berada di formulir. Hasil AI mengikuti ketersediaan layanan.</p></section></div></template>
 <style scoped>
-.modal-enter-active,
-.modal-leave-active {
-  transition: opacity 0.2s ease;
-}
-.modal-enter-from,
-.modal-leave-to {
-  opacity: 0;
-}
+dt,.text-xs { color: var(--muted); }
+kbd.text-xs { color: var(--gold); border-color: var(--control-border); background: var(--panel); }
+dl > div { border-color: var(--line); }
 </style>

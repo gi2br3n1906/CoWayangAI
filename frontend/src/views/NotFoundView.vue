@@ -1,0 +1,1 @@
+<template><section class="surface empty-state"><p class="eyebrow">404 / HALAMAN TIDAK DITEMUKAN</p><h1>Lakon ini belum ada.</h1><p>Gunakan sidebar untuk melanjutkan penjelajahan.</p><RouterLink to="/" class="button">Kembali ke ruang analisis</RouterLink></section></template>

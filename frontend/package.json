@@ -10,7 +10,9 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "test": "vitest run && node --test tests/player*.test.js tests/youtube*.test.js",
+    "test:ui": "node tests/browser-smoke.mjs"
   },
   "dependencies": {
     "axios": "^1.13.2",
@@ -21,12 +23,19 @@
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
     "@vitejs/plugin-vue": "^6.0.1",
+    "@vue/test-utils": "^2.5.1",
     "autoprefixer": "^10.4.22",
+    "jsdom": "^30.1.1",
+    "playwright": "^1.63.0",
     "postcss": "^8.5.6",
     "prettier": "3.6.2",
     "tailwindcss": "^3.4.18",
     "vite": "^7.1.11",
-    "vite-plugin-vue-devtools": "^8.0.3"
+    "vitest": "^5.0.3"
+  },
+  "overrides": {
+    "@grpc/grpc-js": "^1.13.6"
   }
 }

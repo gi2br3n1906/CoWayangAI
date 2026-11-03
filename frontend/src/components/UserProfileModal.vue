@@ -231,11 +231,11 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, watch } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { updateProfile as firebaseUpdateProfile } from 'firebase/auth'
 import { auth, db } from '@/firebase'
-import { doc, getDoc, setDoc, updateDoc, deleteDoc, collection, query, where, getDocs, orderBy } from 'firebase/firestore'
+import { doc, deleteDoc, collection, query, getDocs, orderBy } from 'firebase/firestore'
 
 const props = defineProps({
   isOpen: {
@@ -284,7 +284,7 @@ const closeModal = () => {
   emit('close')
 }
 
-const loadUserData = async () => {
+async function loadUserData() {
   if (!user.value?.uid) return
   
   try {

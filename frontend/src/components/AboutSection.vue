@@ -1,85 +1,12 @@
-<template>
-  <!-- About Section -->
-  <section id="about" class="py-12 px-4 border-t border-wayang-card">
-    <div class="max-w-4xl mx-auto">
-      <!-- Header -->
-      <div class="text-center mb-10">
-        <h2 class="text-2xl font-bold text-white mb-2">
-          Tentang <span class="text-wayang-gold">Co-Wayang AI</span>
-        </h2>
-        <p class="text-gray-400 text-sm max-w-2xl mx-auto">
-          Platform berbasis AI untuk menganalisis dan melestarikan seni pertunjukan Wayang Kulit Indonesia
-        </p>
-      </div>
-
-      <!-- Features Grid -->
-      <div class="grid md:grid-cols-3 gap-6 mb-10">
-        <div 
-          v-for="feature in features" 
-          :key="feature.title"
-          class="p-6 bg-wayang-card/50 rounded-xl border border-wayang-card/50 hover:border-wayang-primary/30 transition-colors"
-        >
-          <div class="w-12 h-12 rounded-lg bg-wayang-primary/20 flex items-center justify-center text-2xl mb-4">
-            {{ feature.icon }}
-          </div>
-          <h3 class="text-white font-semibold mb-2">{{ feature.title }}</h3>
-          <p class="text-gray-400 text-sm leading-relaxed">{{ feature.description }}</p>
-        </div>
-      </div>
-
-      <!-- Tech Stack (Compact) -->
-      <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10 px-4">
-        <span 
-          v-for="tech in techStack" 
-          :key="tech"
-          class="px-4 py-1.5 bg-wayang-dark text-xs sm:text-sm text-gray-300 rounded-full border border-wayang-card hover:border-wayang-primary/50 hover:text-wayang-gold transition-colors whitespace-nowrap"
-        >
-          {{ tech }}
-        </span>
-      </div>
-
-      <!-- Team/Credit -->
-      <div class="text-center">
-        <p class="text-gray-500 text-xs">
-          Dikembangkan sebagai bagian dari upaya pelestarian budaya Wayang Kulit Indonesia
-        </p>
-        <p class="text-gray-600 text-xs mt-1">
-          © {{ new Date().getFullYear() }} Co-Wayang AI • 
-          <a href="#" class="text-wayang-primary hover:underline">Dokumentasi</a> • 
-          <a href="#" class="text-wayang-primary hover:underline">GitHub</a>
-        </p>
-      </div>
-    </div>
-  </section>
-</template>
-
 <script setup>
 const features = [
-  {
-    icon: '🎭',
-    title: 'Deteksi Tokoh',
-    description: 'AI mengenali tokoh wayang yang muncul di layar menggunakan computer vision dan deep learning.'
-  },
-  {
-    icon: '📝',
-    title: 'Transkripsi Otomatis',
-    description: 'Speech recognition untuk bahasa Jawa menghasilkan teks dialog dalang secara real-time.'
-  },
-  {
-    icon: '🌐',
-    title: 'Terjemahan',
-    description: 'Terjemahan otomatis dari bahasa Jawa ke bahasa Indonesia untuk memudahkan pemahaman.'
-  }
-]
-
-const techStack = [
-  'Vue.js',
-  'Firebase',
-  'Python',
-  'Gemini API',
-  'YOLOv12',
-  'Socket.IO',
-  'YouTube API',
-  'Node.js'
+ { code: '01 / VISION', title: 'Melihat tokoh', description: 'Worker Python memproses frame dan mengirim koordinat deteksi. Browser menggambar overlay di atas video YouTube.' },
+ { code: '02 / LANGUAGE', title: 'Mengikuti dialog', description: 'Layanan ASR bahasa Jawa menyediakan transkripsi. Terjemahan mengikuti layanan dan konfigurasi yang tersedia di server.' },
+ { code: '03 / CULTURE', title: 'Mengenal kisah', description: 'Almanak lokal membuka cerita, alias, watak, dan hubungan keluarga tokoh tanpa memerlukan worker AI.' }
 ]
 </script>
+<template><section><div class="story-features"><article v-for="feature in features" :key="feature.code" class="surface"><p class="eyebrow">{{ feature.code }}</p><h2>{{ feature.title }}</h2><p>{{ feature.description }}</p></article></div><div class="story-note"><div><p class="eyebrow">TRADISI BUKAN SEKADAR DATA</p><h2>Teknologi sebagai pendamping,<br />bukan pengganti pengalaman.</h2></div><p>CoWayangAI menghubungkan penjelajahan budaya dengan computer vision dan pengolahan bahasa. Hasil deteksi maupun transkripsi dapat keliru; gunakan sebagai bantuan untuk mengenal pertunjukan, bukan sebagai sumber tunggal kebenaran.</p></div><div class="telemetry-strip"><span>VUE 3</span><span>EXPRESS / SOCKET.IO</span><span>PYTHON / YOLO WORKER</span><span>FIREBASE AUTH</span></div></section></template>
+<style scoped>
+.story-features { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 20px; }.story-features article { padding: 28px; }.story-features h2 { font-size: 22px; margin: 22px 0 14px; }.story-features article > p:last-child { font-size: 12px; color: var(--muted); line-height: 1.9; }.story-note { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; border-block: 1px solid var(--line); margin: 40px 0; padding: 36px 0; }.story-note h2 { font: 28px/1.4 Georgia,serif; color: var(--latte); margin-top: 18px; }.story-note > p { color: var(--muted); font-size: 13px; line-height: 1.9; }
+@media(max-width:767px) { .story-features,.story-note { grid-template-columns: 1fr; }.story-note { gap: 24px; } }
+</style>

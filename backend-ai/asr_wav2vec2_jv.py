@@ -18,12 +18,14 @@ import sys
 import time
 import math
 import uuid
+import io
+import wave
 from collections import deque
 import requests
 import json
 import threading
 import numpy as np
-import soundfile as sf
+
 from dotenv import load_dotenv
 
 # --- Global Metrics untuk Monitoring ---
@@ -46,29 +48,29 @@ def log_stream_attempt(success, error_msg=None):
         print(f"🚨 Last block detected: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(last_block_detected))}")
 
 # --- Gemini API Setup ---
-import google.generativeai as genai
+
 
 # --- VAD Imports ---
+HAVE_SILERO = False
+silero_get_speech_ts = None
+silero_model = None
 try:
     import webrtcvad
     HAVE_WEBRTC = True
 except Exception:
     HAVE_WEBRTC = False
     print('(PERINGATAN) webrtcvad not installed or failed to import. Using Silero VAD fallback.')
-    HAVE_SILERO = False
-    silero_get_speech_ts = None
-    silero_model = None
-    try:
-        # Silero VAD is a good fallback that doesn't require C++ build tools
-        import torch
-        silero_model, silero_utils = torch.hub.load('snakers4/silero-vad', 'silero_vad', trust_repo=True)
-        silero_get_speech_ts = silero_utils[0]
-        HAVE_SILERO = True
-        print('(INFO) Silero VAD loaded via torch.hub')
-    except Exception as e:
-        HAVE_SILERO = False
-        silero_get_speech_ts = None
-        print(f'(ERROR) Failed to load Silero VAD: {e}. Falling back to basic energy VAD.')
+    # Importing the service must not download/execute a remote torch.hub repo.
+    # Operators may explicitly opt in; otherwise use the local energy fallback.
+    if os.getenv('COWAYANG_ENABLE_SILERO') == '1':
+        try:
+            import torch
+            silero_model, silero_utils = torch.hub.load('snakers4/silero-vad', 'silero_vad', trust_repo=True)
+            silero_get_speech_ts = silero_utils[0]
+            HAVE_SILERO = True
+            print('(INFO) Silero VAD loaded via torch.hub')
+        except Exception as e:
+            print(f'(ERROR) Failed to load Silero VAD: {e}. Falling back to basic energy VAD.')
 
 
 def get_stream_url(yt_url):
@@ -168,44 +170,16 @@ class PCMStreamer:
 
     def start(self):
         cmd = [
-            'ffmpeg', '-i', self.stream_url,
+            'ffmpeg', '-ss', str(self.start_time), '-i', self.stream_url,
             '-vn', '-f', 's16le', '-acodec', 'pcm_s16le',
             '-ar', str(self.sample_rate), '-ac', '1', '-nostdin', '-loglevel', 'error', '-'
         ]
-        self.proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        # stderr inherits the console; an unread stderr PIPE can deadlock ffmpeg.
+        self.proc = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+        self.has_seeked = True  # ffmpeg seeks, without recursively discarding hours of PCM
 
     def read_chunk(self, n_bytes):
         if not self.proc: return None
-        
-        # If we haven't seeked yet and have a start_time, consume audio until we reach the target
-        if not self.has_seeked and self.start_time > 0:
-            target_frames = int(self.start_time * self.sample_rate)
-            bytes_per_frame = 2  # s16le = 2 bytes per sample
-            frames_to_skip = target_frames - self.frames_consumed
-            
-            if frames_to_skip > 0:
-                skip_bytes = min(frames_to_skip * bytes_per_frame, 1024 * 1024)  # Max 1MB at a time
-                try:
-                    skipped = self.proc.stdout.read(skip_bytes)
-                    if skipped:
-                        frames_skipped = len(skipped) // bytes_per_frame
-                        self.frames_consumed += frames_skipped
-                        print(f"⏩ Seeking: {self.frames_consumed}/{target_frames} frames ({self.frames_consumed/self.sample_rate:.1f}s)")
-                    else:
-                        # End of stream reached before target
-                        self.has_seeked = True
-                        return None
-                except:
-                    self.has_seeked = True
-                    return None
-                
-                # Check if we've reached the target
-                if self.frames_consumed >= target_frames:
-                    self.has_seeked = True
-                    print(f"✅ Seek complete: Started at {self.start_time}s")
-                else:
-                    # Continue seeking
-                    return self.read_chunk(n_bytes)
         
         # Normal reading after seeking
         data = self.proc.stdout.read(n_bytes)
@@ -215,8 +189,38 @@ class PCMStreamer:
 
     def stop(self):
         if self.proc:
-            try: self.proc.kill()
-            except: pass
+            try:
+                if self.proc.poll() is None:
+                    self.proc.terminate()
+                try:
+                    self.proc.wait(timeout=2)
+                except subprocess.TimeoutExpired:
+                    self.proc.kill()
+                    self.proc.wait(timeout=2)
+            finally:
+                if self.proc.stdout:
+                    self.proc.stdout.close()
+
+class DevicePCMStreamer:
+    def __init__(self, device, sample_rate=16000):
+        self.device = int(device)
+        self.sample_rate = sample_rate
+        self.stream = None
+
+    def start(self):
+        import sounddevice as sd
+        self.stream = sd.RawInputStream(samplerate=self.sample_rate, channels=1, dtype='int16', device=self.device, blocksize=int(self.sample_rate * 0.02))
+        self.stream.start()
+
+    def read_chunk(self, n_bytes):
+        if not self.stream: return None
+        return bytes(self.stream.read(n_bytes // 2)[0])
+
+    def stop(self):
+        if self.stream:
+            self.stream.stop()
+            self.stream.close()
+            self.stream = None
 
 
 def pcm_bytes_to_float_numpy(pcm_bytes):
@@ -232,11 +236,19 @@ def cleanup_json_string(text):
         text = text[:-3]
     return text.strip()
 
-def run_transcription_loop(youtube_url, start_time=0, model_id=None):
+def pcm_to_wav_bytes(pcm_bytes, sample_rate=16000):
+    buffer = io.BytesIO()
+    with wave.open(buffer, 'wb') as wav:
+        wav.setnchannels(1); wav.setsampwidth(2); wav.setframerate(sample_rate); wav.writeframes(pcm_bytes)
+    return buffer.getvalue()
+
+def run_transcription_loop(youtube_url, start_time=0, model_id=None, stop_event=None, session_id=None, target_language='id'):
+    stop_event = stop_event if stop_event is not None else threading.Event()
     load_dotenv()
-    NODEJS_WEBHOOK_URL = os.getenv('NODEJS_WEBHOOK_URL', 'http://localhost:3000/api/webhook')
+    server_url = os.getenv('COWAYANG_SERVER_URL', 'http://127.0.0.1:3000').rstrip('/')
+    NODEJS_WEBHOOK_URL = os.getenv('NODEJS_WEBHOOK_URL', f'{server_url}/api/webhook')
     GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
-    GEMINI_MODEL = os.getenv('GEMINI_MODEL', 'gemini-1.5-flash-latest')
+    GEMINI_MODEL = os.getenv('GEMINI_MODEL', 'gemini-3.5-flash-lite')
     
     if not GEMINI_API_KEY:
         print("(FATAL) GEMINI_API_KEY not found in .env file.")
@@ -245,8 +257,15 @@ def run_transcription_loop(youtube_url, start_time=0, model_id=None):
     # --- Initialize Gemini ---
     print(f"(INFO) Initializing Google Gemini ({GEMINI_MODEL})...")
     try:
-        genai.configure(api_key=GEMINI_API_KEY)
-        model = genai.GenerativeModel(GEMINI_MODEL)
+        from google import genai as genai_client
+        from google.genai import types as genai_types
+        model = genai_client.Client(api_key=GEMINI_API_KEY)
+        use_new_sdk = True
+    except ImportError:
+        model = None
+        use_new_sdk = False
+        print("(FATAL) No Google Gemini SDK installed; audio capture will stop without inference.")
+    try:
         print("(INFO) Gemini API Ready.")
     except Exception as e:
         print(f"(FATAL) Failed to initialize Gemini: {e}")
@@ -260,25 +279,31 @@ def run_transcription_loop(youtube_url, start_time=0, model_id=None):
     if HAVE_WEBRTC:
         vad = webrtcvad.Vad(2)
 
-    window_sec = 4.0
+    direct_audio = youtube_url.startswith('mic://')
+    window_sec = 8.0 if direct_audio else 4.0
     stride_sec = 2.0
     window_frames = int(math.ceil(window_sec * 1000 / frame_duration))
     stride_frames = int(math.ceil(stride_sec * 1000 / frame_duration))
 
-    stream_url = get_stream_url(youtube_url)
-    if not stream_url:
-        print('Failed to get stream url from yt-dlp. Exiting.')
-        return
-
-    streamer = PCMStreamer(stream_url, sample_rate=sample_rate, start_time=start_time)
-    streamer.start()
-
-    chunk_buffer = deque(maxlen=window_frames)
+    if direct_audio:
+        device = os.getenv('FOH_AUDIO_DEVICE_INDEX') or youtube_url.split('://', 1)[1]
+        if not str(device).isdigit():
+            print('FOH_AUDIO_DEVICE_INDEX must be a numeric input device index.')
+            return
+        streamer = DevicePCMStreamer(device, sample_rate=sample_rate)
+    else:
+        stream_url = get_stream_url(youtube_url)
+        if not stream_url:
+            print('Failed to get stream url from yt-dlp. Exiting.')
+            return
+        streamer = PCMStreamer(stream_url, sample_rate=sample_rate, start_time=start_time)
+    chunk_buffer = deque()
     chunk_frame_count = 0
     audio_pos_seconds = 0.0
     last_final_text = None
-    temp_dir = "temp_audio_chunks"
-    os.makedirs(temp_dir, exist_ok=True)
+    silence_frames = 0
+    speech_frames = 0
+
 
     def fmt_ts(ts):
         m = int(ts // 60)
@@ -286,7 +311,8 @@ def run_transcription_loop(youtube_url, start_time=0, model_id=None):
         return f"{m:02d}:{s:02d}"
 
     try:
-        while True:
+        streamer.start()
+        while not stop_event.is_set():
             frame_bytes_data = streamer.read_chunk(frame_bytes)
             if frame_bytes_data is None:
                 print('Streamer ended or returned no data')
@@ -306,11 +332,25 @@ def run_transcription_loop(youtube_url, start_time=0, model_id=None):
                     rms = np.sqrt(np.mean((ints / 32768.0) ** 2))
                     is_speech = rms > 0.01
 
-            chunk_buffer.append((frame_bytes_data, is_speech))
+            rms = 1.0 if is_speech else 0.0
+            if not HAVE_WEBRTC:
+                ints = np.frombuffer(frame_bytes_data, dtype=np.int16).astype(np.float32)
+                rms = float(np.sqrt(np.mean((ints / 32768.0) ** 2))) if ints.size else 0.0
+                is_speech = rms >= 0.01
+            if is_speech or chunk_buffer:
+                chunk_buffer.append((frame_bytes_data, is_speech))
             audio_pos_seconds += frame_duration / 1000.0
-
-            if len(chunk_buffer) >= window_frames and (chunk_frame_count % stride_frames == 0):
+            if is_speech:
+                speech_frames += 1
+                silence_frames = 0
+            else:
+                silence_frames += 1
+            silence_limit = int(700 / frame_duration)
+            max_speech_frames = int(8000 / frame_duration)
+            should_send = bool(chunk_buffer) and speech_frames > 0 and (silence_frames >= silence_limit or speech_frames >= max_speech_frames)
+            if should_send:
                 window_bytes = b''.join([b for b, s in list(chunk_buffer)])
+                speech_bytes = b''.join([b for b, s in list(chunk_buffer) if s])
                 audio_f32 = pcm_bytes_to_float_numpy(window_bytes)
                 
                 voiced_duration = 0
@@ -323,44 +363,35 @@ def run_transcription_loop(youtube_url, start_time=0, model_id=None):
                     voiced_frames = sum(1 for _, s in list(chunk_buffer) if s)
                     voiced_duration = voiced_frames * frame_duration / 1000.0
 
-                if voiced_duration < 0.5: # Min 0.5s of speech in window
-                    chunk_frame_count += 1
+                if voiced_duration < 0.5 or rms < 0.01: # Ignore silence/static noise
+                    chunk_buffer.clear(); speech_frames = 0; silence_frames = 0
                     continue
 
                 window_end = audio_pos_seconds + start_time
                 window_start = window_end - window_sec
                 
-                uploaded_file = None
-                temp_file_path = None
-
                 try:
-                    # 1. Save chunk to a temporary WAV file
-                    temp_file_name = f"{uuid.uuid4()}.wav"
-                    temp_file_path = os.path.join(temp_dir, temp_file_name)
-                    sf.write(temp_file_path, audio_f32, sample_rate)
-
-                    # 2. Upload file to Gemini
-                    uploaded_file = genai.upload_file(path=temp_file_path, display_name=temp_file_name)
-                    
-                    # 3. Call Gemini API
+                    # Keep audio in RAM; the legacy SDK accepts raw bytes as an inline part.
+                    wav_bytes = pcm_to_wav_bytes(speech_bytes, sample_rate)
                     prompt = """
                     You are an expert in Javanese language and culture.
                     Analyze the attached audio file. It contains spoken Javanese.
                     Your task is to:
-                    1. Transcribe the spoken Javanese into written Javanese (using Latin script).
-                    2. Translate the Javanese transcription into standard Indonesian.
-                    
-                    Provide the output as a single, clean JSON object with two keys: "transcription" and "translation". Do not include any other text, greetings, or explanations.
-                    
-                    Example response:
-                    {
-                        "transcription": "iki conto transkripsi jowo",
-                        "translation": "ini contoh transkripsi jawa"
-                    }
+                    1. Transcribe the spoken Javanese into written Javanese (Latin script).
+                    2. Translate it into standard Indonesian.
+                    3. Translate it into English.
+                    Return exactly one JSON object with keys transcription, translation, translation_en.
                     """
                     print(f"--> Mengirim chunk {fmt_ts(window_start)}-{fmt_ts(window_end)} ke Gemini...")
-                    response = model.generate_content([prompt, uploaded_file])
-                    
+                    if use_new_sdk:
+                        response = model.models.generate_content(
+                            model=GEMINI_MODEL,
+                            contents=[prompt, genai_types.Part.from_bytes(data=wav_bytes, mime_type='audio/wav')],
+                            config=genai_types.GenerateContentConfig(
+                                response_mime_type='application/json',
+                                thinking_config=genai_types.ThinkingConfig(thinking_level='low')))
+                    else:
+                        response = model.generate_content([prompt, {'mime_type': 'audio/wav', 'data': wav_bytes}])
                     # Log the raw response from Gemini for debugging
                     print(f"(DEBUG) Raw Gemini Response: {response.text}")
 
@@ -369,6 +400,7 @@ def run_transcription_loop(youtube_url, start_time=0, model_id=None):
                     result = json.loads(response_text)
                     transcription = result.get('transcription', '').lower().strip()
                     translation = result.get('translation', '').strip()
+                    translation_en = result.get('translation_en', '').strip()
 
                     if transcription and transcription != last_final_text:
                         last_final_text = transcription
@@ -376,16 +408,18 @@ def run_transcription_loop(youtube_url, start_time=0, model_id=None):
                         
                         payload = {
                             'type': 'subtitle',
+                            'sessionId': session_id,
                             'data': {
                                 'timestamp': fmt_ts(max(0.0, window_start)),
                                 'start_time': max(0.0, window_start),
                                 'end_time': window_end,
                                 'text': transcription,
-                                'translation': translation
+                                'translation': translation,
+                                'translation_en': translation_en
                             }
                         }
                         try:
-                            requests.post(NODEJS_WEBHOOK_URL, json=payload, timeout=0.5)
+                            requests.post(NODEJS_WEBHOOK_URL, json=payload, headers={'x-cowayang-secret': os.getenv('WORKER_SHARED_SECRET', '')}, timeout=3)
                             print(f"--> Webhook Terkirim: {payload['data']['timestamp']} - '{payload['data']['text']}'")
                         except Exception as e:
                             print(f"  - (ERROR) Webhook Error: {e}")
@@ -394,27 +428,13 @@ def run_transcription_loop(youtube_url, start_time=0, model_id=None):
 
                 except Exception as e:
                     print(f"(ERROR) Gemini API Error: {e}")
-                
-                finally:
-                    # 5. Cleanup files
-                    if uploaded_file:
-                        try: genai.delete_file(uploaded_file.name)
-                        except: pass # Ignore cleanup errors
-                    if temp_file_path and os.path.exists(temp_file_path):
-                        try: os.remove(temp_file_path)
-                        except: pass
-
+                chunk_buffer.clear(); speech_frames = 0; silence_frames = 0
             chunk_frame_count += 1
 
     finally:
         streamer.stop()
         print('Stopped streamer.')
-        # Clean up any leftover temp files
-        for f in os.listdir(temp_dir):
-            try: os.remove(os.path.join(temp_dir, f))
-            except: pass
-        try: os.rmdir(temp_dir)
-        except: pass
+
 
 
 def parse_time(time_str):

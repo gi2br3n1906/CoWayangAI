@@ -20,15 +20,22 @@ import socketio
 import time
 import numpy as np
 from ultralytics import YOLO
-from cap_from_youtube import cap_from_youtube
+import yt_dlp
 import threading
 import argparse
 import sys
 import os
+import math
+import shutil
+from dotenv import load_dotenv
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import urlparse
 
 # ==================== KONFIGURASI ====================
-SERVER_URL = "https://cowayangai.site"
-MODEL_PATH = "yolov12.pt"
+SERVER_URL = os.getenv("COWAYANG_SERVER_URL", "http://127.0.0.1:3000")
+MODEL_PATH = os.getenv("YOLO_MODEL_PATH", os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'ai', 'weight.pt')))
 DEDUP_IOU_THRESHOLD = 0.8
 
 # ==================== GLOBAL STATE ====================
@@ -36,15 +43,60 @@ worker_id = None
 current_session_id = None
 current_video_url = None
 current_seek_time = 0
-stop_flag = False
+processing_stop = threading.Event()
+processing_thread = None
+asr_thread = None
+asr_stop = threading.Event()
+command_lock = threading.Lock()
+restart_timeout = 2.0
 is_processing = False
 model = None
 player_time = 0
 lock = threading.Lock()
 is_registered = False
+preview_enabled = False  # requirements use OpenCV headless by default
+FOH_CAMERA_INDEX = int(os.getenv('FOH_CAMERA_INDEX', '0'))
+PREVIEW_PORT = int(os.getenv('FOH_PREVIEW_PORT', '8002'))
+CAPTURE_LOCAL = os.getenv('FOH_CAPTURE_ENABLED', 'true' if os.getenv('OPERATION_MODE', 'local') == 'local' else 'false').lower() == 'true'
+preview_lock = threading.Lock()
+latest_jpeg = None
+recent_boxes = {}
+
+def mjpeg_part(frame):
+    crlf = bytes((13, 10))
+    return b'--frame' + crlf + b'Content-Type: image/jpeg' + crlf + b'Content-Length: ' + str(len(frame)).encode('ascii') + crlf + crlf + frame + crlf
+
+class PreviewHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        if urlparse(self.path).path != '/video-feed':
+            self.send_error(404); return
+        self.send_response(200)
+        self.send_header('Content-Type', 'multipart/x-mixed-replace; boundary=frame')
+        self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
+        self.end_headers()
+        last_frame = None
+        try:
+            while True:
+                with preview_lock: frame = latest_jpeg
+                if frame and frame is not last_frame:
+                    self.wfile.write(mjpeg_part(frame))
+                    last_frame = frame
+                time.sleep(0.05)
+        except (BrokenPipeError, ConnectionResetError):
+            pass
+    def log_message(self, *_): pass
+
+def start_preview_server():
+    global preview_server
+    server = ThreadingHTTPServer(('127.0.0.1', PREVIEW_PORT), PreviewHandler)
+    preview_server = server
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    print(f"FOH MJPEG preview: http://127.0.0.1:{PREVIEW_PORT}/video-feed")
 
 # ==================== SOCKET.IO SETUP ====================
-sio = socketio.Client(reconnection=True, reconnection_attempts=0, reconnection_delay=1)
+sio = socketio.Client(reconnection=True, reconnection_attempts=5,
+                      reconnection_delay=1, reconnection_delay_max=10)
+WORKER_SHARED_SECRET = os.getenv('WORKER_SHARED_SECRET', '')
 
 def safe_emit(event, data):
     """Emit dengan error handling."""
@@ -63,7 +115,11 @@ def connect():
     
     # Register worker
     print(f"📝 [{worker_id}] Mendaftar sebagai worker...")
-    sio.emit('register-worker', {'workerId': worker_id})
+    sio.emit('register-worker', {
+        'workerId': worker_id,
+        'sharedSecret': WORKER_SHARED_SECRET,
+        'captureLocal': CAPTURE_LOCAL
+    })
 
 @sio.on('worker-registered')
 def on_worker_registered(data):
@@ -83,12 +139,14 @@ def connect_error(data):
 def disconnect():
     global is_registered
     is_registered = False
+    processing_stop.set()
     print(f"⚠️ [{worker_id}] Terputus dari server.")
 
 @sio.on('start-processing')
 def on_start_processing(data):
     """Dipanggil ketika VPS assign session ke worker ini."""
-    global current_video_url, stop_flag, is_processing, current_seek_time, current_session_id
+    global current_video_url, is_processing, current_seek_time, current_session_id
+    global processing_stop, processing_thread
     
     assigned_worker = data.get('workerId', '')
     session_id = data.get('sessionId', '')
@@ -97,29 +155,39 @@ def on_start_processing(data):
     # Only process if assigned to this worker
     if assigned_worker != worker_id:
         return
+    try:
+        start_time = float(data.get('startTime', 0))
+        if not math.isfinite(start_time) or start_time < 0:
+            raise ValueError('startTime must be finite and nonnegative')
+    except (TypeError, ValueError) as exc:
+        safe_emit('stream-error', {'sessionId': session_id, 'message': str(exc)})
+        return
     
     print(f"\n🎬 [{worker_id}] Menerima session: {session_id}")
     print(f"   URL: {video_url}")
     
-    if is_processing:
-        print(f"⚠️ [{worker_id}] Sudah ada proses berjalan, stopping dulu...")
-        stop_flag = True
-        time.sleep(1)
-    
-    stop_flag = False
-    current_session_id = session_id
-    current_video_url = video_url
-    current_seek_time = 0
-    
-    # Start processing in a new thread
-    thread = threading.Thread(target=process_video, args=(video_url, session_id))
-    thread.daemon = True
-    thread.start()
+    # Serialize replacements; never clear a cancellation token an old run owns.
+    with command_lock:
+        if processing_thread and processing_thread.is_alive():
+            processing_stop.set()
+            processing_thread.join(timeout=restart_timeout)
+            if processing_thread.is_alive():
+                safe_emit('stream-error', {'sessionId': session_id,
+                          'message': 'Previous video is still stopping; retry shortly'})
+                return
+        processing_stop = threading.Event()
+        current_session_id = session_id
+        current_video_url = video_url
+        current_seek_time = start_time
+        is_processing = True
+        processing_thread = threading.Thread(
+            target=process_video, args=(video_url, session_id, processing_stop), daemon=True)
+        processing_thread.start()
 
 @sio.on('stop-processing')
 def on_stop_processing(data=None):
     """Dipanggil ketika Frontend/VPS minta stop."""
-    global stop_flag, current_session_id
+    global current_session_id
     
     # Check if this stop is for our session
     if data:
@@ -128,7 +196,28 @@ def on_stop_processing(data=None):
             return  # Not for us
     
     print(f"\n🛑 [{worker_id}] Menerima perintah STOP (session: {current_session_id})")
-    stop_flag = True
+    processing_stop.set()
+
+@sio.on('start-asr')
+def on_start_asr(data):
+    global asr_thread, asr_stop
+    from asr_wav2vec2_jv import run_transcription_loop
+    if data.get('sessionId') != current_session_id:
+        safe_emit('stream-error', {'sessionId': data.get('sessionId'), 'message': 'No matching FOH capture session'})
+        return
+    if asr_thread and asr_thread.is_alive():
+        asr_stop.set()
+        asr_thread.join(timeout=1)
+    asr_stop = threading.Event()
+    asr_thread = threading.Thread(target=run_transcription_loop,
+        kwargs={'youtube_url': data.get('videoUrl'), 'start_time': data.get('startTime', 0), 'stop_event': asr_stop,
+                'session_id': data.get('sessionId'), 'target_language': data.get('targetLanguage', 'id')}, daemon=True)
+    asr_thread.start()
+
+@sio.on('stop-asr')
+def on_stop_asr(data):
+    if data.get('sessionId') == current_session_id:
+        asr_stop.set()
 
 @sio.on('player-time')
 def on_player_time(data):
@@ -154,13 +243,18 @@ def on_player_seek(data):
         return
     
     seek_time = data.get('time', 0)
+    try:
+        seek_time = float(seek_time)
+        if not math.isfinite(seek_time) or seek_time < 0:
+            return
+    except (TypeError, ValueError):
+        return
     print(f"\n⏩ [{worker_id}] User SEEK ke: {seek_time:.1f}s")
     current_seek_time = seek_time
 
 @sio.on('player-state')
 def on_player_state(data):
     """Handle player state changes (pause/play/ended)."""
-    global stop_flag
     
     session_id = data.get('sessionId', '')
     if session_id and session_id != current_session_id:
@@ -169,7 +263,7 @@ def on_player_state(data):
     state = data.get('state', '')
     if state == 'ended':
         print(f"📺 [{worker_id}] Video ended, stopping processing")
-        stop_flag = True
+        processing_stop.set()
 
 
 # ==================== HELPER FUNCTIONS ====================
@@ -269,6 +363,35 @@ def draw_local_preview(frame, boxes, colors, session_id):
     return annotated
 
 
+def open_youtube_capture(video_url, resolution):
+    """Resolve a YouTube format with yt-dlp/EJS, then open it via FFmpeg."""
+    runtime_path = shutil.which('node') or shutil.which('node.exe')
+    ydl_options = {
+        'quiet': True,
+        'no_warnings': False,
+        'noplaylist': True,
+        'format': f'best[protocol^=https][height<={resolution[:-1]}]/best[protocol^=https]' if resolution != 'best' else 'best[protocol^=https]',
+        'js_runtimes': {'node': {'path': runtime_path}} if runtime_path else {},
+    }
+    with yt_dlp.YoutubeDL(ydl_options) as extractor:
+        info = extractor.extract_info(video_url, download=False)
+    entry = (info.get('entries') or [info])[0]
+    stream_url = entry.get('url')
+    if not stream_url and entry.get('requested_formats'):
+        stream_url = entry['requested_formats'][0].get('url')
+    if not stream_url:
+        candidates = [fmt for fmt in entry.get('formats', []) if fmt.get('url') and fmt.get('vcodec') != 'none']
+        if resolution != 'best':
+            height_limit = int(resolution[:-1])
+            under_limit = [fmt for fmt in candidates if not fmt.get('height') or fmt['height'] <= height_limit]
+            candidates = under_limit or candidates
+        candidates.sort(key=lambda fmt: (fmt.get('height') or 0, fmt.get('tbr') or 0), reverse=True)
+        stream_url = candidates[0]['url'] if candidates else None
+    if not stream_url:
+        raise RuntimeError('yt-dlp returned no playable video format')
+    return cv2.VideoCapture(stream_url, cv2.CAP_FFMPEG)
+
+
 COLORS_BGR = [
     (97, 111, 255),
     (255, 186, 97),
@@ -280,31 +403,46 @@ COLORS_BGR = [
 
 
 # ==================== VIDEO PROCESSING ====================
-def process_video(video_url, session_id):
+def process_video(video_url, session_id, stop_event=None):
     """Proses video dan kirim koordinat bounding box ke frontend."""
-    global stop_flag, is_processing, model, current_seek_time, current_session_id
+    global is_processing, model, current_seek_time, current_session_id, latest_jpeg
+    stop_event = stop_event if stop_event is not None else threading.Event()
     
     is_processing = True
     
     print(f"\n📺 [{worker_id}] Membuka YouTube: {video_url}")
     print(f"   Session: {session_id}")
     
-    # Try multiple resolutions (fallback)
-    resolutions = ['720p', '480p', '360p', '1080p', 'best']
-    cap = None
+    camera_input = video_url.startswith('camera://')
+    # FOH capture is worker-owned; hybrid mode sends inference only, never frames.
+    if camera_input:
+        device = int(video_url.split('://', 1)[1] or FOH_CAMERA_INDEX)
+        cap_backend = cv2.CAP_DSHOW if os.name == 'nt' else cv2.CAP_ANY
+        cap = cv2.VideoCapture(device, cap_backend)
+        if not cap.isOpened():
+            safe_emit('stream-error', {'sessionId': session_id, 'message': f'FOH camera {device} unavailable'})
+            is_processing = False; current_session_id = None; return
+        resolutions = []
+    else:
+        resolutions = ['720p', '480p', '360p', '1080p', 'best']
+    cap = cap if camera_input else None
     used_resolution = None
     
-    for res in resolutions:
-        try:
-            print(f"   Mencoba resolusi: {res}...")
-            cap = cap_from_youtube(video_url, res)
-            if cap and cap.isOpened():
-                used_resolution = res
-                print(f"   ✅ Berhasil dengan resolusi: {res}")
-                break
-        except Exception as e:
-            print(f"   ⚠️ Resolusi {res} tidak tersedia: {e}")
-            continue
+    if not camera_input:
+        for res in resolutions:
+            try:
+                print(f"   Mencoba resolusi: {res}...")
+                candidate = open_youtube_capture(video_url, res)
+                if candidate and candidate.isOpened():
+                    cap = candidate
+                    used_resolution = res
+                    print(f"   ✅ Berhasil dengan resolusi: {res}")
+                    break
+                if candidate is not None:
+                    candidate.release()
+            except Exception as e:
+                print(f"   ⚠️ Resolusi {res} tidak tersedia: {e}")
+                continue
     
     if cap is None or not cap.isOpened():
         print(f"❌ [{worker_id}] Gagal membuka video!")
@@ -316,41 +454,35 @@ def process_video(video_url, session_id):
         current_session_id = None
         return
 
-    # Get video properties
-    fps = cap.get(cv2.CAP_PROP_FPS) or 30
-    total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-    duration = total_frames / fps if fps > 0 else 0
-    
-    print(f"   FPS: {fps:.1f}, Duration: {duration:.1f}s, Frames: {total_frames}")
-
-    # Notify frontend that stream started
-    safe_emit('stream-started', {
-        'sessionId': session_id,
-        'videoUrl': video_url,
-        'duration': duration
-    })
-    print(f"🎬 [{worker_id}] Processing dimulai!\n")
-
-    last_log_time = time.time()
-    frame_count = 0
     total_sent = 0
-    current_frame = 0
-    last_seek_time = 0
-    start_real_time = time.time()
-    start_video_time = 0
-    
-    # Window name unique per worker
     window_name = f'CoWayang AI - {worker_id} (Press q to exit)'
-
     try:
-        while not stop_flag:
+        # Setup belongs inside cleanup protection, not just the read loop.
+        fps = cap.get(cv2.CAP_PROP_FPS) or 30
+        if not math.isfinite(fps) or fps <= 0:
+            fps = 30
+        total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT)) if not camera_input else 0
+        duration = total_frames / fps
+        safe_emit('stream-started', {
+            'sessionId': session_id, 'videoUrl': video_url, 'duration': duration})
+        last_log_time = time.monotonic()
+        frame_count = 0
+        current_frame = 0
+        last_seek_time = 0
+        start_real_time = time.monotonic()
+        foh_started_at = start_real_time
+        start_video_time = 0
+        if camera_input:
+            with lock:
+                recent_boxes.clear()
+        while not stop_event.is_set():
             # Check for seek request
-            if current_seek_time != last_seek_time:
+            if not camera_input and current_seek_time != last_seek_time:
                 target_frame = int(current_seek_time * fps)
                 cap.set(cv2.CAP_PROP_POS_FRAMES, target_frame)
                 current_frame = target_frame
                 last_seek_time = current_seek_time
-                start_real_time = time.time()
+                start_real_time = time.monotonic()
                 start_video_time = current_seek_time
                 print(f"   ⏩ [{worker_id}] Seeked to frame {target_frame} ({current_seek_time:.1f}s)")
             
@@ -360,21 +492,34 @@ def process_video(video_url, session_id):
                 break
             
             current_frame += 1
-            current_time = current_frame / fps
+            current_time = time.monotonic() - foh_started_at if camera_input else current_frame / fps
             
             # Real-time sync
-            elapsed_real = time.time() - start_real_time
+            elapsed_real = time.monotonic() - start_real_time
             elapsed_video = current_time - start_video_time
             
-            if elapsed_video > elapsed_real:
+            if not camera_input and elapsed_video > elapsed_real:
                 wait_time = elapsed_video - elapsed_real
                 if wait_time > 0.001:
-                    time.sleep(wait_time)
+                    if stop_event.wait(wait_time):
+                        break
 
             # AI Detection
             h, w = frame.shape[:2]
             results = model.predict(frame, conf=0.5, imgsz=640, verbose=False)
+            if stop_event.is_set():
+                break
             boxes = extract_boxes(results[0], model, w, h, DEDUP_IOU_THRESHOLD)
+            if camera_input and CAPTURE_LOCAL:
+                now = time.monotonic()
+                active_names = {item['name'] for item in boxes}
+                with lock:
+                    for name in active_names: recent_boxes[name] = (now, next(item for item in boxes if item['name'] == name))
+                    recent_boxes.update({name: value for name, value in list(recent_boxes.items()) if now - value[0] <= 0.35})
+                    boxes = [value[1] for value in recent_boxes.values()]
+                ok, encoded = cv2.imencode('.jpg', frame, [cv2.IMWRITE_JPEG_QUALITY, 72])
+                if ok:
+                    with preview_lock: latest_jpeg = encoded.tobytes()
 
             # Send to specific session
             safe_emit('ai-boxes', {
@@ -384,25 +529,24 @@ def process_video(video_url, session_id):
             })
             total_sent += 1
 
-            # Local preview
-            preview = draw_local_preview(frame, boxes, COLORS_BGR, session_id)
-            preview = cv2.resize(preview, (960, 540))
-            
-            cv2.putText(preview, f"Worker: {worker_id} | Session: {session_id[:20]}...", 
-                       (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
-            cv2.putText(preview, f"Time: {current_time:.1f}s | Boxes: {len(boxes)}", 
-                       (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
-            
-            cv2.imshow(window_name, preview)
+            # Local GUI preview is for YouTube only; FOH camera uses MJPEG.
+            if preview_enabled and not camera_input:
+                preview = draw_local_preview(frame, boxes, COLORS_BGR, session_id)
+                preview = cv2.resize(preview, (960, 540))
+                cv2.putText(preview, f"Worker: {worker_id} | Session: {session_id[:20]}...",
+                            (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+                cv2.putText(preview, f"Time: {current_time:.1f}s | Boxes: {len(boxes)}",
+                            (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+                cv2.imshow(window_name, preview)
 
             # FPS Counter Log
             frame_count += 1
-            if time.time() - last_log_time >= 1:
+            if time.monotonic() - last_log_time >= 1:
                 print(f"📤 [{worker_id}] FPS: {frame_count} | Time: {current_time:.1f}s | Boxes: {len(boxes)}")
                 frame_count = 0
-                last_log_time = time.time()
+                last_log_time = time.monotonic()
 
-            if cv2.waitKey(1) & 0xFF == ord('q'):
+            if preview_enabled and cv2.waitKey(1) & 0xFF == ord('q'):
                 print(f"\n🛑 [{worker_id}] Stop diminta user lokal.")
                 break
 
@@ -415,34 +559,44 @@ def process_video(video_url, session_id):
             'message': str(e)
         })
     finally:
-        cap.release()
-        cv2.destroyWindow(window_name)
-        is_processing = False
-        current_session_id = None
+        try:
+            cap.release()
+            if preview_enabled:
+                cv2.destroyWindow(window_name)
+        except Exception as exc:
+            print(f"⚠️ [{worker_id}] Cleanup error: {exc}")
+        finally:
+            is_processing = False
+            current_session_id = None
         print(f"👋 [{worker_id}] Processing selesai. Total koordinat dikirim: {total_sent}")
         print(f"⏳ [{worker_id}] Kembali ke status IDLE, menunggu session baru...\n")
 
 
 # ==================== MAIN LOGIC ====================
 def main():
-    global model, worker_id
+    global model, worker_id, preview_enabled
     
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='CoWayang AI Worker')
     parser.add_argument('--worker-id', type=str, required=True, 
                         help='Unique worker ID (e.g., worker-1)')
-    parser.add_argument('--server', type=str, default=SERVER_URL,
+    parser.add_argument('--server', type=str, default=os.getenv('COWAYANG_SERVER_URL', SERVER_URL),
                         help=f'Server URL (default: {SERVER_URL})')
-    parser.add_argument('--model', type=str, default=MODEL_PATH,
+    parser.add_argument('--model', type=str, default=os.getenv('YOLO_MODEL_PATH', MODEL_PATH),
                         help=f'Model path (default: {MODEL_PATH})')
     parser.add_argument('--no-preview', action='store_true',
                         help='Disable local preview window')
+    parser.add_argument('--preview', action='store_true',
+                        help='Enable local preview (requires GUI-enabled OpenCV)')
     
     args = parser.parse_args()
     
     worker_id = args.worker_id
     server_url = args.server
     model_path = args.model
+    preview_enabled = args.preview and not args.no_preview
+    if CAPTURE_LOCAL:
+        start_preview_server()
     
     print("\n" + "="*60)
     print(f"   CoWayang AI - Worker: {worker_id}")
@@ -476,13 +630,17 @@ def main():
     print("="*60 + "\n")
     
     try:
-        while True:
-            time.sleep(1)
+        # Returns when disconnected and the finite reconnect budget is exhausted.
+        sio.wait()
     except KeyboardInterrupt:
         print(f"\n🛑 [{worker_id}] Shutting down...")
     finally:
+        processing_stop.set()
+        if processing_thread and processing_thread.is_alive():
+            processing_thread.join(timeout=restart_timeout)
         sio.disconnect()
-        cv2.destroyAllWindows()
+        if preview_enabled:
+            cv2.destroyAllWindows()
         print(f"👋 [{worker_id}] Selesai.")
 
 

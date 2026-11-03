@@ -1,225 +1,100 @@
-<template>
-  <!-- Search Bar - Sticky when scrolled -->
-  <div 
-    ref="searchBarRef"
-    :class="[
-      'z-40 w-full transition-all duration-300 ease-in-out',
-      isSticky 
-        ? 'fixed top-16 left-0 right-0 bg-wayang-dark/95 backdrop-blur-md border-b border-white/5 shadow-lg !m-0' 
-        : 'relative bg-transparent'
-    ]"
-  >
-    <div class="container mx-auto px-4 py-4">
-      <!-- Mode Toggle -->
-      <div class="flex gap-2 mb-4 justify-center">
-        <button
-          @click="inputMode = 'search'"
-          :class="[
-            'px-5 py-2.5 rounded-lg font-medium transition-all border',
-            inputMode === 'search' 
-              ? 'bg-wayang-primary text-white border-white/30 shadow-[0_8px_20px_rgba(120,29,66,0.35)]' 
-              : 'bg-white/5 text-[#F0D290]/80 border-white/15 hover:text-white'
-          ]"
-        >
-          🔍 Cari Video
-        </button>
-        <button
-          @click="inputMode = 'live'"
-          :class="[
-            'px-5 py-2.5 rounded-lg font-medium transition-all border flex items-center gap-2',
-            inputMode === 'live' 
-              ? 'bg-red-600 text-white border-white/30 shadow-[0_8px_20px_rgba(220,38,38,0.35)]' 
-              : 'bg-white/5 text-[#F0D290]/80 border-white/15 hover:text-white'
-          ]"
-        >
-          <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-          </span>
-          Live Stream
-        </button>
-      </div>
-
-      <div class="w-full max-w-4xl mx-auto bg-white/5 p-2 rounded-2xl border border-white/10 shadow-xl backdrop-blur">
-        <div class="flex flex-col md:flex-row gap-3">
-          
-          <!-- Search Mode Input -->
-          <div v-if="inputMode === 'search'" class="flex-1 relative group">
-            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <svg class="h-5 w-5 text-gray-500 group-focus-within:text-wayang-primary transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-            <input
-              v-model="searchQuery"
-              type="text"
-              placeholder="Cari video wayang... (tekan Enter)"
-              class="w-full pl-12 pr-4 py-4 bg-white/10 text-white rounded-xl border border-white/20 focus:border-wayang-gold/60 focus:ring-2 focus:ring-wayang-gold/30 outline-none transition-all placeholder-[#F0D290]/70 text-base"
-              @keyup.enter="handleSearch"
-            />
-          </div>
-
-          <!-- Live Mode Input - User inputs YouTube URL for local AI processing -->
-          <div v-else-if="inputMode === 'live'" class="flex-1 relative group">
-            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <svg class="h-5 w-5 text-red-500 group-focus-within:text-red-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <input
-              v-model="liveUrl"
-              type="text"
-              placeholder="Tempel link YouTube untuk diproses AI..."
-              class="w-full pl-12 pr-4 py-4 bg-white/10 text-white rounded-xl border border-red-500/30 focus:border-red-500/60 focus:ring-2 focus:ring-red-500/30 outline-none transition-all placeholder-[#F0D290]/70 text-base"
-              @keyup.enter="handleLiveStream"
-            />
-          </div>
-
-          <!-- Search Button -->
-          <button
-            v-if="inputMode === 'search'"
-            @click="handleSearch"
-            :disabled="!searchQuery || searchLoading"
-            class="px-6 py-4 bg-wayang-primary text-white font-bold rounded-xl shadow-[0_12px_30px_rgba(120,29,66,0.35)] hover:shadow-[0_15px_35px_rgba(163,66,60,0.4)] hover:scale-[1.01] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
-          >
-            <svg v-if="searchLoading" class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            <svg v-else class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <span class="hidden sm:inline">{{ searchLoading ? 'Mencari...' : 'Cari' }}</span>
-          </button>
-
-          <!-- Live Button -->
-          <button
-            v-if="inputMode === 'live'"
-            @click="handleLiveStream"
-            :disabled="!liveUrl || liveLoading"
-            class="px-6 py-4 bg-red-600 text-white font-bold rounded-xl shadow-[0_12px_30px_rgba(220,38,38,0.35)] hover:shadow-[0_15px_35px_rgba(220,38,38,0.4)] hover:scale-[1.01] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap"
-          >
-            <span v-if="liveLoading" class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
-            <svg v-else class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span class="hidden sm:inline">{{ liveLoading ? 'Memproses...' : 'Mulai' }}</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup>
-import { ref, onMounted, onUnmounted, nextTick, watch } from 'vue'
-import axios from 'axios'
-
-defineProps({
-  loading: {
-    type: Boolean,
-    default: false
-  }
-})
-
-const emit = defineEmits(['search-results', 'sticky-change', 'live-stream'])
-
-// Sticky state
-const searchBarRef = ref(null)
-const isSticky = ref(false)
-const triggerPoint = ref(0)
-const searchBarHeight = ref(0)
-
-// Mode toggle
-const inputMode = ref('search')
-
-// Live mode
-const liveUrl = ref('')
-const liveLoading = ref(false)
-
-// Search mode
-const searchQuery = ref('')
-const searchLoading = ref(false)
-
-// Watch sticky state and emit to parent
-watch(isSticky, (newVal) => {
-  emit('sticky-change', { isSticky: newVal, height: searchBarHeight.value })
-})
-
-// Handle scroll to toggle sticky
-const handleScroll = () => {
-  const scrollY = window.scrollY
-  // Make sticky when scrolled past the trigger point
-  isSticky.value = scrollY > triggerPoint.value
+import { ref, nextTick, onMounted, onUnmounted } from 'vue'
+import { api, apiError } from '@/services/api'
+import { getYouTubeVideoId } from '@/utils/video'
+import AppIcon from './AppIcon.vue'
+import { useProductText } from '@/i18n/product'
+const { t } = useProductText()
+const props = defineProps({ loading: Boolean, maintenance: Boolean, compact: Boolean })
+const emit = defineEmits(['search-results', 'live-stream', 'analyze'])
+const inputMode = ref('search'), searchQuery = ref(''), liveUrl = ref(''), searchLoading = ref(false), startTime = ref('0'), mode = ref('live'), validation = ref('')
+let controller = null, sequence = 0, disposed = false, pasting = false
+async function handleSearch() {
+ if (!searchQuery.value.trim()) return
+ const token = ++sequence; controller?.abort(); controller = new AbortController(); searchLoading.value = true; validation.value = ''
+ try {
+  const { data } = await api.get('/api/search-youtube', { params: { q: searchQuery.value.trim() }, signal: controller.signal })
+  if (token !== sequence) return
+  emit('search-results', { videos: data.status === 'success' && Array.isArray(data.videos) ? data.videos : [], error: data.status === 'success' ? '' : data.message || t('source.failed') })
+ } catch (error) { if (token === sequence && error.code !== 'ERR_CANCELED') emit('search-results', { videos: [], error: apiError(error, t('source.failed')) }) }
+ finally { if (token === sequence) searchLoading.value = false }
 }
-
-onMounted(async () => {
-  await nextTick()
-  
-  // Calculate trigger point based on search bar's initial position
-  if (searchBarRef.value) {
-    const rect = searchBarRef.value.getBoundingClientRect()
-    searchBarHeight.value = rect.height
-    // Trigger when search bar reaches navbar (64px = navbar height)
-    triggerPoint.value = rect.top + window.scrollY - 64
-  }
-  
-  window.addEventListener('scroll', handleScroll, { passive: true })
-  handleScroll() // Check initial state
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-})
-
-const handleSearch = async () => {
-  if (!searchQuery.value) return
-  
-  searchLoading.value = true
-  
-  try {
-    const response = await axios.get('/api/search-youtube', {
-      params: { q: searchQuery.value }
-    })
-    
-    if (response.data.status === 'success') {
-      emit('search-results', { videos: response.data.videos, error: null })
-    } else {
-      emit('search-results', { videos: [], error: response.data.message || 'Gagal mencari video' })
-    }
-  } catch (error) {
-    console.error('Search error:', error)
-    emit('search-results', { videos: [], error: error.response?.data?.message || 'Terjadi kesalahan saat mencari video' })
-  } finally {
-    searchLoading.value = false
-  }
+function handleStart() {
+ if (props.loading || props.maintenance) return
+ if (!getYouTubeVideoId(liveUrl.value)) { validation.value = 'source.invalid'; return }
+ validation.value = ''
+ emit('analyze', { url: liveUrl.value, startTime: startTime.value, mode: mode.value })
 }
-
-const handleLiveStream = () => {
-  if (!liveUrl.value) return
-  
-  // Emit YouTube URL for live processing
-  emit('live-stream', { videoUrl: liveUrl.value })
-  liveLoading.value = true
+function setVideoUrl(url) { liveUrl.value = url; inputMode.value = 'live'; validation.value = '' }
+function searchFor(query) { searchQuery.value = query; inputMode.value = 'search'; handleSearch() }
+async function pasteUrl() {
+ if (pasting || props.loading || props.maintenance) return
+ pasting = true
+ inputMode.value = 'live'; validation.value = ''
+ try {
+  const text = await navigator.clipboard.readText()
+  if (disposed) return
+  if (text.trim()) liveUrl.value = text.trim()
+  if (getYouTubeVideoId(liveUrl.value)) handleStart()
+ } catch { /* Clipboard access is optional; keep the manual URL input. */ }
+ finally { pasting = false }
+ if (disposed) return
+ await nextTick(); document.getElementById('video-url')?.focus()
 }
-
-// Method to reset loading state (called from parent)
-const resetLiveLoading = () => {
-  liveLoading.value = false
+function focusSearch(event) {
+ if (!props.compact || event.key !== '/' || event.ctrlKey || event.metaKey || event.altKey || document.querySelector('.account-modal') || event.target.closest?.('input, textarea, select, [contenteditable="true"]')) return
+ event.preventDefault(); inputMode.value = 'search'; nextTick(() => document.getElementById('video-search')?.focus())
 }
-
-// Expose method to set URL from parent (when selecting from search results)
-// Now sets to Live Stream mode instead of URL mode
-const setVideoUrl = (url) => {
-  liveUrl.value = url
-  inputMode.value = 'live'
-  searchQuery.value = ''
-}
-
-defineExpose({ setVideoUrl, resetLiveLoading })
+onMounted(() => window.addEventListener('keydown', focusSearch))
+defineExpose({ setVideoUrl, searchFor, pasteUrl, resetLiveLoading() {} })
+onUnmounted(() => { disposed = true; ++sequence; controller?.abort(); window.removeEventListener('keydown', focusSearch) })
 </script>
-
+<template>
+ <section id="choose-source" class="source-panel" :class="{ 'hub-source': compact }" :aria-label="t('source.title')">
+  <div v-if="!compact" class="source-heading"><h2 id="source-heading">{{ t('source.title') }}</h2><p>{{ t('source.description') }}</p></div>
+  <div v-if="!compact" class="source-modes" role="group" :aria-label="t('source.group')">
+   <button :aria-pressed="inputMode === 'search'" :class="{ selected: inputMode === 'search' }" @click="inputMode = 'search'"><AppIcon name="search" /><span>{{ t('source.searchMode') }}</span></button>
+   <button :aria-pressed="inputMode === 'live'" :class="{ selected: inputMode === 'live' }" @click="inputMode = 'live'"><AppIcon name="stream" /><span>{{ t('source.urlMode') }}</span></button>
+  </div>
+  <div v-if="inputMode === 'search'" class="source-form">
+   <div class="source-field"><label for="video-search" :class="{ 'sr-only': compact }">{{ t('source.searchLabel') }}</label><AppIcon v-if="compact" class="hub-search-icon" name="search" /><input id="video-search" v-model="searchQuery" class="input" type="search" :placeholder="compact ? t('hub.navSearch') : t('source.placeholder')" @keyup.enter="handleSearch" /></div>
+   <button class="button button-primary search-submit" type="submit" :aria-label="t('source.search')" :disabled="!searchQuery.trim() || searchLoading" @click="handleSearch"><AppIcon name="search" /><span class="search-submit-label">{{ searchLoading ? t('source.searching') : t('source.search') }}</span></button>
+  </div>
+  <template v-else>
+   <div class="source-form">
+    <div class="source-field"><label for="video-url">{{ t('source.urlLabel') }}</label><input id="video-url" v-model="liveUrl" class="input" type="url" placeholder="https://www.youtube.com/watch?v=…" :aria-invalid="validation ? true : undefined" :aria-describedby="validation ? 'source-validation' : undefined" @keyup.enter="handleStart" /></div>
+    <button class="button button-primary" type="submit" :aria-label="loading ? t('source.loading') : t('source.watch')" :disabled="loading || maintenance" @click="handleStart"><span class="watch-submit-label">{{ loading ? t('source.loading') : t('source.watch') }}</span><AppIcon name="arrow" /></button>
+   </div>
+   <details class="source-details"><summary>{{ t('source.options') }}</summary><div class="source-options">
+    <label for="analysis-mode">{{ t('source.mode') }}<select id="analysis-mode" v-model="mode" class="input"><option value="live">{{ t('source.live') }}</option><option value="analysis">{{ t('source.analysis') }}</option><option value="transcript">{{ t('source.transcript') }}</option></select></label>
+    <label for="start-time">{{ t('source.start') }}<input id="start-time" v-model="startTime" class="input" placeholder="HH:MM:SS" /><small>{{ t('source.timeHelp') }}</small></label>
+   </div></details>
+  </template>
+  <button v-if="compact" class="button paste-url" type="button" :disabled="loading || maintenance" @click="pasteUrl"><AppIcon name="stream" />{{ t('hub.paste') }}</button>
+  <button v-if="compact && inputMode === 'live'" class="inline-link return-search" type="button" @click="inputMode = 'search'">{{ t('source.searchMode') }}</button>
+  <p v-if="validation" id="source-validation" class="source-note validation-note" role="alert">{{ t(validation) }}</p>
+  <p v-else-if="!compact || maintenance" class="source-note">{{ maintenance ? t('source.maintenance') : t('source.note') }}</p>
+ </section>
+</template>
 <style scoped>
-/* Animations handled by Tailwind classes */
+.source-panel { padding: 24px 0; border-block: 1px solid var(--line); }
+.source-heading { margin-bottom: 16px; }.source-heading h2 { font-size: 22px; font-weight: 500; }.source-heading p { margin-top: 6px; color: var(--muted); font-size: 14px; line-height: 1.65; }
+.source-modes { display: inline-flex; max-width: 100%; gap: 8px; margin-bottom: 18px; }.source-modes button { min-width: 0; min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 14px; border-radius: 8px; border: 1px solid var(--line); color: var(--muted); font-size: 14px; }.source-modes svg { width: 17px; height: 17px; flex-shrink: 0; }.source-modes .selected { color: var(--cream); border-color: var(--brass); background: rgba(215,186,137,.06); }
+.source-modes button { background: var(--panel); border-color: var(--control-border); }.source-modes button:hover { background: var(--sidebar); color: var(--gold); }.source-modes .selected { background: var(--active); color: var(--gold); border-color: var(--gold); font-weight: 600; }
+.source-form { display: flex; align-items: flex-end; gap: 12px; }.source-field { min-width: 0; flex: 1; }.source-field label,.source-options label { display: block; font-size: 14px; color: var(--latte); }.source-field .input { margin-top: 8px; }.source-form .button { flex-shrink: 0; min-height: 48px; }
+.source-details { margin-top: 16px; }summary { cursor: pointer; padding: 12px 0; font-size: 14px; color: var(--latte); }.source-options { display: grid; grid-template-columns: minmax(0,1fr) 180px; gap: 16px; margin: 12px 0; }.source-options .input { margin-top: 9px; }.source-options small { display: block; font-size: 13px; margin-top: 7px; color: var(--muted); }.source-note { color: var(--muted); font-size: 13px; line-height: 1.7; margin-top: 16px; }.validation-note { color: var(--cream); }
+@media(max-width:639px) { .source-modes { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); width: 100%; }.source-modes button { padding-inline: 8px; font-size: 13px; }.source-form { flex-direction: column; align-items: stretch; }.source-options { grid-template-columns: 1fr; } }
+@media(max-width:359px) { .source-modes svg { display: none; } }
+.hub-source { position: relative; border: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.hub-source .source-form { flex: 1; min-width: 0; align-items: center; }
+.hub-source .source-field { position: relative; }
+.hub-source .source-field .input { margin: 0; border-radius: 999px; min-height: 48px; }
+.hub-source #video-search { padding-left: 44px; }
+.hub-search-icon { position: absolute; left: 16px; top: 15px; width: 18px; height: 18px; color: var(--muted); pointer-events: none; }
+.hub-source .source-form .button,.hub-source .paste-url { border-radius: 999px; min-height: 48px; }
+.hub-source .search-submit { display: inline-flex; }.hub-source .search-submit svg { width: 19px; height: 19px; }.hub-source .search-submit-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.hub-source .source-details,.hub-source .source-note { width: 100%; margin: 0; }
+.return-search { min-height: 44px; }
+@media(max-width:639px) { .hub-source { gap: 8px; }.hub-source .source-form { flex-direction: row; width: 100%; flex-basis: 100%; gap: 8px; }.hub-source .source-form .button { padding-inline: 14px; }.hub-source .search-submit { flex: 0 0 44px; width: 44px; padding: 0; }.hub-source .paste-url { min-height: 40px; }.hub-source #video-search { font-size: 13px; } }
+@media(min-width:700px) { .hub-source .paste-url { display: none; } }
 </style>

@@ -8,11 +8,15 @@
  * - Auto-cleanup on disconnect
  */
 
+const { EventEmitter } = require('node:events');
+const { randomUUID } = require('node:crypto');
 const MAX_WORKERS = 20;
 const RECONNECT_WINDOW_MS = 5 * 60 * 1000; // 5 minutes
 
-class SessionManager {
-    constructor() {
+class SessionManager extends EventEmitter {
+    constructor({ cleanupIntervalMs = 60000 } = {}) {
+        super();
+        this.disposed = false;
         // Worker pool: workerId -> { sessionId, status, videoUrl, assignedAt }
         this.workers = new Map();
         
@@ -29,26 +33,24 @@ class SessionManager {
         for (let i = 1; i <= MAX_WORKERS; i++) {
             this.workers.set(`worker-${i}`, {
                 sessionId: null,
-                status: 'idle', // idle, busy, offline
+                status: 'offline', // Only registered Python sockets supply capacity.
                 videoUrl: null,
                 assignedAt: null,
-                pythonSocketId: null
+                pythonSocketId: null,
+                captureLocal: false
             });
         }
-        
-        console.log(`[SessionManager] Initialized with ${MAX_WORKERS} workers`);
-        
+
         // Cleanup expired reconnect sessions every minute
-        setInterval(() => this.cleanupExpiredSessions(), 60000);
+        this.cleanupTimer = cleanupIntervalMs > 0 ? setInterval(() => this.cleanupExpiredSessions(), cleanupIntervalMs) : null;
+        this.cleanupTimer?.unref();
     }
     
     /**
-     * Generate unique session ID using timestamp
+     * Generate an opaque cryptographic bearer reconnect capability
      */
     generateSessionId() {
-        const timestamp = Date.now();
-        const random = Math.random().toString(36).substring(2, 8);
-        return `sess_${timestamp}_${random}`;
+        return `sess_${randomUUID()}`;
     }
     
     /**
@@ -65,13 +67,21 @@ class SessionManager {
             const workerId = workerIds[index];
             const worker = this.workers.get(workerId);
             
-            if (worker.status === 'idle') {
+            if (worker.status === 'idle' && worker.pythonSocketId) {
                 this.nextWorkerIndex = (index + 1) % MAX_WORKERS;
                 return workerId;
             }
         }
         
         return null; // All workers busy
+    }
+
+    getAvailableCaptureWorker() {
+        const available = [...this.workers.entries()].filter(([, worker]) =>
+            worker.status === 'idle' && worker.pythonSocketId && worker.captureLocal);
+        if (!available.length) return null;
+        const [workerId] = available[0];
+        return workerId;
     }
     
     /**
@@ -82,10 +92,23 @@ class SessionManager {
      * @returns {object} { success, sessionId, workerId, message }
      */
     requestSession(socketId, videoUrl, existingSessionId = null) {
+        if (this.disposed) return { success: false, type: 'shutting_down', message: 'Server is shutting down' };
+        this.cleanupExpiredSessions();
+        const owned = this.getSessionBySocket(socketId);
+        if (owned && (owned.videoUrl !== videoUrl || (existingSessionId && owned.sessionId !== existingSessionId))) {
+            return { success: false, type: 'session_conflict', message: 'End the current session before changing video' };
+        }
+        const active = this.sessions.get(existingSessionId);
+        if (active && active.socketId !== socketId) {
+            return { success: false, type: 'forbidden', message: 'Session belongs to another socket' };
+        }
         // Check for reconnect attempt
         if (existingSessionId) {
             const pending = this.pendingReconnect.get(existingSessionId);
             if (pending) {
+                if (pending.videoUrl !== videoUrl) {
+                    return { success: false, type: 'session_conflict', message: 'Reconnect video does not match' };
+                }
                 const elapsed = Date.now() - pending.disconnectedAt;
                 if (elapsed < RECONNECT_WINDOW_MS) {
                     // Reconnect to existing session
@@ -106,14 +129,13 @@ class SessionManager {
                         worker.status = 'busy';
                         
                         this.pendingReconnect.delete(existingSessionId);
-                        
-                        console.log(`[SessionManager] ♻️ Reconnected session ${existingSessionId} to ${workerId}`);
-                        
+
                         return {
                             success: true,
                             sessionId: existingSessionId,
                             workerId,
                             reconnected: true,
+                            shouldStart: false,
                             message: 'Reconnected to existing session'
                         };
                     }
@@ -126,22 +148,22 @@ class SessionManager {
         // Check if socket already has a session
         for (const [sessId, session] of this.sessions) {
             if (session.socketId === socketId) {
-                console.log(`[SessionManager] ⚠️ Socket ${socketId} already has session ${sessId}`);
                 return {
                     success: true,
                     sessionId: sessId,
                     workerId: session.workerId,
+                    shouldStart: false,
                     message: 'Using existing session'
                 };
             }
         }
         
         // Get available worker
-        const workerId = this.getAvailableWorker();
+        const isCaptureSource = /^(camera|mic):\/\//.test(videoUrl);
+        const workerId = isCaptureSource ? this.getAvailableCaptureWorker() : this.getAvailableWorker();
         
         if (!workerId) {
             const status = this.getStatus();
-            console.log(`[SessionManager] ❌ All workers busy (${status.busy}/${status.total})`);
             return {
                 success: false,
                 sessionId: null,
@@ -167,15 +189,12 @@ class SessionManager {
             createdAt: Date.now(),
             lastActivity: Date.now()
         });
-        
-        console.log(`[SessionManager] ✅ Created session ${sessionId} on ${workerId}`);
-        console.log(`[SessionManager]    Video: ${videoUrl}`);
-        console.log(`[SessionManager]    Status: ${this.getStatus().available}/${MAX_WORKERS} available`);
-        
+
         return {
             success: true,
             sessionId,
             workerId,
+            shouldStart: true,
             message: 'Session created'
         };
     }
@@ -186,30 +205,27 @@ class SessionManager {
      * @param {string} reason - Reason for ending (user_action, video_ended, disconnect, timeout)
      */
     endSession(sessionId, reason = 'user_action') {
-        const session = this.sessions.get(sessionId);
+        const session = this.sessions.get(sessionId) || this.pendingReconnect.get(sessionId);
         
         if (!session) {
-            console.log(`[SessionManager] ⚠️ Session ${sessionId} not found`);
             return false;
         }
         
         const { workerId } = session;
         const worker = this.workers.get(workerId);
+        const pythonSocketId = worker?.pythonSocketId;
         
         if (worker) {
             worker.sessionId = null;
-            worker.status = 'idle';
+            worker.status = worker.pythonSocketId ? 'idle' : 'offline';
             worker.videoUrl = null;
             worker.assignedAt = null;
         }
         
         this.sessions.delete(sessionId);
         this.pendingReconnect.delete(sessionId);
-        
-        console.log(`[SessionManager] 🛑 Ended session ${sessionId} (${reason})`);
-        console.log(`[SessionManager]    Released ${workerId}`);
-        console.log(`[SessionManager]    Status: ${this.getStatus().available}/${MAX_WORKERS} available`);
-        
+        this.emit('session-ended', { sessionId, ...session, pythonSocketId, reason });
+
         return true;
     }
     
@@ -220,7 +236,6 @@ class SessionManager {
     handleDisconnect(socketId) {
         for (const [sessionId, session] of this.sessions) {
             if (session.socketId === socketId) {
-                console.log(`[SessionManager] 📴 Socket disconnected for session ${sessionId}`);
                 
                 // Move to pending reconnect
                 this.pendingReconnect.set(sessionId, {
@@ -233,7 +248,6 @@ class SessionManager {
                 // Keep worker reserved but mark session as pending
                 this.sessions.delete(sessionId);
                 
-                console.log(`[SessionManager]    Waiting for reconnect (5 min window)`);
                 return sessionId;
             }
         }
@@ -245,34 +259,29 @@ class SessionManager {
      */
     cleanupExpiredSessions() {
         const now = Date.now();
-        let cleaned = 0;
         
         for (const [sessionId, pending] of this.pendingReconnect) {
-            if (now - pending.disconnectedAt > RECONNECT_WINDOW_MS) {
-                // Release the worker
-                const worker = this.workers.get(pending.workerId);
-                if (worker && worker.sessionId === sessionId) {
-                    worker.sessionId = null;
-                    worker.status = 'idle';
-                    worker.videoUrl = null;
-                    worker.assignedAt = null;
-                }
-                
-                this.pendingReconnect.delete(sessionId);
-                cleaned++;
-                console.log(`[SessionManager] 🧹 Cleaned expired session ${sessionId}`);
+            if (now - pending.disconnectedAt >= RECONNECT_WINDOW_MS) {
+                this.endSession(sessionId, 'reconnect_timeout');
             }
         }
         
-        if (cleaned > 0) {
-            console.log(`[SessionManager]    Status: ${this.getStatus().available}/${MAX_WORKERS} available`);
-        }
     }
     
     /**
      * Update session activity timestamp
      * @param {string} sessionId - Session ID
      */
+    dispose() {
+        if (this.disposed) return;
+        this.disposed = true;
+        clearInterval(this.cleanupTimer);
+        this.cleanupTimer = null;
+        for (const id of [...this.sessions.keys(), ...this.pendingReconnect.keys()]) {
+            this.endSession(id, 'shutdown');
+        }
+    }
+
     updateActivity(sessionId) {
         const session = this.sessions.get(sessionId);
         if (session) {
@@ -287,10 +296,8 @@ class SessionManager {
      */
     updateSocketId(sessionId, newSocketId) {
         const session = this.sessions.get(sessionId);
-        if (session) {
-            const oldSocketId = session.socketId;
+        if (session && session.socketId === newSocketId) {
             session.socketId = newSocketId;
-            console.log(`[SessionManager] 🔄 Updated socketId for ${sessionId}: ${oldSocketId} -> ${newSocketId}`);
             return true;
         }
         return false;
@@ -324,11 +331,16 @@ class SessionManager {
      * @param {string} workerId - Worker ID (e.g., "worker-1")
      * @param {string} socketId - Python socket ID
      */
-    registerPythonWorker(workerId, socketId) {
+    registerPythonWorker(workerId, socketId, captureLocal = false) {
         const worker = this.workers.get(workerId);
+        if (this.disposed || !socketId || !worker || (worker.pythonSocketId && worker.pythonSocketId !== socketId)) return false;
+        for (const [id, registered] of this.workers) {
+            if (id !== workerId && registered.pythonSocketId === socketId) return false;
+        }
         if (worker) {
             worker.pythonSocketId = socketId;
-            console.log(`[SessionManager] 🐍 Python worker ${workerId} registered (socket: ${socketId})`);
+            worker.captureLocal = captureLocal === true;
+            worker.status = worker.sessionId ? 'busy' : 'idle';
             return true;
         }
         return false;
@@ -342,8 +354,8 @@ class SessionManager {
         for (const [workerId, worker] of this.workers) {
             if (worker.pythonSocketId === socketId) {
                 worker.pythonSocketId = null;
-                worker.status = worker.sessionId ? 'busy' : 'idle';
-                console.log(`[SessionManager] 🐍 Python worker ${workerId} unregistered`);
+                worker.captureLocal = false;
+                worker.status = 'offline';
                 
                 // If worker had a session, end it
                 if (worker.sessionId) {
@@ -405,6 +417,6 @@ class SessionManager {
 }
 
 // Singleton instance
-const sessionManager = new SessionManager();
+const sessionManager = new SessionManager({ cleanupIntervalMs: 0 });
 
 module.exports = { sessionManager, SessionManager };

@@ -287,7 +287,7 @@ Jika AI backend tidak bisa load model Roboflow:
 1. **Cek koneksi internet** (model di-download saat startup)
 2. **Cek API key di `.env`:**
    ```bash
-   cat backend-ai/.env | grep ROBOFLOW_API_KEY
+   cat backend-ai/.env | grep YOLO_MODEL_PATH
    ```
 3. **Restart AI backend:**
    ```bash

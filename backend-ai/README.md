@@ -63,7 +63,7 @@ pip install -r requirements.txt
 
 Jika `requirements.txt` belum ada (mis. kamu bekerja dari branch yang belum menyertakannya), install dependensi utama secara manual:
 ```bash
-pip install fastapi uvicorn opencv-python yt-dlp roboflow requests python-dotenv
+pip install -r requirements.txt
 ```
 
 4) (Opsional) Membuat `requirements.txt` dari environment yang sudah terpasang
@@ -74,7 +74,7 @@ pip freeze > requirements.txt
 5) Konfigurasi environment variables
 Buat file `.env` di root `backend-ai` dan tambahkan variabel yang diperlukan:
 ```env
-ROBOFLOW_API_KEY=your_api_key_here
+YOLO_MODEL_PATH=../ai/weight.pt
 NODEJS_WEBHOOK_URL=http://localhost:3000/api/webhook
 ```
 
@@ -90,7 +90,7 @@ Jika ada modul yang hilang, ulangi instalasi paket yang diperlukan atau lihat ba
 
 Buat file `.env` di root folder:
 ```env
-ROBOFLOW_API_KEY=your_api_key_here
+YOLO_MODEL_PATH=../ai/weight.pt
 NODEJS_WEBHOOK_URL=http://localhost:3000/api/webhook
 ```
 
@@ -221,7 +221,7 @@ pip install -r requirements.txt  # Re-install
 cat .env
 
 # Pastikan API key benar
-# Get API key from: https://app.roboflow.com/
+# Pastikan YOLO_MODEL_PATH menunjuk ke model lokal yang tersedia.
 ```
 
 ### Error: Stream URL empty/failed
@@ -252,10 +252,11 @@ taskkill /F /IM python.exe
 
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
-| `ROBOFLOW_API_KEY` | API key dari Roboflow | - | ✅ |
+| `YOLO_MODEL_PATH` | Path model Ultralytics lokal (`.pt`/`.engine`) | `../ai/weight.pt` | ✅ |
 | `NODEJS_WEBHOOK_URL` | URL webhook ke Node.js backend | `http://localhost:3000/api/webhook` | ✅ |
-| `PROJECT_ID` | Roboflow project ID | `cowayangai-luylg` | ❌ |
-| `VERSION` | Model version | `2` | ❌ |
+| `GEMINI_API_KEY` | API key untuk ASR inline audio | - | untuk subtitle |
+| `FOH_CAMERA_INDEX` | Index kamera/capture card lokal | `0` | untuk FOH |
+| `FOH_AUDIO_DEVICE_INDEX` | Index input mixer lokal | - | untuk FOH audio |
 
 ## 📊 Performance Metrics
 

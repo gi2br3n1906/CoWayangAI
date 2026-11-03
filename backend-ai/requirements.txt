@@ -1,15 +1,19 @@
 fastapi
 uvicorn[standard]
-opencv-python-headless
-yt-dlp
-roboflow
+opencv-python
+yt-dlp[default]
+
 requests
 python-dotenv
 numpy
-pillow
-google-generativeai
+google-genai
 soundfile
 torch
-webrtcvad
+# Optional native acceleration; ASR has an energy-based VAD fallback.
 python-socketio[client]
 websocket-client
+# Imports used by live_stream_worker.py and live_stream_socket.py.
+# Worker inference uses the local Ultralytics model; no Roboflow runtime is required.
+ultralytics
+
+sounddevice

@@ -11,18 +11,24 @@ import {
   sendPasswordResetEmail
 } from 'firebase/auth'
 import { auth, db } from '@/firebase'
-import { doc, setDoc, getDoc, collection, addDoc, serverTimestamp, query, where, getDocs, deleteDoc } from 'firebase/firestore'
+import { doc, setDoc, getDoc, collection, addDoc, query, where, getDocs, deleteDoc } from 'firebase/firestore'
 
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(null)
   const loading = ref(true)
+  const ready = ref(false)
   const error = ref(null)
 
   const isAuthenticated = computed(() => !!user.value)
 
   // Initialize auth state listener
+  let authUnsubscribe = null
+  let resolveAuthReady
+  const authReady = new Promise(resolve => { resolveAuthReady = resolve })
+  const disposeAuth = () => { authUnsubscribe?.(); authUnsubscribe = null }
   const initAuth = () => {
-    onAuthStateChanged(auth, (firebaseUser) => {
+    if (authUnsubscribe) return disposeAuth
+    authUnsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
         user.value = {
           uid: firebaseUser.uid,
@@ -34,8 +40,11 @@ export const useAuthStore = defineStore('auth', () => {
         user.value = null
       }
       loading.value = false
-    })
+      if (!ready.value) { ready.value = true; resolveAuthReady() }
+    }, () => { loading.value = false; error.value = "Layanan akun belum tersedia"; ready.value = true; resolveAuthReady() })
+    return disposeAuth
   }
+  const waitUntilReady = () => { if (!authUnsubscribe) initAuth(); return authReady }
 
   // Email/Password Login
   const loginWithEmail = async (email, password) => {
@@ -260,9 +269,11 @@ export const useAuthStore = defineStore('auth', () => {
   return {
     user,
     loading,
+    ready,
     error,
     isAuthenticated,
     initAuth,
+    waitUntilReady,
     loginWithEmail,
     registerWithEmail,
     loginWithGoogle,

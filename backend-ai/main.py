@@ -1,24 +1,25 @@
+"""Deprecated legacy entrypoint.
+
+YOLO inference is now owned by live_stream_worker.py and runs from a local
+Ultralytics model. This module is retained only for old imports and should not
+be started by deployment.
+"""
+import os
+import threading
 import cv2
 import time
 import requests
 import json
 import yt_dlp
-from roboflow import Roboflow
 import random
-import shutil
-import os
-import threading
 import base64
-from fastapi import FastAPI
+from collections import Counter
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import uvicorn
-from collections import Counter
 
 # --- KONFIGURASI ---
-ROBOFLOW_API_KEY = "nxnWGYVSmEqBIjegHsVj"
-PROJECT_ID = "cowayangai-luylg"
-VERSION = 2
-NODEJS_WEBHOOK_URL = "http://localhost:3000/api/webhook"
+NODEJS_WEBHOOK_URL = os.getenv('NODEJS_WEBHOOK_URL', f"{os.getenv('COWAYANG_SERVER_URL', 'http://127.0.0.1:3000').rstrip('/')}/api/webhook")
 
 # --- METRICS GLOBAL ---
 stream_metrics = Counter()
@@ -33,12 +34,7 @@ app = FastAPI()
 
 @app.get("/")
 def health_check():
-    model_status = global_model is not None
-    return {
-        "status": "AI Engine Running",
-        "model_loaded": model_status,
-        "version": "1.0.0"
-    }
+    return {"status": "Deprecated: use live_stream_worker.py", "model_loaded": False, "engine": "local-ultralytics-worker"}
 
 @app.get("/metrics")
 def get_metrics():
@@ -55,31 +51,14 @@ def get_metrics():
 
 current_thread = None
 stop_event = threading.Event() 
+analysis_lock = threading.Lock()
 
 # Variabel Global untuk Model (Biar Standby Terus)
 global_model = None
 
-# --- MODEL LOADING SAAT SERVER STARTUP ---
 @app.on_event("startup")
 async def startup_event():
-    global global_model
-    print("\n🔄 SEDANG MENYIAPKAN OTAK AI (ROBOFLOW)... Mohon Tunggu...")
-    try:
-        rf = Roboflow(api_key=ROBOFLOW_API_KEY)
-        project = rf.workspace().project(PROJECT_ID)
-        global_model = project.version(VERSION).model
-        print("✅ ROBOFLOW SIAP! Model sudah diload ke memori.\n")
-    except Exception as e:
-        print(f"❌ GAGAL LOAD ROBOFLOW: {e}")
-        print("   Pastikan internet konek saat menyalakan server!\n")
-
-    # Check for a JavaScript runtime (node) — yt-dlp often needs it for
-    # parsing YouTube player responses. If node is missing, server logs will
-    # show 'No supported JavaScript runtime' errors in yt-dlp. Print a helpful
-    # guidance message so the operator knows what to install.
-    node_path = shutil.which("node")
-    if not node_path:
-        print("⚠️ Node.js not found in PATH. For reliable YouTube extraction install node and yt-dlp[ejs]:\n    sudo apt install -y nodejs npm\n    python -m pip install -U 'yt-dlp[default]'\n  Or install yt-dlp-ejs plugin if you manage yt-dlp separately.")
+    print("Deprecated AI entrypoint; start live_stream_worker.py instead.")
 
 # --- Model Request ---
 class VideoRequest(BaseModel):
@@ -190,7 +169,6 @@ def get_stream_url(yt_url):
                     else:
                         # try the next client
                         continue
-                info = ydl.extract_info(yt_url, download=False)
                 if not info:
                     print("❌ yt-dlp tidak mengembalikan info apapun (None)")
                     continue
@@ -263,7 +241,8 @@ def get_stream_url(yt_url):
     return None
 
 # --- Logic Analisis Utama ---
-def analysis_logic(video_url: str, start_time: int = 0):
+def analysis_logic(video_url: str, start_time: int = 0, cancellation=None):
+    cancellation = cancellation if cancellation is not None else stop_event
     # Cek apakah model sudah siap
     if global_model is None:
         print("❌ Error: Model AI belum siap. Cek koneksi internet saat start server.")
@@ -278,14 +257,19 @@ def analysis_logic(video_url: str, start_time: int = 0):
         return
 
     cap = cv2.VideoCapture(stream_url)
+    try:
+        if start_time > 0:
+            cap.set(cv2.CAP_PROP_POS_MSEC, start_time * 1000)
+        _analyse_capture(cap, cancellation)
+    finally:
+        cap.release()
+        if os.path.exists("temp.jpg"):
+            os.remove("temp.jpg")
+        print("🏁 Selesai.")
 
-    # 2. Seeking (Lompat)
-    if start_time > 0:
-        print(f"⏩ Melompat ke detik {start_time}...")
-        cap.set(cv2.CAP_PROP_POS_MSEC, start_time * 1000)
-        ret, _ = cap.read() # Pancing buffer
 
-    # 3. Setup Sync & Loop
+def _analyse_capture(cap, cancellation):
+    """Bound consecutive failed reads; finite video EOF must not spin forever."""
     video_fps = cap.get(cv2.CAP_PROP_FPS)
     if video_fps == 0 or video_fps > 60: video_fps = 30
     target_frame_time = 1.0 / video_fps
@@ -294,11 +278,12 @@ def analysis_logic(video_url: str, start_time: int = 0):
     analysis_interval = 1.5 
     last_detected_char = None
     last_sent_time = 0
+    read_failures = 0
 
     while True:
         loop_start_time = time.time()
 
-        if stop_event.is_set():
+        if cancellation.is_set():
             print("🛑 Analisis dihentikan User.")
             break
 
@@ -307,9 +292,11 @@ def analysis_logic(video_url: str, start_time: int = 0):
         # Auto Reconnect
         if not ret:
             print("⚠️ Stream terputus/buffering...")
-            time.sleep(1)
-            if not cap.isOpened(): break
+            read_failures += 1
+            if read_failures >= 3 or not cap.isOpened() or cancellation.wait(1):
+                break
             continue
+        read_failures = 0
 
         current_time = time.time()
 
@@ -358,7 +345,7 @@ def analysis_logic(video_url: str, start_time: int = 0):
                     print(f"🔥 DETEKSI: {[c['name'] for c in detected_characters]}")
 
                     try:
-                        requests.post(NODEJS_WEBHOOK_URL, json={
+                        requests.post(NODEJS_WEBHOOK_URL, headers={'x-cowayang-secret': os.getenv('WORKER_SHARED_SECRET', '')}, json={
                             "type": "active_scene",
                             "timestamp": "Live",
                             "image": jpg_as_text,
@@ -367,7 +354,7 @@ def analysis_logic(video_url: str, start_time: int = 0):
                     except: pass
                 else:
                     try:
-                        requests.post(NODEJS_WEBHOOK_URL, json={
+                        requests.post(NODEJS_WEBHOOK_URL, headers={'x-cowayang-secret': os.getenv('WORKER_SHARED_SECRET', '')}, json={
                             "type": "active_scene",
                             "timestamp": "Live",
                             "image": None,
@@ -384,23 +371,19 @@ def analysis_logic(video_url: str, start_time: int = 0):
         if time_to_wait > 0:
             time.sleep(time_to_wait)
 
-    cap.release()
-    if os.path.exists("temp.jpg"): os.remove("temp.jpg")
-    print("🏁 Selesai.")
-
 @app.post("/start-analysis")
 def start_analysis(req: VideoRequest):
-    global current_thread
-    if current_thread and current_thread.is_alive():
-        stop_event.set()
-        current_thread.join()
-    
-    stop_event.clear()
-    current_thread = threading.Thread(
-        target=analysis_logic, 
-        args=(req.videoUrl, req.startTime)
-    )
-    current_thread.start()
+    global current_thread, stop_event
+    with analysis_lock:
+        if current_thread and current_thread.is_alive():
+            stop_event.set()
+            current_thread.join(timeout=2)
+            if current_thread.is_alive():
+                raise HTTPException(status_code=409, detail="Previous analysis is still stopping")
+        stop_event = threading.Event()
+        current_thread = threading.Thread(
+            target=analysis_logic, args=(req.videoUrl, req.startTime, stop_event), daemon=True)
+        current_thread.start()
     return {"status": "started", "video": req.videoUrl}
 
 if __name__ == "__main__":

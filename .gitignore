@@ -1,2 +1,20 @@
 ai
 runs
+
+# Local credentials and generated artifacts (tracked files are not untracked).
+.env
+.env.*
+!.env.example
+cookies*.txt
+cookies*.txt.backup
+*cookies*.json
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+node_modules/
+logs/
+releases/
+*.log
+temp_audio_chunks/
+temp.jpg

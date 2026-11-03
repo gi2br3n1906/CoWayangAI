@@ -1,0 +1,28 @@
+[Unit]
+Description=CoWayangAI browser FOH backend
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=cowayangai
+Group=cowayangai
+WorkingDirectory=/var/www/cowayangai.site/current/backend
+EnvironmentFile=/etc/cowayangai/backend.env
+Environment=NODE_ENV=production
+Environment=FOH_ONLY_MODE=true
+Environment=HOST=127.0.0.1
+Environment=PORT=3010
+Environment=GEMINI_MODEL=gemini-3.5-flash-lite
+ExecStart=@NODE_BIN@ index.js
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=15
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/www/cowayangai.site/logs
+
+[Install]
+WantedBy=multi-user.target

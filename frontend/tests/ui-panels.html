@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="id">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>CoWayangAI — fixture panel UI</title></head>
+<body>
+<div id="fixture-root"></div>
+<script type="module">
+// Test-only fixture: real Vue panels and CSS, synthetic text, no model/network inference.
+import { createApp, h, ref } from 'vue'
+import { createRouter, createMemoryHistory } from 'vue-router'
+import LiveTranscription from '../src/components/LiveTranscription.vue'
+import DetectionPanel from '../src/components/DetectionPanel.vue'
+import '../src/assets/main.css'
+const router = createRouter({ history: createMemoryHistory(), routes: [{ path: '/', component: { render: () => null } }, { path: '/settings', component: { render: () => null } }] })
+createApp({
+ setup() {
+  const long = ref(false)
+  const subtitles = Array.from({ length: 40 }, (_, i) => ({ id: `test-${i}`, start_time: i * 10, end_time: i * 10 + 8, text: `Ujaran uji ${i + 1}. ` + 'Teks sintetis untuk menguji keterbacaan dan scrolling, bukan transkrip pertunjukan. '.repeat(3), translation: i % 3 ? 'Terjemahan sintetis untuk menguji label dan pembungkusan teks. '.repeat(3) : '', isCurrent: i === 0 }))
+  const characters = Array.from({ length: 30 }, (_, i) => ({ name: `Tokoh uji ${i + 1}`, confidence: 80 }))
+  return () => h('main', { class: 'panel-fixture' }, [
+   h('h1', 'Fixture UI — bukan hasil inference'),
+   h('p', { class: 'fixture-note' }, 'Komponen asli dengan data sintetis untuk pemeriksaan visual, aksesibilitas, dan scrolling.'),
+   h('div', { class: 'fixture-actions' }, [h('button', { class: 'button', onClick: () => { long.value = false } }, 'Tanpa hasil'), h('button', { class: 'button', onClick: () => { long.value = true } }, 'Data uji panjang')]),
+   h('div', { class: 'analysis-layout' }, [
+    h('section', { class: 'surface fixture-stage', 'aria-label': 'Placeholder player untuk tes layout' }, [h('p', 'Area player — tidak ada pemutaran atau inference')]),
+    h('div', { class: 'analysis-panels' }, [h(DetectionPanel, { characters: long.value ? characters : [], aiConnected: long.value, currentTime: 0 }), h(LiveTranscription, { subtitles: long.value ? subtitles : [], currentTime: 400 })])
+   ])
+  ])
+ }
+}).use(router).mount('#fixture-root')
+</script>
+<style>
+.panel-fixture { max-width: 1280px; margin-inline: auto; padding: 24px; }
+.panel-fixture h1 { font-size: 22px; line-height: 1.4; }
+.fixture-note { color: var(--muted); font-size: 13px; line-height: 1.7; margin-top: 8px; }
+.fixture-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0; }
+.fixture-stage { aspect-ratio: 16/9; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--muted); font-size: 14px; }
+@media(max-width:639px) { .panel-fixture { padding: 20px; } }
+</style>
+</body>
+</html>
