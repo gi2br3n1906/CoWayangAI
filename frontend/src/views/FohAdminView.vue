@@ -4,10 +4,13 @@ import { api } from '@/services/api'
 import { MAX_UTTERANCE_MS, shouldCutUtterance } from '@/utils/fohAudioTiming'
 import { buildLanguageOutputUrl } from '@/utils/fohOutput'
 import { createFohDebug } from '@/utils/fohDebug'
+import FohScriptPreview from '@/components/FohScriptPreview.vue'
 
 const requestedKey = ref(''), streamKey = ref(''), uploadToken = ref(''), context = ref(''), outputs = ref({}), savedStreams = ref([])
 const devices = ref([]), deviceId = ref(''), threshold = ref(0.035), level = ref(0), state = ref('idle'), error = ref(''), copied = ref('')
 const selectedModel = ref('gemini-3.5-flash-lite')
+const scriptCursor = ref(null), subtitleMode = ref('legacy')
+const sessionBusy = ref(false)
 const outputLanguages = ['jawa', 'indonesia', 'inggris']
 const outputLabels = { jawa: 'Jawa', indonesia: 'Indonesia', inggris: 'Inggris' }
 const outputColors = ref({ jawa: 'yellow', indonesia: 'white', inggris: 'cyan' })
@@ -40,18 +43,23 @@ async function refreshDevices() {
  } catch { error.value = 'Browser tidak dapat membaca daftar input audio.' }
 }
 async function createSession() {
+ if (sessionBusy.value) return
+ sessionBusy.value = true
  error.value = ''
  try {
   const { data } = await api.post('/api/foh-stream/session', { streamKey: requestedKey.value.trim().toLowerCase() })
   activateSession(data)
   requestedKey.value = ''
  } catch (cause) { error.value = cause.response?.data?.error || 'Gagal membuat sesi FOH.' }
+ finally { sessionBusy.value = false }
 }
 function activateSession(data) {
  sessionGeneration++
  streamKey.value = data.streamKey
  uploadToken.value = data.uploadToken
  outputs.value = data.outputs || {}
+ scriptCursor.value = data.scriptCursor || null
+ subtitleMode.value = data.subtitleMode || 'legacy'
  sessionInvalidated = false
  sendQueue = Promise.resolve()
 }
@@ -60,15 +68,27 @@ async function loadStreams(recoverActive = false) {
   const { data } = await api.get('/api/foh-streams')
   savedStreams.value = data.streams || []
   const recoverable = recoverActive ? savedStreams.value.find(stream => stream.status === 'active') : null
-  if (recoverable) await resumeStream(recoverable.streamKey)
+  if (recoverable && !active.value) await resumeStream(recoverable.streamKey)
  } catch (cause) { error.value = cause.response?.data?.error || 'Tidak dapat memuat stream akun.' }
 }
 async function resumeStream(key) {
+ if (sessionBusy.value) return
+ sessionBusy.value = true
  error.value = ''
  try {
   const { data } = await api.post(`/api/foh-stream/${encodeURIComponent(key)}/resume`)
   activateSession(data)
  } catch (cause) { error.value = cause.response?.data?.error || 'Gagal memulihkan stream.' }
+ finally { sessionBusy.value = false }
+}
+async function setSubtitleMode(mode) {
+ if (sessionBusy.value || !['legacy','script'].includes(mode)) return
+ sessionBusy.value = true; error.value = ''
+ try {
+  const { data } = await api.post(`/api/foh-stream/${encodeURIComponent(streamKey.value)}/subtitle-mode`, { mode }, { headers: { 'x-foh-token': uploadToken.value } })
+  subtitleMode.value = data.subtitleMode; scriptCursor.value = data.scriptCursor || null
+ } catch (cause) { error.value = cause.response?.data?.error || 'Gagal mengubah mode subtitle.' }
+ finally { sessionBusy.value = false }
 }
 async function startAudio() {
  if (state.value !== 'idle') return
@@ -149,9 +169,9 @@ async function sendChunk() {
  sendQueue = sendQueue.then(() => {
   if (sessionInvalidated || generation !== captureGeneration) return null
   debug.sending(currentDebugId); refreshDebug()
-  return api.post(`/api/foh-stream/${encodeURIComponent(key)}/audio`, blob, { headers: { 'Content-Type': mime, 'x-foh-token': token, 'x-foh-context': lakon, 'x-foh-rms': String(rms), 'x-foh-model': currentModel }, ...(currentModel === 'gemini-3.8-flash' ? { timeout: 45000 } : {}) })
+  return api.post(`/api/foh-stream/${encodeURIComponent(key)}/audio`, blob, { headers: { 'Content-Type': mime, 'x-foh-token': token, 'x-foh-context': lakon, 'x-foh-rms': String(rms), 'x-foh-model': currentModel }, ...(currentModel === 'gemini-3.8-flash' || subtitleMode.value === 'script' ? { timeout: 45000 } : {}) })
  })
- sendQueue = sendQueue.then(response => { if (currentDebugRun === debugRun && response) { debug.finish(currentDebugId, response, token); refreshDebug() } })
+ sendQueue = sendQueue.then(response => { if (currentDebugRun === debugRun && response) { debug.finish(currentDebugId, response, token); if (token === uploadToken.value && currentSession === sessionGeneration && response.data?.scriptCursor) scriptCursor.value = response.data.scriptCursor; refreshDebug() } })
  sendQueue = sendQueue.catch(cause => {
   if (currentDebugRun === debugRun) { debug.fail(currentDebugId, cause); refreshDebug() }
   if (cause.response?.status === 401) {
@@ -160,6 +180,7 @@ async function sendChunk() {
    stopAudio()
    uploadToken.value = ''
    streamKey.value = ''
+   scriptCursor.value = null
    error.value = 'Sesi FOH sudah tidak berlaku. Buat sesi baru.'
   } else if (generation === captureGeneration) error.value = cause.response?.data?.error || 'Upload/transkripsi audio gagal.'
  }).finally(() => { if (generation === captureGeneration && mediaStream) state.value = activeSince ? 'speaking' : 'listening' })
@@ -182,7 +203,7 @@ async function endSession() {
  await sendQueue.catch(() => {})
  try { await api.delete(`/api/foh-stream/${encodeURIComponent(endingKey)}/session`, { headers: { 'x-foh-token': endingToken } }) }
  catch { error.value = 'Sesi ditutup di browser, tetapi token server belum dapat dicabut.' }
- uploadToken.value = ''; streamKey.value = ''; outputs.value = {}
+ uploadToken.value = ''; streamKey.value = ''; outputs.value = {}; scriptCursor.value = null
  await loadStreams()
 }
 async function copyLink(kind, value) {
@@ -198,8 +219,8 @@ onUnmounted(stopAudio)
   <header class="page-heading"><p class="eyebrow">FOH BROADCAST</p><h1>Subtitle <span>panggung</span></h1><p>Audio mixer masuk, subtitle tiga bahasa keluar ke overlay operator.</p></header>
   <div v-if="!active" class="surface foh-setup">
    <h2>Stream akun</h2>
-   <form @submit.prevent="createSession"><label class="foh-field">Buat stream key<input v-model="requestedKey" class="input" maxlength="48" pattern="[a-z0-9][a-z0-9-]{2,47}" placeholder="contoh: tmii-nov4" required /></label><button class="button" type="submit">Buat stream</button></form>
-   <div v-if="savedStreams.length" class="foh-saved-streams"><h3>Stream tersimpan</h3><button v-for="saved in savedStreams" :key="saved.streamKey" class="button" type="button" @click="resumeStream(saved.streamKey)"><span>{{ saved.streamKey }}</span><small>{{ saved.status === 'active' ? 'Pulihkan sesi' : 'Lanjutkan stream' }}</small></button></div>
+   <form @submit.prevent="createSession"><label class="foh-field">Buat stream key<input v-model="requestedKey" class="input" maxlength="48" pattern="[a-z0-9][a-z0-9-]{2,47}" placeholder="contoh: tmii-nov4" required /></label><button class="button" type="submit" :disabled="sessionBusy">Buat stream</button></form>
+   <div v-if="savedStreams.length" class="foh-saved-streams"><h3>Stream tersimpan</h3><button v-for="saved in savedStreams" :key="saved.streamKey" class="button" type="button" :disabled="sessionBusy" @click="resumeStream(saved.streamKey)"><span>{{ saved.streamKey }}</span><small>{{ saved.status === 'active' ? 'Pulihkan sesi' : 'Lanjutkan stream' }}</small></button></div>
   </div>
   <template v-else>
    <div class="foh-toolbar"><div><span class="status-dot connected" /> SIARAN AKTIF <code>{{ streamKey }}</code></div><button class="button" @click="endSession">Akhiri sesi</button></div>
@@ -212,6 +233,8 @@ onUnmounted(stopAudio)
     <label class="foh-field">Raw JSON gabungan<input class="input" readonly :value="jsonUrl" /><button class="button" @click="copyLink('json', jsonUrl)">{{ copied === 'json' ? 'Tersalin' : 'Copy link' }}</button></label>
    </section>
    <section class="surface foh-section"><div class="section-heading"><div><h2>Input audio</h2><p>Browser tidak menerapkan echo cancellation, noise suppression, atau auto gain.</p></div><span class="foh-state">{{ state }}</span></div>
+    <label class="foh-field">Mode subtitle<select class="input" :value="subtitleMode" :disabled="sessionBusy" @change="setSubtitleMode($event.target.value)"><option value="legacy">Legacy: transkripsi audio</option><option value="script">Naskah: cocokkan cue dan terjemahkan</option></select></label>
+    <p v-if="subtitleMode === 'script'">Mode naskah aktif. Posisi terakhir: Babak {{ scriptCursor?.act ?? 'belum disetel' }}, cue {{ scriptCursor?.cueId ?? 'belum disetel' }}. Indeks ini masih provisional dan perlu ditinjau.</p>
     <label class="foh-field">Perangkat input<select v-model="deviceId" class="input"><option v-for="device in devices" :key="device.deviceId" :value="device.deviceId">{{ device.label || `Audio input ${device.deviceId.slice(0, 6)}` }}</option></select></label>
    <label class="foh-field">Model Gemini<select v-model="selectedModel" class="input" aria-describedby="foh-model-warning"><option value="gemini-3.5-flash-lite">Gemini 3.5 Flash Lite</option><option value="gemini-3.8-flash">Gemini 3.8 Flash</option></select></label>
    <p id="foh-model-warning">Gemini 3.8 Flash memakai batas timeout 45 detik, dapat memperlambat antrean dan menambah biaya. Tidak ada percobaan ulang otomatis. Perubahan berlaku untuk chunk berikutnya.</p>
@@ -220,6 +243,7 @@ onUnmounted(stopAudio)
     <label class="foh-field">Konteks lakon & tokoh<textarea v-model="context" class="input" maxlength="2000" rows="3" placeholder="Contoh: Lakon Ramayana; Rama, Sinta, Rahwana…" /></label>
     <div class="foh-actions"><button class="button" :disabled="state !== 'idle'" @click="startAudio">Mulai tangkap audio</button><button class="button" :disabled="state === 'idle'" @click="stopAudio">Stop audio</button></div>
    </section>
+   <FohScriptPreview :stream-key="streamKey" :upload-token="uploadToken" :selected-model="selectedModel" :script-cursor="scriptCursor" :subtitle-mode="subtitleMode" @cursor-changed="scriptCursor = $event" />
   </template>
   <section class="surface foh-section"><div class="section-heading"><div><h2>Debug timeline</h2><p>Waktu relatif terhadap klik mulai; batas rekaman VAD perkiraan, bukan waktu per kata. Hening atau ucapan yang terlewat tidak dapat disimpulkan. Subtitle dapat berisi informasi sensitif.</p></div></div>
    <p>Permission pending: {{ debugData.capturePending ? 'ya' : 'tidak' }}; waktu permission: {{ debugData.permissionPendingMs ?? '—' }} ms; entri terbuang: {{ debugData.dropped }}</p>

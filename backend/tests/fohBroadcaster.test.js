@@ -323,10 +323,10 @@ test('silent browser audio is acknowledged without calling Gemini', async t => {
 });
 test('audio response waits for persistence and storage failure returns no subtitle', async t => {
  const store = createTestFohStore();
- const persist = store.updateSubtitle.bind(store);
+ const persist = store.updateState.bind(store);
  let release, started;
  const entered = new Promise(resolve => { started = resolve; });
- store.updateSubtitle = async (...args) => { started(); await new Promise(resolve => { release = resolve; }); await persist(...args); };
+ store.updateState = async (...args) => { started(); await new Promise(resolve => { release = resolve; }); return persist(...args); };
  const { base } = await setup(t, null, store);
  const session = await createSession(base, 'persist-audio');
  let settled = false;
@@ -341,7 +341,7 @@ test('audio response waits for persistence and storage failure returns no subtit
  const body = await response.json();
  const record = await store.getOwnedStream('persist-audio', 'owner-a');
  assert.deepEqual(record.subtitle, { ...body.subtitle, updatedAt: body.updatedAt });
- store.updateSubtitle = async () => { throw new Error('storage failure'); };
+ store.updateState = async () => { throw new Error('storage failure'); };
  for (const rms of ['0.1', '0.0001']) {
   const failed = await request(`${base}/api/foh-stream/persist-audio/audio`, { method:'POST', headers:{'content-type':'audio/webm','x-foh-token':session.uploadToken,'x-foh-rms':rms}, body:Buffer.alloc(256) });
   assert.equal(failed.status, 503);
@@ -457,4 +457,41 @@ test('token rotation during an in-flight Gemini call prevents stale subtitle pub
  assert.equal((await uploading).status, 401);
  const latest = await (await request(`${base}/api/foh-stream/tmii-rotation/latest`)).json();
  assert.equal(latest.jawa, '');
+});
+
+test('a stale instance cannot end a session rotated by another instance', async t => {
+ const store = createTestFohStore();
+ const first = await setup(t, null, store);
+ const second = await setup(t, null, store);
+ const oldSession = await createSession(first.base, 'cross-instance-end');
+ const newSession = await createSession(second.base, 'cross-instance-end');
+ const ended = await request(`${first.base}/api/foh-stream/cross-instance-end/session`, { method:'DELETE', headers:{'x-foh-token':oldSession.uploadToken} });
+ assert.equal(ended.status, 401);
+ const record = await store.getOwnedStream('cross-instance-end', 'owner-a');
+ assert.equal(record.status, 'active');
+ const upload = await request(`${second.base}/api/foh-stream/cross-instance-end/audio`, { method:'POST', headers:{'content-type':'audio/webm','x-foh-token':newSession.uploadToken}, body:Buffer.alloc(256) });
+ assert.equal(upload.status, 200);
+});
+
+test('rotation at the persistence barrier rejects normal and silent audio', async t => {
+ for (const rms of ['0.1', '0.0001']) {
+  const store = createTestFohStore();
+  const persist = store.updateState.bind(store);
+  let release, entered;
+  const barrier = new Promise(resolve => { entered = resolve; });
+  store.updateState = async args => { entered(); await new Promise(resolve => { release = resolve; }); return persist(args); };
+  const first = await setup(t, null, store);
+  const second = await setup(t, null, store);
+  const key = rms === '0.1' ? 'barrier-normal' : 'barrier-silent';
+  const oldSession = await createSession(first.base, key);
+  const upload = request(`${first.base}/api/foh-stream/${key}/audio`, { method:'POST', headers:{'content-type':'audio/webm','x-foh-token':oldSession.uploadToken,'x-foh-rms':rms}, body:Buffer.alloc(256) });
+  await barrier;
+  await createSession(second.base, key);
+  release();
+  const response = await upload;
+  assert.ok([401,409].includes(response.status));
+  const record = await store.getOwnedStream(key,'owner-a');
+  assert.equal(record.subtitle.updatedAt, 0);
+  assert.equal((await (await fetch(`${first.base}/api/foh-stream/${key}/latest`)).json()).updatedAt, 0);
+ }
 });

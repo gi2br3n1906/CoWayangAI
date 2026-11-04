@@ -8,6 +8,27 @@ function conflict(message) {
     return Object.assign(new Error(message), { statusCode: 409 });
 }
 
+// A missing cursor is the legacy/live-mode revision. All callers must supply
+// the revision they observed before starting asynchronous work.
+function cursorMatches(cursor, expected, subtitleMode) {
+    if (!expected || typeof expected !== 'object') return false;
+    return (cursor?.scriptId ?? null) === expected.scriptId &&
+        (cursor?.scriptRevision ?? null) === expected.scriptRevision &&
+        (cursor?.revision ?? 0) === expected.cursorRevision &&
+        (expected.mode === undefined || (cursor?.mode ?? null) === expected.mode) &&
+        (expected.subtitleMode === undefined || (subtitleMode ?? 'legacy') === expected.subtitleMode);
+}
+
+function validCursor(cursor, previous) {
+    return cursor && typeof cursor.scriptId === 'string' && cursor.scriptId.length > 0 &&
+        typeof cursor.scriptRevision === 'string' && cursor.scriptRevision.length > 0 &&
+        Number.isSafeInteger(cursor.act) && cursor.act >= 1 &&
+        typeof cursor.cueId === 'string' && cursor.cueId.length > 0 &&
+        Number.isSafeInteger(cursor.offset) && cursor.offset >= 0 &&
+        ['auto', 'manual'].includes(cursor.mode) &&
+        cursor.revision === (previous?.revision ?? 0) + 1;
+}
+
 function createFirestoreFohStore({ db }) {
     if (!db) throw new TypeError('Firestore database is required');
     const streams = db.collection(STREAMS_COLLECTION);
@@ -52,6 +73,9 @@ function createFirestoreFohStore({ db }) {
                     createdAt: current?.createdAt || now,
                     updatedAt: now,
                     subtitle: current?.subtitle || { jawa: '', indonesia: '', inggris: '', updatedAt: 0 },
+                    scriptCursor: current?.scriptCursor ?? null,
+                    scriptIndex: current?.scriptIndex ?? null,
+                    subtitleMode: current?.subtitleMode ?? 'legacy',
                 };
                 transaction.set(streamRef, record);
                 transaction.set(keyRefs[0], { parentKey: streamKey, kind: 'primary', ownerUid });
@@ -85,15 +109,32 @@ function createFirestoreFohStore({ db }) {
             return { record: parentSnapshot.data(), language: alias.language, streamKey: key };
         },
 
-        async updateSubtitle(streamKey, subtitle, now) {
-            await streams.doc(streamKey).update({ subtitle: { ...subtitle, updatedAt: now }, updatedAt: now });
-        },
-
-        async end(streamKey, ownerUid, now) {
+        async updateState({ streamKey, ownerUid, tokenHash, expectedCursor, scriptCursor, scriptIndex, subtitle, subtitleMode, now }) {
             const streamRef = streams.doc(streamKey);
             return db.runTransaction(async transaction => {
                 const snapshot = await transaction.get(streamRef);
-                if (!snapshot.exists || snapshot.data().ownerUid !== ownerUid) return false;
+                const record = snapshot.exists ? snapshot.data() : null;
+                if (!record || record.ownerUid !== ownerUid || record.status !== 'active' || !tokenHash || record.uploadTokenHash !== tokenHash || !cursorMatches(record.scriptCursor, expectedCursor, record.subtitleMode)) return false;
+                if (scriptCursor !== undefined && !validCursor(scriptCursor, record.scriptCursor)) throw new TypeError('Invalid script cursor');
+                if (scriptIndex !== undefined && (!scriptIndex || typeof scriptIndex.id !== 'string' || !Array.isArray(scriptIndex.cues))) throw new TypeError('Invalid script index');
+                if (subtitleMode !== undefined && !['legacy', 'script'].includes(subtitleMode)) throw new TypeError('Invalid subtitle mode');
+                if (scriptCursor === undefined && scriptIndex === undefined && subtitle === undefined && subtitleMode === undefined) throw new TypeError('No state update supplied');
+                const patch = { updatedAt: now };
+                if (scriptCursor !== undefined) patch.scriptCursor = { ...scriptCursor, updatedAt: now };
+                if (scriptCursor === null) patch.scriptCursor = null;
+                if (scriptIndex !== undefined) patch.scriptIndex = scriptIndex;
+                if (subtitle !== undefined) patch.subtitle = { ...subtitle, updatedAt: now };
+                if (subtitleMode !== undefined) patch.subtitleMode = subtitleMode;
+                transaction.update(streamRef, patch);
+                return true;
+            });
+        },
+
+        async end(streamKey, ownerUid, now, tokenHash) {
+            const streamRef = streams.doc(streamKey);
+            return db.runTransaction(async transaction => {
+                const snapshot = await transaction.get(streamRef);
+                if (!snapshot.exists || snapshot.data().ownerUid !== ownerUid || snapshot.data().status !== 'active' || !tokenHash || snapshot.data().uploadTokenHash !== tokenHash) return false;
                 transaction.update(streamRef, { status: 'ended', uploadTokenHash: null, endedAt: now, updatedAt: now, subtitle: { jawa: '', indonesia: '', inggris: '', updatedAt: now } });
                 return true;
             });
@@ -101,4 +142,4 @@ function createFirestoreFohStore({ db }) {
     };
 }
 
-module.exports = { createFirestoreFohStore };
+module.exports = { createFirestoreFohStore, cursorMatches, validCursor };

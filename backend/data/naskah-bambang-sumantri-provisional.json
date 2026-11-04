@@ -1,0 +1,2123 @@
+{
+  "id": "naskah-local-provisional",
+  "revision": "provisional-unreviewed-1",
+  "status": "PROVISIONAL: source-line candidate, not human-reviewed or performance-aligned",
+  "reviewRequired": true,
+  "source": "foh-naskah-review-draft.json blocks, PDF text-layer extraction; offsets UTF-16",
+  "cues": [
+    {
+      "id": "provisional-001",
+      "order": 1,
+      "act": 1,
+      "kind": "dialog",
+      "page": 2,
+      "text": "H. Sasra : Sumantri… pasuwitanmu sun tampa. Waton biso mboyong\r\nsekar kedhaton magadha kang aran dewi citrawati.\r\n",
+      "spans": [
+        {
+          "page": 2,
+          "start": 66,
+          "end": 180
+        }
+      ],
+      "speaker": "H. Sasra",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-002",
+      "order": 2,
+      "act": 1,
+      "kind": "dialog",
+      "page": 2,
+      "text": "Sumantri : Sagah dereng kinanten selak mbok bilih saget anglampahi\r\ndawuh sinuwun.\r\n",
+      "spans": [
+        {
+          "page": 2,
+          "start": 180,
+          "end": 264
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-003",
+      "order": 3,
+      "act": 2,
+      "kind": "dialog",
+      "page": 3,
+      "text": "Suwandagni : Hong wilaheng awigenam mastunamasidham.\r\nSumantri… paran pawartane nggonira suwita marang negara maespati\r\nngger..\r\n",
+      "spans": [
+        {
+          "page": 3,
+          "start": 66,
+          "end": 195
+        }
+      ],
+      "speaker": "Suwandagni",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-004",
+      "order": 4,
+      "act": 2,
+      "kind": "dialog",
+      "page": 3,
+      "text": "Sumantri : pangestu paduka rama penemban, tinampi pasuwitan kula,\r\nnamung wonten jejibahan ingkang mboten enteng ingkang kedhah\r\nkula lampahi.\r\n",
+      "spans": [
+        {
+          "page": 3,
+          "start": 197,
+          "end": 341
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-005",
+      "order": 5,
+      "act": 2,
+      "kind": "dialog",
+      "page": 3,
+      "text": "Suwandagni : Pakaryan opo sing kudu to tindakake sumantri?\r\n",
+      "spans": [
+        {
+          "page": 3,
+          "start": 343,
+          "end": 403
+        }
+      ],
+      "speaker": "Suwandagni",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-006",
+      "order": 6,
+      "act": 2,
+      "kind": "dialog",
+      "page": 3,
+      "text": "Sumantri : Kula kedhah saget mboyong putri saking negari magadha,\r\nbadhe kagarwa prameswari.\r\n",
+      "spans": [
+        {
+          "page": 3,
+          "start": 405,
+          "end": 499
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-007",
+      "order": 7,
+      "act": 2,
+      "kind": "dialog",
+      "page": 3,
+      "text": "Suwandagni : Samubarang gegayuhan. Iku mesti mawa pangorbanan\r\nkang tembene nggayuh tataran luhur. Yo luhur lair lan batin. Lire, bisa\r\nmurakabi dhiri sarta bebrayan agung. Lamun wis ana sulaking\r\npepadhang, aja mung antu antu wektu kang becik iku, ya mung sira\r\nkang anentokake.\r\n",
+      "spans": [
+        {
+          "page": 3,
+          "start": 501,
+          "end": 782
+        }
+      ],
+      "speaker": "Suwandagni",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-008",
+      "order": 8,
+      "act": 2,
+      "kind": "sulukan",
+      "page": 3,
+      "text": "Sulukan : Rama dewaningsun Oo…\r\n",
+      "spans": [
+        {
+          "page": 3,
+          "start": 784,
+          "end": 816
+        }
+      ],
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-009",
+      "order": 9,
+      "act": 2,
+      "kind": "dialog",
+      "page": 3,
+      "text": "Sumantri : Aduh rama penemban, padhanging manah dados golonging\r\ntekat kula namunng triprekawis. Anggen kula seba ngabdi ing nusa\r\nbangsa maespati wonten ngarsanipun pepundhen kula, sinuwun\r\nprabu Harjuna sasra bahu.\r\n",
+      "spans": [
+        {
+          "page": 3,
+          "start": 818,
+          "end": 1036
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-010",
+      "order": 10,
+      "act": 2,
+      "kind": "dialog",
+      "page": 3,
+      "text": "Suwandagni : Gegaranmu apa Sumantri?\r\n",
+      "spans": [
+        {
+          "page": 3,
+          "start": 1038,
+          "end": 1076
+        }
+      ],
+      "speaker": "Suwandagni",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-011",
+      "order": 11,
+      "act": 2,
+      "kind": "dialog",
+      "page": 3,
+      "text": "Sumantri : Inggih, guna, kaya, menapa dene purun?\r\n",
+      "spans": [
+        {
+          "page": 3,
+          "start": 1078,
+          "end": 1129
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-012",
+      "order": 12,
+      "act": 2,
+      "kind": "dialog",
+      "page": 3,
+      "text": "Suwandagni : Lire?\r\n",
+      "spans": [
+        {
+          "page": 3,
+          "start": 1131,
+          "end": 1151
+        }
+      ],
+      "speaker": "Suwandagni",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-013",
+      "order": 13,
+      "act": 2,
+      "kind": "dialog",
+      "page": 3,
+      "text": "Sumantri : Guna, lebda saliring karya lembad agal kaudi rineka daya\r\nmurih mikolehi. Temah sambada angrampungi damel. Kaya, lirepun\r\ning lair ngudi kardi miwah cekaping batos, inggih lelabetan utami.\r\nWondene purun, Sumantri sagah ngadepi pepalong linambaran tatag\r\ntanggon siyaga dados tumbal bela dateng negari. Sumadyo sewanci\r\nwanci, ngundhokaken jiwa lan raga kula kinarya tamenging negari lan\r\nkautaman.\r\n",
+      "spans": [
+        {
+          "page": 3,
+          "start": 1153,
+          "end": 1564
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-014",
+      "order": 14,
+      "act": 2,
+      "kind": "ada-ada",
+      "page": 4,
+      "text": "Ada – ada :\r\nDhuh kulup putraningsun\r\nSireh iku wus wanci\r\nPisah lan jeneng ing wang Oo..\r\n",
+      "spans": [
+        {
+          "page": 4,
+          "start": 66,
+          "end": 157
+        }
+      ],
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-015",
+      "order": 15,
+      "act": 2,
+      "kind": "dialog",
+      "page": 4,
+      "text": "Suwandagni : Yen wus satata ing gati, sawega ing diri, tumuli enggal\r\nbudala. Tak sangoni sanjata. Eling elingen Sumantri.. Nalika sira\r\nnetepake tekatmu, ya wektu kuwi laku lan lelakuning uripmu kang\r\nkudu sira wiwiti, sumantri...\r\n",
+      "spans": [
+        {
+          "page": 4,
+          "start": 159,
+          "end": 392
+        }
+      ],
+      "speaker": "Suwandagni",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-016",
+      "order": 16,
+      "act": 2,
+      "kind": "sulukan",
+      "page": 4,
+      "text": "Sulukan : siyang pantara ratri\r\n          Amung cipta pukulun\r\n",
+      "spans": [
+        {
+          "page": 4,
+          "start": 394,
+          "end": 457
+        }
+      ],
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-017",
+      "order": 17,
+      "act": 3,
+      "kind": "dialog",
+      "page": 4,
+      "text": "Sumantri : adhiku dhi.. Apa kowe wus krasa atimu arep tak tinggal\r\nmeneh? Seba netepke wajib uga nindakake jejibahan ingkang tak\r\nsangkul, yaiku, saka keparenge prabu Harjuna sasra bahu.\r\n",
+      "spans": [
+        {
+          "page": 4,
+          "start": 459,
+          "end": 647
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-018",
+      "order": 18,
+      "act": 3,
+      "kind": "dialog",
+      "page": 4,
+      "text": "Sukrasana : Atang antli, atu wus ngelti tangg… Aatang wis arep dadi\r\npiyayi.. atang wis alep dadi wong luhuuulll….\r\n",
+      "spans": [
+        {
+          "page": 4,
+          "start": 647,
+          "end": 763
+        }
+      ],
+      "speaker": "Sukrasana",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-019",
+      "order": 19,
+      "act": 3,
+      "kind": "dialog",
+      "page": 4,
+      "text": "Sumantri : Nanging, aku kudu nyingkerake ratu sewu negara kang\r\nmapan ana magadha, dhii..\r\n",
+      "spans": [
+        {
+          "page": 4,
+          "start": 763,
+          "end": 854
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-020",
+      "order": 20,
+      "act": 3,
+      "kind": "dialog",
+      "page": 4,
+      "text": "Sukrasana : Iya atang, atu wis ngelti owg taaangg..\r\n",
+      "spans": [
+        {
+          "page": 4,
+          "start": 854,
+          "end": 907
+        }
+      ],
+      "speaker": "Sukrasana",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-021",
+      "order": 21,
+      "act": 3,
+      "kind": "dialog",
+      "page": 4,
+      "text": "Sumantri : Apa kowe ra melu?\r\n",
+      "spans": [
+        {
+          "page": 4,
+          "start": 907,
+          "end": 937
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-022",
+      "order": 22,
+      "act": 3,
+      "kind": "dialog",
+      "page": 4,
+      "text": "Sukrasana : Ola atang, atu ola melu, mengko yen ning kuta cedak kalo\r\npiyayi – piyayi, mengko aku ndak nyuda kawibawane atang antli.\r\nNadyan atang antli ola icin duwe dulul koyo aku, nanging, aku icin too..\r\naku njaga kawibawane atang antli.\r\n",
+      "spans": [
+        {
+          "page": 4,
+          "start": 937,
+          "end": 1180
+        }
+      ],
+      "speaker": "Sukrasana",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-023",
+      "order": 23,
+      "act": 3,
+      "kind": "ada-ada",
+      "page": 5,
+      "text": "Ada – ada : Kagyat risang kapirangu\r\n             Rinangkul kinempit – kempit\r\n            Duh sang retnaning bawana Oo..\r\n",
+      "spans": [
+        {
+          "page": 5,
+          "start": 66,
+          "end": 189
+        }
+      ],
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-024",
+      "order": 24,
+      "act": 3,
+      "kind": "dialog",
+      "page": 5,
+      "text": "Sumantri : Adhiku dhii… kowe ra melu tenan?\r\n",
+      "spans": [
+        {
+          "page": 5,
+          "start": 191,
+          "end": 236
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-025",
+      "order": 25,
+      "act": 3,
+      "kind": "dialog",
+      "page": 5,
+      "text": "Sukrasana : Ola atang, atu ola melu, nadyan atu adoh, nanging, tancah\r\ncedhak kalo atang antlii..\r\n",
+      "spans": [
+        {
+          "page": 5,
+          "start": 236,
+          "end": 335
+        }
+      ],
+      "speaker": "Sukrasana",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-026",
+      "order": 26,
+      "act": 3,
+      "kind": "dialog",
+      "page": 5,
+      "text": "Sumantri : Kakang Semar, ayo mangkat dino iki. Para senopati wus di\r\npandhegani dening kyai patih surata. Ya wus ngadepi para ratu sewu\r\nnegara kang mapan ana magadha. Aku bakal sumusul. Merga aku kang\r\ndipercaya dening ratu gusti ku, supaya angrampungi perkara iki.\r\n",
+      "spans": [
+        {
+          "page": 5,
+          "start": 335,
+          "end": 603
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-027",
+      "order": 27,
+      "act": 3,
+      "kind": "dialog",
+      "page": 5,
+      "text": "Semar : Eeeehhhh….. mangga ingkang prayitna. Sing atos – atos nggih\r\ndeeennn…\r\n",
+      "spans": [
+        {
+          "page": 5,
+          "start": 603,
+          "end": 682
+        }
+      ],
+      "speaker": "Semar",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-028",
+      "order": 28,
+      "act": 4,
+      "kind": "dialog",
+      "page": 6,
+      "text": "Darmawasesa : Hahahahahah.... yayi sasrahadi lan yayi ing\r\nhargoliman, yayi bramaja..\r\n",
+      "spans": [
+        {
+          "page": 6,
+          "start": 66,
+          "end": 153
+        }
+      ],
+      "speaker": "Darmawasesa",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-029",
+      "order": 29,
+      "act": 4,
+      "kind": "dialog",
+      "page": 6,
+      "text": "Sasrahadi : Wonten dawuh koko prabu?\r\n",
+      "spans": [
+        {
+          "page": 6,
+          "start": 155,
+          "end": 193
+        }
+      ],
+      "speaker": "Sasrahadi",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-030",
+      "order": 30,
+      "act": 4,
+      "kind": "dialog",
+      "page": 6,
+      "text": "Bramaja : inggih wonten dawuh, koko prabu?..\r\n",
+      "spans": [
+        {
+          "page": 6,
+          "start": 195,
+          "end": 241
+        }
+      ],
+      "speaker": "Bramaja",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-031",
+      "order": 31,
+      "act": 4,
+      "kind": "dialog",
+      "page": 6,
+      "text": "Darmawasesa : Wah.. wis pepak para kadangku ratu sewu negara, wis\r\ntak kepung praja magadha. Aku ya gumuunn.. setahun njembleng\r\nsarendheng citrawati tik nampik karo Darmawasesa, ki golek ratu\r\nmodel apa?\r\n",
+      "spans": [
+        {
+          "page": 6,
+          "start": 243,
+          "end": 449
+        }
+      ],
+      "speaker": "Darmawasesa",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-032",
+      "order": 32,
+      "act": 4,
+      "kind": "dialog",
+      "page": 6,
+      "text": "Sasrahadi : nggih sabar koko prabu.\r\n",
+      "spans": [
+        {
+          "page": 6,
+          "start": 451,
+          "end": 488
+        }
+      ],
+      "speaker": "Sasrahadi",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-033",
+      "order": 33,
+      "act": 4,
+      "kind": "dialog",
+      "page": 6,
+      "text": "Darmawasesa : Sabar kepiyee!!?? Selak ora kuat. Selak pengen\r\nmondhong citrawati!!\r\n",
+      "spans": [
+        {
+          "page": 6,
+          "start": 490,
+          "end": 574
+        }
+      ],
+      "speaker": "Darmawasesa",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-034",
+      "order": 34,
+      "act": 4,
+      "kind": "dialog",
+      "page": 6,
+      "text": "Sasrahadi : lha mangke nek mboten kasembadan?\r\n",
+      "spans": [
+        {
+          "page": 6,
+          "start": 576,
+          "end": 623
+        }
+      ],
+      "speaker": "Sasrahadi",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-035",
+      "order": 35,
+      "act": 4,
+      "kind": "dialog",
+      "page": 6,
+      "text": "Darmawasesa : Halaaahhh... banggane wong magadah I sepira to?\r\nmanut pawarta jare wong maespati gawe geger pesanggrahan. Di\r\npandegani dening kyai patih Surata gegedhuging kewuh para senopati.\r\nJarene meneh malah kongkonan menungsa kang jeneng Sumantri.\r\nKaya ngapa dedhapurane?\r\n",
+      "spans": [
+        {
+          "page": 6,
+          "start": 625,
+          "end": 905
+        }
+      ],
+      "speaker": "Darmawasesa",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-036",
+      "order": 36,
+      "act": 4,
+      "kind": "dialog",
+      "page": 6,
+      "text": "Sasrahadi : mangga kula derekaken.\r\n",
+      "spans": [
+        {
+          "page": 6,
+          "start": 907,
+          "end": 943
+        }
+      ],
+      "speaker": "Sasrahadi",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-037",
+      "order": 37,
+      "act": 4,
+      "kind": "dialog",
+      "page": 6,
+      "text": "Darmawasesa : pilihana sing atos balunge, sing brengose detas,\r\ngedhek, ora mundur amung sejangkah\r\n",
+      "spans": [
+        {
+          "page": 6,
+          "start": 945,
+          "end": 1045
+        }
+      ],
+      "speaker": "Darmawasesa",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-038",
+      "order": 38,
+      "act": 5,
+      "kind": "ada-ada",
+      "page": 7,
+      "text": "Ada – ada : Ridhu mawur mangawur awur wurahan\r\n              Tengaran ning a jurit\r\n              Gong ma guru gongso Ooo….\r\n              Tetek kaya butula\r\n              Wor panjrit ing turang ngesti\r\n              Rekatak ingkang dwojo lelayu sebit Oo...\r\n",
+      "spans": [
+        {
+          "page": 7,
+          "start": 66,
+          "end": 325
+        }
+      ],
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-039",
+      "order": 39,
+      "act": 5,
+      "kind": "dialog",
+      "page": 7,
+      "text": "Darmawasesa : Hahahahahah..... Laku layangane di liling – liling. Sapa\r\njenengmu?\r\n",
+      "spans": [
+        {
+          "page": 7,
+          "start": 327,
+          "end": 410
+        }
+      ],
+      "speaker": "Darmawasesa",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-040",
+      "order": 40,
+      "act": 5,
+      "kind": "dialog",
+      "page": 7,
+      "text": "Sumantri : Ngakua disik kowe sapa!\r\n",
+      "spans": [
+        {
+          "page": 7,
+          "start": 410,
+          "end": 446
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-041",
+      "order": 41,
+      "act": 5,
+      "kind": "dialog",
+      "page": 7,
+      "text": "Darmawasesa : Ungguling ratu sewu negara prabu Darmawasesa!\r\n",
+      "spans": [
+        {
+          "page": 7,
+          "start": 446,
+          "end": 507
+        }
+      ],
+      "speaker": "Darmawasesa",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-042",
+      "order": 42,
+      "act": 5,
+      "kind": "dialog",
+      "page": 7,
+      "text": "Sumantri : Yen ngono, kowe ingkang gawe daredah magadha?\r\n",
+      "spans": [
+        {
+          "page": 7,
+          "start": 507,
+          "end": 565
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-043",
+      "order": 43,
+      "act": 5,
+      "kind": "dialog",
+      "page": 7,
+      "text": "Darmawasesa : Ya.. ngendi paranmu lan sapa jenengmu?\r\n",
+      "spans": [
+        {
+          "page": 7,
+          "start": 565,
+          "end": 619
+        }
+      ],
+      "speaker": "Darmawasesa",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-044",
+      "order": 44,
+      "act": 5,
+      "kind": "dialog",
+      "page": 7,
+      "text": "Sumantri : saka praja maespati, Sumantri aranku, ingkang kedawuhan\r\nngendarat mustakamu!!\r\n",
+      "spans": [
+        {
+          "page": 7,
+          "start": 619,
+          "end": 710
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-045",
+      "order": 45,
+      "act": 5,
+      "kind": "dialog",
+      "page": 7,
+      "text": "Darmawasesa : yen pancen kowe wakile harjuna sasra, ayo.. rubuhna\r\nDarmawasesa!!\r\n",
+      "spans": [
+        {
+          "page": 7,
+          "start": 710,
+          "end": 792
+        }
+      ],
+      "speaker": "Darmawasesa",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-046",
+      "order": 46,
+      "act": 5,
+      "kind": "dialog",
+      "page": 7,
+      "text": "Sumantri : Ayo maju leganing atiku, yen pancen kowe sekti\r\nmandraguna!\r\n",
+      "spans": [
+        {
+          "page": 7,
+          "start": 792,
+          "end": 864
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-047",
+      "order": 47,
+      "act": 6,
+      "kind": "sulukan",
+      "page": 8,
+      "text": "Sulukan : Sang saya dalu araras abyor kang lintang kumedap\r\n\r\n          Titi sonya tengah wengi Oo…\r\n",
+      "spans": [
+        {
+          "page": 8,
+          "start": 66,
+          "end": 167
+        }
+      ],
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-048",
+      "order": 48,
+      "act": 6,
+      "kind": "dialog",
+      "page": 8,
+      "text": "Citrawati : Adhuh raden sewu beja kemayangan, dene sampun paring\r\npitulungan dateng praja Magadha.\r\n",
+      "spans": [
+        {
+          "page": 8,
+          "start": 169,
+          "end": 269
+        }
+      ],
+      "speaker": "Citrawati",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-049",
+      "order": 49,
+      "act": 6,
+      "kind": "dialog",
+      "page": 8,
+      "text": "Sumantri : Nuwun inggih kusuma dewi, kula namung sadermi dados\r\nlantaran kewala. Bilih sejatosipun, kula ingkang dinuta dening prabu\r\nharjuna sasra, kinen amboyong paduka.\r\n",
+      "spans": [
+        {
+          "page": 8,
+          "start": 271,
+          "end": 444
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-050",
+      "order": 50,
+      "act": 6,
+      "kind": "dialog",
+      "page": 8,
+      "text": "Citrawati : Raden, nyuwun pangapunten sakderengipun. Kula\r\nngluhuraken dateng kasaenan miwah kasekten jeng ngandika ingkang\r\ntanpa tanding. Jer nyatane, ndika mustikaning satriya.\r\n",
+      "spans": [
+        {
+          "page": 8,
+          "start": 446,
+          "end": 627
+        }
+      ],
+      "speaker": "Citrawati",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-051",
+      "order": 51,
+      "act": 6,
+      "kind": "dialog",
+      "page": 8,
+      "text": "Sumantri : raden ayu, sampun sanget – sanget anggenipun anjunjung\r\ndateng sumantri. Estunipun, kula ngebun bun enjang njejawah sonten.\r\nKula kang nglamar paduka, keparenga kula boyong dating maespati.\r\nDados jatukramanipun ratu gusti kula.\r\n",
+      "spans": [
+        {
+          "page": 8,
+          "start": 629,
+          "end": 870
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-052",
+      "order": 52,
+      "act": 6,
+      "kind": "dialog",
+      "page": 8,
+      "text": "Citrawati : kula tinitah dados putrining ratu, Kados sampun sakmestine\r\nmenawi kula dados garwane raja lan narpati. Namung kula mboten\r\nkepingin dados garwane ratu kang remen dipun ungkuli dening singep\r\nkemben. Kula mboten rena kalihan nalendra kang kawon\r\nsakderengipun perang. Mila, menawi kula dipun tataraken gusti\r\npaduka, sakderengipun kula nyemerepi bobot njawi lebetipun\r\nkasektene nata ing maespati timbang kalihan Sumantri.\r\n",
+      "spans": [
+        {
+          "page": 8,
+          "start": 872,
+          "end": 1308
+        }
+      ],
+      "speaker": "Citrawati",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-053",
+      "order": 53,
+      "act": 6,
+      "kind": "ada-ada",
+      "page": 8,
+      "text": "Ada – ada : Sun iki ngembani muwus\r\n\r\n              Dewa sang hyang hodipati\r\n\r\n              Bathara suksma kawekas Oo…\r\n",
+      "spans": [
+        {
+          "page": 8,
+          "start": 1310,
+          "end": 1432
+        }
+      ],
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-054",
+      "order": 54,
+      "act": 6,
+      "kind": "dialog",
+      "page": 8,
+      "text": "Sumantri : Aduh gusti kula inggihta menawi tetela mekaten nadyan\r\nanggen kula mundhi jejibahan menika saking ngersanipun gusti kula\r\ndadi awrat. Nadyan dados bebanten, bade kula lampahi\r\n",
+      "spans": [
+        {
+          "page": 8,
+          "start": 1434,
+          "end": 1621
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-055",
+      "order": 55,
+      "act": 7,
+      "kind": "ada-ada",
+      "page": 9,
+      "text": "Ada – ada : Bumi gonjang ganjing langit kelap – kelap\r\n              Katon lir kincanging alis Oo..\r\n",
+      "spans": [
+        {
+          "page": 9,
+          "start": 66,
+          "end": 167
+        }
+      ],
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-056",
+      "order": 56,
+      "act": 7,
+      "kind": "dialog",
+      "page": 9,
+      "text": "Surata : ana apa Sumantri?\r\n",
+      "spans": [
+        {
+          "page": 9,
+          "start": 169,
+          "end": 197
+        }
+      ],
+      "speaker": "Surata",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-057",
+      "order": 57,
+      "act": 7,
+      "kind": "dialog",
+      "page": 9,
+      "text": "Sumantri : Nuwunsewu, kula bade nyuwun gongan paduka kyai patih.\r\n",
+      "spans": [
+        {
+          "page": 9,
+          "start": 197,
+          "end": 263
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-058",
+      "order": 58,
+      "act": 7,
+      "kind": "dialog",
+      "page": 9,
+      "text": "Surata : Ana apa? Iki wis menang, gusti ayu dewi citrawati wus mbok\r\nunggahake ing krata.\r\n",
+      "spans": [
+        {
+          "page": 9,
+          "start": 263,
+          "end": 354
+        }
+      ],
+      "speaker": "Surata",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-059",
+      "order": 59,
+      "act": 7,
+      "kind": "dialog",
+      "page": 9,
+      "text": "Sumantri : Inggih, nanging kula bade mandek wonten njawi kita\r\nmaespati rumiyin.\r\n",
+      "spans": [
+        {
+          "page": 9,
+          "start": 354,
+          "end": 436
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-060",
+      "order": 60,
+      "act": 7,
+      "kind": "dialog",
+      "page": 9,
+      "text": "Surata : Sebabe?\r\n",
+      "spans": [
+        {
+          "page": 9,
+          "start": 436,
+          "end": 454
+        }
+      ],
+      "speaker": "Surata",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-061",
+      "order": 61,
+      "act": 7,
+      "kind": "dialog",
+      "page": 9,
+      "text": "Sumantri Kula bade nyuwun gongan paduka kyai patih, keparenga\r\nngaturaken nawala.\r\n",
+      "spans": [
+        {
+          "page": 9,
+          "start": 454,
+          "end": 537
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-062",
+      "order": 62,
+      "act": 7,
+      "kind": "dialog",
+      "page": 9,
+      "text": "Surata : Kanggo sapa?\r\n",
+      "spans": [
+        {
+          "page": 9,
+          "start": 537,
+          "end": 560
+        }
+      ],
+      "speaker": "Surata",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-063",
+      "order": 63,
+      "act": 7,
+      "kind": "dialog",
+      "page": 9,
+      "text": "Sumantri : Sinuwun prabu Harjuna sasra bahu.\r\n",
+      "spans": [
+        {
+          "page": 9,
+          "start": 560,
+          "end": 606
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-064",
+      "order": 64,
+      "act": 7,
+      "kind": "dialog",
+      "page": 9,
+      "text": "Surata : Lho, kowe mung wong magang anyaran. Kok wanuh wani kowe\r\nkaro ratu gustimu?\r\n",
+      "spans": [
+        {
+          "page": 9,
+          "start": 606,
+          "end": 692
+        }
+      ],
+      "speaker": "Surata",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-065",
+      "order": 65,
+      "act": 7,
+      "kind": "dialog",
+      "page": 9,
+      "text": "Sumantri : Inggih, punika wonten sambung rapeting kalihan lampahan\r\ningkang bade dumados. Pramila, sepisan malih kula nyuwun kanthi\r\nsanget, menawi kyai patih surata mboten kersa, dewi Citrawati\r\nmboten bade kelampahan manjing ing puri kedhaton negari Maespati.\r\n",
+      "spans": [
+        {
+          "page": 9,
+          "start": 692,
+          "end": 955
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-066",
+      "order": 66,
+      "act": 7,
+      "kind": "dialog",
+      "page": 9,
+      "text": "Surata : Apa isine nawala iku?\r\n",
+      "spans": [
+        {
+          "page": 9,
+          "start": 955,
+          "end": 987
+        }
+      ],
+      "speaker": "Surata",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-067",
+      "order": 67,
+      "act": 7,
+      "kind": "dialog",
+      "page": 9,
+      "text": "Sumantri : Kula nuwunsewu, namung gusti kula piyambak ingkang\r\npareng maos isine nawala menika.\r\n",
+      "spans": [
+        {
+          "page": 9,
+          "start": 987,
+          "end": 1084
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-068",
+      "order": 68,
+      "act": 7,
+      "kind": "dialog",
+      "page": 9,
+      "text": "Surata : Yen ana apa – apa, aku ora melu – melu.\r\n",
+      "spans": [
+        {
+          "page": 9,
+          "start": 1084,
+          "end": 1134
+        }
+      ],
+      "speaker": "Surata",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-069",
+      "order": 69,
+      "act": 7,
+      "kind": "dialog",
+      "page": 9,
+      "text": "Sumantri : Inggih raden patih\r\n",
+      "spans": [
+        {
+          "page": 9,
+          "start": 1134,
+          "end": 1165
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-070",
+      "order": 70,
+      "act": 8,
+      "kind": "other",
+      "page": 10,
+      "text": "Undang undang : Riris ardo palwonuting ranu..\r\n",
+      "spans": [
+        {
+          "page": 10,
+          "start": 66,
+          "end": 113
+        }
+      ],
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-071",
+      "order": 71,
+      "act": 8,
+      "kind": "janturan",
+      "page": 10,
+      "text": "Janturan : Tidhem datan ana pangaribawane, mangu mangu gung\r\nmangarah. Nenggih nalendra gung Maespati Prabu Harjuna sasra\r\nbahu, anganti – nganti, ingkang dinuteng kardi. Hanenggih sang\r\nBambang sumantri. Miwah para senopati gegedhuging manggalaning\r\nkewuh, cucuking hadilaga. Adhipati suryajethu, candrakethu,\r\nkalinggaprana, lan kalinggapati. Hanenggih nedheng lelenggahan\r\ningkang mosik telenging batin, muhung nenggih calon garwanira dewi\r\ncitrawati. Ingkang mungguhing ayun nenggih sang prabu Soda.\r\nNginango dereng abang, idua dereng ambles bumi, kebat kaya kilat\r\npraptane sang patih surata.\r\n",
+      "spans": [
+        {
+          "page": 10,
+          "start": 115,
+          "end": 715
+        }
+      ],
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-072",
+      "order": 72,
+      "act": 8,
+      "kind": "ada-ada",
+      "page": 10,
+      "text": "Ada – ada : Raras ing rih sang nahengkung\r\n              Ing tyas kapadaningsih\r\n              Kasangsaya ing turidha Oo..\r\n",
+      "spans": [
+        {
+          "page": 10,
+          "start": 717,
+          "end": 841
+        }
+      ],
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-073",
+      "order": 73,
+      "act": 8,
+      "kind": "dialog",
+      "page": 10,
+      "text": "H. sasra : Jagad dewa batara, surata, agahan lumarapmu sowan\r\npanjenenganingsun, wis bali saka Magadha?\r\n",
+      "spans": [
+        {
+          "page": 10,
+          "start": 843,
+          "end": 948
+        }
+      ],
+      "speaker": "H. sasra",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-074",
+      "order": 74,
+      "act": 8,
+      "kind": "dialog",
+      "page": 10,
+      "text": "Surata : Kawula nuwun inggih sinuwun, sowan kula wonten ing gusti\r\nkula, mboten sesarengan kalihan Bambang Sumantri. Awit kula dipun\r\nkengken kalihan bambang Sumantri\r\n",
+      "spans": [
+        {
+          "page": 10,
+          "start": 948,
+          "end": 1116
+        }
+      ],
+      "speaker": "Surata",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-075",
+      "order": 75,
+      "act": 8,
+      "kind": "dialog",
+      "page": 10,
+      "text": "H. sasra : Jagad dewa bathara, Sumantri wani kongkonan marang\r\nkowe? Kowe dikon apa?\r\n",
+      "spans": [
+        {
+          "page": 10,
+          "start": 1116,
+          "end": 1202
+        }
+      ],
+      "speaker": "H. sasra",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-076",
+      "order": 76,
+      "act": 8,
+      "kind": "dialog",
+      "page": 10,
+      "text": "Surata : Ngaturaken nawala konjuk ing ngarsa paduka gusti kula.\r\n",
+      "spans": [
+        {
+          "page": 10,
+          "start": 1202,
+          "end": 1267
+        }
+      ],
+      "speaker": "Surata",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-077",
+      "order": 77,
+      "act": 8,
+      "kind": "dialog",
+      "page": 10,
+      "text": "H. sasra : Lho, Sumantri ndadak nganggo layang layangan lawan aku?\r\nCoba kaya ngapa, ndi layange?\r\n",
+      "spans": [
+        {
+          "page": 10,
+          "start": 1267,
+          "end": 1366
+        }
+      ],
+      "speaker": "H. sasra",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-078",
+      "order": 78,
+      "act": 9,
+      "kind": "ada-ada",
+      "page": 11,
+      "text": "Ada – ada : Jaja muntab lir kinetap\r\n              Duka yayah sinipi\r\n              Jaja bang mawinga winga Oo..\r\n",
+      "spans": [
+        {
+          "page": 11,
+          "start": 66,
+          "end": 180
+        }
+      ],
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-079",
+      "order": 79,
+      "act": 9,
+      "kind": "ada-ada",
+      "page": 11,
+      "text": "Ada – ada : Deniro arso campuh prang\r\n              Sri harjuna sasra\r\n              Klawan raden Sumantri\r\n              Aliu prabawa Oo..\r\n",
+      "spans": [
+        {
+          "page": 11,
+          "start": 182,
+          "end": 323
+        }
+      ],
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-080",
+      "order": 80,
+      "act": 9,
+      "kind": "dialog",
+      "page": 11,
+      "text": "H. sasra : Bagus tenan sira Sumantri, ing ngarep sira ngaku isih\r\nseduluran karo harjunasasra. Saiki ketara kekendelanmu, sira wong\r\nlanang tenan.\r\n",
+      "spans": [
+        {
+          "page": 11,
+          "start": 325,
+          "end": 473
+        }
+      ],
+      "speaker": "H. sasra",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-081",
+      "order": 81,
+      "act": 9,
+      "kind": "dialog",
+      "page": 11,
+      "text": "Sumantri : Nyuwun pangapunten ingkang ag..\r\n",
+      "spans": [
+        {
+          "page": 11,
+          "start": 473,
+          "end": 517
+        }
+      ],
+      "speaker": "Sumantri",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-082",
+      "order": 82,
+      "act": 9,
+      "kind": "dialog",
+      "page": 11,
+      "text": "H. sasra : Ora usah, ayo ungalna dadamu, nanging ya kuwi, yen kowe\r\nkalah, gede pidanane, Sumantri...\r\n",
+      "spans": [
+        {
+          "page": 11,
+          "start": 517,
+          "end": 620
+        }
+      ],
+      "speaker": "H. sasra",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-083",
+      "order": 83,
+      "act": 9,
+      "kind": "pocapan",
+      "page": 11,
+      "text": "Pocapan : Harjuna sasra dupi mulat ingkang kumelet wonten\r\nastane Bambang Sumantri. Nenggih cakra baswara. Mindeng kang\r\nnetra sejati, meker saliraning dadi pitung gunung gedene..!!\r\n",
+      "spans": [
+        {
+          "page": 11,
+          "start": 622,
+          "end": 805
+        }
+      ],
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-084",
+      "order": 84,
+      "act": 10,
+      "kind": "dialog",
+      "page": 12,
+      "text": "Citrawati : Sungkem pangabekti kula konjuk sinuwun..\r\n",
+      "spans": [
+        {
+          "page": 12,
+          "start": 66,
+          "end": 120
+        }
+      ],
+      "speaker": "Citrawati",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-085",
+      "order": 85,
+      "act": 10,
+      "kind": "dialog",
+      "page": 12,
+      "text": "H. sasra : yayi citrawati, wus kinodrat jangkaning jagad, lamun sira\r\npinasthi dadya jatukramaningsun\r\n",
+      "spans": [
+        {
+          "page": 12,
+          "start": 120,
+          "end": 223
+        }
+      ],
+      "speaker": "H. sasra",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-086",
+      "order": 86,
+      "act": 10,
+      "kind": "dialog",
+      "page": 12,
+      "text": "Citrawati : Namung kemawon sinuwuunn...\r\n",
+      "spans": [
+        {
+          "page": 12,
+          "start": 223,
+          "end": 264
+        }
+      ],
+      "speaker": "Citrawati",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-087",
+      "order": 87,
+      "act": 10,
+      "kind": "dialog",
+      "page": 12,
+      "text": "H. sasra : Sira darbe bebana apa?\r\n",
+      "spans": [
+        {
+          "page": 12,
+          "start": 264,
+          "end": 299
+        }
+      ],
+      "speaker": "H. sasra",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-088",
+      "order": 88,
+      "act": 10,
+      "kind": "dialog",
+      "page": 12,
+      "text": "Citrawati : Mugi wonten kepareng padhuka kerso mboyong taman\r\nsriwedari mapan ing negari maespati, murih saya wimbuh tentreming\r\nbatos leladi dateng padhuka sinuwuunn..\r\n",
+      "spans": [
+        {
+          "page": 12,
+          "start": 299,
+          "end": 469
+        }
+      ],
+      "speaker": "Citrawati",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    },
+    {
+      "id": "provisional-089",
+      "order": 89,
+      "act": 10,
+      "kind": "dialog",
+      "page": 12,
+      "text": "H. sasra : Bambang Sumantri, aja wedi kangelan. Sira bakal sun wisuda,\r\nminangka pepatih bisa mboyong taman sriwedari, mapan ing negara\r\nMaespati.\r\n",
+      "spans": [
+        {
+          "page": 12,
+          "start": 469,
+          "end": 617
+        }
+      ],
+      "speaker": "H. sasra",
+      "reviewRequired": true,
+      "reviewNotes": [
+        "Provisional source-line grouping, speaker/kind and boundary need review",
+        "Act/scene is inferred, not author-provided",
+        "Cue may continue across page boundaries; review adjacent cues"
+      ]
+    }
+  ],
+  "excludedSource": [
+    {
+      "page": 1,
+      "start": 0,
+      "end": 64,
+      "text": "                                                             1\r\n",
+      "reason": "probable printed page number",
+      "reviewRequired": true
+    },
+    {
+      "page": 1,
+      "start": 66,
+      "end": 93,
+      "text": "         Bambang Sumantri\r\n",
+      "reason": "probable title or plot synopsis (Cerita), not performance cue",
+      "reviewRequired": true
+    },
+    {
+      "page": 1,
+      "start": 95,
+      "end": 159,
+      "text": "Cerita : Seorang ksatria gagah yang ditugaskan untuk memboyong\r\n",
+      "reason": "probable title or plot synopsis (Cerita), not performance cue",
+      "reviewRequired": true
+    },
+    {
+      "page": 1,
+      "start": 159,
+      "end": 225,
+      "text": "putri dari negara Magadha. Dia, harus melawan prabu Darmawasesa.\r\n",
+      "reason": "probable title or plot synopsis (Cerita), not performance cue",
+      "reviewRequired": true
+    },
+    {
+      "page": 1,
+      "start": 225,
+      "end": 290,
+      "text": "Akhirnya, dia menang. setelah menang citrawati tidak mau dengan\r\n",
+      "reason": "probable title or plot synopsis (Cerita), not performance cue",
+      "reviewRequired": true
+    },
+    {
+      "page": 1,
+      "start": 290,
+      "end": 359,
+      "text": "harjuna sasra. Akhirnya, sumantri bilang ke harjuna sasra kalau dia\r\n",
+      "reason": "probable title or plot synopsis (Cerita), not performance cue",
+      "reviewRequired": true
+    },
+    {
+      "page": 1,
+      "start": 359,
+      "end": 423,
+      "text": "yang akan menikahi dewi citrawati. Harjuna sasra pun marah dan\r\n",
+      "reason": "probable title or plot synopsis (Cerita), not performance cue",
+      "reviewRequired": true
+    },
+    {
+      "page": 1,
+      "start": 423,
+      "end": 487,
+      "text": "menyarang Sumantri. Akhirnya, dia triwikrama, dan sumantri pun\r\n",
+      "reason": "probable title or plot synopsis (Cerita), not performance cue",
+      "reviewRequired": true
+    },
+    {
+      "page": 1,
+      "start": 487,
+      "end": 498,
+      "text": "mengalah.\r\n",
+      "reason": "probable title or plot synopsis (Cerita), not performance cue",
+      "reviewRequired": true
+    },
+    {
+      "page": 2,
+      "start": 0,
+      "end": 64,
+      "text": "                                                             2\r\n",
+      "reason": "probable printed page number",
+      "reviewRequired": true
+    },
+    {
+      "page": 3,
+      "start": 0,
+      "end": 64,
+      "text": "                                                             3\r\n",
+      "reason": "probable printed page number",
+      "reviewRequired": true
+    },
+    {
+      "page": 4,
+      "start": 0,
+      "end": 64,
+      "text": "                                                             4\r\n",
+      "reason": "probable printed page number",
+      "reviewRequired": true
+    },
+    {
+      "page": 5,
+      "start": 0,
+      "end": 64,
+      "text": "                                                             5\r\n",
+      "reason": "probable printed page number",
+      "reviewRequired": true
+    },
+    {
+      "page": 6,
+      "start": 0,
+      "end": 64,
+      "text": "                                                             6\r\n",
+      "reason": "probable printed page number",
+      "reviewRequired": true
+    },
+    {
+      "page": 7,
+      "start": 0,
+      "end": 64,
+      "text": "                                                             7\r\n",
+      "reason": "probable printed page number",
+      "reviewRequired": true
+    },
+    {
+      "page": 8,
+      "start": 0,
+      "end": 64,
+      "text": "                                                             8\r\n",
+      "reason": "probable printed page number",
+      "reviewRequired": true
+    },
+    {
+      "page": 9,
+      "start": 0,
+      "end": 64,
+      "text": "                                                             9\r\n",
+      "reason": "probable printed page number",
+      "reviewRequired": true
+    },
+    {
+      "page": 10,
+      "start": 0,
+      "end": 64,
+      "text": "                                                            10\r\n",
+      "reason": "probable printed page number",
+      "reviewRequired": true
+    },
+    {
+      "page": 11,
+      "start": 0,
+      "end": 64,
+      "text": "                                                            11\r\n",
+      "reason": "probable printed page number",
+      "reviewRequired": true
+    },
+    {
+      "page": 12,
+      "start": 0,
+      "end": 64,
+      "text": "                                                            12\r\n",
+      "reason": "probable printed page number",
+      "reviewRequired": true
+    },
+    {
+      "page": 12,
+      "start": 619,
+      "end": 646,
+      "text": "Yeesss… We are donee..!!!\r\n",
+      "reason": "probable author end note",
+      "reviewRequired": true
+    }
+  ]
+}

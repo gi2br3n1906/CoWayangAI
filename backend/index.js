@@ -55,6 +55,8 @@ function createBackend(options = {}) {
         next();
     });
     app.use('/api/foh-stream/:streamKey/audio', express.raw({ type: ['audio/webm', 'audio/ogg', 'audio/wav'], limit: '8mb' }));
+    app.use('/api/foh-stream/:streamKey/script-preview', express.json({ limit: '12mb' }));
+    app.use('/api/foh-stream/:streamKey/script-position', express.json({ limit: '2mb' }));
     app.use(express.json({ limit: '50mb' }));
     app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
