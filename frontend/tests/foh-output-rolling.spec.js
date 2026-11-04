@@ -2,6 +2,7 @@ import { beforeEach, afterEach, describe, it, expect, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
 import FohOutputView from '../src/views/FohOutputView.vue'
+import outputSource from '../src/views/FohOutputView.vue?raw'
 
 const mocks = vi.hoisted(() => ({ handlers: {}, socket: { on: vi.fn((event, fn) => { mocks.handlers[event] = fn }), emit: vi.fn(), disconnect: vi.fn() } }))
 vi.mock('socket.io-client', () => ({ io: () => mocks.socket }))
@@ -15,6 +16,14 @@ afterEach(() => { wrapper?.unmount(); wrapper = null; vi.useRealTimers() })
 beforeEach(() => { mocks.handlers = {}; vi.useFakeTimers(); vi.setSystemTime(9000000) })
 
 describe('rolling audience output', () => {
+ it('uses Arial with an explicit black subtitle outline', () => {
+  expect(outputSource).toMatch(/font-family:\s*Arial,\s*Helvetica,\s*sans-serif/)
+  expect(outputSource).toMatch(/-webkit-text-stroke:\s*2px\s+#000/)
+  expect(outputSource).toMatch(/paint-order:\s*stroke\s+fill/)
+ })
+ it('gives the default subtitle canvas a wide horizontal area', () => {
+  expect(outputSource).toMatch(/\.foh-canvas\s*\{[^}]*padding:\s*5vh\s+2vw/s)
+ })
  it.each(['jawa', 'indonesia', 'inggris'])('shows only subtitle text in the %s source', async language => {
   show(`lang=${language}&history=1`)
   await send(snapshot([entry('a', 10000)]))

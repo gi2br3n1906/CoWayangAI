@@ -108,12 +108,12 @@ onUnmounted(() => { clearTimeout(clearTimer); resizeObserver?.disconnect(); glob
 
 <style>
 html:has(.foh-canvas), body:has(.foh-canvas), #app:has(.foh-canvas) { width: 100%; height: 100%; min-height: 100%; margin: 0; overflow: hidden; background: transparent; }
-.foh-canvas { width: 100vw; height: 100dvh; box-sizing: border-box; display: flex; flex-direction: column; padding: 5vh 5vw; color: white; font-family: Arial, Helvetica, sans-serif; overflow-y: auto; }
+.foh-canvas { width: 100vw; height: 100dvh; box-sizing: border-box; display: flex; flex-direction: column; padding: 5vh 2vw; color: white; font-family: Arial, Helvetica, sans-serif; overflow-y: auto; }
 .foh-canvas.foh-wide { padding-left: 2vw; padding-right: 2vw; }
 .foh-lines { width: 100%; flex: 0 0 auto; display: flex; flex-direction: column; gap: .4em; text-align: center; }
 .foh-entries { display: flex; flex-direction: column; gap: .12em; }
 .foh-overflow-warning { position: fixed; top: 0; left: 0; z-index: 1; background: #000; color: #fff; font: 700 14px Arial, sans-serif; padding: 4px 8px; }
-.foh-line { margin: 0; color: var(--foh-text-color, #fff); font-size: var(--foh-size); font-weight: 800; line-height: 1.16; text-shadow: 0 2px 2px #000, 2px 0 2px #000, 0 -2px 2px #000, -2px 0 2px #000, 0 5px 16px #000; overflow-wrap: anywhere; }
+.foh-line { margin: 0; color: var(--foh-text-color, #fff); font-size: var(--foh-size); font-weight: 800; line-height: 1.16; -webkit-text-stroke: 2px #000; paint-order: stroke fill; text-shadow: 0 2px 2px #000, 2px 0 2px #000, 0 -2px 2px #000, -2px 0 2px #000, 0 5px 16px #000; overflow-wrap: anywhere; }
 .foh-older { opacity: .7; font-size: calc(var(--foh-size) * .8); }
 .foh-chunk.foh-older .foh-line { font-size: calc(var(--foh-size) * .8); }
 .foh-paired { gap: .35em; }
