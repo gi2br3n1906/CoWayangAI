@@ -2,6 +2,18 @@ import { describe, it, expect } from 'vitest'
 import { createFohDebug } from '../src/utils/fohDebug.js'
 
 describe('FOH debug timeline', () => {
+ it('preserves requested model on failure and records the actual successful model safely', () => {
+  const debug = createFohDebug(); debug.start()
+  const failed = debug.capture(0.05, 'gemini-3.8-flash'); debug.queue(failed, 0.1); debug.sending(failed)
+  debug.fail(failed, { code: 'ETIMEDOUT', config: { data: 'audio-secret' } })
+  const succeeded = debug.capture(0.05, 'gemini-3.8-flash'); debug.queue(succeeded, 0.1); debug.sending(succeeded)
+  debug.finish(succeeded, { status: 200, data: { model: 'gemini-3.5-flash-lite', subtitle: {} } })
+  expect(debug.snapshot().chunks).toMatchObject([
+   { model: 'gemini-3.8-flash', status: 'error', errorCategory: 'timeout' },
+   { model: 'gemini-3.8-flash', actualModel: 'gemini-3.5-flash-lite' },
+  ])
+  expect(JSON.stringify(debug.snapshot())).not.toContain('audio-secret')
+ })
  it('uses the start click as origin and tracks a successful upload', () => {
   let now = 1000
   const debug = createFohDebug({ now: () => now })

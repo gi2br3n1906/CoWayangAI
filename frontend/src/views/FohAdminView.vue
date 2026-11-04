@@ -7,15 +7,17 @@ import { createFohDebug } from '@/utils/fohDebug'
 
 const requestedKey = ref(''), streamKey = ref(''), uploadToken = ref(''), context = ref(''), outputs = ref({}), savedStreams = ref([])
 const devices = ref([]), deviceId = ref(''), threshold = ref(0.035), level = ref(0), state = ref('idle'), error = ref(''), copied = ref('')
+const selectedModel = ref('gemini-3.5-flash-lite')
 const outputLanguages = ['jawa', 'indonesia', 'inggris']
 const outputLabels = { jawa: 'Jawa', indonesia: 'Indonesia', inggris: 'Inggris' }
 const outputColors = ref({ jawa: 'yellow', indonesia: 'white', inggris: 'cyan' })
+const outputHistory = ref('2')
 const base = computed(() => globalThis.location?.origin || '')
 const jsonUrl = computed(() => `${base.value}/api/foh-stream/${streamKey.value}/latest`)
-const outputLinks = computed(() => Object.fromEntries(outputLanguages.map(language => [language, buildLanguageOutputUrl(base.value, outputs.value[language]?.outputPath || `/foh-output/${streamKey.value}-${language}`, language, outputColors.value[language])])))
+const outputLinks = computed(() => Object.fromEntries(outputLanguages.map(language => [language, buildLanguageOutputUrl(base.value, outputs.value[language]?.outputPath || `/foh-output/${streamKey.value}-${language}`, language, outputColors.value[language], outputHistory.value)])))
 let mediaStream, recorder, audioContext, analyser, animation, chunks = [], activeSince = 0, silenceSince = 0, utteranceRmsSum = 0, utteranceRmsCount = 0, sendQueue = Promise.resolve(), sessionInvalidated = false, captureGeneration = 0
 const debug = createFohDebug(), debugData = ref(debug.snapshot())
-let debugChunkId = null, debugRun = 0, sessionGeneration = 0
+let debugChunkId = null, captureModel = null, debugRun = 0, sessionGeneration = 0
 function refreshDebug() { debugData.value = debug.snapshot() }
 function debugJson() { return JSON.stringify(debug.snapshot(), null, 2) }
 function downloadDebug() {
@@ -97,7 +99,8 @@ async function startAudio() {
      recorder = new MediaRecorder(mediaStream, { mimeType, audioBitsPerSecond: 64000 })
      recorder.ondataavailable = event => { if (generation === captureGeneration && event.data.size) chunks.push(event.data) }
      recorder.start(100)
-     debugChunkId = debug.capture(Number(threshold.value)); refreshDebug()
+     captureModel = selectedModel.value
+     debugChunkId = debug.capture(Number(threshold.value), captureModel); refreshDebug()
      state.value = 'speaking'
     }
     silenceSince = 0
@@ -117,7 +120,7 @@ async function sendChunk() {
  const duration = performance.now() - activeSince
  if (duration < 200) { debug.cancel(debugChunkId); debugChunkId = null; refreshDebug(); activeSince = 0; silenceSince = 0; chunks = []; utteranceRmsSum = 0; utteranceRmsCount = 0; state.value = 'listening'; return }
  const currentRecorder = recorder
- const currentDebugId = debugChunkId, currentDebugRun = debugRun; debugChunkId = null
+ const currentDebugId = debugChunkId, currentDebugRun = debugRun, currentModel = captureModel; debugChunkId = null; captureModel = null
  const generation = captureGeneration, currentSession = sessionGeneration
  recorder = null
  const stopped = new Promise(resolve => currentRecorder.addEventListener('stop', resolve, { once: true }))
@@ -132,7 +135,7 @@ async function sendChunk() {
  sendQueue = sendQueue.then(() => {
   if (sessionInvalidated || generation !== captureGeneration) return null
   debug.sending(currentDebugId); refreshDebug()
-  return api.post(`/api/foh-stream/${encodeURIComponent(key)}/audio`, blob, { headers: { 'Content-Type': mime, 'x-foh-token': token, 'x-foh-context': lakon, 'x-foh-rms': String(rms) } })
+  return api.post(`/api/foh-stream/${encodeURIComponent(key)}/audio`, blob, { headers: { 'Content-Type': mime, 'x-foh-token': token, 'x-foh-context': lakon, 'x-foh-rms': String(rms), 'x-foh-model': currentModel }, ...(currentModel === 'gemini-3.8-flash' ? { timeout: 45000 } : {}) })
  })
  sendQueue = sendQueue.then(response => { if (currentDebugRun === debugRun && response) { debug.finish(currentDebugId, response, token); refreshDebug() } })
  sendQueue = sendQueue.catch(cause => {
@@ -148,7 +151,7 @@ async function sendChunk() {
  }).finally(() => { if (generation === captureGeneration && mediaStream) state.value = activeSince ? 'speaking' : 'listening' })
 }
 function stopAudio() {
- debug.stop(); debugChunkId = null; refreshDebug()
+ debug.stop(); debugChunkId = null; captureModel = null; refreshDebug()
  captureGeneration++
  cancelAnimationFrame(animation); animation = null
  if (recorder && recorder.state !== 'inactive') recorder.stop()
@@ -186,11 +189,15 @@ onUnmounted(stopAudio)
   <template v-else>
    <div class="foh-toolbar"><div><span class="status-dot connected" /> SIARAN AKTIF <code>{{ streamKey }}</code></div><button class="button" @click="endSession">Akhiri sesi</button></div>
    <section class="surface foh-section"><div class="section-heading"><div><h2>Output per bahasa</h2><p>Satu input dan satu hit Gemini diproyeksikan menjadi tiga stream key publik. Pilih warna teks untuk masing-masing output.</p></div></div>
+    <label class="foh-field">Jumlah chunk subtitle terbaru<select v-model="outputHistory" class="input" aria-describedby="foh-history-notice"><option value="1">1 chunk</option><option value="2">2 chunk</option><option value="3">3 chunk</option></select></label>
+    <p id="foh-history-notice">Setelah mengubah jumlah, salin link baru dan perbarui URL Browser Source di OBS. Link yang sudah disalin tidak berubah otomatis.</p>
     <div class="foh-language-links"><article v-for="language in outputLanguages" :key="language" class="foh-language-card"><div class="foh-language-card-heading"><strong>{{ outputLabels[language] }}</strong><code>{{ outputs[language]?.streamKey }}</code></div><label class="foh-field">Warna teks<select v-model="outputColors[language]" class="input"><option value="white">Putih</option><option value="yellow">Kuning</option><option value="cyan">Cyan</option><option value="lime">Hijau</option><option value="red">Merah</option><option value="orange">Oranye</option><option value="pink">Pink</option></select></label><input class="input" readonly :value="outputLinks[language]" /><button class="button" @click="copyLink(language, outputLinks[language])">{{ copied === language ? 'Tersalin' : 'Copy link' }}</button></article></div>
     <label class="foh-field">Raw JSON gabungan<input class="input" readonly :value="jsonUrl" /><button class="button" @click="copyLink('json', jsonUrl)">{{ copied === 'json' ? 'Tersalin' : 'Copy link' }}</button></label>
    </section>
    <section class="surface foh-section"><div class="section-heading"><div><h2>Input audio</h2><p>Browser tidak menerapkan echo cancellation, noise suppression, atau auto gain.</p></div><span class="foh-state">{{ state }}</span></div>
     <label class="foh-field">Perangkat input<select v-model="deviceId" class="input"><option v-for="device in devices" :key="device.deviceId" :value="device.deviceId">{{ device.label || `Audio input ${device.deviceId.slice(0, 6)}` }}</option></select></label>
+   <label class="foh-field">Model Gemini<select v-model="selectedModel" class="input" aria-describedby="foh-model-warning"><option value="gemini-3.5-flash-lite">Gemini 3.5 Flash Lite</option><option value="gemini-3.8-flash">Gemini 3.8 Flash</option></select></label>
+   <p id="foh-model-warning">Gemini 3.8 Flash memakai batas timeout 45 detik, dapat memperlambat antrean dan menambah biaya. Tidak ada percobaan ulang otomatis. Perubahan berlaku untuk chunk berikutnya.</p>
     <div class="foh-meter"><span :style="{ width: `${level * 100}%` }" /></div>
     <label class="setting-range"><span>VAD threshold <output>{{ Number(threshold).toFixed(3) }}</output></span><input v-model="threshold" type="range" min="0.005" max="0.15" step="0.005" /><small>Chunk dikirim setelah hening 700 ms atau maksimal {{ MAX_UTTERANCE_MS / 1000 }} detik bicara.</small></label>
     <label class="foh-field">Konteks lakon & tokoh<textarea v-model="context" class="input" maxlength="2000" rows="3" placeholder="Contoh: Lakon Ramayana; Rama, Sinta, Rahwana…" /></label>

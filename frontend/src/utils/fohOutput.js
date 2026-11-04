@@ -15,7 +15,8 @@ export function parseSubtitleColor(value) {
   return /^#(?:[\da-f]{3}|[\da-f]{6}|[\da-f]{8})$/i.test(color) ? color : '#ffffff'
 }
 
-export function buildLanguageOutputUrl(base, outputPath, language, color = 'white') {
+export function buildLanguageOutputUrl(base, outputPath, language, color = 'white', history) {
   const params = new URLSearchParams({ bg: 'transparent', lang: language, size: 'xl', align: 'bottom', color })
+  if ([1, 2, 3].includes(Number(history))) params.set('history', String(Number(history)))
   return `${base}${outputPath}?${params.toString()}`
 }

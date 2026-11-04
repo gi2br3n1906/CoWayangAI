@@ -6,9 +6,14 @@ const MAX_AUDIO_BYTES = 8 * 1024 * 1024;
 const MAX_CONTEXT_LENGTH = 2000;
 const SILENCE_RMS_THRESHOLD = 0.002;
 const OUTPUT_LANGUAGES = ['jawa', 'indonesia', 'inggris'];
+const ALLOWED_MODELS = new Set(['gemini-3.8-flash', 'gemini-3.5-flash-lite']);
 const OUTPUT_SUFFIXES = { jawa: 'jawa', indonesia: 'indo', inggris: 'inggris' };
 
-function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.now, randomBytes = crypto.randomBytes, logger = console, authenticate, store }) {
+function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.now, randomBytes = crypto.randomBytes, logger = console, authenticate, store, providerTimeoutMs }) {
+    let lastNow = 0;
+    const clock = () => (lastNow = Math.max(lastNow, now()));
+    const hasText = subtitle => OUTPUT_LANGUAGES.some(language => typeof subtitle[language] === 'string' && subtitle[language].trim());
+    const historyItem = (subtitle, updatedAt) => ({ id: crypto.randomUUID(), updatedAt, ...Object.fromEntries(OUTPUT_LANGUAGES.map(language => [language, subtitle[language] || ''])) });
     const verifyRequest = async req => {
         if (typeof authenticate !== 'function') return null;
         const match = /^Bearer\s+(.+)$/i.exec(req.get('authorization') || '');
@@ -39,6 +44,7 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
         uploadTokenHash: record.uploadTokenHash || null,
         clients: new Set(),
         processing: false,
+        history: record.status !== 'ended' && record.subtitle?.updatedAt > 0 && clock() - record.subtitle.updatedAt <= 12000 && record.subtitle.updatedAt <= clock() && hasText(record.subtitle) ? [historyItem(record.subtitle, record.subtitle.updatedAt)] : [],
         outputAliases: new Map(Object.values(record.outputs || {}).map(output => [output.streamKey, output.language])),
     });
     const hydrateStream = record => {
@@ -48,6 +54,7 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
             streams.set(record.streamKey, created);
             return created;
         }
+        if (!existing.ownerUid) existing.history = streamFromRecord(record).history;
         Object.assign(existing, {
             ownerUid: record.ownerUid,
             updatedAt: record.subtitle?.updatedAt || 0,
@@ -86,7 +93,7 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
     const getStream = key => {
         let stream = streams.get(key);
         if (!stream) {
-            stream = { streamKey: key, updatedAt: 0, jawa: '', indonesia: '', inggris: '', uploadTokenHash: null, clients: new Set(), processing: false, outputAliases: new Map() };
+            stream = { streamKey: key, updatedAt: 0, jawa: '', indonesia: '', inggris: '', uploadTokenHash: null, clients: new Set(), processing: false, outputAliases: new Map(), history: [] };
             streams.set(key, stream);
         }
         return stream;
@@ -121,13 +128,18 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
         registerAliases(parent);
         return { stream: parent, language: resolved.language, streamKey: resolved.streamKey };
     };
-    const payloadFor = (stream, streamKey = stream.streamKey, language = null) => ({
+    const payloadFor = (stream, streamKey = stream.streamKey, language = null) => {
+        const serverNow = clock();
+        stream.history = (stream.history || []).filter(item => item.updatedAt <= serverNow && serverNow - item.updatedAt <= 12000);
+        return {
         streamKey,
         updatedAt: stream.updatedAt,
         jawa: !language || language === 'jawa' ? stream.jawa : '',
         indonesia: !language || language === 'indonesia' ? stream.indonesia : '',
         inggris: !language || language === 'inggris' ? stream.inggris : '',
-    });
+        serverNow,
+        history: stream.history.map(item => language ? { id: item.id, updatedAt: item.updatedAt, [language]: item[language] } : { ...item }),
+    }; };
     const publish = stream => {
         const payload = payloadFor(stream);
         io.to(`foh:${stream.streamKey}`).emit('foh-subtitle', payload);
@@ -158,8 +170,8 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
         for (let index = dataStart; index + 1 < dataEnd; index += 2) { const sample = bytes.readInt16LE(index) / 32768; sum += sample * sample; samples++; }
         return samples === 0 || Math.sqrt(sum / samples) >= SILENCE_RMS_THRESHOLD;
     };
-    const transcribe = async ({ bytes, mimeType, context }) => {
-        const { apiKey, model } = getConfig();
+    const transcribe = async ({ bytes, mimeType, context, model = getConfig().model, signal }) => {
+        const { apiKey } = getConfig();
         if (!apiKey) throw Object.assign(new Error('GEMINI_API_KEY is not configured on the backend'), { status: 503 });
         let sdk = googleGenAi;
         if (!sdk) {
@@ -174,6 +186,7 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
                 { text: `Transcribe any human spoken voice as the performer's dialogue in transcript. If the audio contains only gamelan, music, or instruments without human speech, return empty strings. Translate the spoken dialogue into Indonesian in indonesia and English in inggris. Preserve Javanese or other original speech in transcript. Use the context to resolve names and terms, but never invent dialogue. Context: ${context || '(none)'}` },
             ] }],
             config: {
+                abortSignal: signal,
                 thinkingConfig: { thinkingLevel: 'low' },
                 responseMimeType: 'application/json',
                 responseSchema: { type: 'OBJECT', properties: { transcript: { type: 'STRING' }, indonesia: { type: 'STRING' }, inggris: { type: 'STRING' } }, required: ['transcript', 'indonesia', 'inggris'] },
@@ -248,11 +261,12 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
             await previous;
             try {
                 if (!timingSafeEqual(tokenHash(uploadToken), stream.uploadTokenHash || '')) return error(res, 401, 'Invalid stream credentials');
-                const endedAt = now();
+                const endedAt = clock();
                 if (!await getStore().end(stream.streamKey, claims.uid, endedAt)) return error(res, 401, 'Invalid stream credentials');
                 stream.uploadTokenHash = null;
                 stream.updatedAt = endedAt;
                 stream.jawa = ''; stream.indonesia = ''; stream.inggris = '';
+                stream.history = [];
                 publish(stream);
                 return res.json({ ok: true });
             } catch { return error(res, 503, 'FOH storage unavailable'); }
@@ -264,6 +278,9 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
             const stream = streams.get(req.params.streamKey) || await resolveOwnedStream(req.params.streamKey, claims.uid);
             const uploadToken = req.get('x-foh-token');
             if (!stream || stream.ownerUid !== claims.uid || !validKey(req.params.streamKey) || !timingSafeEqual(tokenHash(uploadToken), stream.uploadTokenHash || '')) return error(res, 401, 'Invalid stream credentials');
+            const requestedModel = req.get('x-foh-model');
+            if (requestedModel !== undefined && !ALLOWED_MODELS.has(requestedModel)) return error(res, 400, 'Invalid FOH model');
+            const model = requestedModel ?? getConfig().model;
             const mimeType = (req.get('content-type') || '').split(';')[0].trim().toLowerCase();
             if (!['audio/webm', 'audio/ogg', 'audio/wav'].includes(mimeType)) return error(res, 415, 'Unsupported audio format');
             const bytes = req.body;
@@ -272,6 +289,7 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
             let release;
             stream.processing = new Promise(resolve => { release = resolve; });
             await previous;
+            if (res.destroyed) { release(); return; }
             if (!timingSafeEqual(tokenHash(uploadToken), stream.uploadTokenHash || '')) { release(); return error(res, 401, 'Invalid stream credentials'); }
             const context = String(req.get('x-foh-context') || '').slice(0, MAX_CONTEXT_LENGTH);
             const clientRms = Number(req.get('x-foh-rms'));
@@ -280,29 +298,44 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
             try {
                 if ((Number.isFinite(clientRms) && clientRms < SILENCE_RMS_THRESHOLD) || (mimeType === 'audio/wav' && !wavHasSignal(bytes))) {
                     const subtitle = { jawa: '', indonesia: '', inggris: '' };
-                    stream.updatedAt = now(); stream.jawa = ''; stream.indonesia = ''; stream.inggris = '';
-                    try { await getStore().updateSubtitle(stream.streamKey, subtitle, stream.updatedAt); }
-                    catch { release(); return error(res, 503, 'FOH storage unavailable'); }
+                    const updatedAt = clock();
+                    try { await getStore().updateSubtitle(stream.streamKey, subtitle, updatedAt); }
+                    catch { return error(res, 503, 'FOH storage unavailable'); }
+                    stream.updatedAt = updatedAt; stream.jawa = ''; stream.indonesia = ''; stream.inggris = '';
+                    stream.history = [];
                     publish(stream);
                     logger.log('[FOH] Silent chunk skipped Gemini', { streamKey: req.params.streamKey, latencyMs: Date.now() - receivedAt });
-                    return res.json({ ok: true, updatedAt: stream.updatedAt, silent: true, subtitle });
+                    return res.json({ ok: true, updatedAt: stream.updatedAt, silent: true, subtitle, model });
                 }
                 logger.log('[FOH] Gemini request started', { streamKey: req.params.streamKey });
-                const subtitle = await transcribe({ bytes, mimeType, context });
+                const controller = new AbortController();
+                let timer, onClose;
+                const cancelled = new Promise((_, reject) => {
+                    onClose = () => { reject(Object.assign(new Error('Client disconnected'), { status: 499 })); controller.abort(); };
+                    res.once('close', onClose);
+                    timer = setTimeout(() => { reject(Object.assign(new Error('Gemini request timed out'), { status: 504 })); controller.abort(); }, providerTimeoutMs ?? (model === 'gemini-3.8-flash' ? 40000 : 9000));
+                });
+                let subtitle;
+                try { subtitle = await Promise.race([transcribe({ bytes, mimeType, context, model, signal: controller.signal }), cancelled]); }
+                finally { clearTimeout(timer); res.off('close', onClose); }
+                if (res.destroyed) return;
                 let current;
                 try { current = await getStore().getOwnedStream(stream.streamKey, claims.uid); }
                 catch { return error(res, 503, 'FOH storage unavailable'); }
                 if (!current || !timingSafeEqual(tokenHash(uploadToken), current.uploadTokenHash || '')) return error(res, 401, 'Invalid stream credentials');
                 stream.uploadTokenHash = current.uploadTokenHash;
-                stream.updatedAt = now();
+                const updatedAt = clock();
+                try { await getStore().updateSubtitle(stream.streamKey, subtitle, updatedAt); }
+                catch { return error(res, 503, 'FOH storage unavailable'); }
+                stream.updatedAt = updatedAt;
                 stream.jawa = subtitle.jawa;
                 stream.indonesia = subtitle.indonesia;
                 stream.inggris = subtitle.inggris;
-                try { await getStore().updateSubtitle(stream.streamKey, subtitle, stream.updatedAt); }
-                catch { return error(res, 503, 'FOH storage unavailable'); }
+                if (hasText(subtitle)) stream.history = [...(stream.history || []), historyItem(subtitle, stream.updatedAt)].slice(-3);
+                else stream.history = [];
                 publish(stream);
                 logger.log('[FOH] Gemini request completed', { streamKey: req.params.streamKey, latencyMs: Date.now() - receivedAt, fieldLengths: { jawa: subtitle.jawa.length, indonesia: subtitle.indonesia.length, inggris: subtitle.inggris.length } });
-                return res.json({ ok: true, updatedAt: stream.updatedAt, subtitle });
+                return res.json({ ok: true, updatedAt: stream.updatedAt, subtitle, model });
             } catch (cause) {
                 logger.error('[FOH] Gemini transcription failed', {
                     status: cause?.status || 502,
@@ -318,7 +351,7 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
         app.get('/api/foh-stream/:streamKey/latest', async (req, res) => {
             if (!validKey(req.params.streamKey)) return error(res, 400, 'Invalid stream key');
             const output = await resolveOutput(req.params.streamKey);
-            return res.json(output ? payloadFor(output.stream, output.streamKey, output.language) : { streamKey: req.params.streamKey, updatedAt: 0, jawa: '', indonesia: '', inggris: '' });
+            return res.json(output ? payloadFor(output.stream, output.streamKey, output.language) : payloadFor({ streamKey: req.params.streamKey, updatedAt: 0, jawa: '', indonesia: '', inggris: '', history: [] }));
         });
         app.get('/api/foh-stream/:streamKey/sse', async (req, res) => {
             const key = req.params.streamKey;

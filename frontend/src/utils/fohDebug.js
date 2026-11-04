@@ -8,9 +8,9 @@ export function createFohDebug({ now = () => performance.now(), limit = 200 } = 
  return {
   start() { origin = now(); entries = []; dropped = 0; permissionPendingMs = null; stoppedMs = null },
   permissionGranted() { if (origin !== null && stoppedMs === null) permissionPendingMs = elapsed() },
-  capture(threshold) {
+  capture(threshold, model = null) {
    if (origin === null || stoppedMs !== null) return null
-   const entry = { id: ++serial, startMs: elapsed(), endMs: null, status: 'capture_pending', threshold: Number(threshold), rms: null, queueMs: null, requestMs: null, httpStatus: null, errorCategory: null, subtitle: null }
+   const entry = { id: ++serial, startMs: elapsed(), endMs: null, status: 'capture_pending', model, threshold: Number(threshold), rms: null, queueMs: null, requestMs: null, httpStatus: null, errorCategory: null, subtitle: null }
    entries.push(entry)
    if (entries.length > limit) { entries.shift(); dropped++ }
    return entry.id
@@ -22,6 +22,7 @@ export function createFohDebug({ now = () => performance.now(), limit = 200 } = 
    const entry = find(id); if (!isSending(entry)) return
    entry.requestMs = elapsed() - entry.sentMs; delete entry.sentMs
    entry.httpStatus = Number.isInteger(response?.status) ? response.status : null
+   if (['gemini-3.5-flash-lite', 'gemini-3.8-flash'].includes(response?.data?.model)) entry.actualModel = response.data.model
    const subtitle = response?.data?.subtitle
    if (!subtitle || typeof subtitle !== 'object' || Array.isArray(subtitle)) { entry.status = 'protocol_error'; entry.errorCategory = 'protocol'; return }
    if (subtitle && typeof subtitle === 'object' && !Array.isArray(subtitle)) {
