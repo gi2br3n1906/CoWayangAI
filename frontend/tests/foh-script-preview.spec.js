@@ -20,16 +20,30 @@ async function audio(wrapper, file = new File(['s'.repeat(128)], 'voice.wav', { 
 }
 
 describe('FOH script shadow preview', () => {
+  it('shows the selected naskah and act buttons after loading the available provisional script', async () => {
+    api.get.mockReset()
+      .mockResolvedValueOnce({ data:{ scripts:[{ id:'play', title:'Bambang Sumantri · provisional', cueCount:2 }] } })
+      .mockResolvedValueOnce({ data:{ ...index, title:'Bambang Sumantri', reviewRequired:true } })
+    const wrapper=mount(FohScriptPreview,{props})
+    await vi.waitFor(()=>expect(wrapper.find('[data-test="act-button-1"]').exists()).toBe(true))
+    expect(wrapper.get('[data-test="script-catalog"]').element.value).toBe('play')
+    expect(wrapper.get('[data-test="active-script"]').text()).toMatch(/Bambang Sumantri.*provisional/i)
+    expect(wrapper.find('[data-test="act-button-1"]').exists()).toBe(true)
+    wrapper.unmount()
+  })
+
   it('authenticates script catalog and script detail requests', async () => {
     api.get.mockReset()
-      .mockResolvedValueOnce({ data: { scripts: [{ id:'play', title:'Lakon', cueCount:2 }] } })
+      .mockResolvedValueOnce({ data: { scripts: [{ id:'play', title:'Lakon', cueCount:2 }, { id:'other', title:'Lakon lain', cueCount:2 }] } })
       .mockResolvedValueOnce({ data: index })
+      .mockResolvedValueOnce({ data: { ...index, id:'other' } })
     const wrapper = mount(FohScriptPreview, { props })
     await vi.waitFor(() => expect(api.get).toHaveBeenCalledWith('/api/foh-scripts', { headers:{ Authorization:'Bearer firebase-token' } }))
-    await wrapper.get('[data-test="script-catalog"]').setValue('play')
     await vi.waitFor(() => expect(api.get).toHaveBeenCalledWith('/api/foh-scripts/play', { headers:{ Authorization:'Bearer firebase-token' } }))
+    await wrapper.get('[data-test="script-catalog"]').setValue('other')
+    await vi.waitFor(() => expect(api.get).toHaveBeenCalledWith('/api/foh-scripts/other', { headers:{ Authorization:'Bearer firebase-token' } }))
     await flushPromises()
-    expect(JSON.parse(wrapper.get('[data-test="index"]').element.value)).toEqual(index)
+    expect(JSON.parse(wrapper.get('[data-test="index"]').element.value).id).toBe('other')
     wrapper.unmount()
   })
 

@@ -5,7 +5,7 @@ import { auth } from '@/firebase'
 
 const props = defineProps({ streamKey: { type: String, required: true }, uploadToken: { type: String, required: true }, selectedModel: { type: String, required: true }, scriptCursor: { type: Object, default: null }, subtitleMode: { type: String, default: 'legacy' } })
 const emit = defineEmits(['cursorChanged'])
-const indexText = ref(''), cueId = ref(''), audioFile = ref(null), error = ref(''), result = ref(null), pending = ref(false), scriptChoices = ref([])
+const indexText = ref(''), cueId = ref(''), audioFile = ref(null), error = ref(''), result = ref(null), pending = ref(false), scriptChoices = ref([]), selectedScriptId = ref(''), catalogStatus = ref('Pilih naskah yang tersedia.')
 const config = ref({ lookBehind: 1, lookAhead: 2, boundarySize: 1, nextActSize: 1, minScore: 0.7, minMargin: 0.2 })
 const selectedAct = ref(null)
 const index = computed(() => {
@@ -31,6 +31,7 @@ const acts = computed(() => {
   return [...grouped].map(([act, cues]) => ({ act, cues, first: cues[0], last: cues[cues.length - 1], rawText: cues.map(cue => cue.text).join('') }))
 })
 const activeAct = computed(() => acts.value.find(item => item.act === selectedAct.value) || null)
+const activeScript = computed(() => scriptChoices.value.find(item => item.id === selectedScriptId.value) || null)
 const cursorMatches = computed(() => {
   const c = props.scriptCursor
   return Boolean(index.value && c && c.scriptId === index.value.id && c.scriptRevision === index.value.revision && Number.isSafeInteger(c.revision) && c.revision >= 0 && ['auto', 'manual'].includes(c.mode) && index.value.cues.some(cue => cue.id === c.cueId && cue.act === c.act))
@@ -42,16 +43,21 @@ watch([index, () => props.scriptCursor], () => {
   result.value = null
 }, { immediate: true })
 watch(() => [props.streamKey, props.uploadToken], async ([streamKey, uploadToken]) => {
-  scriptChoices.value = []
-  if (!streamKey || !uploadToken) return
+  scriptChoices.value = []; selectedScriptId.value = ''; indexText.value = ''
+  if (!streamKey || !uploadToken) { catalogStatus.value = 'Buat atau pulihkan stream untuk memuat naskah.'; return }
+  catalogStatus.value = 'Memuat daftar naskah…'
   const responseGeneration = generation
   try {
-    if (!auth.currentUser) return
+    if (!auth.currentUser) { catalogStatus.value = 'Login diperlukan untuk memuat daftar naskah.'; return }
     const idToken = await auth.currentUser.getIdToken()
     if (generation !== responseGeneration || props.streamKey !== streamKey || props.uploadToken !== uploadToken) return
     const { data } = await api.get('/api/foh-scripts', { headers: { Authorization: `Bearer ${idToken}` } })
-    if (generation === responseGeneration && props.streamKey === streamKey && props.uploadToken === uploadToken) scriptChoices.value = data.scripts || []
-  } catch { /* Keep manual file loading available if the catalog is unavailable. */ }
+    if (generation !== responseGeneration || props.streamKey !== streamKey || props.uploadToken !== uploadToken) return
+    scriptChoices.value = data.scripts || []
+    selectedScriptId.value = scriptChoices.value[0]?.id || ''
+    catalogStatus.value = selectedScriptId.value ? '' : 'Belum ada naskah di katalog.'
+    if (selectedScriptId.value) await loadCatalogScript(selectedScriptId.value)
+  } catch { catalogStatus.value = 'Katalog tidak termuat; unggah JSON naskah secara manual.' }
 }, { immediate: true })
 function invalidate() { generation++; controller?.abort(); result.value = null }
 watch([indexText, audioFile, cueId, config, () => props.streamKey, () => props.uploadToken, () => props.selectedModel, () => props.scriptCursor], invalidate, { deep: true, flush: 'sync' })
@@ -177,7 +183,8 @@ async function savePosition(action = 'seek') {
  <section class="surface script-preview">
  <h2>Shadow script preview</h2>
  <p>Preview only: not on-air; hasil preview tidak menyimpan posisi. Audio is sent only when you click Preview. Posisi manual hanya disimpan saat menekan tombol simpan.</p>
- <label v-if="scriptChoices.length">Naskah tersedia<select data-test="script-catalog" @change="loadCatalogScript($event.target.value)"><option value="">Pilih naskah</option><option v-for="script in scriptChoices" :key="script.id" :value="script.id">{{ script.title }} · {{ script.cueCount }} cue</option></select></label>
+ <label>Naskah<select v-model="selectedScriptId" data-test="script-catalog" :disabled="!scriptChoices.length" @change="loadCatalogScript(selectedScriptId)"><option value="">{{ catalogStatus }}</option><option v-for="script in scriptChoices" :key="script.id" :value="script.id">{{ script.title }} · {{ script.cueCount }} cue</option></select></label>
+ <p v-if="activeScript" data-test="active-script">Naskah aktif: {{ activeScript.title }} · {{ activeScript.cueCount }} cue</p>
   <form @submit.prevent="preview">
    <fieldset :disabled="pending">
     <label>File indeks naskah (.json)<input data-test="index-file" type="file" accept=".json,application/json" @change="loadIndex"></label>
