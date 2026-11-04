@@ -279,12 +279,13 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
             logger.log('[FOH] Audio chunk received', { streamKey: req.params.streamKey, mimeType, bytes: bytes.length, clientRms: Number.isFinite(clientRms) ? clientRms : null });
             try {
                 if ((Number.isFinite(clientRms) && clientRms < SILENCE_RMS_THRESHOLD) || (mimeType === 'audio/wav' && !wavHasSignal(bytes))) {
+                    const subtitle = { jawa: '', indonesia: '', inggris: '' };
                     stream.updatedAt = now(); stream.jawa = ''; stream.indonesia = ''; stream.inggris = '';
-                    try { await getStore().updateSubtitle(stream.streamKey, { jawa: '', indonesia: '', inggris: '' }, stream.updatedAt); }
+                    try { await getStore().updateSubtitle(stream.streamKey, subtitle, stream.updatedAt); }
                     catch { release(); return error(res, 503, 'FOH storage unavailable'); }
                     publish(stream);
                     logger.log('[FOH] Silent chunk skipped Gemini', { streamKey: req.params.streamKey, latencyMs: Date.now() - receivedAt });
-                    return res.json({ ok: true, updatedAt: stream.updatedAt, silent: true });
+                    return res.json({ ok: true, updatedAt: stream.updatedAt, silent: true, subtitle });
                 }
                 logger.log('[FOH] Gemini request started', { streamKey: req.params.streamKey });
                 const subtitle = await transcribe({ bytes, mimeType, context });
@@ -301,7 +302,7 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
                 catch { return error(res, 503, 'FOH storage unavailable'); }
                 publish(stream);
                 logger.log('[FOH] Gemini request completed', { streamKey: req.params.streamKey, latencyMs: Date.now() - receivedAt, fieldLengths: { jawa: subtitle.jawa.length, indonesia: subtitle.indonesia.length, inggris: subtitle.inggris.length } });
-                return res.json({ ok: true, updatedAt: stream.updatedAt });
+                return res.json({ ok: true, updatedAt: stream.updatedAt, subtitle });
             } catch (cause) {
                 logger.error('[FOH] Gemini transcription failed', {
                     status: cause?.status || 502,

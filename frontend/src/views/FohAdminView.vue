@@ -3,6 +3,7 @@ import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { api } from '@/services/api'
 import { MAX_UTTERANCE_MS, shouldCutUtterance } from '@/utils/fohAudioTiming'
 import { buildLanguageOutputUrl } from '@/utils/fohOutput'
+import { createFohDebug } from '@/utils/fohDebug'
 
 const requestedKey = ref(''), streamKey = ref(''), uploadToken = ref(''), context = ref(''), outputs = ref({}), savedStreams = ref([])
 const devices = ref([]), deviceId = ref(''), threshold = ref(0.035), level = ref(0), state = ref('idle'), error = ref(''), copied = ref('')
@@ -13,6 +14,15 @@ const base = computed(() => globalThis.location?.origin || '')
 const jsonUrl = computed(() => `${base.value}/api/foh-stream/${streamKey.value}/latest`)
 const outputLinks = computed(() => Object.fromEntries(outputLanguages.map(language => [language, buildLanguageOutputUrl(base.value, outputs.value[language]?.outputPath || `/foh-output/${streamKey.value}-${language}`, language, outputColors.value[language])])))
 let mediaStream, recorder, audioContext, analyser, animation, chunks = [], activeSince = 0, silenceSince = 0, utteranceRmsSum = 0, utteranceRmsCount = 0, sendQueue = Promise.resolve(), sessionInvalidated = false, captureGeneration = 0
+const debug = createFohDebug(), debugData = ref(debug.snapshot())
+let debugChunkId = null, debugRun = 0, sessionGeneration = 0
+function refreshDebug() { debugData.value = debug.snapshot() }
+function debugJson() { return JSON.stringify(debug.snapshot(), null, 2) }
+function downloadDebug() {
+ const url = URL.createObjectURL(new Blob([debugJson()], { type: 'application/json' }))
+ const link = document.createElement('a'); link.href = url; link.download = 'foh-debug.json'; link.click()
+ setTimeout(() => URL.revokeObjectURL(url), 1000)
+}
 const active = computed(() => Boolean(uploadToken.value))
 
 async function refreshDevices() {
@@ -31,6 +41,7 @@ async function createSession() {
  } catch (cause) { error.value = cause.response?.data?.error || 'Gagal membuat sesi FOH.' }
 }
 function activateSession(data) {
+ sessionGeneration++
  streamKey.value = data.streamKey
  uploadToken.value = data.uploadToken
  outputs.value = data.outputs || {}
@@ -54,12 +65,14 @@ async function resumeStream(key) {
 }
 async function startAudio() {
  if (state.value !== 'idle') return
+ debugRun++; debug.start(); refreshDebug()
  error.value = ''
  state.value = 'starting'
  const generation = captureGeneration
  try {
   const stream = await navigator.mediaDevices.getUserMedia({ audio: { deviceId: deviceId.value ? { exact: deviceId.value } : undefined, echoCancellation: false, noiseSuppression: false, autoGainControl: false } })
   if (generation !== captureGeneration) { stream.getTracks().forEach(track => track.stop()); return }
+  debug.permissionGranted(); refreshDebug()
   mediaStream = stream
   await refreshDevices()
   if (generation !== captureGeneration) return
@@ -84,6 +97,7 @@ async function startAudio() {
      recorder = new MediaRecorder(mediaStream, { mimeType, audioBitsPerSecond: 64000 })
      recorder.ondataavailable = event => { if (generation === captureGeneration && event.data.size) chunks.push(event.data) }
      recorder.start(100)
+     debugChunkId = debug.capture(Number(threshold.value)); refreshDebug()
      state.value = 'speaking'
     }
     silenceSince = 0
@@ -101,32 +115,40 @@ async function startAudio() {
 async function sendChunk() {
  if (sessionInvalidated || !recorder || !activeSince) return
  const duration = performance.now() - activeSince
- if (duration < 200) { activeSince = 0; silenceSince = 0; chunks = []; utteranceRmsSum = 0; utteranceRmsCount = 0; state.value = 'listening'; return }
+ if (duration < 200) { debug.cancel(debugChunkId); debugChunkId = null; refreshDebug(); activeSince = 0; silenceSince = 0; chunks = []; utteranceRmsSum = 0; utteranceRmsCount = 0; state.value = 'listening'; return }
  const currentRecorder = recorder
- const generation = captureGeneration
+ const currentDebugId = debugChunkId, currentDebugRun = debugRun; debugChunkId = null
+ const generation = captureGeneration, currentSession = sessionGeneration
  recorder = null
  const stopped = new Promise(resolve => currentRecorder.addEventListener('stop', resolve, { once: true }))
+ debug.cutoff(currentDebugId); refreshDebug()
  currentRecorder.stop(); await stopped
  if (generation !== captureGeneration) return
  const mime = currentRecorder.mimeType.split(';')[0] || 'audio/webm'
  const blob = new Blob(chunks, { type: mime })
  const key = streamKey.value, token = uploadToken.value, lakon = context.value, rms = utteranceRmsCount ? utteranceRmsSum / utteranceRmsCount : 0
+ debug.queue(currentDebugId, rms); refreshDebug()
  activeSince = 0; silenceSince = 0; chunks = []; utteranceRmsSum = 0; utteranceRmsCount = 0; state.value = 'sending'
  sendQueue = sendQueue.then(() => {
   if (sessionInvalidated || generation !== captureGeneration) return null
+  debug.sending(currentDebugId); refreshDebug()
   return api.post(`/api/foh-stream/${encodeURIComponent(key)}/audio`, blob, { headers: { 'Content-Type': mime, 'x-foh-token': token, 'x-foh-context': lakon, 'x-foh-rms': String(rms) } })
  })
+ sendQueue = sendQueue.then(response => { if (currentDebugRun === debugRun && response) { debug.finish(currentDebugId, response, token); refreshDebug() } })
  sendQueue = sendQueue.catch(cause => {
+  if (currentDebugRun === debugRun) { debug.fail(currentDebugId, cause); refreshDebug() }
   if (cause.response?.status === 401) {
+   if (token !== uploadToken.value || currentSession !== sessionGeneration) return
    sessionInvalidated = true
    stopAudio()
    uploadToken.value = ''
    streamKey.value = ''
    error.value = 'Sesi FOH sudah tidak berlaku. Buat sesi baru.'
-  } else error.value = cause.response?.data?.error || 'Upload/transkripsi audio gagal.'
+  } else if (generation === captureGeneration) error.value = cause.response?.data?.error || 'Upload/transkripsi audio gagal.'
  }).finally(() => { if (generation === captureGeneration && mediaStream) state.value = activeSince ? 'speaking' : 'listening' })
 }
 function stopAudio() {
+ debug.stop(); debugChunkId = null; refreshDebug()
  captureGeneration++
  cancelAnimationFrame(animation); animation = null
  if (recorder && recorder.state !== 'inactive') recorder.stop()
@@ -175,6 +197,11 @@ onUnmounted(stopAudio)
     <div class="foh-actions"><button class="button" :disabled="state !== 'idle'" @click="startAudio">Mulai tangkap audio</button><button class="button" :disabled="state === 'idle'" @click="stopAudio">Stop audio</button></div>
    </section>
   </template>
+  <section class="surface foh-section"><div class="section-heading"><div><h2>Debug timeline</h2><p>Waktu relatif terhadap klik mulai; batas rekaman VAD perkiraan, bukan waktu per kata. Hening atau ucapan yang terlewat tidak dapat disimpulkan. Subtitle dapat berisi informasi sensitif.</p></div></div>
+   <p>Permission pending: {{ debugData.capturePending ? 'ya' : 'tidak' }}; waktu permission: {{ debugData.permissionPendingMs ?? '—' }} ms; entri terbuang: {{ debugData.dropped }}</p>
+   <div class="foh-actions"><button class="button" @click="downloadDebug">Download JSON</button><button class="button" @click="copyLink('debug', debugJson())">{{ copied === 'debug' ? 'Tersalin' : 'Copy JSON' }}</button></div>
+   <details v-for="chunk in debugData.chunks" :key="chunk.id"><summary><code>#{{ chunk.id }} {{ (chunk.startMs / 1000).toFixed(2) }}–{{ chunk.endMs === null ? '…' : (chunk.endMs / 1000).toFixed(2) }} s: {{ chunk.status }}</code></summary><pre style="white-space: pre-wrap; overflow-wrap: anywhere">{{ JSON.stringify(chunk, null, 2) }}</pre></details>
+  </section>
   <p v-if="error" class="foh-error" role="alert">{{ error }}</p>
  </section>
 </template>

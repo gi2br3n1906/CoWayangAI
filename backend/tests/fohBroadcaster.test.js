@@ -33,9 +33,9 @@ function fakeGoogle(calls) {
  } };
 }
 
-async function setup(t, googleGenAi = null) {
+async function setup(t, googleGenAi = null, store = createTestFohStore()) {
  const calls = [];
- const backend = createBackend({ autoSpawn: false, cleanupIntervalMs: 0, workerSharedSecret: 'unused', googleGenAi: googleGenAi || fakeGoogle(calls), verifyFirebaseToken: async token => token === 'fixture-owner-token' ? { uid: 'owner-a' } : null, fohStore: createTestFohStore(), logger: { log(){}, warn(){}, error(){} } });
+ const backend = createBackend({ autoSpawn: false, cleanupIntervalMs: 0, workerSharedSecret: 'unused', googleGenAi: googleGenAi || fakeGoogle(calls), verifyFirebaseToken: async token => token === 'fixture-owner-token' ? { uid: 'owner-a' } : null, fohStore: store, logger: { log(){}, warn(){}, error(){} } });
  const previous = { key: process.env.GEMINI_API_KEY, model: process.env.GEMINI_MODEL };
  process.env.GEMINI_API_KEY = 'fixture-key'; process.env.GEMINI_MODEL = 'fixture-model';
  t.after(async () => { await backend.shutdown(); for (const [key, value] of Object.entries({ GEMINI_API_KEY: previous.key, GEMINI_MODEL: previous.model })) { if (value === undefined) delete process.env[key]; else process.env[key] = value; } });
@@ -63,6 +63,11 @@ test('audio chunks are authenticated, transcribed in memory, cached and publishe
  try {
   const response = await request(`${base}/api/foh-stream/tmii-test/audio`, { method:'POST', headers:{'content-type':'audio/webm','x-foh-token':created.uploadToken,'x-foh-context':'Lakon Rama'}, body:audio });
   assert.equal(response.status,200, await response.clone().text());
+  const body = await response.json();
+  assert.equal(body.ok, true);
+  assert.ok(body.updatedAt > 0);
+  assert.deepEqual(body.subtitle, { jawa:'Sugeng rawuh', indonesia:'Selamat datang', inggris:'Welcome' });
+  assert.equal(body.silent, undefined);
   const subtitle = await subtitleEvent;
   assert.deepEqual([subtitle.jawa,subtitle.indonesia,subtitle.inggris],['Sugeng rawuh','Selamat datang','Welcome']);
   assert.equal(calls[0].model,'fixture-model'); assert.equal(calls[0].config.thinkingConfig.thinkingLevel,'low');
@@ -119,9 +124,11 @@ test('audio endpoint allows one in-flight Gemini request per stream', async t =>
  await Promise.race([new Promise(resolve=>{const poll=()=>calls.length?resolve():setTimeout(poll,5);poll();}),new Promise((_,reject)=>setTimeout(()=>reject(new Error('first Gemini call did not start')),3000))]);
  const second=send();
  await new Promise(resolve=>setTimeout(resolve,50));assert.equal(calls.length,1);
- calls[0].resolve({text:JSON.stringify({transcript:'pertama',indonesia:'first',inggris:'first'})});assert.equal((await first).status,200);
+ calls[0].resolve({text:JSON.stringify({transcript:'pertama',indonesia:'first',inggris:'first'})});const firstResponse=await first; assert.equal(firstResponse.status,200);
  await Promise.race([new Promise(resolve=>{const poll=()=>calls.length>=2?resolve():setTimeout(poll,5);poll();}),new Promise((_,reject)=>setTimeout(()=>reject(new Error('second Gemini call did not start')),3000))]);
- calls[1].resolve({text:JSON.stringify({transcript:'kedua',indonesia:'second',inggris:'second'})});assert.equal((await second).status,200);
+ calls[1].resolve({text:JSON.stringify({transcript:'kedua',indonesia:'second',inggris:'second'})});const secondResponse=await second; assert.equal(secondResponse.status,200);
+ assert.deepEqual((await firstResponse.json()).subtitle, { jawa:'pertama', indonesia:'first', inggris:'first' });
+ assert.deepEqual((await secondResponse.json()).subtitle, { jawa:'kedua', indonesia:'second', inggris:'second' });
 });
 
 test('silent browser audio is acknowledged without calling Gemini', async t => {
@@ -130,9 +137,47 @@ test('silent browser audio is acknowledged without calling Gemini', async t => {
  const response = await request(`${base}/api/foh-stream/tmii-silent/audio`, { method:'POST', headers:{'content-type':'audio/webm','x-foh-token':session.uploadToken,'x-foh-rms':'0.0001'}, body:Buffer.alloc(256) });
  const body = await response.json();
  assert.equal(response.status,200); assert.equal(body.silent,true); assert.equal(calls.length,0);
+ assert.deepEqual(body.subtitle, { jawa:'', indonesia:'', inggris:'' });
  const latest = await (await request(`${base}/api/foh-stream/tmii-silent/latest`)).json();
  assert.deepEqual([latest.jawa,latest.indonesia,latest.inggris],['','','']);
 });
+test('audio response waits for persistence and storage failure returns no subtitle', async t => {
+ const store = createTestFohStore();
+ const persist = store.updateSubtitle.bind(store);
+ let release, started;
+ const entered = new Promise(resolve => { started = resolve; });
+ store.updateSubtitle = async (...args) => { started(); await new Promise(resolve => { release = resolve; }); await persist(...args); };
+ const { base } = await setup(t, null, store);
+ const session = await createSession(base, 'persist-audio');
+ let settled = false;
+ const upload = request(`${base}/api/foh-stream/persist-audio/audio`, { method:'POST', headers:{'content-type':'audio/webm','x-foh-token':session.uploadToken}, body:Buffer.alloc(256) }).then(response => { settled = true; return response; });
+ await entered;
+ try {
+  await new Promise(resolve => setTimeout(resolve, 50));
+  assert.equal(settled, false);
+ } finally { release(); }
+ const response = await upload;
+ assert.equal(response.status, 200);
+ const body = await response.json();
+ const record = await store.getOwnedStream('persist-audio', 'owner-a');
+ assert.deepEqual(record.subtitle, { ...body.subtitle, updatedAt: body.updatedAt });
+ store.updateSubtitle = async () => { throw new Error('storage failure'); };
+ for (const rms of ['0.1', '0.0001']) {
+  const failed = await request(`${base}/api/foh-stream/persist-audio/audio`, { method:'POST', headers:{'content-type':'audio/webm','x-foh-token':session.uploadToken,'x-foh-rms':rms}, body:Buffer.alloc(256) });
+  assert.equal(failed.status, 503);
+  assert.deepEqual(await failed.json(), { error:'FOH storage unavailable' });
+ }
+});
+
+test('Gemini failure returns an error without a subtitle', async t => {
+ const google = { GoogleGenAI: class { models = { generateContent: async () => { throw new Error('provider failed'); } } } };
+ const { base } = await setup(t, google);
+ const session = await createSession(base, 'provider-error');
+ const response = await request(`${base}/api/foh-stream/provider-error/audio`, { method:'POST', headers:{'content-type':'audio/webm','x-foh-token':session.uploadToken}, body:Buffer.alloc(256) });
+ assert.equal(response.status, 502);
+ assert.deepEqual(await response.json(), { error:'Gemini transcription failed' });
+});
+
 test('ending a session revokes its upload token and clears cached subtitles', async t => {
  const {base}=await setup(t);
  const session=await(await request(`${base}/api/foh-stream/session`,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({pin:'123456',streamKey:'tmii-end'})})).json();

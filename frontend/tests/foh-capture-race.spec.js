@@ -51,12 +51,28 @@ describe('FOH capture stop while recorder is stopping', () => {
  })
  afterEach(() => { wrapper?.unmount(); vi.restoreAllMocks(); vi.unstubAllGlobals(); delete navigator.mediaDevices })
 
+ it('records recorder cutoff before the delayed stop event and queue wait separately', async () => {
+  now = 1800
+  finish(recorders[0]); await flushPromises()
+  const copy = vi.fn().mockResolvedValue()
+  Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: copy } })
+  await button('Copy JSON').trigger('click')
+  const chunk = JSON.parse(copy.mock.calls[0][0]).chunks[0]
+  expect(chunk.endMs).toBe(1100)
+  expect(chunk.queueMs).toBe(0)
+  expect(chunk.queuedMs).toBe(1700)
+ })
+
  it('remains idle and does not upload after delayed stop event', async () => {
   await button('Stop audio').trigger('click')
   finish(recorders[0])
   await flushPromises()
   expect(wrapper.find('.foh-state').text()).toBe('idle')
   expect(api.post.mock.calls.filter(([url]) => url.endsWith('/audio'))).toHaveLength(0)
+  const copy = vi.fn().mockResolvedValue()
+  Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: copy } })
+  await button('Copy JSON').trigger('click')
+  expect(JSON.parse(copy.mock.calls[0][0]).chunks[0]).toMatchObject({ status: 'cancelled', endMs: 1100 })
  })
 
  it('does not let an old delayed stop corrupt a restarted capture', async () => {
