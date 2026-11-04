@@ -8,6 +8,12 @@ describe('FOH API authentication', () => {
     expect(config.headers.Authorization).toBe('Bearer firebase-id-token')
   })
 
+  it('attaches Firebase auth to subtitle mode requests', async () => {
+    const interceptor = createFohAuthInterceptor({ currentUser: { getIdToken: vi.fn().mockResolvedValue('firebase-id-token') } })
+    const config = await interceptor({ url: '/api/foh-stream/uji-foh/subtitle-mode', headers: {} })
+    expect(config.headers.Authorization).toBe('Bearer firebase-id-token')
+  })
+
   it('does not require Firebase auth for public output endpoints', async () => {
     const config = { url: '/api/foh-stream/tmii-jawa/latest', headers: {} }
     await expect(createFohAuthInterceptor({ currentUser: null })(config)).resolves.toBe(config)

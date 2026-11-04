@@ -1,4 +1,4 @@
-const PRIVATE_FOH_PATH = /^\/api\/foh-stream(?:\/session|s(?:\/|$)|\/[^/]+\/(?:resume|session|audio))$/
+const PRIVATE_FOH_PATH = /^\/api\/foh-stream(?:\/session|s(?:\/|$)|\/[^/]+\/(?:resume|session|audio|subtitle-mode|script-mode|script-position|script-preview))$/
 
 export function createFohAuthInterceptor(auth) {
   return async config => {
