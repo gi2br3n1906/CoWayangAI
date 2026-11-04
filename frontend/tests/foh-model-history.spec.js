@@ -10,6 +10,26 @@ vi.mock('@/services/api', () => ({ api: {
 } }))
 
 describe('FOH admin output history', () => {
+  it('offers paired and grouped combined links on the primary stream without exposing credentials', async () => {
+    Object.defineProperty(navigator, 'mediaDevices', { configurable: true, value: { enumerateDevices: vi.fn().mockResolvedValue([]) } })
+    const wrapper = mount(FohAdminView)
+    await flushPromises()
+    await wrapper.find('form').trigger('submit'); await flushPromises()
+    const links = wrapper.findAll('.foh-combined-card input[readonly]').map(input => new URL(input.element.value))
+    expect(links).toHaveLength(2)
+    expect(links.map(link => link.searchParams.get('layout'))).toEqual(['chunk', 'language'])
+    for (const link of links) {
+      expect(link.pathname).toBe('/foh-output/stage')
+      expect(link.searchParams.get('lang')).toBe('jawa,indonesia')
+      expect(link.searchParams.get('history')).toBe('2')
+      expect(link.searchParams.get('colorJawa')).toBe('yellow')
+      expect(link.searchParams.get('colorIndonesia')).toBe('white')
+      expect(link.href).not.toContain('private-token')
+    }
+    await wrapper.get('select[aria-describedby="foh-history-notice"]').setValue('3')
+    expect(wrapper.findAll('.foh-combined-card input[readonly]').map(input => new URL(input.element.value).searchParams.get('history'))).toEqual(['3', '3'])
+    wrapper.unmount()
+  })
   it('generates new per-language links with selectable history without exposing the token', async () => {
     Object.defineProperty(navigator, 'mediaDevices', { configurable: true, value: { enumerateDevices: vi.fn().mockResolvedValue([]) } })
     const writeText = vi.fn().mockResolvedValue()

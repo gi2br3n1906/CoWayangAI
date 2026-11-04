@@ -68,12 +68,12 @@
 .foh-links label { display: grid; align-content: start; gap: 10px; color: var(--muted); font-size: 12px; }
 .foh-links .input { font: 11px ui-monospace,monospace; }
 .foh-language-links { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
-.foh-language-card { min-width: 0; display: grid; align-content: start; gap: 10px; padding: 16px; border: 1px solid var(--line); border-radius: 12px; }
+.foh-language-card,.foh-combined-card { min-width: 0; display: grid; align-content: start; gap: 10px; padding: 16px; border: 1px solid var(--line); border-radius: 12px; }
 .foh-language-card-heading { display: grid; gap: 5px; }
 .foh-language-card-heading strong { font-size: 15px; color: var(--text); }
 .foh-language-card-heading code { min-width: 0; overflow-wrap: anywhere; color: var(--gold); font: 10px ui-monospace,monospace; }
 .foh-language-card .foh-field { margin: 0; }
-.foh-language-card > .input { font: 10px ui-monospace,monospace; }
+.foh-language-card > .input,.foh-combined-card > .input { font: 10px ui-monospace,monospace; }
 .foh-state { color: var(--gold); font: 12px ui-monospace,monospace; text-transform: uppercase; }
 .foh-meter { height: 10px; overflow: hidden; background: var(--canvas); border: 1px solid var(--line); border-radius: 8px; }
 .foh-meter span { display: block; height: 100%; background: #7bad8c; transition: width .06s linear; }

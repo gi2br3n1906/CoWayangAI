@@ -15,6 +15,11 @@ const outputHistory = ref('2')
 const base = computed(() => globalThis.location?.origin || '')
 const jsonUrl = computed(() => `${base.value}/api/foh-stream/${streamKey.value}/latest`)
 const outputLinks = computed(() => Object.fromEntries(outputLanguages.map(language => [language, buildLanguageOutputUrl(base.value, outputs.value[language]?.outputPath || `/foh-output/${streamKey.value}-${language}`, language, outputColors.value[language], outputHistory.value)])))
+const combinedLayouts = [{ id: 'chunk', label: 'Berpasangan per chunk' }, { id: 'language', label: 'Dikelompokkan per bahasa' }]
+const combinedLinks = computed(() => Object.fromEntries(combinedLayouts.map(({ id }) => {
+ const params = new URLSearchParams({ bg: 'transparent', lang: 'jawa,indonesia', size: 'xl', align: 'bottom', layout: id, history: outputHistory.value, colorJawa: outputColors.value.jawa, colorIndonesia: outputColors.value.indonesia })
+ return [id, `${base.value}/foh-output/${encodeURIComponent(streamKey.value)}?${params}`]
+})))
 let mediaStream, recorder, audioContext, analyser, animation, chunks = [], activeSince = 0, silenceSince = 0, utteranceRmsSum = 0, utteranceRmsCount = 0, sendQueue = Promise.resolve(), sessionInvalidated = false, captureGeneration = 0
 const debug = createFohDebug(), debugData = ref(debug.snapshot())
 let debugChunkId = null, captureModel = null, debugRun = 0, sessionGeneration = 0
@@ -188,10 +193,12 @@ onUnmounted(stopAudio)
   </div>
   <template v-else>
    <div class="foh-toolbar"><div><span class="status-dot connected" /> SIARAN AKTIF <code>{{ streamKey }}</code></div><button class="button" @click="endSession">Akhiri sesi</button></div>
-   <section class="surface foh-section"><div class="section-heading"><div><h2>Output per bahasa</h2><p>Satu input dan satu hit Gemini diproyeksikan menjadi tiga stream key publik. Pilih warna teks untuk masing-masing output.</p></div></div>
+   <section class="surface foh-section"><div class="section-heading"><div><h2>Output subtitle</h2><p>Pilih warna teks per bahasa. Link gabungan memakai warna Jawa dan Indonesia yang sama.</p></div></div>
     <label class="foh-field">Jumlah chunk subtitle terbaru<select v-model="outputHistory" class="input" aria-describedby="foh-history-notice"><option value="1">1 chunk</option><option value="2">2 chunk</option><option value="3">3 chunk</option></select></label>
     <p id="foh-history-notice">Setelah mengubah jumlah, salin link baru dan perbarui URL Browser Source di OBS. Link yang sudah disalin tidak berubah otomatis.</p>
     <div class="foh-language-links"><article v-for="language in outputLanguages" :key="language" class="foh-language-card"><div class="foh-language-card-heading"><strong>{{ outputLabels[language] }}</strong><code>{{ outputs[language]?.streamKey }}</code></div><label class="foh-field">Warna teks<select v-model="outputColors[language]" class="input"><option value="white">Putih</option><option value="yellow">Kuning</option><option value="cyan">Cyan</option><option value="lime">Hijau</option><option value="red">Merah</option><option value="orange">Oranye</option><option value="pink">Pink</option></select></label><input class="input" readonly :value="outputLinks[language]" /><button class="button" @click="copyLink(language, outputLinks[language])">{{ copied === language ? 'Tersalin' : 'Copy link' }}</button></article></div>
+    <h3>Output gabungan Jawa + Indonesia</h3><p>Gunakan satu Browser Source untuk membandingkan susunan per chunk atau per bahasa. Setelah mengubah warna atau jumlah chunk, salin ulang link.</p>
+    <div class="foh-language-links"><article v-for="layout in combinedLayouts" :key="layout.id" class="foh-combined-card"><strong>{{ layout.label }}</strong><input class="input" readonly :aria-label="`Link ${layout.label}`" :value="combinedLinks[layout.id]" /><button class="button" @click="copyLink(layout.id, combinedLinks[layout.id])">{{ copied === layout.id ? 'Tersalin' : 'Copy link' }}</button></article></div>
     <label class="foh-field">Raw JSON gabungan<input class="input" readonly :value="jsonUrl" /><button class="button" @click="copyLink('json', jsonUrl)">{{ copied === 'json' ? 'Tersalin' : 'Copy link' }}</button></label>
    </section>
    <section class="surface foh-section"><div class="section-heading"><div><h2>Input audio</h2><p>Browser tidak menerapkan echo cancellation, noise suppression, atau auto gain.</p></div><span class="foh-state">{{ state }}</span></div>

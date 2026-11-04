@@ -21,6 +21,9 @@ const historyLimit = computed(() => ({ '1': 1, '2': 2, '3': 3 })[params.value.ge
 const size = computed(() => ({ lg: 'clamp(28px, 4vw, 48px)', xl: 'clamp(36px, 5vw, 64px)', '2xl': 'clamp(44px, 6vw, 80px)' })[params.value.get('size')] || 'clamp(36px, 5vw, 64px)')
 const alignment = computed(() => params.value.get('align') === 'center' ? 'safe center' : 'safe end')
 const textColor = computed(() => parseSubtitleColor(params.value.get('color')))
+const combined = computed(() => ['chunk', 'language'].includes(params.value.get('layout')))
+const paired = computed(() => params.value.get('layout') === 'chunk')
+const languageColors = computed(() => ({ jawa: parseSubtitleColor(params.value.get('colorJawa') || 'yellow'), indonesia: parseSubtitleColor(params.value.get('colorIndonesia') || 'white') }))
 const labels = { jawa: 'JAWA', indonesia: 'INDONESIA', inggris: 'ENGLISH' }
 const displayed = computed(() => entries.value.slice(-historyLimit.value))
 const textFor = language => displayed.value.filter(entry => entry[language])
@@ -85,13 +88,18 @@ onUnmounted(() => { clearTimeout(clearTimer); resizeObserver?.disconnect(); glob
 </script>
 
 <template>
- <main ref="canvas" class="foh-canvas" :style="{ background, justifyContent: alignment }" aria-live="polite" aria-atomic="true">
+ <main ref="canvas" class="foh-canvas" :class="{ 'foh-wide': combined }" :style="{ background, justifyContent: alignment }" aria-live="polite" aria-atomic="true">
   <div v-if="overflowing" class="foh-overflow-warning">Subtitle exceeds screen — reduce size or history</div>
-  <section ref="lines" class="foh-lines" :style="{ '--foh-size': size, '--foh-text-color': textColor }">
-   <div v-for="language in languages" :key="language" v-show="textFor(language).length" class="foh-language-group" :data-language="language">
+  <section ref="lines" class="foh-lines" :style="{ '--foh-size': size, '--foh-text-color': textColor, '--foh-jawa-color': languageColors.jawa, '--foh-indonesia-color': languageColors.indonesia }">
+   <TransitionGroup v-if="paired" name="subtitle" tag="div" class="foh-entries foh-paired">
+    <div v-for="(entry, index) in displayed" :key="entry.id" class="foh-chunk" :class="{ 'foh-older': index < displayed.length - 1 }">
+     <template v-for="language in languages" :key="language"><p v-if="entry[language]" class="foh-line" :class="`foh-color-${language}`" :data-language="language">{{ entry[language] }}</p></template>
+    </div>
+   </TransitionGroup>
+   <div v-for="language in paired ? [] : languages" :key="language" v-show="textFor(language).length" class="foh-language-group" :data-language="language">
     <span class="foh-language">{{ labels[language] }}</span>
     <TransitionGroup name="subtitle" tag="div" class="foh-entries">
-     <p v-for="(entry, index) in textFor(language)" :key="entry.id" class="foh-line" :class="{ 'foh-older': index < textFor(language).length - 1 }">{{ entry[language] }}</p>
+     <p v-for="(entry, index) in textFor(language)" :key="entry.id" class="foh-line" :class="[{ 'foh-older': index < textFor(language).length - 1 }, combined ? `foh-color-${language}` : '']">{{ entry[language] }}</p>
     </TransitionGroup>
    </div>
   </section>
@@ -101,11 +109,16 @@ onUnmounted(() => { clearTimeout(clearTimer); resizeObserver?.disconnect(); glob
 <style>
 html:has(.foh-canvas), body:has(.foh-canvas), #app:has(.foh-canvas) { width: 100%; height: 100%; min-height: 100%; margin: 0; overflow: hidden; background: transparent; }
 .foh-canvas { width: 100vw; height: 100dvh; box-sizing: border-box; display: flex; flex-direction: column; padding: 5vh 5vw; color: white; font-family: Arial, Helvetica, sans-serif; overflow-y: auto; }
+.foh-canvas.foh-wide { padding-left: 2vw; padding-right: 2vw; }
 .foh-lines { width: 100%; flex: 0 0 auto; display: flex; flex-direction: column; gap: .4em; text-align: center; }
 .foh-entries { display: flex; flex-direction: column; gap: .12em; }
 .foh-overflow-warning { position: fixed; top: 0; left: 0; z-index: 1; background: #000; color: #fff; font: 700 14px Arial, sans-serif; padding: 4px 8px; }
 .foh-line { margin: 0; color: var(--foh-text-color, #fff); font-size: var(--foh-size); font-weight: 800; line-height: 1.16; text-shadow: 0 2px 2px #000, 2px 0 2px #000, 0 -2px 2px #000, -2px 0 2px #000, 0 5px 16px #000; overflow-wrap: anywhere; }
 .foh-older { opacity: .7; font-size: calc(var(--foh-size) * .8); }
+.foh-chunk.foh-older .foh-line { font-size: calc(var(--foh-size) * .8); }
+.foh-paired { gap: .35em; }
+.foh-color-jawa { color: var(--foh-jawa-color); }
+.foh-color-indonesia { color: var(--foh-indonesia-color); }
 .foh-language { display: block; margin-bottom: .25em; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-shadow: 0 2px 4px #000; }
 .subtitle-enter-active,.subtitle-leave-active { transition: opacity .25s ease, transform .25s ease; }
 .subtitle-enter-from,.subtitle-leave-to { opacity: 0; transform: translateY(10px); }
