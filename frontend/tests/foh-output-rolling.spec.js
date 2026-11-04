@@ -18,11 +18,13 @@ beforeEach(() => { mocks.handlers = {}; vi.useFakeTimers(); vi.setSystemTime(900
 describe('rolling audience output', () => {
  it('uses Arial with an explicit black subtitle outline', () => {
   expect(outputSource).toMatch(/font-family:\s*Arial,\s*Helvetica,\s*sans-serif/)
-  expect(outputSource).toMatch(/-webkit-text-stroke:\s*2px\s+#000/)
+  expect(outputSource).toMatch(/-webkit-text-stroke:\s*1px\s+#000/)
   expect(outputSource).toMatch(/paint-order:\s*stroke\s+fill/)
+  expect(outputSource).toMatch(/\.foh-line\s*\{[^}]*font-weight:\s*600/s)
  })
  it('gives the default subtitle canvas a wide horizontal area', () => {
-  expect(outputSource).toMatch(/\.foh-canvas\s*\{[^}]*padding:\s*5vh\s+2vw/s)
+  expect(outputSource).toMatch(/\.foh-canvas\s*\{[^}]*padding:\s*5vh\s+1vw/s)
+  expect(outputSource).toMatch(/'xl':\s*'clamp\(26px, 2\.2vw, 42px\)'|xl:\s*'clamp\(26px, 2\.2vw, 42px\)'/)
  })
  it.each(['jawa', 'indonesia', 'inggris'])('shows only subtitle text in the %s source', async language => {
   show(`lang=${language}&history=1`)

@@ -18,7 +18,7 @@ const languages = computed(() => {
  return value === 'all' ? ['jawa', 'indonesia', 'inggris'] : [...new Set(value.split(',').filter(item => ['jawa', 'indonesia', 'inggris', 'id', 'en'].includes(item)).map(item => ({ id: 'indonesia', en: 'inggris' }[item] || item)))]
 })
 const historyLimit = computed(() => ({ '1': 1, '2': 2, '3': 3 })[params.value.get('history')] || 1)
-const size = computed(() => ({ lg: 'clamp(28px, 4vw, 48px)', xl: 'clamp(36px, 5vw, 64px)', '2xl': 'clamp(44px, 6vw, 80px)' })[params.value.get('size')] || 'clamp(36px, 5vw, 64px)')
+const size = computed(() => ({ lg: 'clamp(22px, 1.8vw, 34px)', xl: 'clamp(26px, 2.2vw, 42px)', '2xl': 'clamp(32px, 2.8vw, 54px)' })[params.value.get('size')] || 'clamp(26px, 2.2vw, 42px)')
 const alignment = computed(() => params.value.get('align') === 'center' ? 'safe center' : 'safe end')
 const textColor = computed(() => parseSubtitleColor(params.value.get('color')))
 const combined = computed(() => ['chunk', 'language'].includes(params.value.get('layout')))
@@ -108,12 +108,12 @@ onUnmounted(() => { clearTimeout(clearTimer); resizeObserver?.disconnect(); glob
 
 <style>
 html:has(.foh-canvas), body:has(.foh-canvas), #app:has(.foh-canvas) { width: 100%; height: 100%; min-height: 100%; margin: 0; overflow: hidden; background: transparent; }
-.foh-canvas { width: 100vw; height: 100dvh; box-sizing: border-box; display: flex; flex-direction: column; padding: 5vh 2vw; color: white; font-family: Arial, Helvetica, sans-serif; overflow-y: auto; }
-.foh-canvas.foh-wide { padding-left: 2vw; padding-right: 2vw; }
+.foh-canvas { width: 100vw; height: 100dvh; box-sizing: border-box; display: flex; flex-direction: column; padding: 5vh 1vw; color: white; font-family: Arial, Helvetica, sans-serif; overflow-y: auto; }
+.foh-canvas.foh-wide { padding-left: 1vw; padding-right: 1vw; }
 .foh-lines { width: 100%; flex: 0 0 auto; display: flex; flex-direction: column; gap: .4em; text-align: center; }
 .foh-entries { display: flex; flex-direction: column; gap: .12em; }
 .foh-overflow-warning { position: fixed; top: 0; left: 0; z-index: 1; background: #000; color: #fff; font: 700 14px Arial, sans-serif; padding: 4px 8px; }
-.foh-line { margin: 0; color: var(--foh-text-color, #fff); font-size: var(--foh-size); font-weight: 800; line-height: 1.16; -webkit-text-stroke: 2px #000; paint-order: stroke fill; text-shadow: 0 2px 2px #000, 2px 0 2px #000, 0 -2px 2px #000, -2px 0 2px #000, 0 5px 16px #000; overflow-wrap: anywhere; }
+.foh-line { margin: 0; color: var(--foh-text-color, #fff); font-size: var(--foh-size); font-weight: 600; line-height: 1.16; -webkit-text-stroke: 1px #000; paint-order: stroke fill; text-shadow: 0 1px 2px #000, 0 2px 5px #000; overflow-wrap: anywhere; }
 .foh-older { opacity: .7; font-size: calc(var(--foh-size) * .8); }
 .foh-chunk.foh-older .foh-line { font-size: calc(var(--foh-size) * .8); }
 .foh-paired { gap: .35em; }
