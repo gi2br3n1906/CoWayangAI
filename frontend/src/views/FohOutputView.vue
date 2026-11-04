@@ -97,7 +97,7 @@ onUnmounted(() => { clearTimeout(clearTimer); resizeObserver?.disconnect(); glob
     </div>
    </TransitionGroup>
    <div v-for="language in paired ? [] : languages" :key="language" v-show="textFor(language).length" class="foh-language-group" :data-language="language">
-    <span class="foh-language">{{ labels[language] }}</span>
+    <span v-if="languages.length > 1" class="foh-language">{{ labels[language] }}</span>
     <TransitionGroup name="subtitle" tag="div" class="foh-entries">
      <p v-for="(entry, index) in textFor(language)" :key="entry.id" class="foh-line" :class="[{ 'foh-older': index < textFor(language).length - 1 }, combined ? `foh-color-${language}` : '']">{{ entry[language] }}</p>
     </TransitionGroup>

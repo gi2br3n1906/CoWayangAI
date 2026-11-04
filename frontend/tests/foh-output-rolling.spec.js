@@ -15,6 +15,18 @@ afterEach(() => { wrapper?.unmount(); wrapper = null; vi.useRealTimers() })
 beforeEach(() => { mocks.handlers = {}; vi.useFakeTimers(); vi.setSystemTime(9000000) })
 
 describe('rolling audience output', () => {
+ it.each(['jawa', 'indonesia', 'inggris'])('shows only subtitle text in the %s source', async language => {
+  show(`lang=${language}&history=1`)
+  await send(snapshot([entry('a', 10000)]))
+  const expected = { jawa: 'ja', indonesia: 'ia', inggris: 'ea' }
+  expect(wrapper.find('.foh-language').exists()).toBe(false)
+  expect(wrapper.find('.foh-lines').text()).toBe(expected[language])
+ })
+ it('retains language labels in grouped multilingual output', async () => {
+  show('lang=jawa,indonesia&layout=language&history=1')
+  await send(snapshot([entry('a', 10000)]))
+  expect(wrapper.findAll('.foh-language').map(label => label.text())).toEqual(['JAWA', 'INDONESIA'])
+ })
  it('pairs Javanese and Indonesian by chunk with independent colors', async () => {
   show('lang=jawa,indonesia&layout=chunk&history=3&colorJawa=yellow&colorIndonesia=white')
   await send(snapshot([entry('a', 8000), entry('b', 9000), entry('c', 10000)]))
