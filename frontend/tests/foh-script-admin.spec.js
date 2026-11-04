@@ -23,6 +23,17 @@ describe('FOH admin script preview integration', () => {
   wrapper.unmount(); delete navigator.mediaDevices
  })
 
+ it('blocks script mode until a starting cue has been saved', async () => {
+  Object.defineProperty(navigator, 'mediaDevices', { configurable:true, value:{ enumerateDevices:vi.fn().mockResolvedValue([]) } })
+  api.get.mockResolvedValue({data:{streams:[]}})
+  api.post.mockResolvedValue({data:{streamKey:'stage',uploadToken:'private-token',scriptCursor:null}})
+  const wrapper=mount(FohAdminView,{global:{stubs:{FohScriptPreview:true}}})
+  await flushPromises()
+  await wrapper.find('form').trigger('submit'); await flushPromises()
+  expect(wrapper.get('select option[value="script"]').element.disabled).toBe(true)
+  wrapper.unmount(); delete navigator.mediaDevices
+ })
+
  it('does not rotate a session twice when create is triggered concurrently', async () => {
   Object.defineProperty(navigator, 'mediaDevices', { configurable:true, value:{ enumerateDevices:vi.fn().mockResolvedValue([]) } })
   api.get.mockResolvedValue({data:{streams:[]}})

@@ -11,6 +11,7 @@ const devices = ref([]), deviceId = ref(''), threshold = ref(0.035), level = ref
 const selectedModel = ref('gemini-3.5-flash-lite')
 const scriptCursor = ref(null), subtitleMode = ref('legacy')
 const sessionBusy = ref(false)
+const canEnableScriptMode = computed(() => Boolean(scriptCursor.value?.scriptId && scriptCursor.value?.scriptRevision && scriptCursor.value?.cueId && Number.isSafeInteger(scriptCursor.value?.revision)))
 const outputLanguages = ['jawa', 'indonesia', 'inggris']
 const outputLabels = { jawa: 'Jawa', indonesia: 'Indonesia', inggris: 'Inggris' }
 const outputColors = ref({ jawa: 'yellow', indonesia: 'white', inggris: 'cyan' })
@@ -83,6 +84,7 @@ async function resumeStream(key) {
 }
 async function setSubtitleMode(mode) {
  if (sessionBusy.value || !['legacy','script'].includes(mode)) return
+ if (mode === 'script' && !canEnableScriptMode.value) { error.value = 'Simpan posisi babak dan cue di panel naskah terlebih dahulu.'; return }
  sessionBusy.value = true; error.value = ''
  try {
   const { data } = await api.post(`/api/foh-stream/${encodeURIComponent(streamKey.value)}/subtitle-mode`, { mode }, { headers: { 'x-foh-token': uploadToken.value } })
@@ -233,7 +235,8 @@ onUnmounted(stopAudio)
     <label class="foh-field">Raw JSON gabungan<input class="input" readonly :value="jsonUrl" /><button class="button" @click="copyLink('json', jsonUrl)">{{ copied === 'json' ? 'Tersalin' : 'Copy link' }}</button></label>
    </section>
    <section class="surface foh-section"><div class="section-heading"><div><h2>Input audio</h2><p>Browser tidak menerapkan echo cancellation, noise suppression, atau auto gain.</p></div><span class="foh-state">{{ state }}</span></div>
-    <label class="foh-field">Mode subtitle<select class="input" :value="subtitleMode" :disabled="sessionBusy" @change="setSubtitleMode($event.target.value)"><option value="legacy">Legacy: transkripsi audio</option><option value="script">Naskah: cocokkan cue dan terjemahkan</option></select></label>
+    <label class="foh-field">Mode subtitle<select class="input" :value="subtitleMode" :disabled="sessionBusy" @change="setSubtitleMode($event.target.value)"><option value="legacy">Legacy: transkripsi audio</option><option value="script" :disabled="!canEnableScriptMode">Naskah: cocokkan cue dan terjemahkan</option></select></label>
+    <p v-if="subtitleMode === 'legacy' && !canEnableScriptMode" data-test="script-mode-hint" role="status">Untuk memilih Naskah: buka panel Shadow script preview, pilih babak/cue, lalu simpan posisi. Status tersimpan akan muncul di panel itu.</p>
     <p v-if="subtitleMode === 'script'">Mode naskah aktif. Posisi terakhir: Babak {{ scriptCursor?.act ?? 'belum disetel' }}, cue {{ scriptCursor?.cueId ?? 'belum disetel' }}. Indeks ini masih provisional dan perlu ditinjau.</p>
     <label class="foh-field">Perangkat input<select v-model="deviceId" class="input"><option v-for="device in devices" :key="device.deviceId" :value="device.deviceId">{{ device.label || `Audio input ${device.deviceId.slice(0, 6)}` }}</option></select></label>
    <label class="foh-field">Model Gemini<select v-model="selectedModel" class="input" aria-describedby="foh-model-warning"><option value="gemini-3.5-flash-lite">Gemini 3.5 Flash Lite</option><option value="gemini-3.8-flash">Gemini 3.8 Flash</option></select></label>

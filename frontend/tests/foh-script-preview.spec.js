@@ -185,6 +185,7 @@ describe('FOH script shadow preview', () => {
     expect(body).toEqual({ index, expectedRevision:0, action:'seek', cueId:'b' })
     expect(options.headers['x-foh-token']).toBe('secret')
     expect(wrapper.emitted('cursorChanged')[0]).toEqual([cursor])
+    expect(wrapper.get('[data-test="position-status"]').text()).toContain('Posisi tersimpan: Babak 1, cue b')
     wrapper.unmount()
   })
 

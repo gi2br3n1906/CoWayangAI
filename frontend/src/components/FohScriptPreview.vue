@@ -8,6 +8,7 @@ const emit = defineEmits(['cursorChanged'])
 const indexText = ref(''), cueId = ref(''), audioFile = ref(null), error = ref(''), result = ref(null), pending = ref(false), scriptChoices = ref([]), selectedScriptId = ref(''), catalogStatus = ref('Pilih naskah yang tersedia.')
 const config = ref({ lookBehind: 1, lookAhead: 2, boundarySize: 1, nextActSize: 1, minScore: 0.7, minMargin: 0.2 })
 const selectedAct = ref(null)
+const locallySavedCursor = ref(null)
 const index = computed(() => {
   try {
     const value = JSON.parse(indexText.value)
@@ -36,6 +37,13 @@ const cursorMatches = computed(() => {
   const c = props.scriptCursor
   return Boolean(index.value && c && c.scriptId === index.value.id && c.scriptRevision === index.value.revision && Number.isSafeInteger(c.revision) && c.revision >= 0 && ['auto', 'manual'].includes(c.mode) && index.value.cues.some(cue => cue.id === c.cueId && cue.act === c.act))
 })
+const selectedCueId = computed(() => cueId.value === '__cursor__' && cursorMatches.value ? props.scriptCursor.cueId : cueId.value)
+const statusCursor = computed(() => {
+  const saved = locallySavedCursor.value
+  if (saved && index.value?.id === saved.scriptId && index.value?.revision === saved.scriptRevision) return saved
+  return cursorMatches.value ? props.scriptCursor : null
+})
+const positionSaved = computed(() => Boolean(statusCursor.value && selectedCueId.value === statusCursor.value.cueId))
 let generation = 0, controller = null
 watch([index, () => props.scriptCursor], () => {
   cueId.value = cursorMatches.value ? '__cursor__' : index.value?.cues[0]?.id || ''
@@ -162,14 +170,14 @@ async function savePosition(action = 'seek') {
     const idToken = await auth.currentUser.getIdToken()
     if (generation !== requestGeneration) return
     const { data } = await api.post(`/api/foh-stream/${encodeURIComponent(props.streamKey)}/script-position`, { index: index.value, expectedRevision: props.scriptCursor?.revision ?? 0, action, cueId: selected }, { headers: { 'x-foh-token': props.uploadToken, Authorization: `Bearer ${idToken}` }, signal: controller.signal })
-    if (generation === requestGeneration) emit('cursorChanged', data.cursor)
+    if (generation === requestGeneration) { locallySavedCursor.value = data.cursor; emit('cursorChanged', data.cursor) }
   } catch (e) {
     if (generation !== requestGeneration) return
     if (e?.response?.status === 409) {
       try {
         const { data } = await api.get(`/api/foh-stream/${encodeURIComponent(props.streamKey)}/script-position`, { headers: { 'x-foh-token': props.uploadToken }, signal: controller.signal })
         if (generation !== requestGeneration) return
-        emit('cursorChanged', data.cursor)
+        locallySavedCursor.value = data.cursor; emit('cursorChanged', data.cursor)
         error.value = 'Posisi diperbarui dari server. Periksa posisi atau versi naskah sebelum mencoba lagi.'
         return
       } catch { if (generation !== requestGeneration) return }
@@ -202,7 +210,8 @@ async function savePosition(action = 'seek') {
      </section>
     </div>
     <label v-if="index">Starting cue<select :value="cueId" data-test="cue" @change="selectCue($event.target.value)"><option v-if="cursorMatches" value="__cursor__">Use matching saved cursor ({{ scriptCursor.cueId }})</option><option v-for="cue in index.cues" :key="cue.id" :value="cue.id">Act {{ cue.act }} · {{ cue.id }} · page {{ cue.page }}</option></select></label>
-    <button v-if="index" data-test="save-position" type="button" @click="savePosition('seek')">Simpan posisi manual</button>
+    <p v-if="index" data-test="position-status" role="status">{{ pending ? 'Menyimpan atau memproses…' : positionSaved ? `Posisi tersimpan: Babak ${statusCursor.act}, cue ${statusCursor.cueId}` : 'Posisi belum tersimpan untuk cue ini. Pilih babak/cue, lalu simpan posisi.' }}</p>
+    <button v-if="index" data-test="save-position" type="button" :disabled="pending || positionSaved" @click="savePosition('seek')">{{ pending ? 'Menyimpan…' : positionSaved ? `Tersimpan · Babak ${statusCursor.act} · ${statusCursor.cueId}` : 'Simpan posisi manual' }}</button>
     <button v-if="index && scriptCursor" data-test="replace-script" type="button" @click="savePosition('replace')">Ganti naskah dan simpan posisi</button>
     <button v-if="index && scriptCursor && subtitleMode === 'script'" data-test="cursor-mode" type="button" @click="setCursorMode(scriptCursor.mode === 'auto' ? 'manual' : 'auto')">{{ scriptCursor.mode === 'auto' ? 'Ambil alih posisi manual' : 'Lanjutkan posisi otomatis' }}</button>
     <label>Local audio (.webm, .ogg, .wav; max 8 MB)<input data-test="audio" type="file" accept=".webm,.ogg,.wav,audio/webm,audio/ogg,audio/wav" @change="audioFile = $event.target.files[0] || null"></label>
