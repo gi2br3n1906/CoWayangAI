@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { flushPromises, mount } from '@vue/test-utils'
 import FohAdminView from '@/views/FohAdminView.vue'
 import { api } from '@/services/api'
+import { decodeTranscriptContext } from '@/utils/fohTranscriptContext'
 
 vi.mock('@/services/api', () => ({ api: { get: vi.fn(), post: vi.fn(), delete: vi.fn() } }))
 
@@ -117,7 +118,27 @@ describe('FOH capture stop while recorder is stopping', () => {
   Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: copy } })
   await button('Copy JSON').trigger('click')
   expect(JSON.parse(copy.mock.calls[0][0]).chunks).toMatchObject([{ model: 'gemini-3.8-flash', status: 'capture_pending' }])
+})
+
+it('sends successful prior Jawa chunks as context for the next Legacy upload', async () => {
+ const uploads=[]
+ let resolveUpload
+ api.post.mockImplementation((url, _body, config) => {
+  if (!url.endsWith('/audio')) return Promise.resolve({data:{streamKey:'test',uploadToken:'token'}})
+  uploads.push(config)
+  return new Promise(resolve => { resolveUpload=resolve })
  })
+ finish(recorders[0]); await flushPromises()
+ expect(decodeTranscriptContext(uploads[0].headers['x-foh-recent-transcript'])).toBe('')
+ resolveUpload({status:200,data:{subtitle:{jawa:'Ukara sepisan',indonesia:'Kalimat pertama',inggris:'First sentence'}}})
+ await flushPromises()
+ await tick(1400,true); await tick(1700,false); await tick(2500,false)
+ finish(recorders[1]); await flushPromises()
+ expect(uploads).toHaveLength(2)
+ expect(decodeTranscriptContext(uploads[1].headers['x-foh-recent-transcript'])).toBe('Ukara sepisan')
+ resolveUpload({status:200,data:{subtitle:{jawa:'lanjutan ukara',indonesia:'lanjutan',inggris:'continuation'}}})
+ await flushPromises()
+})
 
  it('records recorder cutoff before the delayed stop event and queue wait separately', async () => {
   now = 1800
@@ -144,7 +165,7 @@ describe('FOH capture stop while recorder is stopping', () => {
   const originalSetTimeout = globalThis.setTimeout
   let deadline
   vi.spyOn(globalThis, 'setTimeout').mockImplementation((callback, delay, ...args) => {
-   if (delay === 4000) { deadline = callback; return 12345 }
+   if (delay === 6000) { deadline = callback; return 12345 }
    return originalSetTimeout(callback, delay, ...args)
   })
   await tick(1400, true)
@@ -159,7 +180,7 @@ describe('FOH capture stop while recorder is stopping', () => {
   const originalSetTimeout = globalThis.setTimeout
   const deadlines = []
   vi.spyOn(globalThis, 'setTimeout').mockImplementation((callback, delay, ...args) => {
-   if (delay === 4000) { deadlines.push(callback); return 12345 + deadlines.length }
+   if (delay === 6000) { deadlines.push(callback); return 12345 + deadlines.length }
    return originalSetTimeout(callback, delay, ...args)
   })
   await tick(1400, true)

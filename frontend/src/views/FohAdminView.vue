@@ -4,6 +4,7 @@ import { api } from '@/services/api'
 import { MAX_UTTERANCE_MS, shouldCutUtterance } from '@/utils/fohAudioTiming'
 import { buildLanguageOutputUrl } from '@/utils/fohOutput'
 import { createFohDebug } from '@/utils/fohDebug'
+import { addTranscriptContext, encodeTranscriptContext, formatTranscriptContext } from '@/utils/fohTranscriptContext'
 import FohScriptPreview from '@/components/FohScriptPreview.vue'
 
 const requestedKey = ref(''), streamKey = ref(''), uploadToken = ref(''), context = ref(''), outputs = ref({}), savedStreams = ref([])
@@ -24,7 +25,7 @@ const combinedLinks = computed(() => Object.fromEntries(combinedLayouts.map(({ i
  const params = new URLSearchParams({ bg: 'transparent', lang: 'jawa,indonesia', size: 'xl', align: 'bottom', layout: id, history: outputHistory.value, colorJawa: outputColors.value.jawa, colorIndonesia: outputColors.value.indonesia })
  return [id, `${base.value}/foh-output/${encodeURIComponent(streamKey.value)}?${params}`]
 })))
-let mediaStream, recorder, audioContext, analyser, animation, captureDeadline, chunks = [], activeSince = 0, silenceSince = 0, utteranceRmsSum = 0, utteranceRmsCount = 0, sendQueue = Promise.resolve(), sessionInvalidated = false, captureGeneration = 0
+let mediaStream, recorder, audioContext, analyser, animation, captureDeadline, chunks = [], activeSince = 0, silenceSince = 0, utteranceRmsSum = 0, utteranceRmsCount = 0, sendQueue = Promise.resolve(), sessionInvalidated = false, captureGeneration = 0, transcriptHistory = []
 const debug = createFohDebug(), debugData = ref(debug.snapshot())
 let debugChunkId = null, captureModel = null, debugRun = 0, sessionGeneration = 0
 function refreshDebug() { debugData.value = debug.snapshot() }
@@ -61,6 +62,7 @@ function activateSession(data) {
  outputs.value = data.outputs || {}
  scriptCursor.value = data.scriptCursor || null
  subtitleMode.value = data.subtitleMode || 'legacy'
+ transcriptHistory = []
  sessionInvalidated = false
  sendQueue = Promise.resolve()
 }
@@ -170,10 +172,20 @@ async function sendChunk() {
  activeSince = 0; silenceSince = 0; chunks = []; utteranceRmsSum = 0; utteranceRmsCount = 0; state.value = 'sending'
  sendQueue = sendQueue.then(() => {
   if (sessionInvalidated || generation !== captureGeneration) return null
+  const recentTranscript = formatTranscriptContext(transcriptHistory)
   debug.sending(currentDebugId); refreshDebug()
-  return api.post(`/api/foh-stream/${encodeURIComponent(key)}/audio`, blob, { headers: { 'Content-Type': mime, 'x-foh-token': token, 'x-foh-context': lakon, 'x-foh-rms': String(rms), 'x-foh-model': currentModel }, ...(currentModel === 'gemini-3.8-flash' || subtitleMode.value === 'script' ? { timeout: 45000 } : {}) })
+  return api.post(`/api/foh-stream/${encodeURIComponent(key)}/audio`, blob, { headers: { 'Content-Type': mime, 'x-foh-token': token, 'x-foh-context': lakon, 'x-foh-recent-transcript': encodeTranscriptContext(recentTranscript), 'x-foh-rms': String(rms), 'x-foh-model': currentModel }, ...(currentModel === 'gemini-3.8-flash' || subtitleMode.value === 'script' ? { timeout: 45000 } : {}) })
  })
- sendQueue = sendQueue.then(response => { if (currentDebugRun === debugRun && response) { debug.finish(currentDebugId, response, token); if (token === uploadToken.value && currentSession === sessionGeneration && response.data?.scriptCursor) scriptCursor.value = response.data.scriptCursor; refreshDebug() } })
+ sendQueue = sendQueue.then(response => {
+  if (currentDebugRun === debugRun && response) {
+   debug.finish(currentDebugId, response, token)
+   if (token === uploadToken.value && currentSession === sessionGeneration) {
+    if (response.data?.scriptCursor) scriptCursor.value = response.data.scriptCursor
+    if (subtitleMode.value === 'legacy') transcriptHistory = addTranscriptContext(transcriptHistory, response.data?.subtitle?.jawa)
+   }
+   refreshDebug()
+  }
+ })
  sendQueue = sendQueue.catch(cause => {
   if (currentDebugRun === debugRun) { debug.fail(currentDebugId, cause); refreshDebug() }
   if (cause.response?.status === 401) {
@@ -183,6 +195,7 @@ async function sendChunk() {
    uploadToken.value = ''
    streamKey.value = ''
    scriptCursor.value = null
+   transcriptHistory = []
    error.value = 'Sesi FOH sudah tidak berlaku. Buat sesi baru.'
   } else if (generation === captureGeneration) error.value = cause.response?.data?.error || 'Upload/transkripsi audio gagal.'
  }).finally(() => { if (generation === captureGeneration && mediaStream) state.value = activeSince ? 'speaking' : 'listening' })
@@ -205,7 +218,7 @@ async function endSession() {
  await sendQueue.catch(() => {})
  try { await api.delete(`/api/foh-stream/${encodeURIComponent(endingKey)}/session`, { headers: { 'x-foh-token': endingToken } }) }
  catch { error.value = 'Sesi ditutup di browser, tetapi token server belum dapat dicabut.' }
- uploadToken.value = ''; streamKey.value = ''; outputs.value = {}; scriptCursor.value = null
+ uploadToken.value = ''; streamKey.value = ''; outputs.value = {}; scriptCursor.value = null; transcriptHistory = []
  await loadStreams()
 }
 async function copyLink(kind, value) {

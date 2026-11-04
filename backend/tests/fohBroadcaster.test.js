@@ -194,6 +194,24 @@ test('direct transcribe preserves configured environment fallback', async () => 
  assert.equal(result.jawa, 'Sugeng rawuh');
 });
 
+test('Legacy transcription receives recent transcript as context and limits it to 1200 characters', async t => {
+ const { base, calls } = await setup(t);
+ const session = await createSession(base, 'recent-transcript-context');
+ const recent = `PRIOR: ${'tembung '.repeat(300)}`;
+ const response = await request(`${base}/api/foh-stream/recent-transcript-context/audio`, {
+  method:'POST',
+  headers:{'content-type':'audio/webm','x-foh-token':session.uploadToken,'x-foh-rms':'0.1','x-foh-context':'Lakon Bambang Sumantri','x-foh-recent-transcript':Buffer.from(recent).toString('base64')},
+  body:Buffer.alloc(256),
+ });
+ assert.equal(response.status,200);
+ const prompt=calls[0].contents[0].parts[1].text;
+ assert.match(prompt,/Story context: Lakon Bambang Sumantri/);
+ assert.match(prompt,/Prior transcript context \(not new audio; context only\):/);
+ assert.ok(prompt.length < 2000);
+ assert.match(prompt,/Transcribe ONLY human speech audible in the CURRENT audio/);
+ assert.match(prompt,/do not return prior words unless they are audible again in the current audio/);
+});
+
 test('timed-out provider responses cannot publish and do not block subsequent chunks', async t => {
  let finishFirst, call = 0;
  const google = { GoogleGenAI: class { models = { generateContent: () => ++call === 1

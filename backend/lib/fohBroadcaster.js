@@ -180,7 +180,7 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
         for (let index = dataStart; index + 1 < dataEnd; index += 2) { const sample = bytes.readInt16LE(index) / 32768; sum += sample * sample; samples++; }
         return samples === 0 || Math.sqrt(sum / samples) >= SILENCE_RMS_THRESHOLD;
     };
-    const transcribe = async ({ bytes, mimeType, context, model = getConfig().model, signal }) => {
+    const transcribe = async ({ bytes, mimeType, context, recentTranscript = '', model = getConfig().model, signal }) => {
         const { apiKey } = getConfig();
         if (!apiKey) throw Object.assign(new Error('GEMINI_API_KEY is not configured on the backend'), { status: 503 });
         let sdk = googleGenAi;
@@ -193,7 +193,7 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
             model,
             contents: [{ role: 'user', parts: [
                 { inlineData: { mimeType, data: bytes.toString('base64') } },
-                { text: `Transcribe any human spoken voice as the performer's dialogue in transcript. If the audio contains only gamelan, music, or instruments without human speech, return empty strings. Translate the spoken dialogue into Indonesian in indonesia and English in inggris. Preserve Javanese or other original speech in transcript. Use the context to resolve names and terms, but never invent dialogue. Context: ${context || '(none)'}` },
+                { text: `Transcribe ONLY human speech audible in the CURRENT audio. If it contains only gamelan, music, or instruments without human speech, return empty strings. Translate only the current audio's dialogue into Indonesian in indonesia and English in inggris. Preserve the current audio's Javanese or other original speech in transcript. Never copy, repeat, complete, or invent words from context or prior transcript. Use the prior transcript ONLY to understand continuity, names, and grammar when the current audio clearly continues it; do not return prior words unless they are audible again in the current audio. Story context: ${context || '(none)'}\nPrior transcript context (not new audio; context only): ${recentTranscript || '(none)'}` },
             ] }],
             config: {
                 abortSignal: signal,
@@ -471,6 +471,14 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
             if (res.destroyed) { release(); return; }
             if (!timingSafeEqual(tokenHash(uploadToken), stream.uploadTokenHash || '')) { release(); return error(res, 401, 'Invalid stream credentials'); }
             const context = String(req.get('x-foh-context') || '').slice(0, MAX_CONTEXT_LENGTH);
+            let recentTranscript = '';
+            const recentTranscriptHeader = req.get('x-foh-recent-transcript');
+            if (recentTranscriptHeader) {
+                try {
+                    const decoded = Buffer.from(recentTranscriptHeader, 'base64').toString('utf8');
+                    if (Buffer.from(decoded, 'utf8').toString('base64') === recentTranscriptHeader) recentTranscript = decoded.slice(-1200);
+                } catch { recentTranscript = ''; }
+            }
             const clientRms = Number(req.get('x-foh-rms'));
             const receivedAt = Date.now();
             logger.log('[FOH] Audio chunk received', { streamKey: req.params.streamKey, mimeType, bytes: bytes.length, clientRms: Number.isFinite(clientRms) ? clientRms : null });
@@ -502,7 +510,7 @@ function createFohBroadcaster({ io, googleGenAi, env = process.env, now = Date.n
                 });
                 let subtitle, nextCursor, scriptStatus;
                 const work = (async () => {
-                    if (current.subtitleMode !== 'script') return transcribe({ bytes, mimeType, context, model, signal: controller.signal });
+                    if (current.subtitleMode !== 'script') return transcribe({ bytes, mimeType, context, recentTranscript, model, signal: controller.signal });
                     const index = current.scriptIndex, cursor = current.scriptCursor;
                     if (!index || !cursor || cursor.scriptDigest !== scriptHash(index) || !validateScriptIndex(index).valid) throw Object.assign(new Error('Script index or cursor is unavailable'), { status: 409 });
                     if (cursor.mode === 'manual') { scriptStatus = 'manual'; return { jawa: '', indonesia: '', inggris: '' }; }
