@@ -20,7 +20,7 @@ const combinedLinks = computed(() => Object.fromEntries(combinedLayouts.map(({ i
  const params = new URLSearchParams({ bg: 'transparent', lang: 'jawa,indonesia', size: 'xl', align: 'bottom', layout: id, history: outputHistory.value, colorJawa: outputColors.value.jawa, colorIndonesia: outputColors.value.indonesia })
  return [id, `${base.value}/foh-output/${encodeURIComponent(streamKey.value)}?${params}`]
 })))
-let mediaStream, recorder, audioContext, analyser, animation, chunks = [], activeSince = 0, silenceSince = 0, utteranceRmsSum = 0, utteranceRmsCount = 0, sendQueue = Promise.resolve(), sessionInvalidated = false, captureGeneration = 0
+let mediaStream, recorder, audioContext, analyser, animation, captureDeadline, chunks = [], activeSince = 0, silenceSince = 0, utteranceRmsSum = 0, utteranceRmsCount = 0, sendQueue = Promise.resolve(), sessionInvalidated = false, captureGeneration = 0
 const debug = createFohDebug(), debugData = ref(debug.snapshot())
 let debugChunkId = null, captureModel = null, debugRun = 0, sessionGeneration = 0
 function refreshDebug() { debugData.value = debug.snapshot() }
@@ -98,19 +98,27 @@ async function startAudio() {
    const rms = Math.sqrt(sum / samples.length)
    level.value = Math.min(1, rms * 5)
    const now = performance.now()
+   if (recorder && activeSince && shouldCutUtterance(now - activeSince)) {
+    sendChunk()
+    animation = requestAnimationFrame(tick)
+    return
+   }
    if (rms >= Number(threshold.value)) {
     if (!activeSince) {
      activeSince = now; chunks = []; utteranceRmsSum = 0; utteranceRmsCount = 0
      recorder = new MediaRecorder(mediaStream, { mimeType, audioBitsPerSecond: 64000 })
      recorder.ondataavailable = event => { if (generation === captureGeneration && event.data.size) chunks.push(event.data) }
      recorder.start(100)
+     const currentRecorder = recorder
+     captureDeadline = setTimeout(() => {
+      if (generation === captureGeneration && recorder === currentRecorder) sendChunk()
+     }, MAX_UTTERANCE_MS)
      captureModel = selectedModel.value
      debugChunkId = debug.capture(Number(threshold.value), captureModel); refreshDebug()
      state.value = 'speaking'
     }
     silenceSince = 0
     if (activeSince) { utteranceRmsSum += rms; utteranceRmsCount++ }
-    if (shouldCutUtterance(now - activeSince)) sendChunk()
    } else if (activeSince) {
     if (!silenceSince) silenceSince = now
     if (now - silenceSince >= 700) sendChunk()
@@ -122,6 +130,7 @@ async function startAudio() {
 }
 async function sendChunk() {
  if (sessionInvalidated || !recorder || !activeSince) return
+ clearTimeout(captureDeadline); captureDeadline = null
  const duration = performance.now() - activeSince
  if (duration < 200) { debug.cancel(debugChunkId); debugChunkId = null; refreshDebug(); activeSince = 0; silenceSince = 0; chunks = []; utteranceRmsSum = 0; utteranceRmsCount = 0; state.value = 'listening'; return }
  const currentRecorder = recorder
@@ -158,6 +167,7 @@ async function sendChunk() {
 function stopAudio() {
  debug.stop(); debugChunkId = null; captureModel = null; refreshDebug()
  captureGeneration++
+ clearTimeout(captureDeadline); captureDeadline = null
  cancelAnimationFrame(animation); animation = null
  if (recorder && recorder.state !== 'inactive') recorder.stop()
  recorder = null
@@ -206,7 +216,7 @@ onUnmounted(stopAudio)
    <label class="foh-field">Model Gemini<select v-model="selectedModel" class="input" aria-describedby="foh-model-warning"><option value="gemini-3.5-flash-lite">Gemini 3.5 Flash Lite</option><option value="gemini-3.8-flash">Gemini 3.8 Flash</option></select></label>
    <p id="foh-model-warning">Gemini 3.8 Flash memakai batas timeout 45 detik, dapat memperlambat antrean dan menambah biaya. Tidak ada percobaan ulang otomatis. Perubahan berlaku untuk chunk berikutnya.</p>
     <div class="foh-meter"><span :style="{ width: `${level * 100}%` }" /></div>
-    <label class="setting-range"><span>VAD threshold <output>{{ Number(threshold).toFixed(3) }}</output></span><input v-model="threshold" type="range" min="0.005" max="0.15" step="0.005" /><small>Chunk dikirim setelah hening 700 ms atau maksimal {{ MAX_UTTERANCE_MS / 1000 }} detik bicara.</small></label>
+    <label class="setting-range"><span>VAD threshold <output>{{ Number(threshold).toFixed(3) }}</output></span><input v-model="threshold" type="range" min="0.005" max="0.15" step="0.001" /><small>Target chunk dikirim setelah hening 700 ms atau {{ MAX_UTTERANCE_MS / 1000 }} detik. Jaga tab tetap aktif; browser dapat menunda pemotongan di background.</small></label>
     <label class="foh-field">Konteks lakon & tokoh<textarea v-model="context" class="input" maxlength="2000" rows="3" placeholder="Contoh: Lakon Ramayana; Rama, Sinta, Rahwana…" /></label>
     <div class="foh-actions"><button class="button" :disabled="state !== 'idle'" @click="startAudio">Mulai tangkap audio</button><button class="button" :disabled="state === 'idle'" @click="stopAudio">Stop audio</button></div>
    </section>

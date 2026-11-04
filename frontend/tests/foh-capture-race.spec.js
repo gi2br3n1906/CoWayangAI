@@ -67,6 +67,13 @@ describe('FOH capture stop while recorder is stopping', () => {
   expect(wrapper.find('select[aria-describedby="foh-model-warning"]').element.value).toBe('gemini-3.5-flash-lite')
  })
 
+ it('allows VAD threshold values between 0.005 and 0.010', async () => {
+  const slider = wrapper.find('input[type="range"]')
+  expect(slider.attributes('step')).toBe('0.001')
+  await slider.setValue('0.007')
+  expect(wrapper.find('.setting-range output').text()).toBe('0.007')
+ })
+
  it('snapshots the model at capture start, including while queued', async () => {
   let resolveFirst
   api.post.mockImplementation(url => url.endsWith('/audio') ? new Promise(resolve => { resolveFirst = resolve }) : Promise.resolve({ data: {} }))
@@ -122,6 +129,46 @@ describe('FOH capture stop while recorder is stopping', () => {
   expect(chunk.endMs).toBe(1100)
   expect(chunk.queueMs).toBe(0)
   expect(chunk.queuedMs).toBe(1700)
+ })
+
+ it('cuts an overdue recording immediately even when the next frame is quiet', async () => {
+  finish(recorders[0]); await flushPromises()
+  await tick(1400, true)
+  expect(recorders[1].state).toBe('recording')
+  await tick(8000, false)
+  expect(recorders[1].state).toBe('inactive')
+ })
+
+ it('cuts an active recording at its deadline without another animation frame', async () => {
+  finish(recorders[0]); await flushPromises()
+  const originalSetTimeout = globalThis.setTimeout
+  let deadline
+  vi.spyOn(globalThis, 'setTimeout').mockImplementation((callback, delay, ...args) => {
+   if (delay === 4000) { deadline = callback; return 12345 }
+   return originalSetTimeout(callback, delay, ...args)
+  })
+  await tick(1400, true)
+  expect(deadline).toBeTypeOf('function')
+  now = 5400
+  deadline()
+  expect(recorders[1].state).toBe('inactive')
+ })
+
+ it('ignores a stale deadline after capture has stopped and restarted', async () => {
+  finish(recorders[0]); await flushPromises()
+  const originalSetTimeout = globalThis.setTimeout
+  const deadlines = []
+  vi.spyOn(globalThis, 'setTimeout').mockImplementation((callback, delay, ...args) => {
+   if (delay === 4000) { deadlines.push(callback); return 12345 + deadlines.length }
+   return originalSetTimeout(callback, delay, ...args)
+  })
+  await tick(1400, true)
+  await button('Stop audio').trigger('click')
+  now = 1500; amplitude = 160
+  await button('Mulai tangkap audio').trigger('click'); await flushPromises()
+  expect(recorders[2].state).toBe('recording')
+  deadlines[0]()
+  expect(recorders[2].state).toBe('recording')
  })
 
  it('remains idle and does not upload after delayed stop event', async () => {
