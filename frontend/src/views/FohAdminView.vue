@@ -12,7 +12,7 @@ const outputColors = ref({ jawa: 'yellow', indonesia: 'white', inggris: 'cyan' }
 const base = computed(() => globalThis.location?.origin || '')
 const jsonUrl = computed(() => `${base.value}/api/foh-stream/${streamKey.value}/latest`)
 const outputLinks = computed(() => Object.fromEntries(outputLanguages.map(language => [language, buildLanguageOutputUrl(base.value, outputs.value[language]?.outputPath || `/foh-output/${streamKey.value}-${language}`, language, outputColors.value[language])])))
-let mediaStream, recorder, audioContext, analyser, animation, chunks = [], activeSince = 0, silenceSince = 0, utteranceRmsSum = 0, utteranceRmsCount = 0, sendQueue = Promise.resolve(), sessionInvalidated = false
+let mediaStream, recorder, audioContext, analyser, animation, chunks = [], activeSince = 0, silenceSince = 0, utteranceRmsSum = 0, utteranceRmsCount = 0, sendQueue = Promise.resolve(), sessionInvalidated = false, captureGeneration = 0
 const active = computed(() => Boolean(uploadToken.value))
 
 async function refreshDevices() {
@@ -53,10 +53,16 @@ async function resumeStream(key) {
  } catch (cause) { error.value = cause.response?.data?.error || 'Gagal memulihkan stream.' }
 }
 async function startAudio() {
+ if (state.value !== 'idle') return
  error.value = ''
+ state.value = 'starting'
+ const generation = captureGeneration
  try {
-  mediaStream = await navigator.mediaDevices.getUserMedia({ audio: { deviceId: deviceId.value ? { exact: deviceId.value } : undefined, echoCancellation: false, noiseSuppression: false, autoGainControl: false } })
+  const stream = await navigator.mediaDevices.getUserMedia({ audio: { deviceId: deviceId.value ? { exact: deviceId.value } : undefined, echoCancellation: false, noiseSuppression: false, autoGainControl: false } })
+  if (generation !== captureGeneration) { stream.getTracks().forEach(track => track.stop()); return }
+  mediaStream = stream
   await refreshDevices()
+  if (generation !== captureGeneration) return
   audioContext = new AudioContext()
   const source = audioContext.createMediaStreamSource(mediaStream)
   analyser = audioContext.createAnalyser(); analyser.fftSize = 1024; source.connect(analyser)
@@ -76,7 +82,7 @@ async function startAudio() {
     if (!activeSince) {
      activeSince = now; chunks = []; utteranceRmsSum = 0; utteranceRmsCount = 0
      recorder = new MediaRecorder(mediaStream, { mimeType, audioBitsPerSecond: 64000 })
-     recorder.ondataavailable = event => { if (event.data.size) chunks.push(event.data) }
+     recorder.ondataavailable = event => { if (generation === captureGeneration && event.data.size) chunks.push(event.data) }
      recorder.start(100)
      state.value = 'speaking'
     }
@@ -90,22 +96,24 @@ async function startAudio() {
    animation = requestAnimationFrame(tick)
   }
   tick()
- } catch (cause) { error.value = cause.message || 'Tidak dapat membuka input audio.'; stopAudio() }
+ } catch (cause) { if (generation === captureGeneration) { error.value = cause.message || 'Tidak dapat membuka input audio.'; stopAudio() } }
 }
 async function sendChunk() {
  if (sessionInvalidated || !recorder || !activeSince) return
  const duration = performance.now() - activeSince
  if (duration < 200) { activeSince = 0; silenceSince = 0; chunks = []; utteranceRmsSum = 0; utteranceRmsCount = 0; state.value = 'listening'; return }
  const currentRecorder = recorder
+ const generation = captureGeneration
  recorder = null
  const stopped = new Promise(resolve => currentRecorder.addEventListener('stop', resolve, { once: true }))
  currentRecorder.stop(); await stopped
+ if (generation !== captureGeneration) return
  const mime = currentRecorder.mimeType.split(';')[0] || 'audio/webm'
  const blob = new Blob(chunks, { type: mime })
  const key = streamKey.value, token = uploadToken.value, lakon = context.value, rms = utteranceRmsCount ? utteranceRmsSum / utteranceRmsCount : 0
  activeSince = 0; silenceSince = 0; chunks = []; utteranceRmsSum = 0; utteranceRmsCount = 0; state.value = 'sending'
  sendQueue = sendQueue.then(() => {
-  if (sessionInvalidated) return null
+  if (sessionInvalidated || generation !== captureGeneration) return null
   return api.post(`/api/foh-stream/${encodeURIComponent(key)}/audio`, blob, { headers: { 'Content-Type': mime, 'x-foh-token': token, 'x-foh-context': lakon, 'x-foh-rms': String(rms) } })
  })
  sendQueue = sendQueue.catch(cause => {
@@ -116,9 +124,10 @@ async function sendChunk() {
    streamKey.value = ''
    error.value = 'Sesi FOH sudah tidak berlaku. Buat sesi baru.'
   } else error.value = cause.response?.data?.error || 'Upload/transkripsi audio gagal.'
- }).finally(() => { if (mediaStream) state.value = activeSince ? 'speaking' : 'listening' })
+ }).finally(() => { if (generation === captureGeneration && mediaStream) state.value = activeSince ? 'speaking' : 'listening' })
 }
 function stopAudio() {
+ captureGeneration++
  cancelAnimationFrame(animation); animation = null
  if (recorder && recorder.state !== 'inactive') recorder.stop()
  recorder = null
